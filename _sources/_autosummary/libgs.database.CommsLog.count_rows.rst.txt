@@ -1,0 +1,6 @@
+libgs.database.CommsLog.count\_rows
+===================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: CommsLog.count_rows

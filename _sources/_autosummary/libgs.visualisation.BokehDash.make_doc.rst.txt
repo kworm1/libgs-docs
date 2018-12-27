@@ -1,0 +1,6 @@
+libgs.visualisation.BokehDash.make\_doc
+=======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: BokehDash.make_doc

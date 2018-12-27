@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.FAILED\_COMMUNICATION
+=======================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStation.FAILED_COMMUNICATION

@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.MAX\_AZ
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.MAX_AZ

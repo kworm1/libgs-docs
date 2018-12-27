@@ -1,0 +1,6 @@
+libgs.utils.Defaults.ROTATOR\_MIN\_AZ
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.ROTATOR_MIN_AZ

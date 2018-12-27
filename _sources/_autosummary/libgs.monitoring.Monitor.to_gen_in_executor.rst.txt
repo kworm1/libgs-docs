@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.to\_gen\_in\_executor
+==============================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.to_gen_in_executor

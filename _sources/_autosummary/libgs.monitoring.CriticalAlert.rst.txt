@@ -1,0 +1,34 @@
+
+
+libgs.monitoring.CriticalAlert
+==============================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoclass:: CriticalAlert
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~CriticalAlert.alertcode
+      ~CriticalAlert.alertstr
+   
+   
+

@@ -1,0 +1,6 @@
+libgs.visualisation.TrackDash.UNITS
+===================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: TrackDash.UNITS

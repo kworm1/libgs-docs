@@ -1,0 +1,48 @@
+
+
+libgs.utils.UTCLogFormatterHTML
+===============================
+
+.. currentmodule:: libgs.utils
+
+.. autoclass:: UTCLogFormatterHTML
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~UTCLogFormatterHTML.converter
+      
+      
+      ~UTCLogFormatterHTML.format
+      
+      
+      ~UTCLogFormatterHTML.formatException
+      
+      
+      ~UTCLogFormatterHTML.formatTime
+      
+      
+      ~UTCLogFormatterHTML.usesTime
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~UTCLogFormatterHTML.use_colour
+   
+   
+

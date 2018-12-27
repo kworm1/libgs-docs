@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.in\_pos
+===================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: DummyRotator.in_pos

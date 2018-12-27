@@ -1,0 +1,6 @@
+libgs.utils.Defaults.RECORD\_SPECTRA\_MAX\_LEN
+==============================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.RECORD_SPECTRA_MAX_LEN

@@ -1,0 +1,6 @@
+libgs.restapi.get\_mon
+======================
+
+.. currentmodule:: libgs.restapi
+
+.. autofunction:: get_mon

@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.hardware.GS232B.STOWED_EL &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.hardware.GS232B.az" href="libgs.hardware.GS232B.az.html" />
+    <link rel="prev" title="libgs.hardware.GS232B.STOWED_AZ" href="libgs.hardware.GS232B.STOWED_AZ.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.azel_err.html">libgs.hardware.GS232B.azel_err</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.azel_to_antenna_angles.html">libgs.hardware.GS232B.azel_to_antenna_angles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.get_azel.html">libgs.hardware.GS232B.get_azel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.get_azel_rate.html">libgs.hardware.GS232B.get_azel_rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.in_pos.html">libgs.hardware.GS232B.in_pos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.set_azel.html">libgs.hardware.GS232B.set_azel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.set_azel_rate.html">libgs.hardware.GS232B.set_azel_rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.start.html">libgs.hardware.GS232B.start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.stop.html">libgs.hardware.GS232B.stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.stow.html">libgs.hardware.GS232B.stow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.BEAMWIDTH.html">libgs.hardware.GS232B.BEAMWIDTH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.GET_DT.html">libgs.hardware.GS232B.GET_DT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.MAX_AZ.html">libgs.hardware.GS232B.MAX_AZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.MAX_EL.html">libgs.hardware.GS232B.MAX_EL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.MIN_AZ.html">libgs.hardware.GS232B.MIN_AZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.MIN_EL.html">libgs.hardware.GS232B.MIN_EL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.ROT_SETTLETIME_GET.html">libgs.hardware.GS232B.ROT_SETTLETIME_GET</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.ROT_SETTLETIME_SET.html">libgs.hardware.GS232B.ROT_SETTLETIME_SET</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.SERIAL_PORT_TIMEOUT.html">libgs.hardware.GS232B.SERIAL_PORT_TIMEOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.SET_DT.html">libgs.hardware.GS232B.SET_DT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.SET_REGULARLY.html">libgs.hardware.GS232B.SET_REGULARLY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.SLEW_TIMEOUT.html">libgs.hardware.GS232B.SLEW_TIMEOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.STALE_TIME.html">libgs.hardware.GS232B.STALE_TIME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.STOWED_AZ.html">libgs.hardware.GS232B.STOWED_AZ</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">libgs.hardware.GS232B.STOWED_EL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.az.html">libgs.hardware.GS232B.az</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.azel.html">libgs.hardware.GS232B.azel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.cmd_az.html">libgs.hardware.GS232B.cmd_az</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.cmd_el.html">libgs.hardware.GS232B.cmd_el</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.el.html">libgs.hardware.GS232B.el</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.name.html">libgs.hardware.GS232B.name</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.hardware.html">libgs.hardware</a> &raquo;</li>
+        
+          <li><a href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a> &raquo;</li>
+        
+      <li>libgs.hardware.GS232B.STOWED_EL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.hardware.GS232B.STOWED_EL.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-hardware-gs232b-stowed-el">
+<h1>libgs.hardware.GS232B.STOWED_EL<a class="headerlink" href="#libgs-hardware-gs232b-stowed-el" title="Permalink to this headline">¶</a></h1>
+<dl class="attribute">
+<dt id="libgs.hardware.GS232B.STOWED_EL">
+<code class="descclassname">GS232B.</code><code class="descname">STOWED_EL</code><em class="property"> = 90</em><a class="headerlink" href="#libgs.hardware.GS232B.STOWED_EL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.hardware.GS232B.az.html" class="btn btn-neutral float-right" title="libgs.hardware.GS232B.az" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.hardware.GS232B.STOWED_AZ.html" class="btn btn-neutral" title="libgs.hardware.GS232B.STOWED_AZ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

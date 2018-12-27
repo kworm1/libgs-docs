@@ -1,0 +1,6 @@
+libgs.database.KVDb.count\_rows
+===============================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: KVDb.count_rows

@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.format
+=======================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.format

@@ -1,0 +1,6 @@
+libgs.visualisation.SatellitePass.name
+======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: SatellitePass.name

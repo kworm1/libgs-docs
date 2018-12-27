@@ -1,0 +1,6 @@
+libgs.monitoring.NoAlert.alertcode
+==================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: NoAlert.alertcode

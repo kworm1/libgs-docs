@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.get\_range\_rate
+=========================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RadioBase.get_range_rate

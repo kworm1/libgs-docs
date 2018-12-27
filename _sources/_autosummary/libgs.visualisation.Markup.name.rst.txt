@@ -1,0 +1,6 @@
+libgs.visualisation.Markup.name
+===============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: Markup.name

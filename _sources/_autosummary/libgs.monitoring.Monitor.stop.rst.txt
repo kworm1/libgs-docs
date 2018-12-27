@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.stop
+=============================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.stop

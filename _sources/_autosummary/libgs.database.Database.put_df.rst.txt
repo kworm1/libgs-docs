@@ -1,0 +1,6 @@
+libgs.database.Database.put\_df
+===============================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: Database.put_df

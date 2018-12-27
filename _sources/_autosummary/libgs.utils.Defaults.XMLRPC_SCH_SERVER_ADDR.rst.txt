@@ -1,0 +1,6 @@
+libgs.utils.Defaults.XMLRPC\_SCH\_SERVER\_ADDR
+==============================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.XMLRPC_SCH_SERVER_ADDR

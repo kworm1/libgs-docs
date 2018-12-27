@@ -1,0 +1,6 @@
+libgs.utils.Defaults.WFALL\_JPG\_OUT\_SCALE
+===========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.WFALL_JPG_OUT_SCALE

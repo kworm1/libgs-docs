@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.disable
+=================================
+
+.. currentmodule:: libgs.scheduler
+
+.. automethod:: Scheduler.disable

@@ -1,0 +1,6 @@
+libgs.monitoring.MonitorItem.count
+==================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: MonitorItem.count

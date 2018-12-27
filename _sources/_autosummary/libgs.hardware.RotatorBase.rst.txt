@@ -1,0 +1,69 @@
+
+
+libgs.hardware.RotatorBase
+==========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoclass:: RotatorBase
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~RotatorBase.azel_err
+      
+      
+      ~RotatorBase.azel_to_antenna_angles
+      
+      
+      ~RotatorBase.get_azel
+      
+      
+      ~RotatorBase.get_azel_rate
+      
+      
+      ~RotatorBase.in_pos
+      
+      
+      ~RotatorBase.set_azel
+      
+      
+      ~RotatorBase.set_azel_rate
+      
+      
+      ~RotatorBase.stow
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~RotatorBase.BEAMWIDTH
+      ~RotatorBase.MAX_AZ
+      ~RotatorBase.MAX_EL
+      ~RotatorBase.MIN_AZ
+      ~RotatorBase.MIN_EL
+      ~RotatorBase.SLEW_TIMEOUT
+      ~RotatorBase.STOWED_AZ
+      ~RotatorBase.STOWED_EL
+      ~RotatorBase.az
+      ~RotatorBase.azel
+      ~RotatorBase.cmd_az
+      ~RotatorBase.cmd_el
+      ~RotatorBase.el
+      ~RotatorBase.name
+   
+   
+

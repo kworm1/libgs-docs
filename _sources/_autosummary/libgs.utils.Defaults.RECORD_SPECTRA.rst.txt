@@ -1,0 +1,6 @@
+libgs.utils.Defaults.RECORD\_SPECTRA
+====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.RECORD_SPECTRA

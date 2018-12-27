@@ -1,0 +1,6 @@
+libgs.utils.Defaults.ROTATOR\_STOWED\_EL
+========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.ROTATOR_STOWED_EL

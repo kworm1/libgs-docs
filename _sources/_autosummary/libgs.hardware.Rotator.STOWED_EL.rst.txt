@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.STOWED\_EL
+=================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: Rotator.STOWED_EL

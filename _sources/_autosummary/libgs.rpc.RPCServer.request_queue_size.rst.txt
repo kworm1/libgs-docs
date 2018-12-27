@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.request\_queue\_size
+========================================
+
+.. currentmodule:: libgs.rpc
+
+.. autoattribute:: RPCServer.request_queue_size

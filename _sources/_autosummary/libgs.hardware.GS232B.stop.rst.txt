@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.stop
+==========================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.stop

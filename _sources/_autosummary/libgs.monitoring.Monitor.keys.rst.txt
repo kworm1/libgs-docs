@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.keys
+=============================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.keys

@@ -1,0 +1,6 @@
+libgs.utils.raise\_if\_aborted
+==============================
+
+.. currentmodule:: libgs.utils
+
+.. autofunction:: raise_if_aborted

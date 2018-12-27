@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.emulators &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.emulators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.emulators</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+
+<span class="sd">libgs.emulators</span>
+<span class="sd">===============</span>
+
+<span class="sd">:date: Wed Jun 14 12:32:08 2017</span>
+<span class="sd">:author: kjetil</span>
+
+
+<span class="sd">This module implements emulation routines - mostly against hardware -</span>
+<span class="sd">for testing the libgs library whennot connected</span>
+<span class="sd">to the hardware</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">select</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">zmq</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">SimpleXMLRPCServer</span> <span class="k">import</span> <span class="n">SimpleXMLRPCServer</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># Configure logging with the name libgs-log, and add the NullHandler. That</span>
+<span class="c1"># means that log messages will be dropped unless the application using this</span>
+<span class="c1"># library configures logging.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># Class for catching signals</span>
+<span class="c1">#</span>
+<div class="viewcode-block" id="Killer"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Killer.html#libgs.emulators.Killer">[docs]</a><span class="k">class</span> <span class="nc">Killer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kill_now</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="Killer.exit"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Killer.exit.html#libgs.emulators.Killer.exit">[docs]</a>    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kill_now</span> <span class="o">=</span> <span class="kc">True</span></div></div>
+
+
+<div class="viewcode-block" id="Server"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Server.html#libgs.emulators.Server">[docs]</a><span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generic TCPIP Server. Opens on a port</span>
+<span class="sd">        Will accept predefined commands and</span>
+<span class="sd">        return predefined answers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span>
+            <span class="n">persist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">resp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Port</span>
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PORT</span><span class="o">=</span><span class="n">port</span>
+
+        <span class="c1">#: Leave client connections open</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_persistant_connections</span> <span class="o">=</span> <span class="n">persist</span>
+
+        <span class="c1">#: response dictionary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responses</span> <span class="o">=</span> <span class="n">resp</span>
+
+
+    <span class="k">def</span> <span class="nf">_close_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inputs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_thread_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server_id</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span>
+
+        <span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PORT</span>
+
+        <span class="n">server</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="c1">#settimeout(1)</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+        <span class="c1">#listen_socket.settimeout(1)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">server</span><span class="p">]</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inputs</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+
+
+        <span class="c1"># Outgoing message queues (socket:Queue)</span>
+        <span class="c1">#message_queues = {}</span>
+
+        <span class="k">while</span> <span class="n">inputs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_server</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+                    <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">break</span>
+
+            <span class="n">readable</span><span class="p">,</span> <span class="n">writable</span><span class="p">,</span> <span class="n">exceptional</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+            <span class="c1"># Handle inputs</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">readable</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="n">server</span><span class="p">:</span>
+                    <span class="c1"># A &quot;readable&quot; server socket is ready to accept a connection</span>
+                    <span class="n">connection</span><span class="p">,</span> <span class="n">client_address</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+                    <span class="c1">#print((&#39;new connection from %s&#39;,(client_address)), file=sys.stderr)</span>
+                    <span class="n">connection</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+                        <span class="c1"># A readable client socket has data</span>
+                        <span class="c1">#print ( &#39;received &quot;%s&quot; from %s&#39; % (data, s.getpeername()), file=sys.stderr)</span>
+                        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_respond</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Socket error when sending:&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persistant_connections</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_close_connection</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_respond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Respond by simple echo</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmds</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">cmds</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="n">cmd</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="s1">&#39;DEFAULT&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+
+                <span class="n">resp</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">resp</span>
+
+
+
+<div class="viewcode-block" id="Server.start"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Server.start.html#libgs.emulators.Server.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting server...&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_thread_server</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Server running&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Server.stop"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Server.stop.html#libgs.emulators.Server.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Stopping server...&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">thr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_server_id</span>
+        <span class="k">if</span> <span class="n">thr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    waiting&#39;</span><span class="p">)</span>
+            <span class="n">thr</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    server stopped&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Server.close_all"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Server.close_all.html#libgs.emulators.Server.close_all">[docs]</a>    <span class="k">def</span> <span class="nf">close_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_close_connection</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div></div>
+
+
+
+<div class="viewcode-block" id="SpaceTrack"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.SpaceTrack.html#libgs.emulators.SpaceTrack">[docs]</a><span class="k">class</span> <span class="nc">SpaceTrack</span><span class="p">(</span><span class="n">Server</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Emulate space-track.org server</span>
+
+<span class="sd">    :todo: Implement SpaceTrack class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Rotctld"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Rotctld.html#libgs.emulators.Rotctld">[docs]</a><span class="k">class</span> <span class="nc">Rotctld</span><span class="p">(</span><span class="n">Server</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Emulate hamlib rotctld daemon responses</span>
+
+<span class="sd">    Simple response.</span>
+<span class="sd">    Allows for the commands p (get position) and P (set position)</span>
+
+<span class="sd">    Will also implement a simple slewing from one to the other over</span>
+<span class="sd">    a set amount of time.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Rotctld</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">4533</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">125</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">125</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_t</span>   <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1">#: time to slew to new position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slew_t</span>  <span class="o">=</span> <span class="mi">4</span>
+
+
+    <span class="k">def</span> <span class="nf">_respond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slew_t</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_t</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slew_t</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_pos</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.6f</span><span class="se">\n</span><span class="si">%.6f</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">d_az</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cmd_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">slew_t</span>
+                <span class="n">d_el</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cmd_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">slew_t</span>
+
+
+                <span class="n">resp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.6f</span><span class="se">\n</span><span class="si">%.6f</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">d_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">d_el</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_pos</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="s1">&#39;RPRT 0</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="s2">&quot;Command &#39;</span><span class="si">%s</span><span class="s2">&#39; not found!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">resp</span></div>
+
+
+
+<div class="viewcode-block" id="Radio"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Radio.html#libgs.emulators.Radio">[docs]</a><span class="k">class</span> <span class="nc">Radio</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class emulates a GNU Radio frontend by providing the xmlrpc</span>
+<span class="sd">    and zmq interfaces expected in a adfa-gs frontend, and provide a random</span>
+<span class="sd">    IQ stream.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> 
+            <span class="n">addr</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> 
+            <span class="n">port</span><span class="o">=</span><span class="mi">8051</span><span class="p">,</span> 
+            <span class="n">ifvars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mf">449e6</span><span class="p">,</span> <span class="s1">&#39;samp_rate&#39;</span><span class="p">:</span><span class="mf">74e3</span><span class="p">,</span> <span class="s1">&#39;rangeRate&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">},</span>
+            <span class="n">iqport</span> <span class="o">=</span> <span class="mi">5560</span><span class="p">):</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addr</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ifvars</span> <span class="o">=</span> <span class="n">ifvars</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iq_port</span> <span class="o">=</span> <span class="n">iqport</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;samp_rate&#39;</span> <span class="ow">in</span> <span class="n">ifvars</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="n">ifvars</span><span class="p">[</span><span class="s1">&#39;samp_rate&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="mf">74e3</span>
+
+        <span class="c1"># Set up XMLRPC server on port 8051</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span> <span class="o">=</span> <span class="n">SimpleXMLRPCServer</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">),</span> <span class="n">allow_none</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">logRequests</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Register the functions</span>
+
+        <span class="k">def</span> <span class="nf">make_func</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">_get_func</span><span class="p">():</span>
+                <span class="c1">#log.debug(&quot;Radio: %s was called&quot;%(_get_func.__name__))</span>
+                <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">_set_func</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Radio: </span><span class="si">%s</span><span class="s2"> was called with arg </span><span class="si">%.0f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">_set_func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">_get_func</span><span class="p">,</span> <span class="n">_set_func</span>
+
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ifvars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">get_func</span><span class="p">,</span> <span class="n">set_func</span> <span class="o">=</span> <span class="n">make_func</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">get_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="s1">&#39;get_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">set_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="s1">&#39;set_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;get_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">get_func</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;set_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">set_func</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.get_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.set_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+
+            <span class="n">set_func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span><span class="o">.</span><span class="n">register_introspection_functions</span><span class="p">()</span>
+        
+        
+        
+    <span class="k">def</span> <span class="nf">_start_iq_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">_pthr_serve_iq</span><span class="p">():</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="mi">64</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># Generate IQ</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_iq</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+                
+                <span class="c1"># Dump over zmq</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tobytes</span><span class="p">())</span>
+                
+                <span class="c1"># Sleep a tiny bit to simulate the sample rate</span>
+                <span class="c1"># sleep time = N/samp_rate</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
+                    <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">PUB</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tcp://*:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iq_port</span><span class="p">))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">_pthr_serve_iq</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        
+
+
+    <span class="k">def</span> <span class="nf">_generate_iq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate IQ values. These have amplitude with mean=0.0025, std=0.0076 and random phase angles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0025</span><span class="p">,</span> <span class="mf">0.0076</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)],</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)])]</span>
+        <span class="n">npx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">npx</span>
+
+
+<div class="viewcode-block" id="Radio.start"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Radio.start.html#libgs.emulators.Radio.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># self.stop()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start_iq_server</span><span class="p">()</span></div>
+        
+<div class="viewcode-block" id="Radio.stop"><a class="viewcode-back" href="../../_autosummary/libgs.emulators.Radio.stop.html#libgs.emulators.Radio.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_pthr&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rpcserver</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>            
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_pthr_iq&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>
+        
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">Radio</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">xmlrpclib</span> <span class="k">import</span> <span class="n">ServerProxy</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">ServerProxy</span><span class="p">(</span><span class="s1">&#39;http://localhost:8051&#39;</span><span class="p">)</span>
+
+    <span class="c1">#s2 = Rotctld()</span>
+    <span class="c1">#s2.start()</span>
+
+    <span class="c1">#sat =  BuccaneerSpacelink()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

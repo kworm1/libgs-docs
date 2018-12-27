@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.SET\_REGULARLY
+====================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.SET_REGULARLY

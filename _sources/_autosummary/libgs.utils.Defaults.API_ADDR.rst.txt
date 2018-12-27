@@ -1,0 +1,6 @@
+libgs.utils.Defaults.API\_ADDR
+==============================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.API_ADDR

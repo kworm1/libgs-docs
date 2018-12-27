@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.disabled
+==================================
+
+.. currentmodule:: libgs.scheduler
+
+.. autoattribute:: Scheduler.disabled

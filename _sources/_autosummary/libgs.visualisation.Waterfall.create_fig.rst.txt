@@ -1,0 +1,6 @@
+libgs.visualisation.Waterfall.create\_fig
+=========================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: Waterfall.create_fig

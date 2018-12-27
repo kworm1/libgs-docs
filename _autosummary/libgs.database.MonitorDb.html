@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.database.MonitorDb &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.database.MonitorDb.count_rows" href="libgs.database.MonitorDb.count_rows.html" />
+    <link rel="prev" title="libgs.database.KVDb.put_df" href="libgs.database.KVDb.put_df.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.database.html">libgs.database</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.database.tfilterstr2query.html">libgs.database.tfilterstr2query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.database.CommsLog.html">libgs.database.CommsLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.database.Database.html">libgs.database.Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.database.KVDb.html">libgs.database.KVDb</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.database.MonitorDb</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.count_rows.html">libgs.database.MonitorDb.count_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.create_table.html">libgs.database.MonitorDb.create_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.get.html">libgs.database.MonitorDb.get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.get_df.html">libgs.database.MonitorDb.get_df</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.get_file.html">libgs.database.MonitorDb.get_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.put.html">libgs.database.MonitorDb.put</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.MonitorDb.put_df.html">libgs.database.MonitorDb.put_df</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.database.PassDb.html">libgs.database.PassDb</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.database.html">libgs.database</a> &raquo;</li>
+        
+      <li>libgs.database.MonitorDb</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.database.MonitorDb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-database-monitordb">
+<h1>libgs.database.MonitorDb<a class="headerlink" href="#libgs-database-monitordb" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="libgs.database.MonitorDb">
+<em class="property">class </em><code class="descclassname">libgs.database.</code><code class="descname">MonitorDb</code><span class="sig-paren">(</span><em>db='sqlite:///libgs.db'</em>, <em>binary_fmt='b64'</em>, <em>disk_threshold=1000</em>, <em>disk_path='.'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/database.html#MonitorDb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.database.MonitorDb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monitor database interface class</p>
+<p>The monitor database is a key/value type database
+that stores arbitrary monitoring values. Each key/value pair
+is additionally associated with the pass id for easy search.</p>
+<p>It sets up a table with the following columns</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>key</td>
+<td>The name of the monitor point</td>
+</tr>
+<tr class="row-even"><td>value</td>
+<td>The monitor point value (JSON encoded)</td>
+</tr>
+<tr class="row-odd"><td>pass_id</td>
+<td>The pass id associated with the current monitor entry</td>
+</tr>
+<tr class="row-even"><td>alert</td>
+<td>The alert level of the current monitor entry</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally each row is assigned a primary key and a timestamp</p>
+<p>See <a class="reference internal" href="libgs.database.Database.html#libgs.database.Database" title="libgs.database.Database"><code class="xref py py-class docutils literal notranslate"><span class="pre">Database</span></code></a> for description of available arguments</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.database.MonitorDb.count_rows.html#libgs.database.MonitorDb.count_rows" title="libgs.database.MonitorDb.count_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_rows</span></code></a>(table)</td>
+<td>Return the number of rows in a table</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.database.MonitorDb.create_table.html#libgs.database.MonitorDb.create_table" title="libgs.database.MonitorDb.create_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_table</span></code></a>(name,&nbsp;*columns,&nbsp;**kwargs)</td>
+<td>Set up the columns and add a unique key.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.database.MonitorDb.get.html#libgs.database.MonitorDb.get" title="libgs.database.MonitorDb.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>([limit,&nbsp;keys,&nbsp;tstamps])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.database.MonitorDb.get_df.html#libgs.database.MonitorDb.get_df" title="libgs.database.MonitorDb.get_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_df</span></code></a>(table[,&nbsp;where,&nbsp;limit,&nbsp;orderby,&nbsp;…])</td>
+<td>Get data from communications database as a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.23.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> object</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.database.MonitorDb.get_file.html#libgs.database.MonitorDb.get_file" title="libgs.database.MonitorDb.get_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file</span></code></a>(fname)</td>
+<td>Grab a file resource and return the bytes or string (.bin or .txt)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.database.MonitorDb.put.html#libgs.database.MonitorDb.put" title="libgs.database.MonitorDb.put"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put</span></code></a>(pass_id,&nbsp;key,&nbsp;value[,&nbsp;alert])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.database.MonitorDb.put_df.html#libgs.database.MonitorDb.put_df" title="libgs.database.MonitorDb.put_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put_df</span></code></a>(table,&nbsp;df[,&nbsp;index,&nbsp;if_exists])</td>
+<td>Add dataframe to database, appending metadata for when it was added</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.database.MonitorDb.count_rows.html" class="btn btn-neutral float-right" title="libgs.database.MonitorDb.count_rows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.database.KVDb.put_df.html" class="btn btn-neutral" title="libgs.database.KVDb.put_df" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+libgs.rpc.RPCSchedulerServer.execute\_schedule
+==============================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCSchedulerServer.execute_schedule

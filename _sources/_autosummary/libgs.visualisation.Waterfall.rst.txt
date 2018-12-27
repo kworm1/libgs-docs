@@ -1,0 +1,41 @@
+
+
+libgs.visualisation.Waterfall
+=============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: Waterfall
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~Waterfall.add_freq_plot
+      
+      
+      ~Waterfall.create_fig
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~Waterfall.live_data
+      ~Waterfall.live_props
+      ~Waterfall.name
+   
+   
+

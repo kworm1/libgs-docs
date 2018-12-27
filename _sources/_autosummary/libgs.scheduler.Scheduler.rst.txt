@@ -1,0 +1,50 @@
+
+
+libgs.scheduler.Scheduler
+=========================
+
+.. currentmodule:: libgs.scheduler
+
+.. autoclass:: Scheduler
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~Scheduler.disable
+      
+      
+      ~Scheduler.enable
+      
+      
+      ~Scheduler.execute
+      
+      
+      ~Scheduler.execute_pass
+      
+      
+      ~Scheduler.stop
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~Scheduler.disabled
+      ~Scheduler.state
+      ~Scheduler.timer
+   
+   
+

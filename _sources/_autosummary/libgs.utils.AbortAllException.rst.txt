@@ -1,0 +1,6 @@
+libgs.utils.AbortAllException
+=============================
+
+.. currentmodule:: libgs.utils
+
+.. autoexception:: AbortAllException

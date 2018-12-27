@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.MAX\_TRACK\_DT
+================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStation.MAX_TRACK_DT

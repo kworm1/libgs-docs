@@ -1,0 +1,38 @@
+
+
+libgs.visualisation.LivePlot
+============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: LivePlot
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~LivePlot.create_fig
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~LivePlot.live_data
+      ~LivePlot.live_props
+      ~LivePlot.name
+   
+   
+

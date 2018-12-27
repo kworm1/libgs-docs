@@ -1,0 +1,6 @@
+libgs.database.CommsLog.put
+===========================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: CommsLog.put

@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.init\_rxtx
+============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStation.init_rxtx

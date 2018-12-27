@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.get\_azel
+================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotCtld.get_azel

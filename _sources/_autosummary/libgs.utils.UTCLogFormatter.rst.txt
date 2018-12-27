@@ -1,0 +1,48 @@
+
+
+libgs.utils.UTCLogFormatter
+===========================
+
+.. currentmodule:: libgs.utils
+
+.. autoclass:: UTCLogFormatter
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~UTCLogFormatter.converter
+      
+      
+      ~UTCLogFormatter.format
+      
+      
+      ~UTCLogFormatter.formatException
+      
+      
+      ~UTCLogFormatter.formatTime
+      
+      
+      ~UTCLogFormatter.usesTime
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~UTCLogFormatter.use_colour
+   
+   
+

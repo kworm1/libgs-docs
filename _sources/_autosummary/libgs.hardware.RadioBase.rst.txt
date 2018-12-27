@@ -1,0 +1,53 @@
+
+
+libgs.hardware.RadioBase
+========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoclass:: RadioBase
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~RadioBase.get_range_rate
+      
+      
+      ~RadioBase.get_spectrum
+      
+      
+      ~RadioBase.record_spectrum
+      
+      
+      ~RadioBase.send_bytes
+      
+      
+      ~RadioBase.set_range_rate
+      
+      
+      ~RadioBase.set_recv_callback
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~RadioBase.err_range_rate_get
+      ~RadioBase.err_range_rate_set
+      ~RadioBase.name
+      ~RadioBase.range_rate
+   
+   
+

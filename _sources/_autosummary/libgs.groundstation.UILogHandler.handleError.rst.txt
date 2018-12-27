@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.handleError
+============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.handleError

@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.terminate
+===============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStationBase.terminate

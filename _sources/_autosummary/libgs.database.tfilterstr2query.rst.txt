@@ -1,0 +1,6 @@
+libgs.database.tfilterstr2query
+===============================
+
+.. currentmodule:: libgs.database
+
+.. autofunction:: tfilterstr2query

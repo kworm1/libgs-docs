@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.disconnect
+=========================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GR_XMLRPCRadio.disconnect

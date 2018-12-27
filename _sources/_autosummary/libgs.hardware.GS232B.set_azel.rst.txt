@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.set\_azel
+===============================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.set_azel

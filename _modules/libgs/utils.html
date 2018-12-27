@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.utils &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+
+<span class="sd">libgs.utils</span>
+<span class="sd">===========</span>
+
+<span class="sd">:date: Thu Jul 27 20:40:36 2017</span>
+<span class="sd">:author: Kjetil Wormnes</span>
+
+
+<span class="sd">This module contains utilities and settings for the libgs package.</span>
+
+
+<span class="sd">Examples</span>
+<span class="sd">---------</span>
+
+<span class="sd">.. todo:</span>
+<span class="sd">    Add examples to libgs.utils</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">ephem</span>
+<span class="kn">from</span> <span class="nn">libgs_ops.rpc</span> <span class="k">import</span> <span class="n">RPCClient</span>
+
+
+<span class="n">abort_all</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+
+
+<span class="c1">##########################</span>
+<span class="c1">#</span>
+<span class="c1"># Exceptions</span>
+<span class="c1">#</span>
+<span class="c1">##########################</span>
+
+<div class="viewcode-block" id="Error"><a class="viewcode-back" href="../../_autosummary/libgs.utils.Error.html#libgs.utils.Error">[docs]</a><span class="k">class</span> <span class="nc">Error</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generic Error for libgs&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">original_Error</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">original_Error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Error</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">original_Error</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">original_Error</span> <span class="o">=</span> <span class="n">original_Error</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Error</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AbortAllException"><a class="viewcode-back" href="../../_autosummary/libgs.utils.AbortAllException.html#libgs.utils.AbortAllException">[docs]</a><span class="k">class</span> <span class="nc">AbortAllException</span><span class="p">(</span><span class="n">Error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exception representing the abort_all event</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<span class="c1">##########################</span>
+<span class="c1">#</span>
+<span class="c1"># Default values used throughout</span>
+<span class="c1">#</span>
+<span class="c1">##########################</span>
+
+
+<div class="viewcode-block" id="Defaults"><a class="viewcode-back" href="../../_autosummary/libgs.utils.Defaults.html#libgs.utils.Defaults">[docs]</a><span class="k">class</span> <span class="nc">Defaults</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines default values used by the different classes.</span>
+
+<span class="sd">    .. note:</span>
+
+<span class="sd">        Many (probably most) of these values are configurable in other ways (through class interfaces, constructors, etc...)</span>
+
+<span class="sd">        This class just holds all the fallback values (defaults).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># The interval at which to save monitoring values to database</span>
+    <span class="c1"># when tracking and when not tracking</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#: The time inteval (in seconds) at which to save monitor values to database while tracking</span>
+    <span class="n">MONITOR_SAVE_DT_TRACK</span>   <span class="o">=</span> <span class="mi">5</span>   <span class="c1"># 5 seconds</span>
+
+    <span class="c1">#: The time inteval (in seconds) at which to save monitor values to database while not tracking</span>
+    <span class="n">MONITOR_SAVE_DT_NOTRACK</span> <span class="o">=</span> <span class="mi">900</span> <span class="c1"># 15 minutes</span>
+
+
+    <span class="c1">##############################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Hardware interfaces</span>
+    <span class="c1">#</span>
+    <span class="c1">##############################################</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># XMLRPC interface to scheduler</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#: The host to bind the XMLRPC scheduler interface to</span>
+    <span class="n">XMLRPC_SCH_SERVER_ADDR</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+
+    <span class="c1">#: The port to bind the XMLRPC scheduler interface to</span>
+    <span class="n">XMLRPC_SCH_SERVER_PORT</span> <span class="o">=</span> <span class="mi">8000</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># XMLRPC interface to ground station</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#: The host to bind the XMLRPC ground station interface to</span>
+    <span class="n">XMLRPC_GS_SERVER_ADDR</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+
+    <span class="c1">#: The port to bind the XMLRPC ground station interface to</span>
+    <span class="n">XMLRPC_GS_SERVER_PORT</span> <span class="o">=</span> <span class="mi">8001</span>
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Default client timeout for xmlrpc calls</span>
+    <span class="c1">#:</span>
+    <span class="n">XMLRPC_CLI_TIMEOUT</span> <span class="o">=</span> <span class="mi">2</span>
+    
+
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Dashboard port</span>
+    <span class="c1">#:</span>
+    <span class="n">DASH_PORT</span> <span class="o">=</span> <span class="mi">5001</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># REST API</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#: The host to bind the REST API to</span>
+    <span class="n">API_ADDR</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+
+    <span class="c1">#: The port to bind the REST API to</span>
+    <span class="n">API_PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+
+
+
+    <span class="c1">##############################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Configuration parameters</span>
+    <span class="c1">#</span>
+    <span class="c1">##############################################</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Default rotator configurations</span>
+    <span class="c1"># (Set in rotator base class, but usually overwritten in derived classes)</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#: Default azimuth angle to stow antennae to (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_STOWED_AZ</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#: Default elevation angle to stow antennae to (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_STOWED_EL</span> <span class="o">=</span> <span class="mi">90</span>
+
+    <span class="c1">#: Default antenna beamwidth (normally overridden in rotator class). Sets the granularity at which the rotator</span>
+    <span class="c1">#: moves the antenna</span>
+    <span class="n">ROTATOR_ANTENNA_BEAMWIDTH</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#&lt;-- sets the granularity at which the rotator moves the antenna</span>
+
+    <span class="c1">#: Default maximum azimuth angle for antenna rotator  (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_MAX_AZ</span>    <span class="o">=</span> <span class="mi">360</span>
+
+    <span class="c1">#: Default minimum azimuth angle for antenna rotator  (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_MIN_AZ</span>    <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#: Default maximum elevation for antenna rotator  (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_MAX_EL</span>    <span class="o">=</span> <span class="mi">90</span>
+
+    <span class="c1">#: Default minimum elevation for antenna rotator  (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_MIN_EL</span>    <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#: Default timeout for slewing antennae  (normally overridden in rotator class)</span>
+    <span class="n">ROTATOR_SLEW_TIMEOUT</span> <span class="o">=</span> <span class="mi">100</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Log config</span>
+    <span class="c1">#</span>
+    <span class="n">LOG_PATH</span> <span class="o">=</span> <span class="s1">&#39;./logs&#39;</span>       <span class="c1">#: Path to store log files in</span>
+    <span class="n">LOG_FILE</span> <span class="o">=</span> <span class="s1">&#39;libgs.log&#39;</span>    <span class="c1">#: Log file name</span>
+    <span class="n">LOG_BACKUPCOUNT</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c1">#: Number of log files to keep</span>
+    <span class="n">LOG_MAXFILESIZE</span> <span class="o">=</span> <span class="mi">1000000</span> <span class="c1">#: Max log filesize in bytes</span>
+    <span class="n">LOG_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)14s</span><span class="s1"> - </span><span class="si">%(levelname)5s</span><span class="s1"> - </span><span class="si">%(module)20s</span><span class="s1">:</span><span class="si">%(lineno)4s</span><span class="s1"> - &quot;</span><span class="si">%(message)s</span><span class="s1">&quot;&#39;</span> <span class="c1">#: log format string</span>
+    <span class="n">LOG_STRING_LEN</span> <span class="o">=</span> <span class="mi">23</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">14</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="o">+</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">24</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">1</span>  <span class="c1">#: length of log format string</span>
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Length of log to keep in UI</span>
+    <span class="c1">#:</span>
+    <span class="n">UI_LOG_LEN</span> <span class="o">=</span> <span class="mi">200</span>
+
+
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Database connection (See SQLAlchemy for syntax)</span>
+    <span class="c1">#:</span>
+    <span class="n">DB</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///libgs.db&#39;</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Rotctld ppolling</span>
+    <span class="c1"># TODO: This might also be an old one that should be removed</span>
+    <span class="c1">#</span>
+    <span class="n">GS_ROTATOR_POLLING_INTERVAL</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="c1">#: Deprecated. Will be removed in future updates</span>
+
+
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Communications timeout after requesting data, and waiting for reply</span>
+    <span class="c1">#:</span>
+    <span class="n">TX_REPLY_TIMEOUT</span><span class="o">=</span><span class="mi">1000</span> <span class="c1">#&lt;--- large number to let spacelink handle the timeouts.</span>
+
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Color log entries</span>
+    <span class="c1">#:</span>
+    <span class="n">USE_LOG_COLOUR</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Log level  for extra verbose logging (normally disabled but can be enabled)</span>
+    <span class="c1">#:</span>
+    <span class="c1"># VERY_VERB_LOG = 5</span>
+
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Update delay for frequency plot (should be around .2 - 2)</span>
+    <span class="c1">#:</span>
+    <span class="n">VIS_FREQUENCY_PLOT_UPDATE_DELAY</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Spectrum recording</span>
+    <span class="c1">#</span>
+    <span class="n">RECORD_SPECTRA</span> <span class="o">=</span> <span class="kc">True</span>           <span class="c1">#: If false, spectra will not be recorded and stored in database</span>
+    <span class="n">RECORD_SPECTRA_MAX_LEN</span> <span class="o">=</span> <span class="mi">900</span>    <span class="c1">#: If spectrum recording enabled, maximum number of spectra to record in a single pass</span>
+    <span class="n">RECORD_SPECTRA_DT</span> <span class="o">=</span> <span class="mf">1.0</span>         <span class="c1">#: If spectrum recording enabled, time delay between subsequent recorded spectra (in seconds)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Max allowed dt (in seconds) in data used for gs tracking</span>
+    <span class="c1">#</span>
+    <span class="n">MAX_TRACK_DT</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1">#:</span>
+    <span class="c1">#: Path to store datafiles in (that are not stored in db)</span>
+    <span class="c1">#:</span>
+    <span class="n">DB_BIN_PATH</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
+
+    <span class="c1">#: For backwards compatability only. Will be removed in future updates.</span>
+    <span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">DB_BIN_PATH</span> <span class="c1">#&lt;-- todo: refactor and delete</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Visualisation waterfalls</span>
+    <span class="c1">#</span>
+    <span class="n">WFALL_COLORMAP</span> <span class="o">=</span> <span class="s1">&#39;Viridis256&#39;</span> <span class="c1">#: Bokeh colormap. see https://bokeh.pydata.org/en/0.12.6/docs/reference/palettes.html</span>
+    <span class="n">WFALL_JPG_COLORMAP</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span> <span class="c1">#: Matplotlib colormap. See: https://matplotlib.org/examples/color/colormaps_reference.html</span>
+    <span class="n">WFALL_JPG_WIDTH</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1">#: Width of each recorded waterfall plot (in pixels) if dpi=100</span>
+    <span class="n">WFALL_JPG_HEIGHT</span> <span class="o">=</span> <span class="mi">600</span> <span class="c1">#: Height of each recorded waterfall plot(in pixels) if dpi = 100</span>
+    <span class="n">WFALL_JPG_WIDTH_EXTRA</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1">#: Extra width of each recorded waterfall plot in pixels if dpi = 100</span>
+    <span class="n">WFALL_JPG_DPI</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#: DPI for recorded waterfall plots</span>
+    <span class="n">WFALL_JPG_OUT_SCALE</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#: Scaling of DPI on output of recorded waterfall plots.. Affects font size</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># REST API</span>
+    <span class="c1">#</span>
+    <span class="n">RESTAPI_DEBUG_MODE</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1">#: Put restapi in debug mode (more verbose error messages)</span>
+    <span class="n">RESTAPI_TABLE_LIMIT</span> <span class="o">=</span> <span class="mi">400</span>  <span class="c1">#: Max rows to return by restapi if nothing has been explicitly given</span></div>
+
+<span class="c1">########################</span>
+<span class="c1">#</span>
+<span class="c1"># Functions and classes</span>
+<span class="c1">#</span>
+<span class="c1">########################</span>
+
+<div class="viewcode-block" id="raise_if_aborted"><a class="viewcode-back" href="../../_autosummary/libgs.utils.raise_if_aborted.html#libgs.utils.raise_if_aborted">[docs]</a><span class="k">def</span> <span class="nf">raise_if_aborted</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method will raise an exception if the abort_all global event has been set.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">abort_all</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="n">AbortAllException</span><span class="p">(</span><span class="s2">&quot;abort_all event has been set&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="RegularCallback"><a class="viewcode-back" href="../../_autosummary/libgs.utils.RegularCallback.html#libgs.utils.RegularCallback">[docs]</a><span class="k">class</span> <span class="nc">RegularCallback</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">min_interval</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func:  Callback funciton to call</span>
+<span class="sd">            delay: Time between two subsequent calls</span>
+<span class="sd">            min_interval: Minimum time between the end of one call and the beginning of th next</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_regular_callback</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span><span class="o">=</span><span class="n">min_interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_suppressing_errors</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_e</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_regular_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            A function to regularly call a callback based on the specified delay</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># This property can be changed to stop the callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop_thread</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">stop_thread_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop_thread</span>
+        
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Regular callback of &#39;</span><span class="si">{}</span><span class="s2">&#39; started&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">new_e</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">new_e</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_e</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_suppressing_errors</span><span class="p">:</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Repeat Exception &#39;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&#39; in regular callback, suppressing output until something new happens&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">new_e</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_suppressing_errors</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_suppressing_errors</span><span class="p">:</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Repeat Exception &#39;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&#39; has stopped occurring. Regular callback resumed normal operation&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_e</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_suppressing_errors</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_last_e</span> <span class="o">=</span> <span class="n">new_e</span>
+                    <span class="n">err</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Exception in regular callback function. Stack trace:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+                <span class="c1">#Error(&quot;Exception in regular callback function: %s&quot;%(e))</span>
+
+            <span class="c1"># Sleep until next call unless an event happens in which case we break from the loop</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">wait_loop</span><span class="p">([</span><span class="n">stop_thread_fn</span><span class="p">],</span> <span class="n">timeout</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">-</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span><span class="p">))</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">except</span> <span class="n">AbortAllException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Abort All event caught. Shutting down regular callback&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Regular callback of &#39;</span><span class="si">{}</span><span class="s2">&#39; ended&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="c1">#time.sleep(max(self.delay - (time.time() - t0), self.min_interval))</span>
+
+<div class="viewcode-block" id="RegularCallback.start"><a class="viewcode-back" href="../../_autosummary/libgs.utils.RegularCallback.start.html#libgs.utils.RegularCallback.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RegularCallback.stop"><a class="viewcode-back" href="../../_autosummary/libgs.utils.RegularCallback.stop.html#libgs.utils.RegularCallback.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop_thread</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>
+
+
+
+<div class="viewcode-block" id="conv_time"><a class="viewcode-back" href="../../_autosummary/libgs.utils.conv_time.html#libgs.utils.conv_time">[docs]</a><span class="k">def</span> <span class="nf">conv_time</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">,</span> <span class="n">float_t</span><span class="o">=</span><span class="s1">&#39;julian&#39;</span><span class="p">,</span> <span class="n">ignore_ambig_types</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    There are a number of different date formats used around libgs</span>
+<span class="sd">    ephem.Date, datetime, pandas.Timestamp to mention some.</span>
+<span class="sd">    Also modified Julian time and various string formats.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ignore_ambig_types</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ephem</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">d</span>
+        
+    
+    <span class="c1"># first make a pandas Timestamp object</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ephem</span><span class="o">.</span><span class="n">Date</span><span class="p">):</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">datetime</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">):</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">d</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">float_t</span> <span class="o">==</span> <span class="s1">&#39;julian&#39;</span><span class="p">:</span>
+            <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;julian&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">float_t</span> <span class="o">==</span> <span class="s1">&#39;unix&#39;</span><span class="p">:</span>
+            <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;unix&quot;</span> <span class="p">)</span>
+            <span class="c1">#d2 = pd.to_datetime(datetime.fromtimestamp(d))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unknown float  time type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">float_t</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="c1"># Try to work out if we have year first (iso like or day first)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Dont know how to convert obejct of type </span><span class="si">{}</span><span class="s2"> to time&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">d2</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">to</span> <span class="o">==</span> <span class="s1">&#39;iso&#39;</span><span class="p">:</span> <span class="c1">#w milliseconds</span>
+        <span class="n">d3</span> <span class="o">=</span> <span class="n">d2</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S,</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>   
+        <span class="n">d3</span> <span class="o">+=</span> <span class="s1">&#39;Z&#39;</span>
+    <span class="k">elif</span> <span class="n">to</span> <span class="o">==</span> <span class="s1">&#39;julian&#39;</span><span class="p">:</span>
+        <span class="n">d3</span> <span class="o">=</span><span class="n">d2</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">to_julian_date</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">to</span> <span class="o">==</span> <span class="s1">&#39;unix&#39;</span><span class="p">:</span>
+        <span class="n">d3</span><span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">d2</span><span class="o">.</span><span class="n">timetuple</span><span class="p">())</span> <span class="o">+</span> <span class="n">d2</span><span class="o">.</span><span class="n">microsecond</span><span class="o">/</span><span class="mf">1e6</span>
+    <span class="k">elif</span> <span class="n">to</span> <span class="o">==</span> <span class="s1">&#39;datetime&#39;</span><span class="p">:</span>
+        <span class="n">d3</span> <span class="o">=</span> <span class="n">d2</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">to</span> <span class="o">==</span> <span class="s1">&#39;pandas&#39;</span><span class="p">:</span>
+        <span class="n">d3</span> <span class="o">=</span> <span class="n">d2</span>
+    <span class="k">elif</span> <span class="n">to</span> <span class="o">==</span> <span class="s1">&#39;ephem&#39;</span><span class="p">:</span>
+        <span class="n">d3</span> <span class="o">=</span> <span class="n">ephem</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">d2</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Dont know how to convert to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">to</span><span class="p">))</span>
+        
+        
+    <span class="k">return</span> <span class="n">d3</span></div>
+
+
+<div class="viewcode-block" id="wait_loop"><a class="viewcode-back" href="../../_autosummary/libgs.utils.wait_loop.html#libgs.utils.wait_loop">[docs]</a><span class="k">def</span> <span class="nf">wait_loop</span><span class="p">(</span><span class="n">events_or_callables</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic waiting loop. It will wait for any event</span>
+<span class="sd">    (of type threading.Event) to be set, or for any callable to return True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">events_or_callables</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+        <span class="n">events_or_callables</span> <span class="o">=</span> <span class="p">[</span><span class="n">events_or_callables</span><span class="p">]</span>
+
+    <span class="n">fns</span> <span class="o">=</span> <span class="p">[</span><span class="n">ec</span><span class="o">.</span><span class="n">is_set</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">_Event</span><span class="p">)</span> <span class="k">else</span> <span class="n">ec</span> <span class="k">for</span> <span class="n">ec</span> <span class="ow">in</span> <span class="n">events_or_callables</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">ec</span> <span class="ow">in</span> <span class="n">events_or_callables</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">_Event</span><span class="p">)</span> <span class="ow">or</span> <span class="n">callable</span><span class="p">(</span><span class="n">ec</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;events_or_callable must be a list of events or callables, got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ec</span><span class="p">)))</span>
+
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">abort_all</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">AbortAllException</span><span class="p">(</span><span class="s2">&quot;global wait_loop abort_all has been set&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+
+        <span class="n">e_set</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">events_or_callables</span><span class="p">,</span> <span class="n">fns</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="p">()]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">e_set</span>
+
+
+        <span class="n">rdt</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">-</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span> <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">rdt</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="safe_sleep"><a class="viewcode-back" href="../../_autosummary/libgs.utils.safe_sleep.html#libgs.utils.safe_sleep">[docs]</a><span class="k">def</span> <span class="nf">safe_sleep</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    safe_sleep uses a subset of the wait_loop capabilities to implement an anologe to the time.sleep() function.</span>
+
+<span class="sd">    The advantage is that it will raise an exception if the global abort event gets set, and as such is safe to</span>
+<span class="sd">    use in thread loops that need to exit on adfa-gs exit.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wait_loop</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">t</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="UTCLogFormatter"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatter.html#libgs.utils.UTCLogFormatter">[docs]</a><span class="k">class</span> <span class="nc">UTCLogFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">):</span>
+    <span class="n">converter</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span>
+    <span class="n">use_colour</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">USE_LOG_COLOUR</span>
+
+<div class="viewcode-block" id="UTCLogFormatter.formatTime"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatter.formatTime.html#libgs.utils.UTCLogFormatter.formatTime">[docs]</a>    <span class="k">def</span> <span class="nf">formatTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">ct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">created</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">,</span> <span class="n">ct</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%03d</span><span class="s2">Z&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">record</span><span class="o">.</span><span class="n">msecs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">s</span></div>
+
+<div class="viewcode-block" id="UTCLogFormatter.format"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatter.format.html#libgs.utils.UTCLogFormatter.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+
+        <span class="n">s</span> <span class="o">=</span>  <span class="nb">super</span><span class="p">(</span><span class="n">UTCLogFormatter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">levelno</span> <span class="o">&gt;=</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_colour</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[1;31m</span><span class="si">%s</span><span class="se">\033</span><span class="s2">[1;0m&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">s</span></div></div>
+
+<div class="viewcode-block" id="UTCLogFormatterHTML"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatterHTML.html#libgs.utils.UTCLogFormatterHTML">[docs]</a><span class="k">class</span> <span class="nc">UTCLogFormatterHTML</span><span class="p">(</span><span class="n">UTCLogFormatter</span><span class="p">):</span>
+
+<div class="viewcode-block" id="UTCLogFormatterHTML.format"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatterHTML.format.html#libgs.utils.UTCLogFormatterHTML.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+
+        <span class="n">frec</span>   <span class="o">=</span>  <span class="nb">super</span><span class="p">(</span><span class="n">UTCLogFormatter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">levelno</span> <span class="o">&gt;=</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_colour</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&lt;pre style=&quot;color:red;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&lt;pre style=&quot;&#39;</span>
+
+        <span class="c1">#s += &#39;max-width: 100%;overflow-x: auto;&quot;&gt;{}&lt;/pre&gt;\n&#39;.format(frec)</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/pre&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frec</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span></div></div>
+
+
+<div class="viewcode-block" id="setup_logger"><a class="viewcode-back" href="../../_autosummary/libgs.utils.setup_logger.html#libgs.utils.setup_logger">[docs]</a><span class="k">def</span> <span class="nf">setup_logger</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span>
+                 <span class="n">cons_loglvl</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+                 <span class="n">file_logpath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">file_loglvl</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+                 <span class="n">fmt</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">LOG_FORMAT</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to set up logging for libgs. Should only ever be called</span>
+<span class="sd">    once.</span>
+
+<span class="sd">    It sill set up logging to console and to file if requested.</span>
+
+<span class="sd">    It will also make sure all logging is timestamped in UTC time</span>
+<span class="sd">    following ISO 8601</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">     logger: The log to setup</span>
+<span class="sd">     cons_loglvl: log level for console logging,</span>
+<span class="sd">     file_logpath: Path to log to if logging to file (None for no file logging),</span>
+<span class="sd">     file_loglvl: log level for file log</span>
+<span class="sd">     fmt: log formatting string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="s1">&#39;_has_been_setup&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;setup_logger can only be called once per logger&quot;</span><span class="p">)</span>
+
+
+
+    <span class="c1">#</span>
+    <span class="c1"># TODO: NOTE: When moving to a python module, this stuff should probably</span>
+    <span class="c1"># be in the __init__ ...</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Add custom log level</span>
+    <span class="c1">#</span>
+    <span class="n">DEBUG_LEVELV_NUM</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">addLevelName</span><span class="p">(</span><span class="n">DEBUG_LEVELV_NUM</span><span class="p">,</span> <span class="s2">&quot;DBG_V&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">debugv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+        <span class="c1"># Yes, logger takes its &#39;*args&#39; as &#39;args&#39;.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">DEBUG_LEVELV_NUM</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span><span class="o">.</span><span class="n">debugv</span> <span class="o">=</span> <span class="n">debugv</span>
+
+    <span class="c1"># create logger</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+    <span class="c1"># create formatter</span>
+
+    <span class="c1"># class MyFormatter(logging.Formatter):</span>
+    <span class="c1">#     converter = time.gmtime</span>
+    <span class="c1">#     use_colour = Defaults.USE_LOG_COLOUR</span>
+    <span class="c1">#</span>
+    <span class="c1">#     def formatTime(self, record, datefmt=None):</span>
+    <span class="c1">#         ct = self.converter(record.created)</span>
+    <span class="c1">#         t = time.strftime(&quot;%Y-%m-%dT%H:%M:%S&quot;, ct)</span>
+    <span class="c1">#         s = &quot;%s.%03dZ&quot; % (t, record.msecs)</span>
+    <span class="c1">#</span>
+    <span class="c1">#         return s</span>
+    <span class="c1">#</span>
+    <span class="c1">#     def format(self, record):</span>
+    <span class="c1">#</span>
+    <span class="c1">#         s =  super(MyFormatter, self).format(record)</span>
+    <span class="c1">#</span>
+    <span class="c1">#         if record.levelno &gt;= logging.ERROR and self.use_colour:</span>
+    <span class="c1">#             s = &quot;\033[1;31m%s\033[1;0m&quot;%(s)</span>
+    <span class="c1">#</span>
+    <span class="c1">#         return s</span>
+
+
+
+    <span class="n">formatter</span> <span class="o">=</span> <span class="n">UTCLogFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+
+    <span class="c1"># create console handler and set level to debug</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">cons_loglvl</span><span class="p">)</span>
+
+    <span class="c1"># add formatter to ch</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+    <span class="c1"># add ch to logger</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Set up file logging as specificed</span>
+    <span class="c1">#</span>
+    <span class="k">if</span> <span class="n">file_logpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">logpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">file_logpath</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">logpath</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">logpath</span><span class="p">)</span>
+
+
+        <span class="n">cf</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">logpath</span> <span class="o">+</span><span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">LOG_FILE</span><span class="p">,</span><span class="n">when</span><span class="o">=</span><span class="s1">&#39;midnight&#39;</span><span class="p">,</span><span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">backupCount</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">cf</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+        <span class="n">cf</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">file_loglvl</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;File-logging enabled to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">logpath</span><span class="p">))</span>
+
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">_has_been_setup</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="schedule_regular_callback"><a class="viewcode-back" href="../../_autosummary/libgs.utils.schedule_regular_callback.html#libgs.utils.schedule_regular_callback">[docs]</a><span class="k">def</span> <span class="nf">schedule_regular_callback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">delay</span><span class="p">):</span>
+    <span class="n">cb</span> <span class="o">=</span>  <span class="n">RegularCallback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">delay</span><span class="p">)</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">cb</span></div>
+
+
+
+
+<span class="k">def</span> <span class="nf">_print</span><span class="p">(</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to print.</span>
+
+<span class="sd">        This wrapper funciton is provided to allow for more easy redirection</span>
+<span class="sd">        of output to other destinations (including Bokeh GUI, or files) if</span>
+<span class="sd">        necessary.</span>
+
+<span class="sd">        It should be used for information targeted at an interactive user, not</span>
+<span class="sd">        for logging messages</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span>
+
+
+
+
+<div class="viewcode-block" id="bytes2prettyhex"><a class="viewcode-back" href="../../_autosummary/libgs.utils.bytes2prettyhex.html#libgs.utils.bytes2prettyhex">[docs]</a><span class="k">def</span> <span class="nf">bytes2prettyhex</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">whitespacelen</span><span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">LOG_STRING_LEN</span><span class="p">):</span>
+
+    <span class="c1">#log.info(st)</span>
+
+    <span class="n">st</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data_array</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">datastr</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;</span><span class="si">%02X</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_array</span><span class="p">]</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">datastr</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">N</span><span class="p">:</span>
+           <span class="n">st</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="n">whitespacelen</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{:06x}</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datastr</span><span class="p">[</span><span class="mi">0</span><span class="o">+</span><span class="n">n</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">n</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">st</span></div>
+
+<div class="viewcode-block" id="bytes2hex"><a class="viewcode-back" href="../../_autosummary/libgs.utils.bytes2hex.html#libgs.utils.bytes2hex">[docs]</a><span class="k">def</span> <span class="nf">bytes2hex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%02X</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="hex2bytes"><a class="viewcode-back" href="../../_autosummary/libgs.utils.hex2bytes.html#libgs.utils.hex2bytes">[docs]</a><span class="k">def</span> <span class="nf">hex2bytes</span><span class="p">(</span><span class="n">hexstr</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">hexstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">bytearray</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]))</span></div>
+
+
+
+<div class="viewcode-block" id="XMLRPCTimeoutServerProxy"><a class="viewcode-back" href="../../_autosummary/libgs.utils.XMLRPCTimeoutServerProxy.html#libgs.utils.XMLRPCTimeoutServerProxy">[docs]</a><span class="k">class</span> <span class="nc">XMLRPCTimeoutServerProxy</span><span class="p">(</span><span class="n">RPCClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Deprecated in favor of RPCClient. The implmeentation is now just that this is an alias for RPCClient</span>
+
+<span class="sd">    .. todo::</span>
+
+<span class="sd">        Refactor the code to no longer use this so we can delete</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">setup_logger</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">cons_loglvl</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+    <span class="c1">#m = Monitor(dt = 1)</span>
+    <span class="c1">#fn = lambda: x</span>
+    <span class="c1">#alfn = lambda r: &#39;RED&#39; if r &lt; 0 else &#39;GREEN&#39;</span>
+    <span class="c1">#m.register_monitor(&#39;blah test&#39;, 5, fn, alert_fn = alfn)</span>
+    <span class="c1">#m.start()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

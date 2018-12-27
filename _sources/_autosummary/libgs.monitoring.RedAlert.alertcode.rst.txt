@@ -1,0 +1,6 @@
+libgs.monitoring.RedAlert.alertcode
+===================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: RedAlert.alertcode

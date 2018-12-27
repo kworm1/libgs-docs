@@ -1,0 +1,42 @@
+
+
+libgs.visualisation.TrackDash
+=============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: TrackDash
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~TrackDash.add_plot
+      
+      
+      ~TrackDash.get_plot
+      
+      
+      ~TrackDash.make_doc
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~TrackDash.UNITS
+   
+   
+

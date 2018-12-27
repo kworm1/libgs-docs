@@ -1,0 +1,6 @@
+libgs.utils.Defaults.WFALL\_JPG\_WIDTH\_EXTRA
+=============================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.WFALL_JPG_WIDTH_EXTRA

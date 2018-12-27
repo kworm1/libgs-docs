@@ -1,0 +1,6 @@
+libgs.utils.Defaults.XMLRPC\_GS\_SERVER\_PORT
+=============================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.XMLRPC_GS_SERVER_PORT

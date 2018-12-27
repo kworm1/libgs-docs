@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.register\_function
+======================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.register_function

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.LOG\_MAXFILESIZE
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.LOG_MAXFILESIZE

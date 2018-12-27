@@ -1,0 +1,6 @@
+libgs.utils.Defaults.LOG\_STRING\_LEN
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.LOG_STRING_LEN

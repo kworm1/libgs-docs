@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.utils.Defaults &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.utils.Defaults.API_ADDR" href="libgs.utils.Defaults.API_ADDR.html" />
+    <link rel="prev" title="libgs.utils.wait_loop" href="libgs.utils.wait_loop.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.utils.html">libgs.utils</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.bytes2hex.html">libgs.utils.bytes2hex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.bytes2prettyhex.html">libgs.utils.bytes2prettyhex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.conv_time.html">libgs.utils.conv_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.hex2bytes.html">libgs.utils.hex2bytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.raise_if_aborted.html">libgs.utils.raise_if_aborted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.safe_sleep.html">libgs.utils.safe_sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.schedule_regular_callback.html">libgs.utils.schedule_regular_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.setup_logger.html">libgs.utils.setup_logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.wait_loop.html">libgs.utils.wait_loop</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.utils.Defaults</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.API_ADDR.html">libgs.utils.Defaults.API_ADDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.API_PORT.html">libgs.utils.Defaults.API_PORT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.DASH_PORT.html">libgs.utils.Defaults.DASH_PORT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.DATA_PATH.html">libgs.utils.Defaults.DATA_PATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.DB.html">libgs.utils.Defaults.DB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.DB_BIN_PATH.html">libgs.utils.Defaults.DB_BIN_PATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.GS_ROTATOR_POLLING_INTERVAL.html">libgs.utils.Defaults.GS_ROTATOR_POLLING_INTERVAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.LOG_BACKUPCOUNT.html">libgs.utils.Defaults.LOG_BACKUPCOUNT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.LOG_FILE.html">libgs.utils.Defaults.LOG_FILE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.LOG_FORMAT.html">libgs.utils.Defaults.LOG_FORMAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.LOG_MAXFILESIZE.html">libgs.utils.Defaults.LOG_MAXFILESIZE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.LOG_PATH.html">libgs.utils.Defaults.LOG_PATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.LOG_STRING_LEN.html">libgs.utils.Defaults.LOG_STRING_LEN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.MAX_TRACK_DT.html">libgs.utils.Defaults.MAX_TRACK_DT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK.html">libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.MONITOR_SAVE_DT_TRACK.html">libgs.utils.Defaults.MONITOR_SAVE_DT_TRACK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.RECORD_SPECTRA.html">libgs.utils.Defaults.RECORD_SPECTRA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.RECORD_SPECTRA_DT.html">libgs.utils.Defaults.RECORD_SPECTRA_DT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.RECORD_SPECTRA_MAX_LEN.html">libgs.utils.Defaults.RECORD_SPECTRA_MAX_LEN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.RESTAPI_DEBUG_MODE.html">libgs.utils.Defaults.RESTAPI_DEBUG_MODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.RESTAPI_TABLE_LIMIT.html">libgs.utils.Defaults.RESTAPI_TABLE_LIMIT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_ANTENNA_BEAMWIDTH.html">libgs.utils.Defaults.ROTATOR_ANTENNA_BEAMWIDTH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MAX_AZ.html">libgs.utils.Defaults.ROTATOR_MAX_AZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MAX_EL.html">libgs.utils.Defaults.ROTATOR_MAX_EL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MIN_AZ.html">libgs.utils.Defaults.ROTATOR_MIN_AZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MIN_EL.html">libgs.utils.Defaults.ROTATOR_MIN_EL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_SLEW_TIMEOUT.html">libgs.utils.Defaults.ROTATOR_SLEW_TIMEOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_STOWED_AZ.html">libgs.utils.Defaults.ROTATOR_STOWED_AZ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_STOWED_EL.html">libgs.utils.Defaults.ROTATOR_STOWED_EL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.TX_REPLY_TIMEOUT.html">libgs.utils.Defaults.TX_REPLY_TIMEOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.UI_LOG_LEN.html">libgs.utils.Defaults.UI_LOG_LEN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.USE_LOG_COLOUR.html">libgs.utils.Defaults.USE_LOG_COLOUR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.VIS_FREQUENCY_PLOT_UPDATE_DELAY.html">libgs.utils.Defaults.VIS_FREQUENCY_PLOT_UPDATE_DELAY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_COLORMAP.html">libgs.utils.Defaults.WFALL_COLORMAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_COLORMAP.html">libgs.utils.Defaults.WFALL_JPG_COLORMAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_DPI.html">libgs.utils.Defaults.WFALL_JPG_DPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_HEIGHT.html">libgs.utils.Defaults.WFALL_JPG_HEIGHT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_OUT_SCALE.html">libgs.utils.Defaults.WFALL_JPG_OUT_SCALE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_WIDTH.html">libgs.utils.Defaults.WFALL_JPG_WIDTH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_WIDTH_EXTRA.html">libgs.utils.Defaults.WFALL_JPG_WIDTH_EXTRA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_CLI_TIMEOUT.html">libgs.utils.Defaults.XMLRPC_CLI_TIMEOUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_GS_SERVER_ADDR.html">libgs.utils.Defaults.XMLRPC_GS_SERVER_ADDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_GS_SERVER_PORT.html">libgs.utils.Defaults.XMLRPC_GS_SERVER_PORT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_SCH_SERVER_ADDR.html">libgs.utils.Defaults.XMLRPC_SCH_SERVER_ADDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_SCH_SERVER_PORT.html">libgs.utils.Defaults.XMLRPC_SCH_SERVER_PORT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.RegularCallback.html">libgs.utils.RegularCallback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatter.html">libgs.utils.UTCLogFormatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.html">libgs.utils.UTCLogFormatterHTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.XMLRPCTimeoutServerProxy.html">libgs.utils.XMLRPCTimeoutServerProxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.AbortAllException.html">libgs.utils.AbortAllException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.Error.html">libgs.utils.Error</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.utils.html">libgs.utils</a> &raquo;</li>
+        
+      <li>libgs.utils.Defaults</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.utils.Defaults.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-utils-defaults">
+<h1>libgs.utils.Defaults<a class="headerlink" href="#libgs-utils-defaults" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="libgs.utils.Defaults">
+<em class="property">class </em><code class="descclassname">libgs.utils.</code><code class="descname">Defaults</code><a class="reference internal" href="../_modules/libgs/utils.html#Defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.Defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines default values used by the different classes.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.API_ADDR.html#libgs.utils.Defaults.API_ADDR" title="libgs.utils.Defaults.API_ADDR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">API_ADDR</span></code></a></td>
+<td>The host to bind the REST API to</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.API_PORT.html#libgs.utils.Defaults.API_PORT" title="libgs.utils.Defaults.API_PORT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">API_PORT</span></code></a></td>
+<td>The port to bind the REST API to</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.DASH_PORT.html#libgs.utils.Defaults.DASH_PORT" title="libgs.utils.Defaults.DASH_PORT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DASH_PORT</span></code></a></td>
+<td>Dashboard port</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.DATA_PATH.html#libgs.utils.Defaults.DATA_PATH" title="libgs.utils.Defaults.DATA_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DATA_PATH</span></code></a></td>
+<td>For backwards compatability only.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.DB.html#libgs.utils.Defaults.DB" title="libgs.utils.Defaults.DB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DB</span></code></a></td>
+<td>Database connection (See SQLAlchemy for syntax)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.DB_BIN_PATH.html#libgs.utils.Defaults.DB_BIN_PATH" title="libgs.utils.Defaults.DB_BIN_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DB_BIN_PATH</span></code></a></td>
+<td>Path to store datafiles in (that are not stored in db)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.GS_ROTATOR_POLLING_INTERVAL.html#libgs.utils.Defaults.GS_ROTATOR_POLLING_INTERVAL" title="libgs.utils.Defaults.GS_ROTATOR_POLLING_INTERVAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GS_ROTATOR_POLLING_INTERVAL</span></code></a></td>
+<td>Deprecated.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.LOG_BACKUPCOUNT.html#libgs.utils.Defaults.LOG_BACKUPCOUNT" title="libgs.utils.Defaults.LOG_BACKUPCOUNT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOG_BACKUPCOUNT</span></code></a></td>
+<td>Number of log files to keep</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.LOG_FILE.html#libgs.utils.Defaults.LOG_FILE" title="libgs.utils.Defaults.LOG_FILE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOG_FILE</span></code></a></td>
+<td>Log file name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.LOG_FORMAT.html#libgs.utils.Defaults.LOG_FORMAT" title="libgs.utils.Defaults.LOG_FORMAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOG_FORMAT</span></code></a></td>
+<td>log format string</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.LOG_MAXFILESIZE.html#libgs.utils.Defaults.LOG_MAXFILESIZE" title="libgs.utils.Defaults.LOG_MAXFILESIZE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOG_MAXFILESIZE</span></code></a></td>
+<td>Max log filesize in bytes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.LOG_PATH.html#libgs.utils.Defaults.LOG_PATH" title="libgs.utils.Defaults.LOG_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOG_PATH</span></code></a></td>
+<td>Path to store log files in</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.LOG_STRING_LEN.html#libgs.utils.Defaults.LOG_STRING_LEN" title="libgs.utils.Defaults.LOG_STRING_LEN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOG_STRING_LEN</span></code></a></td>
+<td>length of log format string</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.MAX_TRACK_DT.html#libgs.utils.Defaults.MAX_TRACK_DT" title="libgs.utils.Defaults.MAX_TRACK_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_TRACK_DT</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK.html#libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK" title="libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONITOR_SAVE_DT_NOTRACK</span></code></a></td>
+<td>The time inteval (in seconds) at which to save monitor values to database while not tracking</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.MONITOR_SAVE_DT_TRACK.html#libgs.utils.Defaults.MONITOR_SAVE_DT_TRACK" title="libgs.utils.Defaults.MONITOR_SAVE_DT_TRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONITOR_SAVE_DT_TRACK</span></code></a></td>
+<td>The time inteval (in seconds) at which to save monitor values to database while tracking</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.RECORD_SPECTRA.html#libgs.utils.Defaults.RECORD_SPECTRA" title="libgs.utils.Defaults.RECORD_SPECTRA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA</span></code></a></td>
+<td>If false, spectra will not be recorded and stored in database</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.RECORD_SPECTRA_DT.html#libgs.utils.Defaults.RECORD_SPECTRA_DT" title="libgs.utils.Defaults.RECORD_SPECTRA_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA_DT</span></code></a></td>
+<td>If spectrum recording enabled, time delay between subsequent recorded spectra (in seconds)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.RECORD_SPECTRA_MAX_LEN.html#libgs.utils.Defaults.RECORD_SPECTRA_MAX_LEN" title="libgs.utils.Defaults.RECORD_SPECTRA_MAX_LEN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA_MAX_LEN</span></code></a></td>
+<td>If spectrum recording enabled, maximum number of spectra to record in a single pass</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.RESTAPI_DEBUG_MODE.html#libgs.utils.Defaults.RESTAPI_DEBUG_MODE" title="libgs.utils.Defaults.RESTAPI_DEBUG_MODE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RESTAPI_DEBUG_MODE</span></code></a></td>
+<td>Put restapi in debug mode (more verbose error messages)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.RESTAPI_TABLE_LIMIT.html#libgs.utils.Defaults.RESTAPI_TABLE_LIMIT" title="libgs.utils.Defaults.RESTAPI_TABLE_LIMIT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RESTAPI_TABLE_LIMIT</span></code></a></td>
+<td>Max rows to return by restapi if nothing has been explicitly given</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_ANTENNA_BEAMWIDTH.html#libgs.utils.Defaults.ROTATOR_ANTENNA_BEAMWIDTH" title="libgs.utils.Defaults.ROTATOR_ANTENNA_BEAMWIDTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_ANTENNA_BEAMWIDTH</span></code></a></td>
+<td>Default antenna beamwidth (normally overridden in rotator class).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MAX_AZ.html#libgs.utils.Defaults.ROTATOR_MAX_AZ" title="libgs.utils.Defaults.ROTATOR_MAX_AZ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_MAX_AZ</span></code></a></td>
+<td>Default maximum azimuth angle for antenna rotator  (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MAX_EL.html#libgs.utils.Defaults.ROTATOR_MAX_EL" title="libgs.utils.Defaults.ROTATOR_MAX_EL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_MAX_EL</span></code></a></td>
+<td>Default maximum elevation for antenna rotator  (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MIN_AZ.html#libgs.utils.Defaults.ROTATOR_MIN_AZ" title="libgs.utils.Defaults.ROTATOR_MIN_AZ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_MIN_AZ</span></code></a></td>
+<td>Default minimum azimuth angle for antenna rotator  (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_MIN_EL.html#libgs.utils.Defaults.ROTATOR_MIN_EL" title="libgs.utils.Defaults.ROTATOR_MIN_EL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_MIN_EL</span></code></a></td>
+<td>Default minimum elevation for antenna rotator  (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_SLEW_TIMEOUT.html#libgs.utils.Defaults.ROTATOR_SLEW_TIMEOUT" title="libgs.utils.Defaults.ROTATOR_SLEW_TIMEOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_SLEW_TIMEOUT</span></code></a></td>
+<td>Default timeout for slewing antennae  (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_STOWED_AZ.html#libgs.utils.Defaults.ROTATOR_STOWED_AZ" title="libgs.utils.Defaults.ROTATOR_STOWED_AZ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_STOWED_AZ</span></code></a></td>
+<td>Default azimuth angle to stow antennae to (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.ROTATOR_STOWED_EL.html#libgs.utils.Defaults.ROTATOR_STOWED_EL" title="libgs.utils.Defaults.ROTATOR_STOWED_EL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROTATOR_STOWED_EL</span></code></a></td>
+<td>Default elevation angle to stow antennae to (normally overridden in rotator class)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.TX_REPLY_TIMEOUT.html#libgs.utils.Defaults.TX_REPLY_TIMEOUT" title="libgs.utils.Defaults.TX_REPLY_TIMEOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TX_REPLY_TIMEOUT</span></code></a></td>
+<td>Communications timeout after requesting data, and waiting for reply</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.UI_LOG_LEN.html#libgs.utils.Defaults.UI_LOG_LEN" title="libgs.utils.Defaults.UI_LOG_LEN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UI_LOG_LEN</span></code></a></td>
+<td>Length of log to keep in UI</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.USE_LOG_COLOUR.html#libgs.utils.Defaults.USE_LOG_COLOUR" title="libgs.utils.Defaults.USE_LOG_COLOUR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">USE_LOG_COLOUR</span></code></a></td>
+<td>Color log entries</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.VIS_FREQUENCY_PLOT_UPDATE_DELAY.html#libgs.utils.Defaults.VIS_FREQUENCY_PLOT_UPDATE_DELAY" title="libgs.utils.Defaults.VIS_FREQUENCY_PLOT_UPDATE_DELAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VIS_FREQUENCY_PLOT_UPDATE_DELAY</span></code></a></td>
+<td>Update delay for frequency plot (should be around .2 - 2)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_COLORMAP.html#libgs.utils.Defaults.WFALL_COLORMAP" title="libgs.utils.Defaults.WFALL_COLORMAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_COLORMAP</span></code></a></td>
+<td>//bokeh.pydata.org/en/0.12.6/docs/reference/palettes.html</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_COLORMAP.html#libgs.utils.Defaults.WFALL_JPG_COLORMAP" title="libgs.utils.Defaults.WFALL_JPG_COLORMAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_COLORMAP</span></code></a></td>
+<td>//matplotlib.org/examples/color/colormaps_reference.html</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_DPI.html#libgs.utils.Defaults.WFALL_JPG_DPI" title="libgs.utils.Defaults.WFALL_JPG_DPI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_DPI</span></code></a></td>
+<td>DPI for recorded waterfall plots</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_HEIGHT.html#libgs.utils.Defaults.WFALL_JPG_HEIGHT" title="libgs.utils.Defaults.WFALL_JPG_HEIGHT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_HEIGHT</span></code></a></td>
+<td>Height of each recorded waterfall plot(in pixels) if dpi = 100</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_OUT_SCALE.html#libgs.utils.Defaults.WFALL_JPG_OUT_SCALE" title="libgs.utils.Defaults.WFALL_JPG_OUT_SCALE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_OUT_SCALE</span></code></a></td>
+<td>Scaling of DPI on output of recorded waterfall plots..</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_WIDTH.html#libgs.utils.Defaults.WFALL_JPG_WIDTH" title="libgs.utils.Defaults.WFALL_JPG_WIDTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_WIDTH</span></code></a></td>
+<td>Width of each recorded waterfall plot (in pixels) if dpi=100</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_WIDTH_EXTRA.html#libgs.utils.Defaults.WFALL_JPG_WIDTH_EXTRA" title="libgs.utils.Defaults.WFALL_JPG_WIDTH_EXTRA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_WIDTH_EXTRA</span></code></a></td>
+<td>Extra width of each recorded waterfall plot in pixels if dpi = 100</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_CLI_TIMEOUT.html#libgs.utils.Defaults.XMLRPC_CLI_TIMEOUT" title="libgs.utils.Defaults.XMLRPC_CLI_TIMEOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMLRPC_CLI_TIMEOUT</span></code></a></td>
+<td>Default client timeout for xmlrpc calls</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_GS_SERVER_ADDR.html#libgs.utils.Defaults.XMLRPC_GS_SERVER_ADDR" title="libgs.utils.Defaults.XMLRPC_GS_SERVER_ADDR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMLRPC_GS_SERVER_ADDR</span></code></a></td>
+<td>The host to bind the XMLRPC ground station interface to</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_GS_SERVER_PORT.html#libgs.utils.Defaults.XMLRPC_GS_SERVER_PORT" title="libgs.utils.Defaults.XMLRPC_GS_SERVER_PORT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMLRPC_GS_SERVER_PORT</span></code></a></td>
+<td>The port to bind the XMLRPC ground station interface to</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_SCH_SERVER_ADDR.html#libgs.utils.Defaults.XMLRPC_SCH_SERVER_ADDR" title="libgs.utils.Defaults.XMLRPC_SCH_SERVER_ADDR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMLRPC_SCH_SERVER_ADDR</span></code></a></td>
+<td>The host to bind the XMLRPC scheduler interface to</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.XMLRPC_SCH_SERVER_PORT.html#libgs.utils.Defaults.XMLRPC_SCH_SERVER_PORT" title="libgs.utils.Defaults.XMLRPC_SCH_SERVER_PORT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMLRPC_SCH_SERVER_PORT</span></code></a></td>
+<td>The port to bind the XMLRPC scheduler interface to</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.utils.Defaults.API_ADDR.html" class="btn btn-neutral float-right" title="libgs.utils.Defaults.API_ADDR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.utils.wait_loop.html" class="btn btn-neutral" title="libgs.utils.wait_loop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

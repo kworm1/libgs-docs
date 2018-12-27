@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.MONITOR\_SAVE\_DT\_TRACK
+==============================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStationBase.MONITOR_SAVE_DT_TRACK

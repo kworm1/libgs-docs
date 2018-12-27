@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.track
+=======================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStation.track

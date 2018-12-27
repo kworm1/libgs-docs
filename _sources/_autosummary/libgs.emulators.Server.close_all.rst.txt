@@ -1,0 +1,6 @@
+libgs.emulators.Server.close\_all
+=================================
+
+.. currentmodule:: libgs.emulators
+
+.. automethod:: Server.close_all

@@ -1,0 +1,32 @@
+
+
+libgs.utils.RegularCallback
+===========================
+
+.. currentmodule:: libgs.utils
+
+.. autoclass:: RegularCallback
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~RegularCallback.start
+      
+      
+      ~RegularCallback.stop
+      
+   
+   
+
+   
+   
+   
+

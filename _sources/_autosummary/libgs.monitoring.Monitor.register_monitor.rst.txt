@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.register\_monitor
+==========================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.register_monitor

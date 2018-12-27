@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.azel\_to\_antenna\_angles
+=====================================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: DummyRotator.azel_to_antenna_angles

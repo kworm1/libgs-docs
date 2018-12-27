@@ -1,0 +1,6 @@
+libgs.visualisation.BokehServer.start
+=====================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: BokehServer.start

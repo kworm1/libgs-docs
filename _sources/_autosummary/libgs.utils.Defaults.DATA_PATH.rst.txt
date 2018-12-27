@@ -1,0 +1,6 @@
+libgs.utils.Defaults.DATA\_PATH
+===============================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.DATA_PATH

@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.MAX\_AZ
+==============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: Rotator.MAX_AZ

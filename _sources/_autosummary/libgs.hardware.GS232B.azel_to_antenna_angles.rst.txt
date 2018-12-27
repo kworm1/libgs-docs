@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.azel\_to\_antenna\_angles
+===============================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.azel_to_antenna_angles

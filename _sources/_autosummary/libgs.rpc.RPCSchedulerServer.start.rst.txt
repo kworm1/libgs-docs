@@ -1,0 +1,6 @@
+libgs.rpc.RPCSchedulerServer.start
+==================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCSchedulerServer.start

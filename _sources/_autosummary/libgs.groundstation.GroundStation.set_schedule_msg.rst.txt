@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.set\_schedule\_msg
+====================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStation.set_schedule_msg

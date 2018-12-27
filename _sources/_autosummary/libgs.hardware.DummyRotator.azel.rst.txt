@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.azel
+================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: DummyRotator.azel

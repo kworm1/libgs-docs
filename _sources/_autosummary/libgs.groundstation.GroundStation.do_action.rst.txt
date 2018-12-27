@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.do\_action
+============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStation.do_action

@@ -1,0 +1,6 @@
+libgs.database.Database.create\_table
+=====================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: Database.create_table

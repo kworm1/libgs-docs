@@ -1,0 +1,992 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.monitoring &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.monitoring</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.monitoring</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+
+<span class="sd">libgs.monitoring</span>
+<span class="sd">=================</span>
+
+<span class="sd">:date:   Mon Sep 18 09:22:40 2017</span>
+<span class="sd">:author: Kjetil Wormnes</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="k">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1"># Logging</span>
+<span class="c1">#</span>
+<span class="c1">########</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1"># Alert class and</span>
+<span class="c1"># specific derived alert types.</span>
+<span class="c1"># A user can specify others if she wishes.</span>
+<span class="c1">#</span>
+<span class="c1">############################################</span>
+<div class="viewcode-block" id="Alert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Alert.html#libgs.monitoring.Alert">[docs]</a><span class="k">class</span> <span class="nc">Alert</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;alertstr&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; Unknown Alert&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; ( </span><span class="si">{}</span><span class="s2"> alert&lt;</span><span class="si">{}</span><span class="s2">&gt; )&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alertstr</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alertstr</span> <span class="k">else</span> <span class="s2">&quot;NO&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alertcode</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CriticalAlert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.CriticalAlert.html#libgs.monitoring.CriticalAlert">[docs]</a><span class="k">class</span> <span class="nc">CriticalAlert</span><span class="p">(</span><span class="n">Alert</span><span class="p">):</span>
+    <span class="n">alertstr</span><span class="o">=</span><span class="s2">&quot;CRITICAL&quot;</span>
+    <span class="n">alertcode</span><span class="o">=</span><span class="mi">100</span></div>
+
+<div class="viewcode-block" id="RedAlert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.RedAlert.html#libgs.monitoring.RedAlert">[docs]</a><span class="k">class</span> <span class="nc">RedAlert</span><span class="p">(</span><span class="n">Alert</span><span class="p">):</span>
+    <span class="n">alertstr</span><span class="o">=</span><span class="s2">&quot;RED&quot;</span>
+    <span class="n">alertcode</span> <span class="o">=</span> <span class="mi">30</span></div>
+
+<div class="viewcode-block" id="OrangeAlert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.OrangeAlert.html#libgs.monitoring.OrangeAlert">[docs]</a><span class="k">class</span> <span class="nc">OrangeAlert</span><span class="p">(</span><span class="n">Alert</span><span class="p">):</span>
+    <span class="n">alertstr</span><span class="o">=</span><span class="s2">&quot;ORANGE&quot;</span>
+    <span class="n">alertcode</span> <span class="o">=</span> <span class="mi">20</span></div>
+
+<div class="viewcode-block" id="GreenAlert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.GreenAlert.html#libgs.monitoring.GreenAlert">[docs]</a><span class="k">class</span> <span class="nc">GreenAlert</span><span class="p">(</span><span class="n">Alert</span><span class="p">):</span>
+    <span class="n">alertstr</span><span class="o">=</span><span class="s2">&quot;GREEN&quot;</span>
+    <span class="n">alertcode</span> <span class="o">=</span> <span class="mi">10</span></div>
+
+<div class="viewcode-block" id="NoAlert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.NoAlert.html#libgs.monitoring.NoAlert">[docs]</a><span class="k">class</span> <span class="nc">NoAlert</span><span class="p">(</span><span class="n">Alert</span><span class="p">):</span>
+    <span class="n">alertstr</span>  <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">alertcode</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+
+<div class="viewcode-block" id="MonitorItem"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.MonitorItem.html#libgs.monitoring.MonitorItem">[docs]</a><span class="k">class</span> <span class="nc">MonitorItem</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
+    <span class="n">_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="s1">&#39;parent&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+
+        <span class="n">tuplelist</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_fields</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">tuplelist</span> <span class="o">+=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="n">f</span><span class="p">]]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">tuplelist</span> <span class="o">+=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+
+
+        <span class="k">return</span> <span class="nb">super</span> <span class="p">(</span><span class="n">MonitorItem</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tuplelist</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">basestring</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MonitorItem.keys"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.MonitorItem.keys.html#libgs.monitoring.MonitorItem.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span></div>
+
+<div class="viewcode-block" id="MonitorItem.items"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.MonitorItem.items.html#libgs.monitoring.MonitorItem.items">[docs]</a>    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="n">f</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">item</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">MonitorItem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span></div>
+
+
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1"># The monitor magic</span>
+<span class="c1">#</span>
+<span class="c1">############################################</span>
+
+<div class="viewcode-block" id="Monitor"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.html#libgs.monitoring.Monitor">[docs]</a><span class="k">class</span> <span class="nc">Monitor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to provide functionality for monitoring</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">workers</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">tick</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">tick_cb</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1">#TODO: Perhaps get rid of tick callbacks.</span>
+                 <span class="n">default_dt</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            workers:    Maximum number of simultaneouse threads to spawn in the ThreadPool</span>
+<span class="sd">            tick:       The delay between successive runs of the monitor loop. Should be fairly small (&lt; 1 sec).</span>
+<span class="sd">            tick_cb:    A callback that can be invoked at the end of every tick.</span>
+<span class="sd">            default_dt: Default dt to apply to monitor generators (if dt not specified explicitly)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Defaults</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_dt</span>   <span class="o">=</span> <span class="n">default_dt</span>
+
+        <span class="c1"># Callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tick_cb</span> <span class="o">=</span> <span class="n">tick_cb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#&lt;-- added with add_callback</span>
+
+        <span class="c1"># Set up the executor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="c1">#&lt;-- max threads we permit at a time</span>
+
+        <span class="c1"># This is the tick</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tick</span> <span class="o">=</span> <span class="n">tick</span>
+
+        <span class="c1"># A dictionary to hold the parent headings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># The exec map keeps track of all the monitored values and their execution status and times</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exec_t&#39;</span><span class="p">,</span>       <span class="s1">&#39;next_exec_t&#39;</span><span class="p">,</span>   <span class="s1">&#39;name&#39;</span><span class="p">,</span>  <span class="s1">&#39;parent&#39;</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="s1">&#39;gen&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;loglvl_values&#39;</span><span class="p">,</span><span class="s1">&#39;loglvl_alerts&#39;</span><span class="p">,</span><span class="s1">&#39;logthr_alerts&#39;</span><span class="p">,</span><span class="s1">&#39;dependents&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;alert&#39;</span><span class="p">])</span>
+
+
+        <span class="c1"># A dictionary to map alert values to human readable strings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alertstr_map</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># The monitoring loop runs in a separate thread</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_abort</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_get_alertstr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alertstr_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alertstr_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alertcode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">alert</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Monitor.register_parent"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.register_parent.html#libgs.monitoring.Monitor.register_parent">[docs]</a>    <span class="k">def</span> <span class="nf">register_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">name</span><span class="p">,</span>
+                        <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A parent monitor is not really a monitor. It is merely the product</span>
+<span class="sd">        of its children and exists for visualisation purposes only.</span>
+
+<span class="sd">        Its alert status will always be the worst of its children</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># If parent hadnt been explicitly defined already, define it at the top level</span>
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">parent</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_parent</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Monitor.add_callback"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.add_callback.html#libgs.monitoring.Monitor.add_callback">[docs]</a>    <span class="k">def</span> <span class="nf">add_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a callable to be invoked every N times a value is polled.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           The callback will be executed in the same sub-thread that does the polling</span>
+
+<span class="sd">        The prototype of the callable should be</span>
+<span class="sd">            some_function(point_name, tstamp, exc, ret)</span>
+
+<span class="sd">        where</span>
+<span class="sd">            * point_name is the name of the monitor point that has been polled</span>
+<span class="sd">            * tstamp is the unix timestamp at which the monitor function returned a value (obtained wiht time.time()),</span>
+<span class="sd">            * exc is None if no exception happened, otherwise it is set to the exception that occurred.</span>
+<span class="sd">            * ret are the return values. Will always be an Alert object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            callable: The callable</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">callable</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Monitor.to_gen_in_executor"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.to_gen_in_executor.html#libgs.monitoring.Monitor.to_gen_in_executor">[docs]</a>    <span class="k">def</span> <span class="nf">to_gen_in_executor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">point_names</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This decorator will take any function and turn it into a generator</span>
+<span class="sd">        that always returns immediately after calls to next().</span>
+
+<span class="sd">        The call to fn is being delegated to an executor, and while it is not</span>
+<span class="sd">        done, calls to next() will return None, otherwise it will return a tuple containging</span>
+<span class="sd">            * the timestamp the data the return</span>
+<span class="sd">        value of fn</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fn:</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point_names</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span>
+        <span class="n">numvals</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">point_names</span><span class="p">)</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Further wrap the call to catch any exceptions and timestamp</span>
+        <span class="c1"># the output</span>
+        <span class="c1">#</span>
+        <span class="k">def</span> <span class="nf">exc_wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">numvals</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="p">(</span><span class="n">numvals</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))):</span>
+                    <span class="n">lres</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unexpected number of returned values from monitor function. expected </span><span class="si">{}</span><span class="s2"> value(s), got </span><span class="si">{}</span><span class="s2"> value(s)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numvals</span><span class="p">,</span> <span class="n">lres</span><span class="p">))</span>
+
+                <span class="n">exc</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">exc</span> <span class="o">=</span> <span class="n">e</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+            <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">numvals</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">r</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Alert</span><span class="p">)</span> <span class="k">else</span> <span class="n">NoAlert</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">res</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">Alert</span><span class="p">):</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">NoAlert</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">exc</span><span class="p">,</span> <span class="n">res</span>
+
+            <span class="c1"># Invoke callbacks</span>
+            <span class="k">for</span> <span class="n">cb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                        <span class="n">res2</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">,)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">point_names</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">res2</span> <span class="o">=</span> <span class="n">res</span>
+
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">point_names</span><span class="p">):</span>
+                        <span class="n">cb</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">exc</span><span class="p">,</span> <span class="n">res2</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error invoking callback function </span><span class="si">{}</span><span class="s2">. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cb</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+
+            <span class="k">return</span> <span class="n">ret</span>
+
+
+
+        <span class="k">def</span> <span class="nf">generator</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">exc_wrapped</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="c1"># Ensure a call returns immediately, and returns None if not ready</span>
+                <span class="k">while</span> <span class="ow">not</span> <span class="n">future</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+                    <span class="k">yield</span> <span class="kc">None</span>
+
+                <span class="k">yield</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">generator</span><span class="p">()</span></div>
+
+
+    <span class="c1">#############</span>
+    <span class="c1">#</span>
+    <span class="c1"># Convenience decorators</span>
+    <span class="c1">#</span>
+    <span class="c1">#############</span>
+<div class="viewcode-block" id="Monitor.callback"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.callback.html#libgs.monitoring.Monitor.callback">[docs]</a>    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator to convert a function definition to an IntervalCallback instance and add it to the</span>
+<span class="sd">        monitor&#39;s callback list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="c1"># Otherwise convert it to an IntervalCallback instance</span>
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">fn</span>
+
+        <span class="k">return</span> <span class="n">decorator</span></div>
+
+<div class="viewcode-block" id="Monitor.monitor"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.monitor.html#libgs.monitoring.Monitor.monitor">[docs]</a>    <span class="k">def</span> <span class="nf">monitor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a decorator that can be applied to any function to add it to be monitored.</span>
+
+<span class="sd">        It will do two things:</span>
+<span class="sd">            1) convert the function to a generator in which the function call is run in an executor, so that</span>
+<span class="sd">               any call to the generators next() function will return immeditately and not hold up execution. If</span>
+<span class="sd">               the function has not finished the generator will return None. If it has completed, it will return</span>
+<span class="sd">               the value as well as a timestamp and any potential exception in the format required for the monitoring</span>
+<span class="sd">               loop.</span>
+<span class="sd">            2) add the function to the Monitor class  polling schedule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            point:           The name of the monitor point. If omitted it will use the function name</span>
+<span class="sd">            *args, **kwargs: Also accepts all the arguments of register_monitor()</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Decorator</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">point</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">point_names</span> <span class="o">=</span> <span class="p">(</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">point_names</span> <span class="o">=</span> <span class="p">(</span><span class="n">point</span><span class="p">,)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">point_names</span> <span class="o">=</span> <span class="n">point</span>
+
+            <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs2</span><span class="p">):</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_gen_in_executor</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">fn</span><span class="p">,</span> <span class="n">point_names</span><span class="o">=</span><span class="n">point_names</span><span class="p">,</span><span class="o">*</span><span class="n">args2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs2</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">f</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_monitor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">point_names</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gen</span><span class="o">=</span><span class="n">decorated</span><span class="p">(),</span> <span class="n">dependents</span> <span class="o">=</span> <span class="n">point_names</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">point_names</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register_monitor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">gen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+            <span class="k">return</span> <span class="n">decorated</span>
+        <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<div class="viewcode-block" id="Monitor.register_monitor"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor">[docs]</a>    <span class="k">def</span> <span class="nf">register_monitor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">name</span><span class="p">,</span>
+                         <span class="n">gen</span><span class="p">,</span>
+                         <span class="n">dt</span>    <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">loglvl_values</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">loglvl_alerts</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+                         <span class="n">logthr_alerts</span> <span class="o">=</span> <span class="n">RedAlert</span><span class="o">.</span><span class="n">alertcode</span><span class="p">,</span>
+                         <span class="n">dependents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(),</span>
+                         <span class="n">alert_exc</span> <span class="o">=</span> <span class="n">NoAlert</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This is a low level function to register a monitor generator with the monitor class.</span>
+
+<span class="sd">        The format of the generator is quite specific, and it should therefore ideally have been created from</span>
+<span class="sd">        a callable using the to_gen_in_executor() method. Using this method will ensure the generator returns</span>
+<span class="sd">        values in the right format for the monitor class, and that it never blocks.</span>
+
+
+<span class="sd">        Args:</span>
+<span class="sd">            name:           The name of the monitor point</span>
+<span class="sd">            gen:            The monitor generator (* see description above)</span>
+<span class="sd">            dt:             The time interval in which to poll the monitored (dt = None -&gt; one shot)</span>
+<span class="sd">            parent:         Assign a parent to the monitored (For grouping purposes only,</span>
+<span class="sd">            loglvl_values:  If not None, any change in value will be logged with the logging level specified.</span>
+<span class="sd">            loglvl_alerts:  If not None, a change in alert level may be logged with the logging level specified</span>
+<span class="sd">            logthr_alerts:  The threshold for the alertcode above by which to log. Default = RedAlert.alertcode</span>
+<span class="sd">            dependents:     Other monitors to update from same generator</span>
+<span class="sd">            alert_exc:      Alert to set in case an exception is raised in monitor function. Default = NoAlert</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="c1">#&lt;-- large number to prevent it from running again</span>
+
+        <span class="c1"># One-shot can be enabled by setting dt == None. Negative dt = unset, and defaults will be applied</span>
+        <span class="c1"># Continous running (ie every tick) is enabled by setting dt = 0</span>
+        <span class="k">elif</span> <span class="n">dt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_dt</span>
+
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Adding monitor point &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="c1"># If parent hadnt been explicitly defined already, define it at the top level</span>
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">parent</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_parent</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> already exists. Names must be unique&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">exec_t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">next_exec_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+            <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">,</span>
+            <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span>
+            <span class="n">dependents</span><span class="o">=</span><span class="n">dependents</span><span class="p">,</span>
+            <span class="n">loglvl_values</span> <span class="o">=</span> <span class="n">loglvl_values</span><span class="p">,</span>
+            <span class="n">loglvl_alerts</span> <span class="o">=</span> <span class="n">loglvl_alerts</span><span class="p">,</span>
+            <span class="n">logthr_alerts</span> <span class="o">=</span> <span class="n">logthr_alerts</span><span class="p">,</span>
+            <span class="n">alert_exc</span><span class="o">=</span><span class="n">alert_exc</span><span class="p">),</span>
+            <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Make sure value is of dtype=object so it can</span>
+        <span class="c1"># accept values of different types</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">alert</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">alert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">alert</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;exec_t&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Monitor.start"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.start.html#libgs.monitoring.Monitor.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subprocess</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">subprocess</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_polling_loop</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_polling_loop</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Monitor.stop"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.stop.html#libgs.monitoring.Monitor.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_abort</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_polling_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_abort</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_poll_due</span><span class="p">()</span>
+
+            <span class="c1"># TODO: Generalise this to be able to call add_cb and add any number of callbacks at different rates</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tick_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error invoking tick callbak. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+            <span class="c1"># TICK</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tick</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_poll_due</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Poll whatever is due</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#</span>
+        <span class="c1"># Get the variables that are due for polling and loop through them</span>
+        <span class="c1"># to poll.</span>
+        <span class="c1">#</span>
+        <span class="n">to_exec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[(</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">gen</span><span class="p">))</span> <span class="o">&amp;</span>
+                                 <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">next_exec_t</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;next_exec_t&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># Try to get values for everything that is due</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">to_exec</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+            <span class="c1"># No value means the poller hasnt returned yet so just leave it to try again at the next tick</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">tstamp</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">val</span>
+
+            <span class="n">dependents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dependents&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">exc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ret</span><span class="o">.</span><span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unexpected. It should not be possible to get an exception and return value at the same time. ret=&#39;</span><span class="si">{}</span><span class="s2">&#39;, exc=&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span>
+
+                <span class="n">alertclass</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;alert_exc&#39;</span><span class="p">]</span>
+                <span class="n">ret</span> <span class="o">=</span>  <span class="p">(</span><span class="n">alertclass</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">exc</span><span class="p">)),)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dependents</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Ensure that the result is always a tuple so that iteration works properly</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dependents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ret</span><span class="o">=</span> <span class="p">(</span><span class="n">ret</span><span class="p">,)</span>
+
+            <span class="c1"># populate dependents</span>
+            <span class="k">for</span> <span class="n">k1</span><span class="p">,</span> <span class="n">dep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],)</span> <span class="o">+</span> <span class="n">dependents</span><span class="p">):</span>
+
+                <span class="c1"># Look up the index of the dependent</span>
+                <span class="n">dep_k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">dep</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dep_k</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="n">dep_k</span> <span class="o">=</span> <span class="n">dep_k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log_value</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>        <span class="c1">#&lt;-- TODO: Could be implmented using the generalised callback functionality we have</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log_alert</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">alertcode</span><span class="p">)</span>  <span class="c1">#&lt;-- TODO: Could be implmented using the generalised callback functionality we have</span>
+
+                <span class="c1"># Update the dependent</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dep_k</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">val</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dep_k</span><span class="p">,</span> <span class="s1">&#39;alert&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">alertcode</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dep_k</span><span class="p">,</span> <span class="s1">&#39;exec_t&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tstamp</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dep_k</span><span class="p">,</span> <span class="s1">&#39;next_exec_t&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">tstamp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">alertcode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alertstr_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_alertstr_map</span><span class="p">[</span><span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">alertcode</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">alertstr</span> <span class="k">if</span> <span class="n">ret</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">.</span><span class="n">alertstr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_log_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="c1">#</span>
+        <span class="c1"># Log a change in value if requested and as requested</span>
+        <span class="c1">#</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">val</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;loglvl_values&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;loglvl_values&#39;</span><span class="p">]),</span> <span class="s1">&#39;Monitor: value &quot;</span><span class="si">{}</span><span class="s1">&quot; --&gt; </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">val</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_log_alert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">alertcode</span><span class="p">):</span>
+        <span class="c1">#</span>
+        <span class="c1"># Log a change in alert if requested and as requested</span>
+        <span class="c1">#</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">alertcode</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;loglvl_alerts&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;logthr_alerts&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">alertcode</span> <span class="ow">or</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;logthr_alerts&#39;</span><span class="p">]</span> <span class="p">)):</span>
+
+            <span class="n">log</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;loglvl_alerts&#39;</span><span class="p">]),</span> <span class="s1">&#39;Monitor: alert &quot;</span><span class="si">{}</span><span class="s1">&quot; --&gt; </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">alertcode</span><span class="p">))</span>
+
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Note: Returns a copy of the entry so changing variables will not change it in the monitor</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            item:</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">it</span> <span class="o">=</span> <span class="n">MonitorItem</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;parent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Monitor name is not unique. This should not be possible&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Monitor name does not exist&quot;</span><span class="p">)</span>
+
+
+            <span class="n">itd</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="n">itd</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">itd</span><span class="p">[</span><span class="s1">&#39;exec_t&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">itd</span><span class="p">[</span><span class="s1">&#39;exec_t&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+
+            <span class="n">it</span> <span class="o">=</span> <span class="n">MonitorItem</span><span class="p">(</span><span class="n">itd</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">it</span> <span class="c1">#&lt;-- TODO: Decide if we should return all fields or a subset</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">],</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;exec_t&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot; Monitor &quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alertcode</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;(</span><span class="si">{}</span><span class="s2">) &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_alertstr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alertcode</span><span class="p">))</span>
+
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;--- running</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_pthr&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;--- not running</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">{:&lt;30s}{:&lt;40s}{:&lt;10s}{:&lt;15s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Alert&quot;</span><span class="p">,</span> <span class="s2">&quot;Last polled&quot;</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span><span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">29</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">39</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">9</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">15</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">itertree</span><span class="p">():</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">parent</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span>
+                <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="si">{:30.29s}{:40.39s}{:10.9s}{:s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s1">&#39;.&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_alertstr</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="Monitor.itertree"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.itertree.html#libgs.monitoring.Monitor.itertree">[docs]</a>    <span class="k">def</span> <span class="nf">itertree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">parent</span><span class="p">)]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">top</span> <span class="o">+=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">top</span> <span class="o">+=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">parent</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">top</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+        <span class="n">top</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">yield</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">itertree</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]):</span>
+                <span class="k">yield</span> <span class="n">it</span></div>
+
+
+
+
+<div class="viewcode-block" id="Monitor.keys"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.keys.html#libgs.monitoring.Monitor.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Just include this since dicts etc all use keys to describe the access keys. Although in this class</span>
+<span class="sd">        names is more descriptive. This method is the same as .names()</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Monitor.names"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.names.html#libgs.monitoring.Monitor.names">[docs]</a>    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="n">setup_logger</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">setup_logger</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">cons_loglvl</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">database</span>  <span class="k">import</span> <span class="n">MonitorDb</span>
+
+    <span class="n">db</span> <span class="o">=</span> <span class="n">MonitorDb</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s1">&#39;sqlite:///mondbtest.db&#39;</span><span class="p">)</span>
+
+    <span class="n">mon</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">workers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">default_dt</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># @mon.monitor(parent=&quot;test&quot;, dt=5, dtdb=5)</span>
+    <span class="c1"># # @alert_a</span>
+    <span class="c1"># def blah1():</span>
+    <span class="c1">#     time.sleep(2)</span>
+    <span class="c1">#     return &#39;a&#39;</span>
+    <span class="c1">#</span>
+    <span class="c1"># @mon.monitor(&quot;b&quot;, dt=2, dtdb=5)</span>
+    <span class="c1"># def blah2():</span>
+    <span class="c1">#     #time.sleep(2)</span>
+    <span class="c1">#     return &#39;b&#39;</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1"># @mon.monitor(&quot;c&quot;, dt=10)</span>
+    <span class="c1"># def blah3():</span>
+    <span class="c1">#     time.sleep(2)</span>
+    <span class="c1">#     return RedAlert(&#39;c&#39;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1"># @mon.monitor(dt=30)</span>
+    <span class="c1"># # @alert_a</span>
+    <span class="c1"># def fail():</span>
+    <span class="c1">#     time.sleep(1)</span>
+    <span class="c1">#     1/0</span>
+    <span class="c1">#     return(&quot;done&quot;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1"># @mon.monitor((&quot;test1&quot;,&quot;test2&quot;, &quot;test3&quot;, &quot;test4&quot;, &quot;test5&quot;), parent=&#39;test_many_ret&#39;)</span>
+    <span class="c1"># def test():</span>
+    <span class="c1">#     time.sleep(2)</span>
+    <span class="c1">#     return 1,CriticalAlert(2),GreenAlert(3),RedAlert(4),5</span>
+    <span class="c1">#</span>
+
+    <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+
+    <span class="kn">import</span> <span class="nn">psutil</span>
+    <span class="c1">#from libgs.monitoring import Monitor</span>
+
+    <span class="c1">#mon = Monitor(default_dt=5)</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">current_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cpu_usage</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nd">@mon</span><span class="o">.</span><span class="n">monitor</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="s2">&quot;d&quot;</span><span class="p">,</span><span class="s2">&quot;e&quot;</span><span class="p">,</span><span class="s2">&quot;f&quot;</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">randmon</span><span class="p">():</span>
+        <span class="c1">#time.sleep(1)</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">count</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">count</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+    <span class="nd">@mon</span><span class="o">.</span><span class="n">monitor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="s1">&#39;grandchild&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">current_time</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">count</span><span class="p">[</span><span class="s1">&#39;current_time&#39;</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+
+
+    <span class="nd">@mon</span><span class="o">.</span><span class="n">monitor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="s1">&#39;parent&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cpu_usage</span><span class="p">():</span>
+        <span class="n">count</span><span class="p">[</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">usage</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">usage</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">RedAlert</span><span class="p">(</span><span class="n">usage</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">GreenAlert</span><span class="p">(</span><span class="n">usage</span><span class="p">)</span>
+
+
+
+
+
+
+    <span class="c1"># last_t = {}</span>
+    <span class="c1"># dt = 10</span>
+    <span class="c1"># @mon.callback()</span>
+    <span class="c1"># def save( name, tstamp, exc, res):</span>
+    <span class="c1">#     if name in last_t.keys() and time.time()  &lt;  last_t[name] + dt:</span>
+    <span class="c1">#         # print(&#39;NOT saving {}&#39;.format(name))</span>
+    <span class="c1">#         return</span>
+    <span class="c1">#</span>
+    <span class="c1">#     last_t[name] = time.time()</span>
+    <span class="c1">#     # print(&#39;saving {}&#39;.format(name))</span>
+    <span class="c1">#     #db.put(0, args[0], args[3].val)</span>
+
+
+    <span class="c1">#mon.register_parent(&#39;parent&#39;)</span>
+    <span class="c1"># mon.register_parent(&#39;child&#39;, parent=&#39;parent&#39;)</span>
+    <span class="c1"># mon.register_parent(&#39;grandchild&#39;, parent=&#39;child&#39;)</span>
+
+
+    <span class="n">mon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

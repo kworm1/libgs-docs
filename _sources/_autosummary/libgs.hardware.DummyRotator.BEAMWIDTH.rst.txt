@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.BEAMWIDTH
+=====================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: DummyRotator.BEAMWIDTH

@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.get\_request
+================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.get_request

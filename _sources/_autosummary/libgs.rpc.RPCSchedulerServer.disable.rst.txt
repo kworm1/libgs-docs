@@ -1,0 +1,6 @@
+libgs.rpc.RPCSchedulerServer.disable
+====================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCSchedulerServer.disable

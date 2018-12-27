@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.set\_azel\_rate
+======================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotCtld.set_azel_rate

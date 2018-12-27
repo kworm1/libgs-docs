@@ -1,0 +1,44 @@
+
+
+libgs.visualisation.FrequencyPlot
+=================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: FrequencyPlot
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~FrequencyPlot.connect
+      
+      
+      ~FrequencyPlot.create_fig
+      
+      
+      ~FrequencyPlot.disconnect
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~FrequencyPlot.live_data
+      ~FrequencyPlot.live_props
+      ~FrequencyPlot.name
+   
+   
+

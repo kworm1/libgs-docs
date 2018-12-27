@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.handle\_timeout
+===================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.handle_timeout

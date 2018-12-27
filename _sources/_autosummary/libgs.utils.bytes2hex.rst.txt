@@ -1,0 +1,6 @@
+libgs.utils.bytes2hex
+=====================
+
+.. currentmodule:: libgs.utils
+
+.. autofunction:: bytes2hex

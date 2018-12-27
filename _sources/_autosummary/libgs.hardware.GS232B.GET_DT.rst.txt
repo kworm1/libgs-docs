@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.GET\_DT
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.GET_DT

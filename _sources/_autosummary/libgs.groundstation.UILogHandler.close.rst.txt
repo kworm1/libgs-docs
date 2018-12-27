@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.close
+======================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.close

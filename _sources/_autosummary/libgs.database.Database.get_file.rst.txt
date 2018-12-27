@@ -1,0 +1,6 @@
+libgs.database.Database.get\_file
+=================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: Database.get_file

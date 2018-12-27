@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.test
+=====================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.test

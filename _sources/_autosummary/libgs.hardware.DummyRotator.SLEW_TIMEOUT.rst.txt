@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.SLEW\_TIMEOUT
+=========================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: DummyRotator.SLEW_TIMEOUT

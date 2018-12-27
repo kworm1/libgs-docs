@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.timeout
+===========================
+
+.. currentmodule:: libgs.rpc
+
+.. autoattribute:: RPCServer.timeout

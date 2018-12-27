@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.el
+=========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: Rotator.el

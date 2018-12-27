@@ -1,0 +1,70 @@
+
+
+libgs.hardware.Rotator
+======================
+
+.. currentmodule:: libgs.hardware
+
+.. autoclass:: Rotator
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~Rotator.azel_err
+      
+      
+      ~Rotator.azel_to_antenna_angles
+      
+      
+      ~Rotator.get_azel
+      
+      
+      ~Rotator.get_azel_rate
+      
+      
+      ~Rotator.in_pos
+      
+      
+      ~Rotator.set_azel
+      
+      
+      ~Rotator.set_azel_rate
+      
+      
+      ~Rotator.stow
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~Rotator.BEAMWIDTH
+      ~Rotator.MAX_AZ
+      ~Rotator.MAX_EL
+      ~Rotator.MIN_AZ
+      ~Rotator.MIN_EL
+      ~Rotator.SLEW_TIMEOUT
+      ~Rotator.STOWED_AZ
+      ~Rotator.STOWED_EL
+      ~Rotator.az
+      ~Rotator.azel
+      ~Rotator.cmd_az
+      ~Rotator.cmd_el
+      ~Rotator.el
+      ~Rotator.name
+   
+   
+

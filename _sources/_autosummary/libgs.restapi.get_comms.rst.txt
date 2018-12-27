@@ -1,0 +1,6 @@
+libgs.restapi.get\_comms
+========================
+
+.. currentmodule:: libgs.restapi
+
+.. autofunction:: get_comms

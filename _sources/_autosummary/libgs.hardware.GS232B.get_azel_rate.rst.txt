@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.get\_azel\_rate
+=====================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.get_azel_rate

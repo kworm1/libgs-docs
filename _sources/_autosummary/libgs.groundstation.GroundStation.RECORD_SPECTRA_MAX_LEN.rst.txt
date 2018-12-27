@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.RECORD\_SPECTRA\_MAX\_LEN
+===========================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStation.RECORD_SPECTRA_MAX_LEN

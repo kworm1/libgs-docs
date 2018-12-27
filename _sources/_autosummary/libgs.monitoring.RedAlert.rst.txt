@@ -1,0 +1,34 @@
+
+
+libgs.monitoring.RedAlert
+=========================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoclass:: RedAlert
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~RedAlert.alertcode
+      ~RedAlert.alertstr
+   
+   
+

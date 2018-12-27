@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.state
+=================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.state

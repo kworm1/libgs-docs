@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.service\_info
+=========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GSState.service_info

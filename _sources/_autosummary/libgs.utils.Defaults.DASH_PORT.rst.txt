@@ -1,0 +1,6 @@
+libgs.utils.Defaults.DASH\_PORT
+===============================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.DASH_PORT

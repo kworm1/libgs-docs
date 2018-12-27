@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.execute
+=================================
+
+.. currentmodule:: libgs.scheduler
+
+.. automethod:: Scheduler.execute

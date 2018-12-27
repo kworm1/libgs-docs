@@ -1,0 +1,6 @@
+libgs.utils.safe\_sleep
+=======================
+
+.. currentmodule:: libgs.utils
+
+.. autofunction:: safe_sleep

@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.MAX\_EL
+===================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: DummyRotator.MAX_EL

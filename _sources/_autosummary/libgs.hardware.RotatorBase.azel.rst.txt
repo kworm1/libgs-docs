@@ -1,0 +1,6 @@
+libgs.hardware.RotatorBase.azel
+===============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotatorBase.azel

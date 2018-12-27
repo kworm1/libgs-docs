@@ -1,0 +1,35 @@
+
+
+libgs.visualisation.TextDash
+============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: TextDash
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~TextDash.add_plot
+      
+      
+      ~TextDash.get_plot
+      
+      
+      ~TextDash.make_doc
+      
+   
+   
+
+   
+   
+   
+

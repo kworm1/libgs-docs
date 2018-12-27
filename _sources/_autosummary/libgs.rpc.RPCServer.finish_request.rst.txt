@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.finish\_request
+===================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.finish_request

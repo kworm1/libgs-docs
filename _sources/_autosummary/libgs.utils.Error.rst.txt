@@ -1,0 +1,6 @@
+libgs.utils.Error
+=================
+
+.. currentmodule:: libgs.utils
+
+.. autoexception:: Error

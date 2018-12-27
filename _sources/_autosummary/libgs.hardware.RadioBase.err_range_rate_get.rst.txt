@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.err\_range\_rate\_get
+==============================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RadioBase.err_range_rate_get

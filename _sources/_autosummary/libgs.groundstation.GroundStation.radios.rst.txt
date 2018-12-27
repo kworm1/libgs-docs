@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.radios
+========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStation.radios

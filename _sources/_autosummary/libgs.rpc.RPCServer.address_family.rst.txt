@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.address\_family
+===================================
+
+.. currentmodule:: libgs.rpc
+
+.. autoattribute:: RPCServer.address_family

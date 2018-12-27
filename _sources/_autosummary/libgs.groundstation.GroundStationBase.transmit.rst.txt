@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.transmit
+==============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStationBase.transmit

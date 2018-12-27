@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.curpos
+==================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.curpos

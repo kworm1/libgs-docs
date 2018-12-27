@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.scheduler.Scheduler &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.scheduler.Scheduler.disable" href="libgs.scheduler.Scheduler.disable.html" />
+    <link rel="prev" title="libgs.scheduler" href="libgs.scheduler.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.scheduler.Scheduler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.disable.html">libgs.scheduler.Scheduler.disable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.enable.html">libgs.scheduler.Scheduler.enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.execute.html">libgs.scheduler.Scheduler.execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.execute_pass.html">libgs.scheduler.Scheduler.execute_pass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.stop.html">libgs.scheduler.Scheduler.stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.disabled.html">libgs.scheduler.Scheduler.disabled</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.state.html">libgs.scheduler.Scheduler.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.scheduler.Scheduler.timer.html">libgs.scheduler.Scheduler.timer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.scheduler.html">libgs.scheduler</a> &raquo;</li>
+        
+      <li>libgs.scheduler.Scheduler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.scheduler.Scheduler.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-scheduler-scheduler">
+<h1>libgs.scheduler.Scheduler<a class="headerlink" href="#libgs-scheduler-scheduler" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="libgs.scheduler.Scheduler">
+<em class="property">class </em><code class="descclassname">libgs.scheduler.</code><code class="descname">Scheduler</code><span class="sig-paren">(</span><em>gs</em>, <em>schedule</em>, <em>track_full_pass=False</em>, <em>compute_ant_points=True</em>, <em>enforce_signoffs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/scheduler.html#Scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.scheduler.Scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the main scheduler class.</p>
+<p>It is responsible for executing the schedule on the ground station. As such
+it needs access to both the ground station instance
+and the schedule instance.</p>
+<dl class="docutils">
+<dt>..note::</dt>
+<dd>A schedule is assumed immutable after being added to the scheduler</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gs</strong> (<em>Groundstation</em>) – Instance of Grounstation class</li>
+<li><strong>schedule</strong> (<em>Schedule</em>) – The schedule to execute</li>
+<li><strong>track_full_pass</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – If this flag is true the scheduler will not complete
+a pass before the satellite is no longer in view, regardless of whether there
+are any remaining communications. (Useful for debugging)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.disable.html#libgs.scheduler.Scheduler.disable" title="libgs.scheduler.Scheduler.disable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.scheduler.Scheduler.enable.html#libgs.scheduler.Scheduler.enable" title="libgs.scheduler.Scheduler.enable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.execute.html#libgs.scheduler.Scheduler.execute" title="libgs.scheduler.Scheduler.execute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Execute the schedule.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.scheduler.Scheduler.execute_pass.html#libgs.scheduler.Scheduler.execute_pass" title="libgs.scheduler.Scheduler.execute_pass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute_pass</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Method to execute a pass on the ground station.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.stop.html#libgs.scheduler.Scheduler.stop" title="libgs.scheduler.Scheduler.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.disabled.html#libgs.scheduler.Scheduler.disabled" title="libgs.scheduler.Scheduler.disabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disabled</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.scheduler.Scheduler.state.html#libgs.scheduler.Scheduler.state" title="libgs.scheduler.Scheduler.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.timer.html#libgs.scheduler.Scheduler.timer" title="libgs.scheduler.Scheduler.timer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timer</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.scheduler.Scheduler.disable.html" class="btn btn-neutral float-right" title="libgs.scheduler.Scheduler.disable" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.scheduler.html" class="btn btn-neutral" title="libgs.scheduler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

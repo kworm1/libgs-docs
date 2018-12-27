@@ -1,0 +1,6 @@
+libgs.emulators.Server.stop
+===========================
+
+.. currentmodule:: libgs.emulators
+
+.. automethod:: Server.stop

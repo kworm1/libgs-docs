@@ -1,0 +1,6 @@
+libgs.monitoring.GreenAlert.alertstr
+====================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: GreenAlert.alertstr

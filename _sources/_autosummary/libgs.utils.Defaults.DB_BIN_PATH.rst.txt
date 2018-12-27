@@ -1,0 +1,6 @@
+libgs.utils.Defaults.DB\_BIN\_PATH
+==================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.DB_BIN_PATH

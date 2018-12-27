@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.RECORD\_SPECTRA
+=================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStation.RECORD_SPECTRA

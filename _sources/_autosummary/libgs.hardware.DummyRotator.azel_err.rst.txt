@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.azel\_err
+=====================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: DummyRotator.azel_err

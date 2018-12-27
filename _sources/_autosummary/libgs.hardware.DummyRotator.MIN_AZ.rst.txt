@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.MIN\_AZ
+===================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: DummyRotator.MIN_AZ

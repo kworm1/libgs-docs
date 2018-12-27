@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.BEAMWIDTH
+================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.BEAMWIDTH

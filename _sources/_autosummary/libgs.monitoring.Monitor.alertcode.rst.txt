@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.alertcode
+==================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: Monitor.alertcode

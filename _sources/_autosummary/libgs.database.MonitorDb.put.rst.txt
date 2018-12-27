@@ -1,0 +1,6 @@
+libgs.database.MonitorDb.put
+============================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: MonitorDb.put

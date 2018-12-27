@@ -1,0 +1,6 @@
+libgs.database.KVDb.get\_file
+=============================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: KVDb.get_file

@@ -1,0 +1,6 @@
+libgs.database.PassDb.create\_table
+===================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: PassDb.create_table

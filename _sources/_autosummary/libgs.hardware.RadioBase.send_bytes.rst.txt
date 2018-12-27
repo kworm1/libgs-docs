@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.send\_bytes
+====================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RadioBase.send_bytes

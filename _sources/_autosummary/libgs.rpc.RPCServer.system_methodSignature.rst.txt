@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.system\_methodSignature
+===========================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.system_methodSignature

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.TX\_REPLY\_TIMEOUT
+=======================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.TX_REPLY_TIMEOUT

@@ -1,0 +1,6 @@
+libgs.monitoring.RedAlert.alertstr
+==================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: RedAlert.alertstr

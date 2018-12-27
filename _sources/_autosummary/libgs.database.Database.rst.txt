@@ -1,0 +1,41 @@
+
+
+libgs.database.Database
+=======================
+
+.. currentmodule:: libgs.database
+
+.. autoclass:: Database
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~Database.count_rows
+      
+      
+      ~Database.create_table
+      
+      
+      ~Database.get_df
+      
+      
+      ~Database.get_file
+      
+      
+      ~Database.put_df
+      
+   
+   
+
+   
+   
+   
+

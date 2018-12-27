@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.createLock
+===========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.createLock

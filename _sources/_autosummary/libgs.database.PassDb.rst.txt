@@ -1,0 +1,47 @@
+
+
+libgs.database.PassDb
+=====================
+
+.. currentmodule:: libgs.database
+
+.. autoclass:: PassDb
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~PassDb.count_rows
+      
+      
+      ~PassDb.create_table
+      
+      
+      ~PassDb.get
+      
+      
+      ~PassDb.get_df
+      
+      
+      ~PassDb.get_file
+      
+      
+      ~PassDb.put
+      
+      
+      ~PassDb.put_df
+      
+   
+   
+
+   
+   
+   
+

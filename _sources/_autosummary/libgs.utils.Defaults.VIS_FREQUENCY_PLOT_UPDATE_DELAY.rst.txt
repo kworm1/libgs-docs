@@ -1,0 +1,6 @@
+libgs.utils.Defaults.VIS\_FREQUENCY\_PLOT\_UPDATE\_DELAY
+========================================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.VIS_FREQUENCY_PLOT_UPDATE_DELAY

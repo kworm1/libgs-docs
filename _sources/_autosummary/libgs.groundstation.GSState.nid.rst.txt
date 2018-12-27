@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.nid
+===============================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.nid

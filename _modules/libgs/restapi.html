@@ -1,0 +1,1380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.restapi &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.restapi</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.restapi</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+
+<span class="sd">libgs.restapi</span>
+<span class="sd">=============</span>
+
+<span class="sd">:date:   Mon Sep 18 09:22:40 2017</span>
+<span class="sd">:author: Kjetil Wormnes</span>
+
+
+<span class="sd">This defines the rest api that permits interaction with a database and arbitrary XMLRPC apis.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span><span class="p">,</span> <span class="n">Event</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="n">Defaults</span><span class="p">,</span> <span class="n">hex2bytes</span><span class="p">,</span> <span class="n">bytes2hex</span><span class="p">,</span> <span class="n">conv_time</span>
+<span class="kn">from</span> <span class="nn">database</span> <span class="k">import</span> <span class="n">TSTAMP_LBL</span>
+<span class="c1"># from pandas import to_datetime</span>
+<span class="c1"># from urllib import unquote</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="n">XMLRPCTimeoutServerProxy</span><span class="p">,</span> <span class="n">wait_loop</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="k">import</span> <span class="n">b64encode</span><span class="p">,</span> <span class="n">encodestring</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">ags_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
+<span class="n">ags_log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">use_reloader</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># DEBUG mode. Will show more explicit exceptions if enabled</span>
+<span class="c1">#</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">RESTAPI_DEBUG_MODE</span>
+
+<span class="c1">#</span>
+<span class="c1"># Limit returned table sizes by default to prevent overloading the processor</span>
+<span class="c1"># trying to fetch an entire giant table. The user will  have to</span>
+<span class="c1"># add N= specifically to request larger tables.</span>
+<span class="c1">#</span>
+<span class="n">DEFAULT_TABLE_LIMIT</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">RESTAPI_TABLE_LIMIT</span>
+
+<span class="c1">#</span>
+<span class="c1"># This  module allows the user to assign RPC apis to any endpoint</span>
+<span class="c1"># In order to avoid conflict with the internally implemented endpoints</span>
+<span class="c1"># below, it checks PROTECTED_ENDPOINTS and raises an exception if</span>
+<span class="c1"># the user tries to use one of those. Must be updated if a new endpoint</span>
+<span class="c1"># is added in this module</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="n">_PROTECTED_ENDPOINTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mon&#39;</span><span class="p">,</span> <span class="s1">&#39;comms&#39;</span><span class="p">,</span> <span class="s1">&#39;passes&#39;</span><span class="p">]</span>
+
+<span class="c1">#</span>
+<span class="c1"># The timestamp label is special in the way it is handled in the database. It can be remapped</span>
+<span class="c1"># to other names using the below constant.</span>
+<span class="c1">#</span>
+<span class="n">_RETURNED_TSTAMP_LBL</span> <span class="o">=</span> <span class="s1">&#39;tstamp&#39;</span>
+
+<span class="c1">#</span>
+<span class="c1"># Default table styles applied to pd.style</span>
+<span class="c1">#</span>
+<span class="n">_TABLE_ATTRIBUTES</span><span class="o">=</span><span class="s1">&#39;style=&quot;border-collapse:collapse&quot;&#39;</span>
+<span class="n">_TABLE_STYLES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="s2">&quot;tr:nth-child(even)&quot;</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;background-color&quot;</span><span class="p">,</span> <span class="s2">&quot;whitesmoke&quot;</span><span class="p">)]),</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="s2">&quot;tr:hover&quot;</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;background-color&quot;</span><span class="p">,</span> <span class="s2">&quot;lightyellow&quot;</span><span class="p">)]),</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="s2">&quot;th&quot;</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;text-align&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">,</span> <span class="s2">&quot;sticky&quot;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s2">&quot;background-color&quot;</span><span class="p">,</span> <span class="s2">&quot;#e2e2e2&quot;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="s2">&quot;#565656&quot;</span><span class="p">),</span>
+                               <span class="c1"># (&#39;border-bottom&#39; &#39;&quot;1px solid #ddd&quot;&#39;)</span>
+                               <span class="p">]),</span>
+                               <span class="c1">#(&quot;border-color&quot;, &quot;#c1bece&quot;)]),</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="s2">&quot;td&quot;</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;padding&quot;</span><span class="p">,</span> <span class="s2">&quot;5px&quot;</span><span class="p">),</span>
+                               <span class="c1">#(&#39;border-bottom&#39; &#39;&quot;1px solid #ddd&quot;&#39;),</span>
+                               <span class="p">(</span><span class="s1">&#39;overflow&#39;</span><span class="p">,</span><span class="s1">&#39;hidden&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s1">&#39;text-overflow&#39;</span><span class="p">,</span><span class="s1">&#39;ellipsis&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s1">&#39;white-space&#39;</span><span class="p">,</span> <span class="s1">&#39;nowrap&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s1">&#39;max-width&#39;</span><span class="p">,</span> <span class="s1">&#39;800px&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;#565656&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s1">&#39;border-left&#39;</span><span class="p">,</span> <span class="s1">&#39;2px solid white&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="s1">&#39;border-right&#39;</span><span class="p">,</span> <span class="s1">&#39;2px solid white&#39;</span><span class="p">)</span>
+                               <span class="p">])</span>
+<span class="p">]</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># Template to apply when returning html pages.</span>
+<span class="c1">#</span>
+<span class="n">_PAGE_TEMPLATE</span> <span class="o">=</span>  <span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="s2">    &lt;html&gt;</span>
+<span class="s2">    &lt;head&gt;      </span>
+<span class="s2">    &lt;style&gt;</span>
+<span class="s2">        body {</span>
+<span class="s2">            display: flex;</span>
+<span class="s2">	        flex-direction: column;          </span>
+<span class="s2">	        height:100vh;</span>
+<span class="s2">	        //width:100%;  </span>
+<span class="s2">            margin-top: 0px; </span>
+<span class="s2">            margin-bottom: 0px; </span>
+<span class="s2">            margin-left: 5px; </span>
+<span class="s2">            margin-right: 5px;</span>
+<span class="s2">            padding: 0;</span>
+<span class="s2">            }</span>
+<span class="s2">            </span>
+<span class="s2">        pre {</span>
+<span class="s2">         width: 90%;</span>
+<span class="s2">         background: #e2e2e2;</span>
+<span class="s2">         border: 2px solid #565656;</span>
+<span class="s2">         border-radius:5px;   </span>
+<span class="s2">         overflow:scroll;</span>
+<span class="s2">         padding: 1em;        </span>
+<span class="s2">        }</span>
+
+
+<span class="s2">        .content {</span>
+<span class="s2">          flex: 1 1 auto;</span>
+<span class="s2">          width: 100%;</span>
+<span class="s2">          min-width: 400px;</span>
+<span class="s2">          overflow: scroll; #&lt;--- makes table sticky not work for some reason</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .main-header {</span>
+<span class="s2">          flex: 0 0 auto;</span>
+<span class="s2">          width:100%;</span>
+<span class="s2">          background:#e2e2e2;</span>
+<span class="s2">          color: #565656;</span>
+<span class="s2">          margin-top: 0;</span>
+<span class="s2">          margin-bottom: 0;</span>
+<span class="s2">          margin-right: 0;</span>
+<span class="s2">          margin-left: 0;            </span>
+<span class="s2">          </span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        </span>
+<span class="s2">        .helptext-overlay {</span>
+<span class="s2">            position: fixed;</span>
+<span class="s2">             width: 80vw; /*optional*/</span>
+<span class="s2">             height: 80vh;</span>
+<span class="s2">              margin-top: 10vh;</span>
+<span class="s2">              margin-bottom: 10vh;</span>
+<span class="s2">              margin-right: 10vw;</span>
+<span class="s2">              margin-left: 10vw;            </span>
+<span class="s2">             visibility:hidden;  </span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .helptext {</span>
+<span class="s2">             background: whitesmoke;//#e2e2e2;   </span>
+<span class="s2">             color: #565656;</span>
+<span class="s2">             border: 5px solid #565656;</span>
+<span class="s2">             border-radius:10px;   </span>
+
+<span class="s2">        }</span>
+
+<span class="s2">        .footer {</span>
+<span class="s2">          flex: 0 0 auto;</span>
+<span class="s2">          background-color: blue;</span>
+<span class="s2">          width: 100%;</span>
+<span class="s2">          height:100px;</span>
+<span class="s2">        }      </span>
+<span class="s2">        </span>
+<span class="s2">         a {</span>
+<span class="s2">           color: #617bcc;</span>
+<span class="s2">           // font-family: helvetica; </span>
+<span class="s2">           text-decoration: none;</span>
+<span class="s2">           </span>
+<span class="s2">         } </span>
+<span class="s2">        </span>
+<span class="s2">         a:hover {</span>
+<span class="s2">           text-decoration: underline;</span>
+<span class="s2">         }</span>
+<span class="s2">        </span>
+<span class="s2">         a:active {</span>
+<span class="s2">           color: black;</span>
+<span class="s2">         }</span>
+<span class="s2">        </span>
+<span class="s2">         a:visited {</span>
+<span class="s2">           color: ;</span>
+<span class="s2">         }         </span>
+<span class="s2">         </span>
+<span class="s2">         a.tablelink:visited {</span>
+<span class="s2">            color: #565656;</span>
+<span class="s2">         }          </span>
+<span class="s2">        </span>
+<span class="s2">        .button  {</span>
+<span class="s2">           background-color: whitesmoke;</span>
+<span class="s2">           border: none;</span>
+<span class="s2">           color: #565656;</span>
+<span class="s2">           padding:2px 4px;// 16px 32px;</span>
+<span class="s2">           text-align: center;</span>
+<span class="s2">           font-size: 16px;</span>
+<span class="s2">           margin: 4px 2px;</span>
+<span class="s2">           opacity: 1;</span>
+<span class="s2">           transition: 0.3s;</span>
+<span class="s2">           display: inline-block;</span>
+<span class="s2">           text-decoration: none;</span>
+<span class="s2">           cursor: pointer;</span>
+<span class="s2">         }</span>
+
+<span class="s2">         .button:hover {opacity: 0.2;}# text-decoration: underline;}</span>
+<span class="s2">         </span>
+
+<span class="s2">        </span>
+<span class="s2">    &lt;/style&gt;</span>
+
+
+<span class="s2">        &lt;meta charset=&quot;UTF-8&quot;&gt;</span>
+<span class="s2">        &lt;title&gt;##TITLE##&lt;/title&gt;</span>
+<span class="s2">    &lt;/head&gt;</span>
+
+<span class="s2">    &lt;body&gt;</span>
+<span class="s2">        &lt;div class=&quot;main-header&quot;&gt;</span>
+<span class="s2">            &lt;div style=&quot;font-size: 50px;&quot;&gt;        </span>
+<span class="s2">            ##TITLE##</span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">            &lt;div&gt;</span>
+<span class="s2">                ##BUTTONS##</span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">        ##ERROR_MSG##</span>
+
+<span class="s2">        &lt;div class=&quot;content&quot;&gt;        </span>
+<span class="s2">        ##MAIN##</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">             </span>
+<span class="s2">    ##HELPTEXTS##                </span>
+
+<span class="s2">    &lt;/body&gt;</span>
+<span class="s2">    &lt;/html&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># Help texts</span>
+<span class="c1">#</span>
+
+<span class="k">def</span> <span class="nf">_format_argument_table</span><span class="p">(</span><span class="n">urlargs</span><span class="p">,</span> <span class="n">qargs</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;table style=&quot;padding:1px;&quot;&gt;&#39;</span>
+    <span class="n">FIRST_COLUMN_W</span> <span class="o">=</span> <span class="s1">&#39;15em&#39;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">urlargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th style=&quot;text-align:left;width:</span><span class="si">{}</span><span class="s1">;vertical-align: top;&quot;&gt; URL Arguments &lt;/th&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">FIRST_COLUMN_W</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">urlargs</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td style=&quot;font-style:italic;vertical-align: top;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/td&gt;&lt;td style=&quot;vertical-align: top;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">qargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th style=&quot;text-align:left;vertical-align: top;&quot;&gt; Query Arguments&lt;/th&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">qargs</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td style=&quot;font-style:italic;vertical-align: top;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/td&gt;&lt;td style=&quot;vertical-align: top;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">examples</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th style=&quot;text-align:left;vertical-align: top;&quot;&gt; Examples &lt;/th&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td style=&quot;word-wrap:break-word;vertical-align: top;&quot;&gt;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&lt;/td&gt;&lt;td style=&quot;vertical-align: top;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
+
+    <span class="k">return</span> <span class="n">html</span>
+
+<span class="n">_HELP_COMMS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;h3&gt; Comms DB API &lt;/h3&gt;</span>
+<span class="s2">Syntax: &lt;pre&gt; /api/comms/[pass id]?[format=html,json,csv][&amp;N=N][&amp;tstamp=tstamp filter][&amp;dest=dest][&amp;orig=orig][&amp;nid=nid]&lt;/pre&gt;</span>
+<span class="s2">&lt;br/&gt;</span>
+<span class="si">{}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_format_argument_table</span><span class="p">(</span>
+    <span class="p">[(</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;The pass ID&#39;</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span>  <span class="s1">&#39;Format to return data in. Valid values are html, json and csv&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;tstamp&#39;</span><span class="p">,</span>  <span class="s1">&#39;Comma-separated list of timestamp filters. Each filter consists of a comparator + a timestamp. eg. &quot;&gt;2018-12-01T02:12:00&quot;&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;nid, orig and dest&#39;</span><span class="p">,</span> <span class="s1">&#39;Filter by columns norad_id, orig or dest&#39;</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="s1">&#39;/api/comms?format=html&#39;</span><span class="p">,</span> <span class="s1">&#39;Get all communications (N is limited by default, increase explicitly to get more values)&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;/api/comms?format=html&amp;N=1000&#39;</span><span class="p">,</span> <span class="s1">&#39;Get all communications up to max 1000 rows&#39;</span><span class="p">)]</span>
+<span class="p">))</span>
+
+<span class="n">_HELP_MON</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;h3&gt; Monitor DB API &lt;/h3&gt;</span>
+<span class="s2">Syntax: &lt;pre&gt; /api/mon[/pass id]?[format=html,htmlraw,json,csv][&amp;N=N]&amp;[keys=keypattern,keypattern,...]&lt;/pre&gt;</span>
+<span class="si">{}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_format_argument_table</span><span class="p">(</span>
+    <span class="p">[(</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;The pass ID&#39;</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span>  <span class="s1">&#39;Format to return data in. Valid values are html, htmlraw, json and csv&lt;br/&gt;Format &quot;html&quot; attempts to pivot the results on timestamp&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;tstamp&#39;</span><span class="p">,</span>  <span class="s1">&#39;Comma-separated list of timestamp filters. Each filter consists of a comparator + a timestamp. eg. &quot;&gt;2018-12-01T02:12:00&quot;&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;keys&#39;</span><span class="p">,</span>    <span class="s1">&#39;Comma-separated list of keypattern filters. Can be the name of a key, or use the wildchar %. &lt;br/&gt;E.g. %Temp% matches anything with Temp in it. Careful to URL encode: % == %25&#39;</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="s1">&#39;/api/mon?format=htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39;Get all monitoring data - unpivoted (N limited by default, set N=explicitly to increase)&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;/api/mon/20180831135300?format=htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39;Get all monitoring data for pass 20180831135300&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;/api/mon?keys=%RACK%,%5V%&amp;format=htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39;Get all RACK and 5V telemetry points, pivoted&#39;</span><span class="p">)]</span>
+<span class="p">))</span>
+
+
+<span class="n">_HELP_PASSES</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;h3&gt; Passes DB API &lt;/h3&gt;</span>
+<span class="s2">Syntax: &lt;pre&gt; /api/passes[/pass_id]?[format=html,htmlraw,json,csv][&amp;N=N]&lt;/pre&gt;</span>
+<span class="si">{}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_format_argument_table</span><span class="p">(</span>
+    <span class="p">[(</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;The pass ID&#39;</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span>  <span class="s1">&#39;Format to return data in. Valid values are html, htmlraw, json and csv&lt;br/&gt;Format &quot;html&quot; attempts to pivot the results on pass_id&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;tstamp&#39;</span><span class="p">,</span>  <span class="s1">&#39;Comma-separated list of timestamp filters. Each filter consists of a comparator + a timestamp. eg. &quot;&gt;2018-12-01T02:12:00&quot;&#39;</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="s1">&#39;/api/mon?format=htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39;Get all monitoring data - unpivoted (N limited by default, set N=explicitly to increase)&#39;</span><span class="p">)]</span>
+<span class="p">))</span>
+
+
+<span class="n">_HELP_RPC</span> <span class="o">=</span>  <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;h3&gt; Auto-APIs (generated from XMLRPC APIs) &lt;/h3&gt;</span>
+<span class="s2">        </span>
+<span class="s2">        Syntax: &lt;pre&gt;/api/[endpoint]/[method]/[pos_arg_1/pos_arg_2/...]?[key1=val1][&amp;key2=val2][&amp;...]&lt;/pre&gt;    </span>
+<span class="s2">        </span>
+<span class="s2">        &lt;br/&gt;</span>
+<span class="s2">        The Auto-API can map any XMLRPC API that advertises its methods (in python, use register_introspection_functions</span>
+<span class="s2">        to acheive this in your xmlrpc API). The APIs are specified on the command-line to libgs-restapi. For help:</span>
+<span class="s2">        &lt;br/&gt;</span>
+<span class="s2">        &lt;pre&gt; $libgs-restapi --help &lt;/pre&gt;</span>
+<span class="s2">        &lt;br/&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+<span class="n">_HELP_FILES</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &lt;h3&gt; File retrieval API &lt;/h3&gt;    </span>
+<span class="s2">    Syntax: &lt;pre&gt; /api/file/[dbname]/[fname]&lt;/pre&gt;</span>
+<span class="s2">    &lt;br/&gt;</span>
+<span class="s2">    The file retrieval API can be used to retrieve data that has been stored in the filesystem with only a file:// reference</span>
+<span class="s2">    in the database.    </span>
+
+<span class="s2">    </span><span class="si">{}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_format_argument_table</span><span class="p">(</span>
+    <span class="p">[(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="s1">&#39;The database the file is referred to from; mon, comms, or passes&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;fname&#39;</span><span class="p">,</span>  <span class="s1">&#39;The file reference&#39;</span><span class="p">)],</span>
+    <span class="p">[],</span>
+    <span class="p">[(</span><span class="s1">&#39;/api/file/passes/20181212062954_FJPYwGtd.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;Get the textual datafile referred to from the passes database&#39;</span><span class="p">),</span>
+     <span class="p">(</span><span class="s1">&#39;/api/file/passes/20181212054731_z0Ag3wjY.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;Get the binary datafile referred to from the passes database&#39;</span><span class="p">)]</span>
+<span class="p">))</span>
+
+<div class="viewcode-block" id="RESTAPI"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.RESTAPI.html#libgs.restapi.RESTAPI">[docs]</a><span class="k">class</span> <span class="nc">RESTAPI</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    THE REST API class</span>
+<span class="sd">    ------------------</span>
+
+<span class="sd">    Will create a RESTFUL API interface to the Commslog database and start</span>
+<span class="sd">    it on a specified port. The api will be started in a separate thread.</span>
+
+<span class="sd">    The URI endpoints are:</span>
+
+<span class="sd">    /api/comms</span>
+<span class="sd">      Download the entire communications log</span>
+
+<span class="sd">    /api/comms/&lt;pass_id&gt;</span>
+<span class="sd">      Download a specific pass</span>
+
+<span class="sd">    Valid parameters are:</span>
+
+<span class="sd">    ======== =============================================</span>
+<span class="sd">    format   output format: json / csv / html</span>
+<span class="sd">    N        max number of entries to return. Omit for all</span>
+<span class="sd">    ======== =============================================</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">      &gt;&gt;&gt; api = RESTAPI()</span>
+<span class="sd">      &gt;&gt;&gt; api.start()</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">commslog</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">monlog</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">passdb</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">host</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">API_ADDR</span><span class="p">,</span>
+                 <span class="n">port</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">API_PORT</span><span class="p">,</span>
+                 <span class="n">default_format</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
+                 <span class="n">rpcapi</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">allowed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">retry_rpc_conn</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">          commslog (CommsLog)     : Database end-point for comms log</span>
+<span class="sd">          host     (str)          : Ip address to bind to</span>
+<span class="sd">          port     (int)          : Port to bind to</span>
+<span class="sd">          default_format (str)    : Format to provide if no argument given (default = json)</span>
+<span class="sd">          allowed  (list(str))    : LIst of allowed URI patterns. Default is None, which actually means all</span>
+<span class="sd">          debug    (bool)         : Set flask in Debug mode for extra verbosity</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commslog</span> <span class="o">=</span> <span class="n">commslog</span> <span class="c1">#&lt;--- comms db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monlog</span>   <span class="o">=</span> <span class="n">monlog</span>   <span class="c1">#&lt;--- monitoring db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">passdb</span>   <span class="o">=</span> <span class="n">passdb</span>   <span class="c1">#&lt;--- pass db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpcapi</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span> <span class="o">=</span> <span class="n">debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_format</span> <span class="o">=</span> <span class="n">default_format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_abort_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">allowed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">allowed</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid type for allowed, expected list, got </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">allowed</span><span class="p">)))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_allowed</span> <span class="o">=</span> <span class="n">allowed</span>
+        <span class="n">_rpcapi</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">rpcapi</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rpcapi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_unavailable</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">uri</span><span class="p">,</span><span class="n">rpcaddr</span> <span class="ow">in</span> <span class="n">_rpcapi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">uri</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_PROTECTED_ENDPOINTS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is a protected endpoint and cannot be used as an rpcapi endpoint&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uri</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">uri</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+                <span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_try_rpc_connection</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">rpcaddr</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_unavailable</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span> <span class="o">=</span> <span class="n">rpcaddr</span>
+                <span class="n">ags_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">&quot;Could not bind to RPC API </span><span class="si">{}</span><span class="s2">. API not started: (</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">retry_rpc_conn</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_connpoll</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_poll_for_rpcconnection</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_connpoll</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_connpoll</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_try_rpc_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">rpcaddr</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">addr</span><span class="o">=</span><span class="n">uri</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">XMLRPCTimeoutServerProxy</span><span class="p">(</span><span class="n">rpcaddr</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># get method from xmlrpc introspection but exclude anything with a . (system methods)</span>
+            <span class="n">a</span><span class="p">[</span><span class="s1">&#39;methods&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="s1">&#39;server&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">listMethods</span><span class="p">()</span> <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">ags_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Bound to RPC API </span><span class="si">{}</span><span class="s2">. Available methods: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="s1">&#39;methods&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rpcapi</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_poll_for_rpcconnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># try to connect to api every minute</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rpc_unavailable</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">_unavailable</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">uri</span><span class="p">,</span> <span class="n">rpcaddr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_unavailable</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_try_rpc_connection</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">rpcaddr</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">_unavailable</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span> <span class="o">=</span> <span class="n">rpcaddr</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_unavailable</span><span class="o">=</span> <span class="n">_unavailable</span>
+            <span class="k">if</span> <span class="n">wait_loop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_abort_event</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+
+
+    <span class="k">def</span> <span class="nf">_run_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+            <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span> <span class="n">use_reloader</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RESTAPI.start"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.RESTAPI.start.html#libgs.restapi.RESTAPI.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_api</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="n">ags_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Started REST API on </span><span class="si">%s</span><span class="s2">:</span><span class="si">%d</span><span class="s2"> in thread </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RESTAPI.stop"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.RESTAPI.stop.html#libgs.restapi.RESTAPI.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
+
+
+
+<span class="c1"># Just a helper funciton used a few places below</span>
+<div class="viewcode-block" id="nid_to_int_if_possible"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.nid_to_int_if_possible.html#libgs.restapi.nid_to_int_if_possible">[docs]</a><span class="k">def</span> <span class="nf">nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nid</span></div>
+
+
+
+<div class="viewcode-block" id="handle_bytes"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.handle_bytes.html#libgs.restapi.handle_bytes">[docs]</a><span class="k">def</span> <span class="nf">handle_bytes</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">format</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">d</span>
+        
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;hex&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">bytes2hex</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;b64&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;b64string&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">encodestring</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid format&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="is_allowed"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.is_allowed.html#libgs.restapi.is_allowed">[docs]</a><span class="k">def</span> <span class="nf">is_allowed</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This decorator checks if a resource is allowed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">argv</span><span class="p">):</span>
+        <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
+        <span class="c1">#</span>
+        <span class="c1"># Check if resource is allowed</span>
+        <span class="c1">#</span>
+        <span class="n">allowed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">api</span><span class="o">.</span><span class="n">_allowed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">api</span><span class="o">.</span><span class="n">_allowed</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)]:</span>
+                    <span class="n">allowed</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">allowed</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Restricted resource&quot;</span><span class="p">,</span> <span class="mi">403</span>
+
+        <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="n">wrapped</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="k">return</span> <span class="n">wrapped</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_style_html_page</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">cur_format</span><span class="p">,</span> <span class="n">cur_page</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">helptexts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A helper function to format and style HTML pages</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#url_root=request.url_root</span>
+    <span class="n">url_root</span><span class="o">=</span><span class="s1">&#39;/&#39;</span> <span class="c1">#&lt;--- need to find a way to make this always work regardless of rproxies etc ... somehow. But its hard</span>
+
+    <span class="n">header_buttons</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">cur_format</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">fstr</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39; RAW &#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39; PIVOTED &#39;</span><span class="p">)]:</span>
+            <span class="n">argstr</span> <span class="o">=</span> <span class="s2">&quot;&amp;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;format&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">argstr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">argstr</span> <span class="o">=</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">+</span> <span class="n">argstr</span>
+
+            <span class="k">if</span> <span class="n">cur_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s1">&#39;&lt;span class=&quot;button&quot; style=&quot;opacity: 0.2;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fstr</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">?format=</span><span class="si">{}{}</span><span class="s1">&quot; class=&quot;button&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">argstr</span><span class="p">,</span> <span class="n">fstr</span><span class="p">)</span>
+
+
+    <span class="c1"># Add in forms for filters</span>
+    <span class="k">if</span> <span class="n">cur_page</span> <span class="o">!=</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+        <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;span style=&quot;display:inline-block;&quot;&gt;&lt;a href=&quot;#&quot; onclick=&quot;document.getElementById(&#39;_helptext_</span><span class="si">{}</span><span class="s2">&#39;).style.visibility = &#39;visible&#39;;event.preventDefault();&quot;&gt;Key filters&lt;/a&gt;:</span>
+<span class="s2">                    &lt;form action=&quot;</span><span class="si">{}</span><span class="s2">&quot; method=&quot;get&quot; style=&quot;display: inline;&quot; &gt;</span>
+<span class="s2">                        &lt;input style=&quot;display: inline; width:100px&quot; type=&quot;input&quot; name=&quot;keys&quot;/&gt;</span>
+<span class="s2">                        </span><span class="si">{}</span><span class="s2"></span>
+<span class="s2">                        &lt;input style=&quot;display: inline;&quot; type=&quot;submit&quot; class=&quot;button&quot; value=&quot;go&quot;/&gt;</span>
+<span class="s2">                    &lt;/form&gt;&lt;/span&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_page</span><span class="p">,</span> <span class="n">cur_page</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;&lt;input type=&quot;hidden&quot; name=&quot;</span><span class="si">{}</span><span class="s1">&quot; value=&quot;</span><span class="si">{}</span><span class="s1">&quot;/&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;keys&#39;</span><span class="p">]))</span>
+
+        <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;span style=&quot;display:inline-block;&quot;&gt;&lt;a href=&quot;#&quot; onclick=&quot;document.getElementById(&#39;_helptext_</span><span class="si">{}</span><span class="s2">&#39;).style.visibility = &#39;visible&#39;;event.preventDefault();&quot;&gt;Timestamp filters&lt;/a&gt;:</span>
+<span class="s2">                    &lt;form action=&quot;</span><span class="si">{}</span><span class="s2">&quot; method=&quot;get&quot; style=&quot;display: inline;&quot; &gt;</span>
+<span class="s2">                        &lt;input style=&quot;display: inline; width:100px&quot; type=&quot;input&quot; name=&quot;tstamp&quot;/&gt;</span>
+<span class="s2">                        </span><span class="si">{}</span><span class="s2"></span>
+<span class="s2">                        &lt;input style=&quot;display: inline;&quot; type=&quot;submit&quot; class=&quot;button&quot; value=&quot;go&quot;/&gt;</span>
+<span class="s2">                    &lt;/form&gt;&lt;/span&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_page</span><span class="p">,</span> <span class="n">cur_page</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;&lt;input type=&quot;hidden&quot; name=&quot;</span><span class="si">{}</span><span class="s1">&quot; value=&quot;</span><span class="si">{}</span><span class="s1">&quot;/&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;tstamp&#39;</span><span class="p">]))</span>
+
+        <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;span style=&quot;display:inline-block;&quot;&gt;Max rows to return:</span>
+<span class="s2">                    &lt;form action=&quot;</span><span class="si">{}</span><span class="s2">&quot; method=&quot;get&quot; style=&quot;display: inline;&quot; &gt;</span>
+<span class="s2">                        &lt;input style=&quot;display: inline; width:30px&quot; type=&quot;input&quot; name=&quot;N&quot;/&gt;</span>
+<span class="s2">                        </span><span class="si">{}</span><span class="s2"></span>
+<span class="s2">                        &lt;input style=&quot;display: inline;&quot; type=&quot;submit&quot; class=&quot;button&quot; value=&quot;go&quot;/&gt;</span>
+<span class="s2">                    &lt;/form&gt;&lt;/span&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur_page</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;&lt;input type=&quot;hidden&quot; name=&quot;</span><span class="si">{}</span><span class="s1">&quot; value=&quot;</span><span class="si">{}</span><span class="s1">&quot;/&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;N&#39;</span><span class="p">]))</span>
+
+
+    <span class="k">if</span> <span class="n">header_buttons</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s2">&quot;&lt;br/&gt;&quot;</span>
+
+    <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">fstr</span><span class="p">,</span> <span class="n">cpage</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Help&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;comms?format=html&#39;</span><span class="p">,</span> <span class="s1">&#39;Comms&#39;</span><span class="p">,</span> <span class="s1">&#39;comms&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mon?format=html&#39;</span><span class="p">,</span> <span class="s1">&#39;Monitor&#39;</span><span class="p">,</span> <span class="s1">&#39;mon&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;passes?format=html&#39;</span><span class="p">,</span> <span class="s1">&#39;Passes&#39;</span><span class="p">,</span> <span class="s1">&#39;passes&#39;</span><span class="p">)]:</span>
+        <span class="k">if</span> <span class="n">cpage</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">cur_page</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s1">&#39;&lt;span class=&quot;button&quot; style=&quot;opacity: 0.2;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fstr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">header_buttons</span> <span class="o">+=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">api/</span><span class="si">{}</span><span class="s1">&quot; class=&quot;button&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url_root</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">fstr</span><span class="p">)</span>
+
+
+    <span class="n">html</span> <span class="o">=</span> <span class="n">_PAGE_TEMPLATE</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##TITLE##&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##BUTTONS##&#39;</span><span class="p">,</span> <span class="n">header_buttons</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##ERROR_MSG##&#39;</span><span class="p">,</span> <span class="n">err_msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">ret</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##MAIN##&#39;</span><span class="p">,</span> <span class="n">ret</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_table_attributes</span><span class="p">(</span><span class="n">_TABLE_ATTRIBUTES</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">(</span><span class="n">_TABLE_STYLES</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##MAIN##&#39;</span><span class="p">,</span> <span class="s2">&quot;NO DATA&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##MAIN##&#39;</span><span class="p">,</span> <span class="n">ret</span><span class="p">)</span> <span class="c1"># in this case ret should be plain html</span>
+
+
+    <span class="k">if</span> <span class="n">helptexts</span><span class="p">:</span>
+        <span class="n">helptext_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">htext</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;comms&#39;</span><span class="p">,</span> <span class="n">_HELP_COMMS</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mon&#39;</span><span class="p">,</span>  <span class="n">_HELP_MON</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;passes&#39;</span><span class="p">,</span> <span class="n">_HELP_PASSES</span><span class="p">)]:</span>
+            <span class="n">helptext_html</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            &lt;div class=&quot;helptext helptext-overlay&quot; id=&quot;_helptext_</span><span class="si">{}</span><span class="s2">&quot;&gt;</span>
+<span class="s2">            &lt;div style=&quot;height:50px;width:100%;margin:10px;&quot;&gt;</span>
+<span class="s2">            &lt;button class=&quot;button&quot; onclick=&quot;javascript:document.getElementById(&#39;_helptext_</span><span class="si">{}</span><span class="s2">&#39;).style.visibility = &#39;hidden&#39;;&quot;&gt;X CLOSE&lt;/button&gt; </span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">            &lt;div style=&quot;width:100%;margin:10px;&quot;&gt;</span>
+<span class="s2">            </span><span class="si">{}</span><span class="s2"></span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">            &lt;/div&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">htext</span><span class="p">)</span>
+
+        <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##HELPTEXTS##&#39;</span><span class="p">,</span> <span class="n">helptext_html</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;##HELPTEXTS##&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">html</span>
+
+
+
+
+<div class="viewcode-block" id="get_comms"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_comms.html#libgs.restapi.get_comms">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/comms&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/comms/&lt;pass_id&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@is_allowed</span>
+<span class="k">def</span> <span class="nf">get_comms</span><span class="p">(</span><span class="n">pass_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">commslog</span>
+
+    <span class="k">if</span> <span class="n">log</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Resource not available&quot;</span><span class="p">,</span> <span class="mi">403</span>
+
+    <span class="c1"># Output format</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">_default_format</span>
+
+
+    <span class="c1"># Output format</span>
+    <span class="n">nid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nid&#39;</span><span class="p">)</span>
+    <span class="n">orig</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;orig&#39;</span><span class="p">)</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dest&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># timestamp filtering</span>
+    <span class="n">tstamps</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tstamp&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tstamps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tstamps</span> <span class="o">=</span> <span class="n">tstamps</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># is the result list going to be limited (N)</span>
+    <span class="c1">#</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">N</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ags_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No N specified, limiting to </span><span class="si">%d</span><span class="s2"> entries&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">DEFAULT_TABLE_LIMIT</span><span class="p">))</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">DEFAULT_TABLE_LIMIT</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pass_id</span><span class="o">=</span><span class="n">pass_id</span><span class="p">,</span> <span class="n">nid</span> <span class="o">=</span> <span class="n">nid</span><span class="p">,</span> <span class="n">orig</span><span class="o">=</span><span class="n">orig</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="n">tstamps</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="c1"># Make norad ids proper integers if we can</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;nid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span> <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;nid&#39;</span><span class="p">]]</span>
+
+
+    <span class="c1"># ensure table has columns in the right order</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[[</span><span class="n">TSTAMP_LBL</span><span class="p">,</span> <span class="s1">&#39;nid&#39;</span><span class="p">,</span> <span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;orig&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">]]</span>
+
+    <span class="n">retc</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">retc</span><span class="p">[</span><span class="n">retc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">TSTAMP_LBL</span><span class="p">)]</span> <span class="o">=</span> <span class="n">_RETURNED_TSTAMP_LBL</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">retc</span>
+
+    <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">pass_id</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;a href=&quot;comms/</span><span class="si">{}</span><span class="s1">?format=html&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;pass_id&#39;</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;pass_id&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="n">ret</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="s2">&quot;Comms log&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;comms&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+
+        <span class="n">rv</span><span class="o">.</span><span class="n">add_etag</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
+
+        <span class="n">rv</span><span class="o">.</span><span class="n">add_etag</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="get_mon"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_mon.html#libgs.restapi.get_mon">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/mon&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/mon/&lt;pass_id&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@is_allowed</span>
+<span class="k">def</span> <span class="nf">get_mon</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
+    <span class="n">monlog</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">monlog</span>
+
+    <span class="k">if</span> <span class="n">monlog</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Resource not available&quot;</span><span class="p">,</span> <span class="mi">403</span>
+
+
+    <span class="c1"># Output format</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span><span class="n">api</span><span class="o">.</span><span class="n">_default_format</span>
+
+
+    <span class="c1"># Keys</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;keys&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="c1"># timestamp filtering</span>
+    <span class="n">tstamps</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tstamp&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tstamps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tstamps</span> <span class="o">=</span> <span class="n">tstamps</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># is the result list going to be limited (N)</span>
+    <span class="c1">#</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">N</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ags_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No N specified, limiting to </span><span class="si">%d</span><span class="s2"> entries&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">DEFAULT_TABLE_LIMIT</span><span class="p">))</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">DEFAULT_TABLE_LIMIT</span>        
+
+    <span class="k">if</span> <span class="n">pass_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">monlog</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="n">pass_id</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="n">tstamps</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">monlog</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="n">tstamps</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="n">retc</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">retc</span><span class="p">[</span><span class="n">retc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">TSTAMP_LBL</span><span class="p">)]</span> <span class="o">=</span> <span class="n">_RETURNED_TSTAMP_LBL</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">retc</span>
+
+    <span class="n">pivoterr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span>
+        <span class="c1"># pivot the table</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;alert&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;RED&#39;</span> <span class="ow">or</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;CRITICAL&#39;</span><span class="p">:</span>
+                    <span class="n">ret</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;span style=&quot;color:red;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">])</span>
+                    <span class="c1"># raise Exception(ret.loc[k, &#39;value&#39;])</span>
+
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret1</span><span class="p">,</span> <span class="s2">&quot;Monitoring data&quot;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s2">&quot;mon&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">pivoterr</span> <span class="o">=</span> <span class="s2">&quot;&lt;span style=&#39;color:red;&#39;&gt;Error pivoting. Reverting to format=htmlraw. The error was &#39;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&#39;&lt;/span&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="s1">&#39;htmlraw&#39;</span>
+
+    <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;htmlraw&#39;</span><span class="p">:</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="s1">&#39;&lt;a href=&quot;/api/mon?keys=</span><span class="si">{}</span><span class="s1">&amp;format=html&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="s2">&quot;Monitoring data&quot;</span><span class="p">,</span> <span class="s1">&#39;htmlraw&#39;</span><span class="p">,</span> <span class="s2">&quot;mon&quot;</span><span class="p">,</span>  <span class="n">err_msg</span><span class="o">=</span><span class="n">pivoterr</span><span class="p">)</span>
+
+
+    <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+
+        <span class="n">rv</span><span class="o">.</span><span class="n">add_etag</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
+
+        <span class="n">rv</span><span class="o">.</span><span class="n">add_etag</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span></div>
+
+
+
+<div class="viewcode-block" id="get_passes"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_passes.html#libgs.restapi.get_passes">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/passes&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/passes/&lt;pass_id&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@is_allowed</span>
+<span class="k">def</span> <span class="nf">get_passes</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
+    <span class="n">passlog</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">passdb</span>
+    <span class="n">commslog</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">commslog</span>
+
+    <span class="k">if</span> <span class="n">passlog</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Resource not available&quot;</span><span class="p">,</span> <span class="mi">403</span>
+
+
+    <span class="c1"># Output format</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span><span class="n">api</span><span class="o">.</span><span class="n">_default_format</span>
+
+
+    <span class="c1"># Keys</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;keys&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="c1"># timestamp filtering</span>
+    <span class="n">tstamps</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tstamp&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tstamps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tstamps</span> <span class="o">=</span> <span class="n">tstamps</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># is the result list going to be limited (N)</span>
+    <span class="c1">#</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">N</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ags_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No N specified, limiting to </span><span class="si">%d</span><span class="s2"> entries&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">DEFAULT_TABLE_LIMIT</span><span class="p">))</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">DEFAULT_TABLE_LIMIT</span>        
+
+        
+    <span class="k">if</span> <span class="n">pass_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">passlog</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="n">pass_id</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="n">tstamps</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">passlog</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="n">tstamps</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="n">retc</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">retc</span><span class="p">[</span><span class="n">retc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">TSTAMP_LBL</span><span class="p">)]</span> <span class="o">=</span> <span class="n">_RETURNED_TSTAMP_LBL</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">retc</span>
+
+    <span class="n">pivoterr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+            <span class="c1"># pivot the table</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">,</span> <span class="s1">&#39;start_t&#39;</span><span class="p">,</span> <span class="s1">&#39;start_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;end_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;stowed_t&#39;</span><span class="p">,</span> <span class="s1">&#39;max_el&#39;</span><span class="p">]</span>
+            <span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">ret1</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="s1">&#39;waterfall_jpeg&#39;</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">add_link</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">s</span>
+
+                    <span class="k">if</span> <span class="n">s</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;file://&#39;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;a class=&#39;tablelink&#39; href=&#39;/api/file/passes/</span><span class="si">{}</span><span class="s2">?format=jpeg&#39;&gt;download&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;a class=&#39;tablelink&#39; href=&#39;data:image/jpeg;base64,</span><span class="si">{}</span><span class="s2">&#39;&gt;download&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+                <span class="n">ret1</span><span class="o">.</span><span class="n">waterfall_jpeg</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">waterfall_jpeg</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">add_link</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;schedule&#39;</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">add_link</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">s</span>
+
+                    <span class="k">if</span> <span class="n">s</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;file://&#39;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;a class=&#39;tablelink&#39; href=&#39;/api/file/passes/</span><span class="si">{}</span><span class="s2">&#39;&gt;download&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">7</span><span class="p">:]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;a class=&#39;tablelink&#39; href=&#39;data:application/json,</span><span class="si">{}</span><span class="s2">&#39;&gt;download&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+                <span class="n">ret1</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">add_link</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;signoffs&#39;</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+                <span class="n">ret1</span><span class="o">.</span><span class="n">signoffs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">signoffs</span><span class="p">]</span>
+
+            <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span> <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">]]</span>
+
+            <span class="c1">#</span>
+            <span class="c1"># add some meta columns</span>
+            <span class="c1">#</span>
+            <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;comms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;a class=&#39;tablelink&#39; href=&#39;/api/comms/</span><span class="si">{}</span><span class="s2">?format=html&#39;&gt;go&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;monitoring&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;a class=&#39;tablelink&#39; href=&#39;/api/mon/</span><span class="si">{}</span><span class="s2">?format=html&#39;&gt;go&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+            <span class="k">def</span> <span class="nf">format_time</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="n">ret1</span><span class="p">[[</span><span class="s1">&#39;start_t&#39;</span><span class="p">,</span> <span class="s1">&#39;start_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;end_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;stowed_t&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ret1</span><span class="p">[</span>
+                <span class="p">[</span><span class="s1">&#39;start_t&#39;</span><span class="p">,</span> <span class="s1">&#39;start_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;end_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;stowed_t&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="n">format_time</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret1</span><span class="p">,</span> <span class="s2">&quot;Passes&quot;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;passes&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">pivoterr</span> <span class="o">=</span> <span class="s2">&quot;&lt;span style=&#39;color:red;&#39;&gt;Error pivoting. Reverting to format=htmlraw. The error was &#39;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&#39;&lt;/span&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="s1">&#39;htmlraw&#39;</span>
+
+
+    <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;htmlraw&#39;</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">pass_id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">pass_id</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;&lt;a href=&quot;/api/passes/</span><span class="si">{}</span><span class="s1">?format=html&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+        <span class="c1"># html = &quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&quot; + ret.style.set_table_styles(_TABLE_STYLES).render()</span>
+        <span class="c1"># html += &quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>
+        <span class="c1"># del ret.index.name</span>
+        <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="s2">&quot;Passes&quot;</span><span class="p">,</span> <span class="s1">&#39;htmlraw&#39;</span><span class="p">,</span> <span class="s1">&#39;passes&#39;</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">pivoterr</span><span class="p">)</span>
+        <span class="c1"># return html</span>
+
+
+    <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+
+        <span class="n">rv</span><span class="o">.</span><span class="n">add_etag</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>        
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
+
+        <span class="n">rv</span><span class="o">.</span><span class="n">add_etag</span><span class="p">()</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span></div>
+
+
+<div class="viewcode-block" id="get_file"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_file.html#libgs.restapi.get_file">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file/&lt;dbname&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file/&lt;dbname&gt;/&lt;fname&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@is_allowed</span>
+<span class="k">def</span> <span class="nf">get_file</span><span class="p">(</span><span class="n">dbname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">dbname</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">fname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid DB / FILE&quot;</span> <span class="p">,</span> <span class="mi">403</span>
+
+    <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>        
+    
+    <span class="k">if</span> <span class="n">dbname</span> <span class="o">==</span> <span class="s1">&#39;comms&#39;</span><span class="p">:</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">commslog</span>
+    <span class="k">elif</span> <span class="n">dbname</span> <span class="o">==</span> <span class="s1">&#39;mon&#39;</span><span class="p">:</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">monlog</span>
+    <span class="k">elif</span> <span class="n">dbname</span> <span class="o">==</span> <span class="s1">&#39;passes&#39;</span><span class="p">:</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">passdb</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid database&quot;</span><span class="p">,</span> <span class="mi">403</span>
+        
+        
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid file&quot;</span><span class="p">,</span> <span class="mi">403</span>
+    
+
+    <span class="n">form</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+
+        <span class="c1"># TODO: FIX THIS !!!</span>
+        <span class="c1"># What&#39;s going on here is that the json is doubly encoded. In the past there wasnt much of a way around that</span>
+        <span class="c1"># but lately we are prefixing json stuff with json:// so we should be able to get away from this.</span>
+        <span class="c1"># Anyway, for now just hack it to remove the type indicator.</span>
+        <span class="c1">#</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;json://&#39;</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>
+
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rv</span>
+
+        
+    <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s2">&quot;jpg&quot;</span> <span class="ow">or</span> <span class="n">form</span> <span class="o">==</span> <span class="s2">&quot;jpeg&quot;</span><span class="p">:</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;image/jpeg&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rv</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;b64string&#39;</span><span class="p">)</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ret</span><span class="p">),</span>
+            <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+            <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rv</span></div>
+        
+
+
+<div class="viewcode-block" id="get_rpcapi"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_rpcapi.html#libgs.restapi.get_rpcapi">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/&lt;path:path&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@is_allowed</span>
+<span class="k">def</span> <span class="nf">get_rpcapi</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Invoke a (user-defined) RPC API. </span>
+<span class="sd">    </span>
+<span class="sd">    Usage:</span>
+<span class="sd">       /api/&lt;name&gt;[/method]</span>
+<span class="sd">      </span>
+<span class="sd">    Args:</span>
+<span class="sd">       name             : can have several levels; eg. &quot;test/subtest/etc&quot; or not &quot;test&quot;</span>
+<span class="sd">       method (optional): The RPC method to call (if not supplied return available methods)</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
+        <span class="n">rpcapi</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">rpcapi</span>
+
+
+        <span class="k">def</span> <span class="nf">guess_arg_type</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">out</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">apiname</span> <span class="ow">in</span> <span class="n">rpcapi</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">apiname</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">apiname</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">apiname</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                <span class="n">method</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">guess_arg_type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+                <span class="k">break</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="mi">200</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="mi">403</span>
+            <span class="n">ret</span> <span class="o">=</span>  <span class="s2">&quot;Invalid resource </span><span class="si">{}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rpcapi</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="mi">403</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;Invalid RPC API endpoint &#39;</span><span class="si">{}</span><span class="s2">&#39;. Available are </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">rpcapi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">rpcapi</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;methods&#39;</span><span class="p">]</span>
+
+            <span class="k">elif</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;methods&#39;</span><span class="p">]:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="mi">403</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;Method &#39;</span><span class="si">{}</span><span class="s2">&#39; not available. Available: </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;methods&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">guess_arg_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">ret</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rpcapi</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;server&#39;</span><span class="p">],</span> <span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">ret</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Exception while making RPC call. Most likely reason is that the RPC function does not return a marshallable type. (See https://docs.python.org/2/library/xmlrpclib.html), or passed arguments are invalid.&quot;</span><span class="p">,</span>
+                               <span class="n">exc_type</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                               <span class="n">exception</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+                    <span class="n">status</span> <span class="o">=</span> <span class="mi">500</span>
+
+        <span class="c1"># if method returned valid json, dont jsonify again, otherwise do so</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+            <span class="n">retj</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">retj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">retj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">exc_type</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="mi">500</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
+        <span class="n">response</span><span class="o">=</span><span class="n">retj</span><span class="p">,</span>
+        <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">,</span>
+        <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rv</span></div>
+    
+    
+    
+
+
+<div class="viewcode-block" id="get_help"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_help.html#libgs.restapi.get_help">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">,</span> <span class="n">strict_slashes</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nd">@is_allowed</span>
+<span class="k">def</span> <span class="nf">get_help</span><span class="p">():</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
+    <span class="n">rpcapi</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">rpcapi</span>
+    
+<span class="c1">#     html = &quot;&quot;&quot;</span>
+<span class="c1"># &lt;h2&gt; libgs api &lt;/h2&gt;</span>
+<span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#     # TODO: Get helps from docstrings</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+
+    <span class="n">helptxt_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">htext</span> <span class="ow">in</span> <span class="p">[</span><span class="n">_HELP_COMMS</span><span class="p">,</span> <span class="n">_HELP_MON</span><span class="p">,</span> <span class="n">_HELP_PASSES</span><span class="p">,</span> <span class="n">_HELP_FILES</span><span class="p">]:</span>
+        <span class="n">helptxt_html</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;div class=&#39;helptext&#39;&gt;&lt;div style=&#39;margin:10px;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="n">htext</span> <span class="o">+</span> <span class="s2">&quot;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&quot;</span>
+    <span class="n">html</span> <span class="o">+=</span> <span class="n">helptxt_html</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># RPC help</span>
+    <span class="c1">#</span>
+    <span class="n">htext</span> <span class="o">=</span> <span class="n">_HELP_RPC</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rpcapi</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">htext</span> <span class="o">+=</span> <span class="s1">&#39;The currently mapped APIs are:&#39;</span>
+        <span class="n">htext</span> <span class="o">+=</span>  <span class="s1">&#39;&lt;table style=&quot;padding:1px;&quot;&gt;&#39;</span>
+        <span class="n">htext</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th style=&quot;width:15em;text-align:left;&quot;&gt;Endpoint&lt;/th&gt;&lt;th style=&quot;text-align:left;&quot;&gt;Available methods&lt;/th&gt;&lt;/tr&gt;&#39;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">rpcapi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">htext</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td style=&quot;vertical-align: center;&quot;&gt;&lt;a href=&quot;/api/</span><span class="si">{}</span><span class="s1">&quot;&gt;/api/</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&lt;/td&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">htext</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td style=&quot;vertical-align: center&quot;&gt;&lt;pre&gt;</span><span class="si">{}</span><span class="s1">&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&lt;br/&gt;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;methods&#39;</span><span class="p">]))</span>
+        <span class="n">htext</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">htext</span> <span class="o">+=</span> <span class="s1">&#39;No APIs are currently mapped. Do so by calling libgs-restapi with the -r / --rpcapi parameter&#39;</span>
+
+    <span class="n">html</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;div class=&#39;helptext&#39;&gt;&lt;div style=&#39;margin:10px;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="n">htext</span> <span class="o">+</span> <span class="s2">&quot;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&quot;</span>
+
+    
+    <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;libgs REST API&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;help&quot;</span><span class="p">),</span> <span class="mi">200</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

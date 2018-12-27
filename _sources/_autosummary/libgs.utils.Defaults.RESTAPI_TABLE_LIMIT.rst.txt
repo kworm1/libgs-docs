@@ -1,0 +1,6 @@
+libgs.utils.Defaults.RESTAPI\_TABLE\_LIMIT
+==========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.RESTAPI_TABLE_LIMIT

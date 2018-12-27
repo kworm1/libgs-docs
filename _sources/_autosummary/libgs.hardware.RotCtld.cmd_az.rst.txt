@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.cmd\_az
+==============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.cmd_az

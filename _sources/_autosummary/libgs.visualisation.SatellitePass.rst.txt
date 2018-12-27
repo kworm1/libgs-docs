@@ -1,0 +1,44 @@
+
+
+libgs.visualisation.SatellitePass
+=================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: SatellitePass
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~SatellitePass.create_fig
+      
+      
+      ~SatellitePass.plot_pass
+      
+      
+      ~SatellitePass.update_data
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~SatellitePass.live_data
+      ~SatellitePass.live_props
+      ~SatellitePass.name
+   
+   
+

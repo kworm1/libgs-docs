@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.stop
+==============================
+
+.. currentmodule:: libgs.scheduler
+
+.. automethod:: Scheduler.stop

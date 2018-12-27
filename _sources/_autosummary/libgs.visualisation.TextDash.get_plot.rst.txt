@@ -1,0 +1,6 @@
+libgs.visualisation.TextDash.get\_plot
+======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: TextDash.get_plot

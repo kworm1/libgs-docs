@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.schedule
+====================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.schedule

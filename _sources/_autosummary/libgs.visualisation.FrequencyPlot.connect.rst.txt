@@ -1,0 +1,6 @@
+libgs.visualisation.FrequencyPlot.connect
+=========================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: FrequencyPlot.connect

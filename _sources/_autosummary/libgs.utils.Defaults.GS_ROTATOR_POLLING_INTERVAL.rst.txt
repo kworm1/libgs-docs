@@ -1,0 +1,6 @@
+libgs.utils.Defaults.GS\_ROTATOR\_POLLING\_INTERVAL
+===================================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.GS_ROTATOR_POLLING_INTERVAL

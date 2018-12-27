@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.emit
+=====================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.emit

@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.register\_parent
+=========================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.register_parent

@@ -1,0 +1,34 @@
+
+
+libgs.monitoring.GreenAlert
+===========================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoclass:: GreenAlert
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~GreenAlert.alertcode
+      ~GreenAlert.alertstr
+   
+   
+

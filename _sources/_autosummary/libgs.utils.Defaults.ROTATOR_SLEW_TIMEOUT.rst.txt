@@ -1,0 +1,6 @@
+libgs.utils.Defaults.ROTATOR\_SLEW\_TIMEOUT
+===========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.ROTATOR_SLEW_TIMEOUT

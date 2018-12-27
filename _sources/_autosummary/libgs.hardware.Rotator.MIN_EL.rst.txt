@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.MIN\_EL
+==============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: Rotator.MIN_EL

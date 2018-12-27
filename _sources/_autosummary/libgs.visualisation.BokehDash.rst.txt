@@ -1,0 +1,35 @@
+
+
+libgs.visualisation.BokehDash
+=============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: BokehDash
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~BokehDash.add_plot
+      
+      
+      ~BokehDash.get_plot
+      
+      
+      ~BokehDash.make_doc
+      
+   
+   
+
+   
+   
+   
+

@@ -1,0 +1,6 @@
+libgs.hardware.RotatorBase.azel\_to\_antenna\_angles
+====================================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotatorBase.azel_to_antenna_angles

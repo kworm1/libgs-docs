@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.release
+========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.release

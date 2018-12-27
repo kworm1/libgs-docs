@@ -1,0 +1,6 @@
+libgs.emulators.Rotctld.start
+=============================
+
+.. currentmodule:: libgs.emulators
+
+.. automethod:: Rotctld.start

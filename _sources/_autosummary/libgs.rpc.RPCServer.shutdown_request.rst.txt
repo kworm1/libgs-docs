@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.shutdown\_request
+=====================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.shutdown_request

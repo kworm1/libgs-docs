@@ -1,0 +1,6 @@
+libgs.visualisation.FrequencyPlot.live\_data
+============================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: FrequencyPlot.live_data

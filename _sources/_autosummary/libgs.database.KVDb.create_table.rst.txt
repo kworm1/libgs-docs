@@ -1,0 +1,6 @@
+libgs.database.KVDb.create\_table
+=================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: KVDb.create_table

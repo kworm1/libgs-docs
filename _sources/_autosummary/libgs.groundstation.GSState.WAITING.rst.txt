@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.WAITING
+===================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.WAITING

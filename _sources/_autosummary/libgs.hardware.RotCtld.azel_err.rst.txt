@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.azel\_err
+================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotCtld.azel_err

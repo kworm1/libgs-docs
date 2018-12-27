@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.record\_spectrum
+===============================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GR_XMLRPCRadio.record_spectrum

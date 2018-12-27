@@ -1,0 +1,66 @@
+
+
+libgs.monitoring.Monitor
+========================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoclass:: Monitor
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~Monitor.add_callback
+      
+      
+      ~Monitor.callback
+      
+      
+      ~Monitor.itertree
+      
+      
+      ~Monitor.keys
+      
+      
+      ~Monitor.monitor
+      
+      
+      ~Monitor.names
+      
+      
+      ~Monitor.register_monitor
+      
+      
+      ~Monitor.register_parent
+      
+      
+      ~Monitor.start
+      
+      
+      ~Monitor.stop
+      
+      
+      ~Monitor.to_gen_in_executor
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~Monitor.alertcode
+   
+   
+

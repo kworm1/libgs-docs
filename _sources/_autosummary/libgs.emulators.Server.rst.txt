@@ -1,0 +1,35 @@
+
+
+libgs.emulators.Server
+======================
+
+.. currentmodule:: libgs.emulators
+
+.. autoclass:: Server
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~Server.close_all
+      
+      
+      ~Server.start
+      
+      
+      ~Server.stop
+      
+   
+   
+
+   
+   
+   
+

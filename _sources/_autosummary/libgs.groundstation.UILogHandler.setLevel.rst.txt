@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.setLevel
+=========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.setLevel

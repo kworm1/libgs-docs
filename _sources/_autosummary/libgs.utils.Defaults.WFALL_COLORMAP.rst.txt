@@ -1,0 +1,6 @@
+libgs.utils.Defaults.WFALL\_COLORMAP
+====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.WFALL_COLORMAP

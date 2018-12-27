@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.stop
+========================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.stop

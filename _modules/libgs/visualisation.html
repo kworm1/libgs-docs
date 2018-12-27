@@ -1,0 +1,1251 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.visualisation &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.visualisation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.visualisation</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+
+
+<span class="sd">libgs.visualisation</span>
+<span class="sd">====================</span>
+
+<span class="sd">:date: Mon Jul 17 16:38:56 2017</span>
+<span class="sd">:author: Kjetil Wormnes</span>
+
+
+<span class="sd">Overview</span>
+<span class="sd">---------</span>
+
+<span class="sd">This module contains wraps Bokeh code with the focus to provide the elements to build</span>
+<span class="sd">web-apps for a libgs dashboards. It also contains the code necessary to create and runa bokeh server programatically.</span>
+
+
+<span class="sd">.. note::</span>
+
+<span class="sd">    While based on Bokeh, this module does not require the Bokeh server to run. Rather the</span>
+<span class="sd">    Bokeh server is initiated from within this module. For that reason the syntax</span>
+<span class="sd">    for &quot;live&quot; elements (Plots and Widgets) is slightly different to the most common</span>
+<span class="sd">    examples in the Bokeh documentation.</span>
+
+
+<span class="sd">The plots and elements in this module can be updated dynamically.</span>
+
+<span class="sd">Implementation</span>
+<span class="sd">----------------</span>
+
+<span class="sd">Plot elements</span>
+<span class="sd">^^^^^^^^^^^^^^</span>
+
+<span class="sd">This module implements the following specialised plot elements:</span>
+
+<span class="sd">* :class:`Markup`        : A simple text or html interface</span>
+<span class="sd">* :class:`Waterfall`     : A waterfall plot (must be connected to a FrequencyPlot)</span>
+<span class="sd">* :class:`FrequencyPlot` : Show a spectrum</span>
+<span class="sd">* :class:`SatellitePass` : Plot the pass of a satellite</span>
+
+<span class="sd">A user can make use of any of these, or make their own plots by deriving from the :class:`LivePlot` class.</span>
+
+<span class="sd">All plots are derived from :class:`LivePlot` and shall implement the following method and attribute:</span>
+
+<span class="sd">* :meth:`~LivePlot.create_fig`: Shall return a Bokeh figure.</span>
+<span class="sd">* :attr:`~LivePlot.name`: A unique idenitifer for the figure</span>
+
+<span class="sd">Additionally they may implement the following attributes if required:</span>
+
+<span class="sd">* live_data (type: dict)</span>
+<span class="sd">* live_props (type: dict)</span>
+
+<span class="sd">Data registered in live_data will be passed onto the figure ColumnDataSource</span>
+<span class="sd">using the same mapping. And properites in live_props will be updated</span>
+<span class="sd">on the figures as well.</span>
+
+
+
+<span class="sd">Dashboard Apps</span>
+<span class="sd">^^^^^^^^^^^^^^</span>
+
+<span class="sd">Apps are defined as independent web-apps, and are created by deriving from :class:`BokehDash`. Apps then need to be added</span>
+<span class="sd">to a :class:`BokehServer` object, in order to make them available.</span>
+
+<span class="sd">:class:`BokehDash` implmenents the Bokeh Server and keeps</span>
+<span class="sd">track of the different plots that are added to it. When the web-page is</span>
+<span class="sd">requested by a client, it will construct a document for each client using the</span>
+<span class="sd">individual plots&#39;get_fig function.</span>
+
+<span class="sd">It will also create ColumnDataSources for those figures, and in a regular</span>
+<span class="sd">callback loop, keep everything up to date with the live_data and live_props</span>
+<span class="sd">dictionaries in the different plots.</span>
+
+<span class="sd">With this implementation, it is possible to have multiple clients connect at</span>
+<span class="sd">the same time and see the same data while not having to run bokeh as a separate</span>
+<span class="sd">application.</span>
+
+<span class="sd">The apps that are currently available in this module are:</span>
+
+<span class="sd">* :class:`TextDash`:   A simple app that just shows text (or html) which is updatable via a live_prop property</span>
+<span class="sd">* :class:`TrackDash`:  A full-fledged dashboard showing antenna tracking status as well as spectra/waterfall from the radios,</span>
+<span class="sd">                       and the current schedule information.</span>
+
+
+
+<span class="sd">Examples</span>
+<span class="sd">---------</span>
+
+<span class="sd">.. todo:</span>
+
+<span class="sd">    Implement visualisation examples</span>
+
+
+
+<span class="sd">Module reference</span>
+<span class="sd">-----------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">################################################################################</span>
+<span class="c1">#</span>
+<span class="c1"># Setup</span>
+<span class="c1">#</span>
+<span class="c1">################################################################################</span>
+
+<span class="c1"># Create Tornado IOLoop</span>
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="k">import</span> <span class="n">IOLoop</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">bokeh</span>
+<span class="kn">from</span> <span class="nn">bokeh.server.server</span> <span class="k">import</span> <span class="n">Server</span>
+<span class="kn">from</span> <span class="nn">bokeh.application</span> <span class="k">import</span> <span class="n">Application</span>
+<span class="kn">from</span> <span class="nn">bokeh.application.handlers.function</span> <span class="k">import</span> <span class="n">FunctionHandler</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="k">import</span> <span class="n">Figure</span><span class="p">,</span> <span class="n">ColumnDataSource</span>
+<span class="kn">import</span> <span class="nn">bokeh.layouts</span> <span class="k">as</span> <span class="nn">bl</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bokeh.models.widgets</span> <span class="k">import</span> <span class="n">PreText</span><span class="p">,</span> <span class="n">Div</span><span class="p">,</span> <span class="n">Paragraph</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="k">import</span> <span class="n">LabelSet</span><span class="p">,</span> <span class="n">Label</span><span class="c1">#, HoverTool</span>
+<span class="kn">import</span> <span class="nn">colorsys</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="n">Defaults</span><span class="p">,</span> <span class="n">RegularCallback</span><span class="p">,</span> <span class="n">Error</span>
+
+<span class="c1"># Configure logging with the name adfags-log, and add the NullHandler. That</span>
+<span class="c1"># means that log messages will be dropped unless the application using this</span>
+<span class="c1"># library configures logging.</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;adfags-log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># Prevent tornado for polluting the root handler.</span>
+<span class="c1"># TODO: Configure tornados own logger (tornado.access) to ge the log messages</span>
+<span class="c1">#</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">#</span>
+<span class="c1"># Functions</span>
+<span class="c1">#</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="linktext"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.linktext.html#libgs.visualisation.linktext">[docs]</a><span class="k">def</span> <span class="nf">linktext</span><span class="p">(</span><span class="n">links</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convenience function to create a series of navigation links to use on the top</span>
+<span class="sd">    of the different apps</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">linktxt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">link</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">link</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">link</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Invalid link argument&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">linktxt</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">linktxt</span> <span class="o">+=</span> <span class="s1">&#39; | &#39;</span>
+
+            <span class="k">if</span> <span class="n">link</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">linktxt</span> <span class="o">+=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">%s</span><span class="s1">&quot; onclick=&quot;javascript:event.target.port=</span><span class="si">%d</span><span class="s1">&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">link</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">link</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">linktxt</span> <span class="o">+=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">link</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+    <span class="k">return</span> <span class="n">linktxt</span></div>
+
+<div class="viewcode-block" id="azel2rect"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.azel2rect.html#libgs.visualisation.azel2rect">[docs]</a><span class="k">def</span> <span class="nf">azel2rect</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper-function to conver az,el (polar coordinates) to x,y</span>
+<span class="sd">    for display on rectangular axes</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">az</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">el</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># Check if az and el are arrays or scalars</span>
+    <span class="c1"># convert to arrays if scalar</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">az</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">az</span> <span class="o">=</span> <span class="p">[</span><span class="n">az</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">el</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">az</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;az and el must be of same lenght&#39;</span><span class="p">)</span>
+
+    <span class="n">az</span> <span class="o">=</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">az</span><span class="p">)</span>
+    <span class="n">el</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">el</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">((</span><span class="n">az</span><span class="o">+</span><span class="mi">90</span><span class="p">)</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">el</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">((</span><span class="n">az</span><span class="o">+</span><span class="mi">90</span><span class="p">)</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span></div>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">#</span>
+<span class="c1"># Plots</span>
+<span class="c1">#</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="LivePlot"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.LivePlot.html#libgs.visualisation.LivePlot">[docs]</a><span class="k">class</span> <span class="nc">LivePlot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all the plots.</span>
+
+<span class="sd">    All derived classes shall implent the following method and attribute</span>
+
+<span class="sd">    * create_fig(self, sources): Shall return a Bokeh figure.</span>
+<span class="sd">    * name (type: str): Uniquely identifying name</span>
+
+<span class="sd">    Additinoally they may implement the following attributes if required. Data</span>
+<span class="sd">    registered in live_data will be passed onto the figure ColumnDataSource</span>
+<span class="sd">    using the same mapping. And properites in live_props will be updated</span>
+<span class="sd">    on the figures as well.</span>
+
+<span class="sd">    * live_data (type: dict)</span>
+<span class="sd">    * live_props (type: dict)</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: A dictionary of data that shall be updatable dynamically. Each value in live data will be regularly and automatically</span>
+    <span class="c1">#: synced with the :class:`bokeh.plotting.ColumnDataSource` object associated with your plot. Thus in order to</span>
+    <span class="c1">#: update your plot data, all you have to do is update the relevant field in live_data.</span>
+    <span class="c1">#: For example if live_data = {&#39;x&#39;: [1, 2, 3], &#39;y&#39;: [4, 5, 4]} indicates the x and y data in a plot, changing</span>
+    <span class="c1">#: live_data[y] to [8, 10, 8] will be immediately reflected on the plot.</span>
+    <span class="n">live_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="c1">#: A dictionary of properties that shall be updatable dynamically. Each value in live props will be regularly and automatically</span>
+    <span class="c1">#: updated in the bokeh object associated with your plot. Thus if for example you have an object with a text property</span>
+    <span class="c1">#: you can change the text by updating the live_props[&#39;text&#39;]. The change will be immediately reflected on the element.</span>
+    <span class="n">live_props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="c1">#: A uniquely identifying name for the plot</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__get_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;LivePlot class does not have a name&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<div class="viewcode-block" id="LivePlot.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.LivePlot.create_fig.html#libgs.visualisation.LivePlot.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The create_fig method shall set up a Bokeh Figure object appropriately and return it</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sources:    Will be a ictionary of ColumnDataSources where the keys will correspond to the keys</span>
+<span class="sd">                        of the :attr:`.live_data` attribute dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Nothing</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;create_fig(self,sources) must be overloaded&#39;</span><span class="p">)</span></div></div>
+        <span class="c1"># live plots</span>
+
+
+<div class="viewcode-block" id="SatellitePass"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.SatellitePass.html#libgs.visualisation.SatellitePass">[docs]</a><span class="k">class</span> <span class="nc">SatellitePass</span><span class="p">(</span><span class="n">LivePlot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualisation of the sky.</span>
+
+<span class="sd">    Can show, in real-time, the current and demanded pointing of the</span>
+<span class="sd">    antennas, the satellite track, and the position of the tracked satellite</span>
+
+<span class="sd">    Attr (See :class:`LivePlot`</span>
+<span class="sd">        name: A descriptive (and unique) name. Required for the Bokeh server</span>
+<span class="sd">        live_data: The datapoints that can be updated in real-time</span>
+<span class="sd">        live_props: The properties that can be updated in real-time</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">fig_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name:       Unique name for this plot</span>
+<span class="sd">            **fig_args: Arguments to pass to :class:`bokeh.plotting.figure.Figure`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span>
+
+        <span class="c1"># Create some live data, but plot it outside the view so it isnt visible</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">ant_cur</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1e9</span><span class="p">],</span>
+                <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+
+            <span class="n">ant_cmd</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1e9</span><span class="p">],</span>
+                <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+
+            <span class="n">sat</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1e9</span><span class="p">],</span>
+                <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+
+            <span class="n">dpass</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1e9</span><span class="p">,</span><span class="o">-</span><span class="mf">1e9</span><span class="p">,</span><span class="o">-</span><span class="mf">1e9</span><span class="p">,</span><span class="o">-</span><span class="mf">1e9</span><span class="p">],</span>
+                <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Figure arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span> <span class="o">=</span> <span class="n">fig_args</span>
+
+
+<div class="viewcode-block" id="SatellitePass.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.SatellitePass.create_fig.html#libgs.visualisation.SatellitePass.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implementation of :meth:`LivePlot.create_fig` to set up the bokeh figure</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">background_fill_color</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">toolbar_location</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">y_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span><span class="p">)</span>
+
+
+
+        <span class="c1"># Remove existing axes and grid</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+        <span class="c1"># Draw circular grid</span>
+        <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># Draw visibility field</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vis_horizon</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="c1">#fig.patch(*pol2rect([90 - self.vis_horizon]*len(th), th), color=&#39;lightgray&#39;)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="o">*</span><span class="n">azel2rect</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vis_horizon</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">th</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">*</span><span class="n">azel2rect</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">th</span><span class="p">)),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">45</span><span class="p">):</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">*</span><span class="n">azel2rect</span><span class="p">([</span><span class="n">th</span><span class="p">,</span><span class="n">th</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">]),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Add grid labels</span>
+        <span class="n">lx</span><span class="p">,</span><span class="n">ly</span> <span class="o">=</span> <span class="n">azel2rect</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">270</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">lx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">30</span>
+        <span class="n">lx</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">20</span>
+        <span class="n">ly</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">10</span>
+        <span class="n">lx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">10</span>
+        <span class="n">src_labels</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">labels</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;N (0)&#39;</span><span class="p">,</span> <span class="s1">&#39;E (90)&#39;</span><span class="p">,</span> <span class="s1">&#39;S (180)&#39;</span><span class="p">,</span> <span class="s1">&#39;W (270)&#39;</span><span class="p">],</span>
+            <span class="n">label_x</span><span class="o">=</span> <span class="n">lx</span><span class="p">,</span>
+            <span class="n">label_y</span> <span class="o">=</span><span class="n">ly</span><span class="p">))</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">LabelSet</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;label_x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;label_y&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">src_labels</span><span class="p">))</span>
+
+
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;dpass&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ant_cmd&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ant_cur&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;sat&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+
+<div class="viewcode-block" id="SatellitePass.plot_pass"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.SatellitePass.plot_pass.html#libgs.visualisation.SatellitePass.plot_pass">[docs]</a>    <span class="k">def</span> <span class="nf">plot_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convenience function for plotting a pass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">azel2rect</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="p">[</span><span class="s1">&#39;dpass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SatellitePass.update_data"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.SatellitePass.update_data.html#libgs.visualisation.SatellitePass.update_data">[docs]</a>    <span class="k">def</span> <span class="nf">update_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convenience function for updating any live_data element</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset (string): The live_data to update. dataset=&#39;dpass&#39; is equivalent</span>
+<span class="sd">                              to calling plot_pass</span>
+<span class="sd">            az: The azimuth coordinate(s)</span>
+<span class="sd">            el: The elevaiton coordinate(s)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">dataset</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Invalid dataset&quot;</span><span class="p">)</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">azel2rect</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="p">[</span><span class="n">dataset</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="FrequencyPlot"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.html#libgs.visualisation.FrequencyPlot">[docs]</a><span class="k">class</span> <span class="nc">FrequencyPlot</span><span class="p">(</span><span class="n">LivePlot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A frequency spectrum plot for use within a libgs dashboard web-application.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        FrequencyPlot needs a callable that it can query to obtain the frequency and spectrum information. Normally</span>
+<span class="sd">         this would be :meth:`.hardware.RadioBase.get_spectrum`. If you are implementing a non-standard radio,</span>
+<span class="sd">         ensure you consult that documentation for the format of the callable.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        FrequencyPlot uses the ColumnDataSource identifier &#39;freq&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">get_spectrum</span><span class="p">,</span> <span class="n">wfall</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fig_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name:                   The identifying name of the plot</span>
+<span class="sd">            get_spectrum:           A callable that should return the current frequency vector and spectrum. Normally this would be the method from a :class:`.RadioBase` derived object.</span>
+<span class="sd">            wfall (optional):       The waterfall plot to connect to</span>
+<span class="sd">            title (optional):       The title of the frequency plot</span>
+<span class="sd">            **fig_args (optional:   Any other kw argument is passed directly to :class:`bokeh.plotting.Figure` when creating the figure.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;y&#39;</span><span class="p">:[]}}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_spectrum</span> <span class="o">=</span> <span class="n">get_spectrum</span>
+
+        <span class="c1">#Figure title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fig_title</span> <span class="o">=</span> <span class="n">title</span> <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">name</span>
+
+        <span class="c1"># Figure arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span> <span class="o">=</span> <span class="n">fig_args</span>
+
+        <span class="c1"># The waterfall to connect spectrum to</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wfall_plot</span> <span class="o">=</span> <span class="n">wfall</span>
+        
+        <span class="c1"># Rate at which to update spectrum</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_delay</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">VIS_FREQUENCY_PLOT_UPDATE_DELAY</span>
+
+
+    <span class="c1">##########################################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Private methods</span>
+    <span class="c1">#</span>
+    <span class="c1">##########################################################################################</span>
+
+    <span class="k">def</span> <span class="nf">_update_plots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_spectrum</span><span class="p">(</span><span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y</span><span class="p">}</span>
+   
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wfall_plot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wfall_plot</span><span class="o">.</span><span class="n">add_freq_plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            
+
+    <span class="c1">##########################################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Overloaded methods</span>
+    <span class="c1">#</span>
+    <span class="c1">##########################################################################################</span>
+
+
+<div class="viewcode-block" id="FrequencyPlot.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.create_fig.html#libgs.visualisation.FrequencyPlot.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class implementation of :class:`.LivePlot.create_fig`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="mi">32000</span> <span class="c1">#&lt;-- just a default sample rate to use until something is read from the get_spectrum callable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span><span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Frequency (MHz)&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fig_title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fig_title</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">range_padding</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+    <span class="c1">##########################################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Other methods</span>
+    <span class="c1">#</span>
+    <span class="c1">##########################################################################################</span>
+
+
+<div class="viewcode-block" id="FrequencyPlot.connect"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.connect.html#libgs.visualisation.FrequencyPlot.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_regcb</span> <span class="o">=</span> <span class="n">RegularCallback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_plots</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_delay</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_regcb</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FrequencyPlot.disconnect"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.disconnect.html#libgs.visualisation.FrequencyPlot.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_regcb&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_regcb</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="Waterfall"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Waterfall.html#libgs.visualisation.Waterfall">[docs]</a><span class="k">class</span> <span class="nc">Waterfall</span><span class="p">(</span><span class="n">LivePlot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    LivePlot visualisation of a &quot;waterfall plot&quot;.</span>
+
+<span class="sd">    This plot must be connected to a FrequencyPlot which will feed it data. The connection is done in the</span>
+<span class="sd">    :class:`FrequencyPlot` constructor.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mi">3200</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">wfallwidth</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">wfallheight</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">fig_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str):                     The :attr:`LivePlot name &lt;LivePlot.name&gt;`</span>
+<span class="sd">            sample_rate (int, optional):    Only affects the figure x-axis which is disabled by default. This parameter</span>
+<span class="sd">                                            will therefore normally have no effect.</span>
+<span class="sd">            freq (float, optional):         Only affects the figure x-axis which is disabled by default. This parameter</span>
+<span class="sd">                                            will therefore normally have no effect.</span>
+<span class="sd">            wfallwidth (int, optional):     The width of the waterfall (in pixels). Note wfallwidth must divide</span>
+<span class="sd">                                            the number of channels in the spectrum returned by the radio. I.e. if the radio</span>
+<span class="sd">                                            returns a 1024 point fft, then wfallwidth could be 128 since 8 * 128 = 1024.</span>
+<span class="sd">                                            A wfallwidth of 129 will cause an exception and error.</span>
+<span class="sd">            wfallheight (int, optinal):     The height of the waterfall (in pixels).</span>
+<span class="sd">            **fig_args:                     Additional arguments to pass to the :class:`bokeh.plotting.figure.Figure` constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;wfall&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;image&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">wfallheight</span><span class="p">,</span><span class="n">wfallwidth</span><span class="p">))]}}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq</span> <span class="o">=</span> <span class="n">freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="n">wfallheight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">wfallwidth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span> <span class="o">=</span> <span class="n">fig_args</span>
+
+<div class="viewcode-block" id="Waterfall.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Waterfall.create_fig.html#libgs.visualisation.Waterfall.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class implementation of :meth:`LivePlot.create_fig`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="o">/</span><span class="mf">2.0</span><span class="p">],</span>
+                    <span class="n">y_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">],</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span><span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span> <span class="n">sources</span><span class="p">[</span><span class="s1">&#39;wfall&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=-</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dw</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">,</span><span class="n">dh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">WFALL_COLORMAP</span> <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+<div class="viewcode-block" id="Waterfall.add_freq_plot"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Waterfall.add_freq_plot.html#libgs.visualisation.Waterfall.add_freq_plot">[docs]</a>    <span class="k">def</span> <span class="nf">add_freq_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">freq</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to append a spectrum to the waterfall.</span>
+
+<span class="sd">        It does this by appending a row to the live_data image property.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            freq: (list[float]). Spectrum to append.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">):</span>
+            <span class="k">if</span>  <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;frequency vector must be a multiple of waterfall width&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">))</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Dimension mismatch&#39;</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="p">[</span><span class="s1">&#39;wfall&#39;</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="p">[</span><span class="s1">&#39;wfall&#39;</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="n">freq</span><span class="p">]))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span><span class="p">[</span><span class="s1">&#39;wfall&#39;</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:],</span> <span class="p">[</span><span class="n">freq</span><span class="p">]))]</span></div></div>
+
+
+<div class="viewcode-block" id="Markup"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Markup.html#libgs.visualisation.Markup">[docs]</a><span class="k">class</span> <span class="nc">Markup</span><span class="p">(</span><span class="n">LivePlot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A LivePlot wrapper for the three Bokeh Markup widgets;</span>
+
+<span class="sd">        * :class:`bokeh.models.widgets.markups.Div`</span>
+<span class="sd">        * :class:`bokeh.models.widgets.markups.Paragraph`</span>
+<span class="sd">        * :class:`bokeh.models.widgets.markups.PreText`</span>
+
+<span class="sd">        The text (or html) can be changed through the &#39;text&#39; property in the :attr:`~LivePlot.live_props` attribute.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;PreText&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name:       The :attr:`LivePlot.name` for the LivePlot</span>
+<span class="sd">            text:       The text/html to populate the widget with</span>
+<span class="sd">            mtype:      The type of Boke Markup widget. One of &#39;LivePlot&#39;, &#39;PreText&#39;, or &#39;Paragraph&#39;</span>
+<span class="sd">            **args:     Additional kw arguments to pass to the bokeh widget constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_props</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">text</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span> <span class="n">args</span>
+
+        <span class="k">if</span> <span class="n">mtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;PreText&#39;</span><span class="p">,</span> <span class="s1">&#39;Div&#39;</span><span class="p">,</span> <span class="s1">&#39;Paragraph&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Invalid mtype&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">mtype</span>
+
+<div class="viewcode-block" id="Markup.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Markup.create_fig.html#libgs.visualisation.Markup.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="s1">&#39;PreText&#39;</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">PreText</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">,</span>  <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="s1">&#39;Div&#39;</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">Div</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="s1">&#39;Paragraph&#39;</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div></div>
+
+
+<div class="viewcode-block" id="BokehServer"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehServer.html#libgs.visualisation.BokehServer">[docs]</a><span class="k">class</span> <span class="nc">BokehServer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A class to set up and run the bokeh server to serve the dashboard apps.</span>
+
+<span class="sd">        Apps need to be added to the server using the :meth:`.add_app` method</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5001</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            port: The port to start the server on</span>
+<span class="sd">            host: The host to bind the server to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span> <span class="o">=</span> <span class="n">IOLoop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_apps</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bokeh_port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bokeh_host</span> <span class="o">=</span> <span class="n">host</span>
+
+<div class="viewcode-block" id="BokehServer.add_app"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehServer.add_app.html#libgs.visualisation.BokehServer.add_app">[docs]</a>    <span class="k">def</span> <span class="nf">add_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">makefn</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an app to the server</span>
+
+<span class="sd">        the app is a standard :class:`bokeh.application.application.Application` that is created by passing either</span>
+<span class="sd">        an arbitrary makefunction (see :class:`bokeh.application.handlers.function.FunctionHandler`), or a :class:`BokehDash`</span>
+<span class="sd">        object (which implements the same make function as the make_doc method).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            uri:    The URI to serve the app on (e.g. &#39;/dash&#39;, or &#39;/&#39; or ...)</span>
+<span class="sd">            makefn: The app to add (can be either a BokehDash app, or an arbitrary user-define app maker function.</span>
+<span class="sd">                    If you are implementing arbitrary app-maker ensure it follows the format required by</span>
+<span class="sd">                     :class:`bokeh.application.handlers.function.FunctionHandler`</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">makefn</span><span class="p">,</span> <span class="n">BokehDash</span><span class="p">):</span>
+            <span class="n">makefn</span> <span class="o">=</span> <span class="n">makefn</span><span class="o">.</span><span class="n">make_doc</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">makefn</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;App must either be of type BokehDash (i.e. with a make_doc method), or a callable&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_apps</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span> <span class="o">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">FunctionHandler</span><span class="p">(</span><span class="n">makefn</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="BokehServer.start"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehServer.start.html#libgs.visualisation.BokehServer.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Starts the server and tornado IOloop. This is required for the plots</span>
+<span class="sd">            to become live. The ioloop is started in a separate thread so this method returns immediately.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_apps</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bokeh_host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bokeh_port</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="p">,</span>
+                              <span class="n">allow_websocket_origin</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ploop</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ploop</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ploop</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="c1"># Now request the page so that all the figures get initialised</span>
+
+        <span class="k">for</span> <span class="n">uri</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apps</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://</span><span class="si">%s</span><span class="s2">:</span><span class="si">%d%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bokeh_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bokeh_port</span><span class="p">,</span> <span class="n">uri</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Initialising app on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">))</span>
+            <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BokehServer.stop"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehServer.stop.html#libgs.visualisation.BokehServer.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Stops the tornado IOloop (does not do anything with the server)</span>
+
+<span class="sd">            ..todo::</span>
+<span class="sd">              Properly stop server too</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ploop</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>
+
+
+
+<div class="viewcode-block" id="BokehDash"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehDash.html#libgs.visualisation.BokehDash">[docs]</a><span class="k">class</span> <span class="nc">BokehDash</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A bare-bone Bokeh dashboard app.</span>
+
+<span class="sd">        Plots and Visualisations can be added to the Dashboard using the add_plot</span>
+<span class="sd">        method.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Bokeh-based dashboard&quot;</span><span class="p">,</span> <span class="n">layout_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            update_rate (float, optional): The delay (in seconds) between each update of</span>
+<span class="sd">                        the dashboard (on the client-side)</span>
+<span class="sd">            title (string, optional): The dashboard title</span>
+<span class="sd">            layout_callback (function, optional): An optional function that defines</span>
+<span class="sd">                        the layout using bokeh.layout elements. The layout_callback function</span>
+<span class="sd">                        shall accept a single argument being a list of figures.</span>
+<span class="sd">                        It shall return a layout comprising those figures.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_title_text</span> <span class="o">=</span> <span class="n">title</span>
+
+        <span class="c1"># set update rate (in ms)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_rate</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">update_rate</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+
+        <span class="c1"># plots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Layout function</span>
+        <span class="c1"># TODO: Change this to be a method that we overload in the derived classes instead (?)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_layout_callback</span> <span class="o">=</span> <span class="n">layout_callback</span>
+
+<div class="viewcode-block" id="BokehDash.add_plot"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehDash.add_plot.html#libgs.visualisation.BokehDash.add_plot">[docs]</a>    <span class="k">def</span> <span class="nf">add_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Add a :class:`LivePlot` to the document</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                plot: The :class:`LivePlot` to add.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BokehDash.get_plot"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehDash.get_plot.html#libgs.visualisation.BokehDash.get_plot">[docs]</a>    <span class="k">def</span> <span class="nf">get_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a :class:`LivePlot` by name</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p</span>
+
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Plot does not exist&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_title_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">,</span>
+                     <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Remove existing axes and grid</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">background_fill_color</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">toolbar_location</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                     <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_title_text</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s1">&#39;css&#39;</span><span class="p">,</span>
+                     <span class="n">background_fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">background_fill_alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                     <span class="n">text_font_size</span><span class="o">=</span><span class="s1">&#39;28pt&#39;</span><span class="p">,</span> <span class="n">text_align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">text_baseline</span><span class="o">=</span><span class="s1">&#39;middle&#39;</span>
+                     <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BokehDash.make_doc"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.BokehDash.make_doc.html#libgs.visualisation.BokehDash.make_doc">[docs]</a>    <span class="k">def</span> <span class="nf">make_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Set up the document. This function is called once for each</span>
+<span class="sd">            client connection.</span>
+
+<span class="sd">            Variables are therefore kept local in this scope rather than</span>
+<span class="sd">            added to the class as method which would have meant that multiple</span>
+<span class="sd">            users were served the same variable (ColumnDataSource or Figure)</span>
+<span class="sd">            something that is not permitted by Bokeh.</span>
+
+<span class="sd">            .. note::</span>
+
+<span class="sd">                This method is the bokeh makefunction (see :class:`bokeh.application.handlers.function.FunctionHandler`)</span>
+<span class="sd">                that will be passed to the :class:`bokeh.application.Application` constructor.</span>
+
+<span class="sd">            While a derived class *may* overload this method it is not recommended to do so. Instead you can initialise</span>
+<span class="sd">            this class with the layout_function parameter in order to lay out the LivePlots.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">titlefig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_title_fig</span><span class="p">()</span>
+
+        <span class="n">clock</span> <span class="o">=</span> <span class="n">Paragraph</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;A clock&quot;</span><span class="p">)</span>
+
+        <span class="n">datasrc</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">:</span>
+            <span class="n">datasrc</span><span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">__get_name__</span><span class="p">()]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">data_key</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">live_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">datasrc</span><span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">__get_name__</span><span class="p">()][</span><span class="n">data_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Create a dot that continually changes colour to show that app is live</span>
+        <span class="n">src_heartbeat</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]))</span>
+        <span class="n">hb_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">bokeh</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">RGB</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">colorsys</span><span class="o">.</span><span class="n">hsv_to_rgb</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">)]</span>
+
+        <span class="k">def</span> <span class="nf">update</span><span class="p">():</span>
+
+            <span class="c1"># Update heartbeat</span>
+            <span class="n">update</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="p">(</span><span class="n">update</span><span class="o">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">hb_cols</span><span class="p">)</span>
+            <span class="n">src_heartbeat</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">hb_cols</span><span class="p">[</span><span class="n">update</span><span class="o">.</span><span class="n">counter</span><span class="p">]]</span>
+
+            <span class="c1"># Update clock</span>
+            <span class="n">clock</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Update everything else</span>
+            <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">data_key</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">live_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">datasrc</span><span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">__get_name__</span><span class="p">()][</span><span class="n">data_key</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+                <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">live_props</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">figs</span><span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">__get_name__</span><span class="p">()],</span> <span class="n">prop</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="n">update</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Set update frequency</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">add_periodic_callback</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_rate</span><span class="p">)</span>
+
+        <span class="c1"># Set up the figures, and plot anything that is static</span>
+        <span class="c1">#</span>
+        <span class="c1"># WARNING: Using self.figs here is probably dangerous</span>
+        <span class="c1">#  Since I believe a new figs object needs to be created</span>
+        <span class="c1">#  at every reload.</span>
+        <span class="n">figs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">:</span>
+            <span class="n">figs</span><span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">__get_name__</span><span class="p">()]</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">create_fig</span><span class="p">(</span><span class="n">datasrc</span><span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">__get_name__</span><span class="p">()])</span>
+
+        <span class="c1"># Draw heartbeat</span>
+        <span class="n">titlefig</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">src_heartbeat</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># Lay everything out</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_layout_callback</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">layout</span><span class="p">([[</span><span class="n">titlefig</span><span class="p">,</span> <span class="n">clock</span><span class="p">],</span> <span class="n">figs</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">column</span><span class="p">([</span><span class="n">titlefig</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_layout_callback</span><span class="p">(</span><span class="n">figs</span><span class="p">)],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+
+        <span class="n">doc</span><span class="o">.</span><span class="n">add_root</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+
+        <span class="n">doc</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_title_text</span></div></div>
+
+
+<div class="viewcode-block" id="TrackDash"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.TrackDash.html#libgs.visualisation.TrackDash">[docs]</a><span class="k">class</span> <span class="nc">TrackDash</span><span class="p">(</span><span class="n">BokehDash</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A full dashboard featuring:</span>
+
+<span class="sd">    * :class:`SatellitePass` plot to show the trajectory of the satellite and rotators</span>
+<span class="sd">    * :class:`Markup` box to show the current status of the ground station</span>
+<span class="sd">    * :class:`FrequencyPlot` + :class:`Waterfall` for each of the configured :class:`radios &lt;hardware.RadioBase&gt;`</span>
+<span class="sd">    * :class:`Markup` box to show the current schedule executed by the scheduler</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1">#: The base number of units to use to scale the plots.</span>
+    <span class="c1">#: Note, to change, must be set before instanitating anything from the class</span>
+    <span class="n">UNITS</span> <span class="o">=</span> <span class="mi">50</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">radios</span><span class="o">=</span><span class="p">[],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Groundstation Dashboard&quot;</span><span class="p">,</span> <span class="n">links</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            radios (list[:class:`hardware.RadioBase]).  The radios to create plots for</span>
+<span class="sd">            title: (str).                               The title of the dashboard</span>
+<span class="sd">            links: (list[tuple[str]])                   A list of tuples (name, URI) to use to create navigation links</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">UNITS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">UNITS</span>
+        <span class="n">WFALLH</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">UNITS</span>
+        <span class="n">FREQH</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">UNITS</span>
+
+        <span class="c1"># Radio plots - freqency and waterfalls</span>
+        <span class="n">wfall</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">radio</span> <span class="ow">in</span> <span class="n">radios</span><span class="p">:</span>
+
+            <span class="n">wfall</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Waterfall</span><span class="p">(</span><span class="s1">&#39;wfall</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">32000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="n">WFALLH</span><span class="p">,</span> <span class="n">toolbar_location</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+            <span class="n">freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">FrequencyPlot</span><span class="p">(</span><span class="s1">&#39;freq</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">radio</span><span class="o">.</span><span class="n">get_spectrum</span><span class="p">,</span> <span class="n">wfall</span><span class="o">=</span><span class="n">wfall</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="n">FREQH</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;hover&quot;</span><span class="p">))</span>
+            <span class="n">freq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+            <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
+
+        <span class="c1"># Satellite pass visualisation</span>
+        <span class="n">spass</span> <span class="o">=</span> <span class="n">SatellitePass</span><span class="p">(</span><span class="s1">&#39;spass&#39;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="n">UNITS</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="n">UNITS</span><span class="p">)</span>
+
+        <span class="c1"># Textbox for tracking info</span>
+        <span class="n">track_info</span>  <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;track_info&#39;</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;Div&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+        <span class="c1"># Tetbox for schedule info</span>
+        <span class="n">sch_info</span> <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;sch_info&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># Links along the top to different apps</span>
+        <span class="n">linksbox</span> <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;links&#39;</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;Div&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">linktext</span><span class="p">(</span><span class="n">links</span><span class="p">))</span>
+
+
+        <span class="c1">#</span>
+        <span class="c1"># Create a custom layout to make things look nice</span>
+        <span class="c1">#</span>
+        <span class="k">def</span> <span class="nf">layout_figs</span><span class="p">(</span><span class="n">figs</span><span class="p">):</span>
+
+            <span class="c1">#row1 = bl.row([figs[&#39;title&#39;]], sizing_mode=&#39;scale_width&#39;)</span>
+            <span class="n">row2</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">row</span><span class="p">([</span><span class="n">figs</span><span class="p">[</span><span class="s1">&#39;links&#39;</span><span class="p">]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+            <span class="n">row3</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">row</span><span class="p">([</span><span class="n">figs</span><span class="p">[</span><span class="s1">&#39;spass&#39;</span><span class="p">],</span> <span class="n">figs</span><span class="p">[</span><span class="s1">&#39;track_info&#39;</span><span class="p">]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;fixed&#39;</span><span class="p">)</span>
+
+            <span class="n">radios</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">wfall</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">radios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bl</span><span class="o">.</span><span class="n">column</span><span class="p">([</span><span class="n">figs</span><span class="p">[</span><span class="s1">&#39;freq</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span><span class="n">figs</span><span class="p">[</span><span class="s1">&#39;wfall</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">)]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">))</span>
+
+
+            <span class="n">row4</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">radios</span><span class="p">,</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+            <span class="n">row5</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">row</span><span class="p">([</span><span class="n">figs</span><span class="p">[</span><span class="s1">&#39;sch_info&#39;</span><span class="p">]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">column</span><span class="p">([</span><span class="n">row2</span><span class="p">,</span><span class="n">row3</span><span class="p">,</span><span class="n">row4</span><span class="p">,</span> <span class="n">row5</span><span class="p">],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">layout</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">TrackDash</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">layout_callback</span><span class="o">=</span><span class="n">layout_figs</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Now add everything to the dashboard</span>
+        <span class="c1">#</span>
+        <span class="k">for</span> <span class="n">wf</span> <span class="ow">in</span> <span class="n">wfall</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">freq</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">spass</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">track_info</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">linksbox</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">sch_info</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TextDash"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.TextDash.html#libgs.visualisation.TextDash">[docs]</a><span class="k">class</span> <span class="nc">TextDash</span><span class="p">(</span><span class="n">BokehDash</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple Dash app that just contains a single :class:`Markup` text nbox.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">plot_name</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;PreText&#39;</span><span class="p">,</span>  <span class="n">links</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title:      The title of the plot</span>
+<span class="sd">            plot_name:  The unique name to refer to the LivePlot by (this dash only has a single LivePlot - the textbox)</span>
+<span class="sd">            mtype:      The type of textbox to use. Options are PreText, Div, or Paragraph. See :class:Markup</span>
+<span class="sd">            links:      An array of links to display. See :function:`linktext` for the format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="k">if</span> <span class="n">plot_name</span> <span class="o">==</span> <span class="s1">&#39;links&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Plot name cannot be links&quot;</span><span class="p">)</span>
+
+        <span class="n">linksbox</span> <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;links&#39;</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;Div&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">linktext</span><span class="p">(</span><span class="n">links</span><span class="p">))</span>
+
+        <span class="n">textbox</span>  <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="n">plot_name</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="n">mtype</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+        <span class="c1">#</span>
+        <span class="c1"># Create a custom layout to make things look nice</span>
+        <span class="c1">#</span>
+        <span class="k">def</span> <span class="nf">layout_figs</span><span class="p">(</span><span class="n">figs</span><span class="p">):</span>
+
+            <span class="n">row1</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">row</span><span class="p">([</span><span class="n">figs</span><span class="p">[</span><span class="s1">&#39;links&#39;</span><span class="p">]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+            <span class="n">row2</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">row</span><span class="p">([</span><span class="n">figs</span><span class="p">[</span><span class="n">plot_name</span><span class="p">]],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">bl</span><span class="o">.</span><span class="n">column</span><span class="p">([</span><span class="n">row1</span><span class="p">,</span><span class="n">row2</span><span class="p">],</span> <span class="n">sizing_mode</span><span class="o">=</span><span class="s1">&#39;scale_width&#39;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">layout</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">TextDash</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">layout_callback</span><span class="o">=</span><span class="n">layout_figs</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">linksbox</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">textbox</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">adfags</span> <span class="k">import</span> <span class="n">Radio</span><span class="p">,</span> <span class="n">Defaults</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="n">BokehServer</span><span class="p">()</span>
+        <span class="n">radios</span> <span class="o">=</span> <span class="p">[</span>\
+                <span class="n">Radio</span><span class="p">(</span><span class="s1">&#39;UHF TX&#39;</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">RADIO_INTS</span><span class="p">[</span><span class="s1">&#39;UHFTX&#39;</span><span class="p">]),</span>
+                <span class="n">Radio</span><span class="p">(</span><span class="s1">&#39;UHF RX&#39;</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">RADIO_INTS</span><span class="p">[</span><span class="s1">&#39;UHFRX&#39;</span><span class="p">]),</span>
+                <span class="n">Radio</span><span class="p">(</span><span class="s1">&#39;SBAND&#39;</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">RADIO_INTS</span><span class="p">[</span><span class="s1">&#39;SBAND&#39;</span><span class="p">])]</span>
+        <span class="n">dash</span> <span class="o">=</span> <span class="n">TrackDash</span><span class="p">(</span><span class="n">radios</span><span class="o">=</span><span class="n">radios</span><span class="p">)</span>
+        <span class="n">statdash</span> <span class="o">=</span> <span class="n">TextDash</span><span class="p">(</span><span class="n">plot_name</span><span class="o">=</span><span class="s1">&#39;hwstatus&#39;</span><span class="p">)</span>
+        <span class="n">servdash</span> <span class="o">=</span> <span class="n">TextDash</span><span class="p">(</span><span class="n">plot_name</span><span class="o">=</span><span class="s1">&#39;servstatus&#39;</span><span class="p">)</span>
+
+        <span class="n">server</span><span class="o">.</span><span class="n">add_app</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">dash</span><span class="p">)</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">add_app</span><span class="p">(</span><span class="s1">&#39;/status&#39;</span><span class="p">,</span> <span class="n">statdash</span><span class="p">)</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">add_app</span><span class="p">(</span><span class="s1">&#39;/services&#39;</span><span class="p">,</span> <span class="n">servdash</span><span class="p">)</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

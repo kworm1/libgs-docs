@@ -1,0 +1,6 @@
+libgs.utils.Defaults.DB
+=======================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.DB

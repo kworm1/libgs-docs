@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.allow\_reuse\_address
+=========================================
+
+.. currentmodule:: libgs.rpc
+
+.. autoattribute:: RPCServer.allow_reuse_address

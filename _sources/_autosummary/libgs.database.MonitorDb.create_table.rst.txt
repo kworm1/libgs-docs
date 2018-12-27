@@ -1,0 +1,6 @@
+libgs.database.MonitorDb.create\_table
+======================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: MonitorDb.create_table

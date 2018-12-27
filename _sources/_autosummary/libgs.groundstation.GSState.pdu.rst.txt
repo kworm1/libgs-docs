@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.pdu
+===============================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.pdu

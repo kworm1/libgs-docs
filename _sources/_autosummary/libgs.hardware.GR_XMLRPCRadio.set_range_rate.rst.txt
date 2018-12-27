@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.set\_range\_rate
+===============================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GR_XMLRPCRadio.set_range_rate

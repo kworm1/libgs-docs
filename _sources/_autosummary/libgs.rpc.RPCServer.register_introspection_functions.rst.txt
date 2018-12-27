@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.register\_introspection\_functions
+======================================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.register_introspection_functions

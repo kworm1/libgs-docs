@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.in\_pos
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.in_pos

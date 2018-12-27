@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.hardware\_info
+==========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GSState.hardware_info

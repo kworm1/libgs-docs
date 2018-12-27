@@ -1,0 +1,6 @@
+libgs.utils.Defaults.ROTATOR\_MAX\_AZ
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.ROTATOR_MAX_AZ

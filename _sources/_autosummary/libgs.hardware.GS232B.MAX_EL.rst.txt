@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.MAX\_EL
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.MAX_EL

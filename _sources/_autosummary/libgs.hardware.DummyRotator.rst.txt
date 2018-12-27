@@ -1,0 +1,69 @@
+
+
+libgs.hardware.DummyRotator
+===========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoclass:: DummyRotator
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~DummyRotator.azel_err
+      
+      
+      ~DummyRotator.azel_to_antenna_angles
+      
+      
+      ~DummyRotator.get_azel
+      
+      
+      ~DummyRotator.get_azel_rate
+      
+      
+      ~DummyRotator.in_pos
+      
+      
+      ~DummyRotator.set_azel
+      
+      
+      ~DummyRotator.set_azel_rate
+      
+      
+      ~DummyRotator.stow
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~DummyRotator.BEAMWIDTH
+      ~DummyRotator.MAX_AZ
+      ~DummyRotator.MAX_EL
+      ~DummyRotator.MIN_AZ
+      ~DummyRotator.MIN_EL
+      ~DummyRotator.SLEW_TIMEOUT
+      ~DummyRotator.STOWED_AZ
+      ~DummyRotator.STOWED_EL
+      ~DummyRotator.az
+      ~DummyRotator.azel
+      ~DummyRotator.cmd_az
+      ~DummyRotator.cmd_el
+      ~DummyRotator.el
+      ~DummyRotator.name
+   
+   
+

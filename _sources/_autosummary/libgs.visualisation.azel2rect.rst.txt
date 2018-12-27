@@ -1,0 +1,6 @@
+libgs.visualisation.azel2rect
+=============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autofunction:: azel2rect

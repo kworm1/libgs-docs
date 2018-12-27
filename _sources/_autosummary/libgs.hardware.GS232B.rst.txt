@@ -1,0 +1,83 @@
+
+
+libgs.hardware.GS232B
+=====================
+
+.. currentmodule:: libgs.hardware
+
+.. autoclass:: GS232B
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~GS232B.azel_err
+      
+      
+      ~GS232B.azel_to_antenna_angles
+      
+      
+      ~GS232B.get_azel
+      
+      
+      ~GS232B.get_azel_rate
+      
+      
+      ~GS232B.in_pos
+      
+      
+      ~GS232B.set_azel
+      
+      
+      ~GS232B.set_azel_rate
+      
+      
+      ~GS232B.start
+      
+      
+      ~GS232B.stop
+      
+      
+      ~GS232B.stow
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~GS232B.BEAMWIDTH
+      ~GS232B.GET_DT
+      ~GS232B.MAX_AZ
+      ~GS232B.MAX_EL
+      ~GS232B.MIN_AZ
+      ~GS232B.MIN_EL
+      ~GS232B.ROT_SETTLETIME_GET
+      ~GS232B.ROT_SETTLETIME_SET
+      ~GS232B.SERIAL_PORT_TIMEOUT
+      ~GS232B.SET_DT
+      ~GS232B.SET_REGULARLY
+      ~GS232B.SLEW_TIMEOUT
+      ~GS232B.STALE_TIME
+      ~GS232B.STOWED_AZ
+      ~GS232B.STOWED_EL
+      ~GS232B.az
+      ~GS232B.azel
+      ~GS232B.cmd_az
+      ~GS232B.cmd_el
+      ~GS232B.el
+      ~GS232B.name
+   
+   
+

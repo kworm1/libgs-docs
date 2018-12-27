@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.monitor
+=============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStationBase.monitor

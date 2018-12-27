@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.propagator
+================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStationBase.propagator

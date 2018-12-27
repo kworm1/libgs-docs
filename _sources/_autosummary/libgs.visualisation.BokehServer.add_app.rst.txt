@@ -1,0 +1,6 @@
+libgs.visualisation.BokehServer.add\_app
+========================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: BokehServer.add_app

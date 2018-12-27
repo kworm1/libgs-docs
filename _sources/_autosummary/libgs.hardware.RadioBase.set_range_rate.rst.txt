@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.set\_range\_rate
+=========================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RadioBase.set_range_rate

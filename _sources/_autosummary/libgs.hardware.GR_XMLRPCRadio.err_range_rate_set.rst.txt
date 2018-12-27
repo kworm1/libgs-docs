@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.err\_range\_rate\_set
+====================================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GR_XMLRPCRadio.err_range_rate_set

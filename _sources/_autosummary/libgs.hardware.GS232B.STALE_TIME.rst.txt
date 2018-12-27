@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.STALE\_TIME
+=================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.STALE_TIME

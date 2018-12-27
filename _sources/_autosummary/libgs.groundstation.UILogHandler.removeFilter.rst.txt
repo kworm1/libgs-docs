@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.removeFilter
+=============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.removeFilter

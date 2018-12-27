@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.setFormatter
+=============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.setFormatter

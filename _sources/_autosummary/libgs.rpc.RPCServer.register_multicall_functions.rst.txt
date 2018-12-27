@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.register\_multicall\_functions
+==================================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.register_multicall_functions

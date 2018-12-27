@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.system\_multicall
+=====================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.system_multicall

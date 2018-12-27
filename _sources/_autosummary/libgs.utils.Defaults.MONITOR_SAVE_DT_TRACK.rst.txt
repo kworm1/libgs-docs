@@ -1,0 +1,6 @@
+libgs.utils.Defaults.MONITOR\_SAVE\_DT\_TRACK
+=============================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.MONITOR_SAVE_DT_TRACK

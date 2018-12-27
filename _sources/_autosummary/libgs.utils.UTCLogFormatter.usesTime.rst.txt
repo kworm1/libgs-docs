@@ -1,0 +1,6 @@
+libgs.utils.UTCLogFormatter.usesTime
+====================================
+
+.. currentmodule:: libgs.utils
+
+.. automethod:: UTCLogFormatter.usesTime

@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.name
+===================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GR_XMLRPCRadio.name

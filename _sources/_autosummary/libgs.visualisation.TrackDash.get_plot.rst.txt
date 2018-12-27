@@ -1,0 +1,6 @@
+libgs.visualisation.TrackDash.get\_plot
+=======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: TrackDash.get_plot

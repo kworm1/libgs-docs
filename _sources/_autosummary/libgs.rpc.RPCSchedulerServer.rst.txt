@@ -1,0 +1,44 @@
+
+
+libgs.rpc.RPCSchedulerServer
+============================
+
+.. currentmodule:: libgs.rpc
+
+.. autoclass:: RPCSchedulerServer
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~RPCSchedulerServer.disable
+      
+      
+      ~RPCSchedulerServer.enable
+      
+      
+      ~RPCSchedulerServer.execute_schedule
+      
+      
+      ~RPCSchedulerServer.scheduler_state
+      
+      
+      ~RPCSchedulerServer.start
+      
+      
+      ~RPCSchedulerServer.stop_schedule
+      
+   
+   
+
+   
+   
+   
+

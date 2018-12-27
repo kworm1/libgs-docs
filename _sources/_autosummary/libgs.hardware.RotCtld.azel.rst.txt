@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.azel
+===========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.azel

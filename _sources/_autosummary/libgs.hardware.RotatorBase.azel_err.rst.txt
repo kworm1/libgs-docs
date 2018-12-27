@@ -1,0 +1,6 @@
+libgs.hardware.RotatorBase.azel\_err
+====================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotatorBase.azel_err

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.LOG\_BACKUPCOUNT
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.LOG_BACKUPCOUNT

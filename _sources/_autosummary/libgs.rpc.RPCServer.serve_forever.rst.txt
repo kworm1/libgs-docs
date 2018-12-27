@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.serve\_forever
+==================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.serve_forever

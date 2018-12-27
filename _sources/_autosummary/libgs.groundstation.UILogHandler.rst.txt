@@ -1,0 +1,84 @@
+
+
+libgs.groundstation.UILogHandler
+================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoclass:: UILogHandler
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~UILogHandler.acquire
+      
+      
+      ~UILogHandler.addFilter
+      
+      
+      ~UILogHandler.close
+      
+      
+      ~UILogHandler.createLock
+      
+      
+      ~UILogHandler.emit
+      
+      
+      ~UILogHandler.filter
+      
+      
+      ~UILogHandler.flush
+      
+      
+      ~UILogHandler.format
+      
+      
+      ~UILogHandler.get_name
+      
+      
+      ~UILogHandler.handle
+      
+      
+      ~UILogHandler.handleError
+      
+      
+      ~UILogHandler.release
+      
+      
+      ~UILogHandler.removeFilter
+      
+      
+      ~UILogHandler.setFormatter
+      
+      
+      ~UILogHandler.setLevel
+      
+      
+      ~UILogHandler.set_name
+      
+      
+      ~UILogHandler.test
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~UILogHandler.name
+   
+   
+

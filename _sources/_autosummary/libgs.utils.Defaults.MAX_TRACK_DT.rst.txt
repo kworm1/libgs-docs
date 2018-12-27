@@ -1,0 +1,6 @@
+libgs.utils.Defaults.MAX\_TRACK\_DT
+===================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.MAX_TRACK_DT

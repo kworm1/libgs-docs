@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.azel\_err
+===============================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.azel_err

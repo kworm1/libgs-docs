@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.cmdpos
+==================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.cmdpos

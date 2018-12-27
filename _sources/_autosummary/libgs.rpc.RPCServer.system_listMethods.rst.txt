@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.system\_listMethods
+=======================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.system_listMethods

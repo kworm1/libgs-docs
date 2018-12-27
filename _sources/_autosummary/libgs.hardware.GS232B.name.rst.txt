@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.name
+==========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.name

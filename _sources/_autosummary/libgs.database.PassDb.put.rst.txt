@@ -1,0 +1,6 @@
+libgs.database.PassDb.put
+=========================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: PassDb.put

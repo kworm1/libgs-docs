@@ -1,0 +1,6 @@
+libgs.database.PassDb.count\_rows
+=================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: PassDb.count_rows

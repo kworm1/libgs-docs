@@ -1,0 +1,6 @@
+libgs.visualisation.Waterfall.live\_data
+========================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: Waterfall.live_data

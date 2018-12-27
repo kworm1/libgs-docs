@@ -1,0 +1,6 @@
+libgs.utils.Defaults.ROTATOR\_ANTENNA\_BEAMWIDTH
+================================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.ROTATOR_ANTENNA_BEAMWIDTH

@@ -1,0 +1,6 @@
+libgs.utils.UTCLogFormatterHTML.use\_colour
+===========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: UTCLogFormatterHTML.use_colour

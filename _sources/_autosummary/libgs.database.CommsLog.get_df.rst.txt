@@ -1,0 +1,6 @@
+libgs.database.CommsLog.get\_df
+===============================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: CommsLog.get_df

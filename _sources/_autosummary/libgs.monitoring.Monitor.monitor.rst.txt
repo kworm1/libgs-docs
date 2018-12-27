@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.monitor
+================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.monitor

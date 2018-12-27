@@ -1,0 +1,6 @@
+libgs.hardware.RotatorBase.name
+===============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotatorBase.name

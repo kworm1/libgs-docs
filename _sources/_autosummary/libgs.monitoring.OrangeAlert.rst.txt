@@ -1,0 +1,34 @@
+
+
+libgs.monitoring.OrangeAlert
+============================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoclass:: OrangeAlert
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~OrangeAlert.alertcode
+      ~OrangeAlert.alertstr
+   
+   
+

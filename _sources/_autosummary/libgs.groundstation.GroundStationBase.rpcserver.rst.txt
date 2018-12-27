@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.rpcserver
+===============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStationBase.rpcserver

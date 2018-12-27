@@ -1,0 +1,47 @@
+
+
+libgs.database.KVDb
+===================
+
+.. currentmodule:: libgs.database
+
+.. autoclass:: KVDb
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~KVDb.count_rows
+      
+      
+      ~KVDb.create_table
+      
+      
+      ~KVDb.get
+      
+      
+      ~KVDb.get_df
+      
+      
+      ~KVDb.get_file
+      
+      
+      ~KVDb.put
+      
+      
+      ~KVDb.put_df
+      
+   
+   
+
+   
+   
+   
+

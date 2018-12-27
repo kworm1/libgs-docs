@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.server\_activate
+====================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.server_activate

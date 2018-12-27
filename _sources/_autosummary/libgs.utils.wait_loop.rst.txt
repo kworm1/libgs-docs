@@ -1,0 +1,6 @@
+libgs.utils.wait\_loop
+======================
+
+.. currentmodule:: libgs.utils
+
+.. autofunction:: wait_loop

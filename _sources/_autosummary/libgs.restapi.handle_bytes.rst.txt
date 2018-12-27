@@ -1,0 +1,6 @@
+libgs.restapi.handle\_bytes
+===========================
+
+.. currentmodule:: libgs.restapi
+
+.. autofunction:: handle_bytes

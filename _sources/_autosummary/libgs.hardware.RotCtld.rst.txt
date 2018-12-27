@@ -1,0 +1,70 @@
+
+
+libgs.hardware.RotCtld
+======================
+
+.. currentmodule:: libgs.hardware
+
+.. autoclass:: RotCtld
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~RotCtld.azel_err
+      
+      
+      ~RotCtld.azel_to_antenna_angles
+      
+      
+      ~RotCtld.get_azel
+      
+      
+      ~RotCtld.get_azel_rate
+      
+      
+      ~RotCtld.in_pos
+      
+      
+      ~RotCtld.set_azel
+      
+      
+      ~RotCtld.set_azel_rate
+      
+      
+      ~RotCtld.stow
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~RotCtld.BEAMWIDTH
+      ~RotCtld.MAX_AZ
+      ~RotCtld.MAX_EL
+      ~RotCtld.MIN_AZ
+      ~RotCtld.MIN_EL
+      ~RotCtld.SLEW_TIMEOUT
+      ~RotCtld.STOWED_AZ
+      ~RotCtld.STOWED_EL
+      ~RotCtld.az
+      ~RotCtld.azel
+      ~RotCtld.cmd_az
+      ~RotCtld.cmd_el
+      ~RotCtld.el
+      ~RotCtld.name
+   
+   
+

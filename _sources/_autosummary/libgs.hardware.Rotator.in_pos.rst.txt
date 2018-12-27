@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.in\_pos
+==============================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: Rotator.in_pos

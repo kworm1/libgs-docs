@@ -1,0 +1,6 @@
+libgs.utils.UTCLogFormatterHTML.formatTime
+==========================================
+
+.. currentmodule:: libgs.utils
+
+.. automethod:: UTCLogFormatterHTML.formatTime

@@ -1,0 +1,6 @@
+libgs.visualisation.SatellitePass.update\_data
+==============================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: SatellitePass.update_data

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.XMLRPC\_CLI\_TIMEOUT
+=========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.XMLRPC_CLI_TIMEOUT

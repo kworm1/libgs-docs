@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.init\_rx
+==============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStationBase.init_rx

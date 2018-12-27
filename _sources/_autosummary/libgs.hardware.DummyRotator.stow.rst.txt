@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.stow
+================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: DummyRotator.stow

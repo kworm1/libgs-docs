@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.satpos
+==================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.satpos

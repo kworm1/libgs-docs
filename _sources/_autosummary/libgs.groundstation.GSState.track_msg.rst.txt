@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.track\_msg
+======================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.track_msg

@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.state
+===============================
+
+.. currentmodule:: libgs.scheduler
+
+.. autoattribute:: Scheduler.state

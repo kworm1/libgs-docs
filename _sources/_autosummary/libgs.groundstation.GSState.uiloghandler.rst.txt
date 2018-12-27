@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.uiloghandler
+========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.uiloghandler

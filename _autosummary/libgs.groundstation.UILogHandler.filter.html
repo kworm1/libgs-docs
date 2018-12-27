@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.groundstation.UILogHandler.filter &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.groundstation.UILogHandler.flush" href="libgs.groundstation.UILogHandler.flush.html" />
+    <link rel="prev" title="libgs.groundstation.UILogHandler.emit" href="libgs.groundstation.UILogHandler.emit.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GSState.html">libgs.groundstation.GSState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GroundStation.html">libgs.groundstation.GroundStation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GroundStationBase.html">libgs.groundstation.GroundStationBase</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="libgs.groundstation.UILogHandler.html">libgs.groundstation.UILogHandler</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.acquire.html">libgs.groundstation.UILogHandler.acquire</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.addFilter.html">libgs.groundstation.UILogHandler.addFilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.close.html">libgs.groundstation.UILogHandler.close</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.createLock.html">libgs.groundstation.UILogHandler.createLock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.emit.html">libgs.groundstation.UILogHandler.emit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">libgs.groundstation.UILogHandler.filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.flush.html">libgs.groundstation.UILogHandler.flush</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.format.html">libgs.groundstation.UILogHandler.format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.get_name.html">libgs.groundstation.UILogHandler.get_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.handle.html">libgs.groundstation.UILogHandler.handle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.handleError.html">libgs.groundstation.UILogHandler.handleError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.release.html">libgs.groundstation.UILogHandler.release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.removeFilter.html">libgs.groundstation.UILogHandler.removeFilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.setFormatter.html">libgs.groundstation.UILogHandler.setFormatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.setLevel.html">libgs.groundstation.UILogHandler.setLevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.set_name.html">libgs.groundstation.UILogHandler.set_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.test.html">libgs.groundstation.UILogHandler.test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.name.html">libgs.groundstation.UILogHandler.name</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.groundstation.html">libgs.groundstation</a> &raquo;</li>
+        
+          <li><a href="libgs.groundstation.UILogHandler.html">libgs.groundstation.UILogHandler</a> &raquo;</li>
+        
+      <li>libgs.groundstation.UILogHandler.filter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.groundstation.UILogHandler.filter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-groundstation-uiloghandler-filter">
+<h1>libgs.groundstation.UILogHandler.filter<a class="headerlink" href="#libgs-groundstation-uiloghandler-filter" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="libgs.groundstation.UILogHandler.filter">
+<code class="descclassname">UILogHandler.</code><code class="descname">filter</code><span class="sig-paren">(</span><em>record</em><span class="sig-paren">)</span><a class="headerlink" href="#libgs.groundstation.UILogHandler.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a record is loggable by consulting all the filters.</p>
+<p>The default is to allow the record to be logged; any filter can veto
+this and the record is then dropped. Returns a zero value if a record
+is to be dropped, else non-zero.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.groundstation.UILogHandler.flush.html" class="btn btn-neutral float-right" title="libgs.groundstation.UILogHandler.flush" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.groundstation.UILogHandler.emit.html" class="btn btn-neutral" title="libgs.groundstation.UILogHandler.emit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

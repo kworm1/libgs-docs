@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.visualisation &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.visualisation.azel2rect" href="libgs.visualisation.azel2rect.html" />
+    <link rel="prev" title="libgs.console_scripts.restapi" href="libgs.console_scripts.restapi.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libgs.visualisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plot-elements">Plot elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dashboard-apps">Dashboard Apps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-reference">Module reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.azel2rect.html">libgs.visualisation.azel2rect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.linktext.html">libgs.visualisation.linktext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.BokehDash.html">libgs.visualisation.BokehDash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.BokehServer.html">libgs.visualisation.BokehServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.FrequencyPlot.html">libgs.visualisation.FrequencyPlot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.LivePlot.html">libgs.visualisation.LivePlot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.Markup.html">libgs.visualisation.Markup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.SatellitePass.html">libgs.visualisation.SatellitePass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.TextDash.html">libgs.visualisation.TextDash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.TrackDash.html">libgs.visualisation.TrackDash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.Waterfall.html">libgs.visualisation.Waterfall</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>libgs.visualisation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.visualisation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-libgs.visualisation"></span><div class="section" id="libgs-visualisation">
+<h1>libgs.visualisation<a class="headerlink" href="#libgs-visualisation" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">date:</th><td class="field-body">Mon Jul 17 16:38:56 2017</td>
+</tr>
+<tr class="field-even field"><th class="field-name">author:</th><td class="field-body">Kjetil Wormnes</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This module contains wraps Bokeh code with the focus to provide the elements to build
+web-apps for a libgs dashboards. It also contains the code necessary to create and runa bokeh server programatically.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While based on Bokeh, this module does not require the Bokeh server to run. Rather the
+Bokeh server is initiated from within this module. For that reason the syntax
+for “live” elements (Plots and Widgets) is slightly different to the most common
+examples in the Bokeh documentation.</p>
+</div>
+<p>The plots and elements in this module can be updated dynamically.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plot-elements">
+<h3>Plot elements<a class="headerlink" href="#plot-elements" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the following specialised plot elements:</p>
+<ul class="simple">
+<li><a class="reference internal" href="libgs.visualisation.Markup.html#libgs.visualisation.Markup" title="libgs.visualisation.Markup"><code class="xref py py-class docutils literal notranslate"><span class="pre">Markup</span></code></a>        : A simple text or html interface</li>
+<li><a class="reference internal" href="libgs.visualisation.Waterfall.html#libgs.visualisation.Waterfall" title="libgs.visualisation.Waterfall"><code class="xref py py-class docutils literal notranslate"><span class="pre">Waterfall</span></code></a>     : A waterfall plot (must be connected to a FrequencyPlot)</li>
+<li><a class="reference internal" href="libgs.visualisation.FrequencyPlot.html#libgs.visualisation.FrequencyPlot" title="libgs.visualisation.FrequencyPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyPlot</span></code></a> : Show a spectrum</li>
+<li><a class="reference internal" href="libgs.visualisation.SatellitePass.html#libgs.visualisation.SatellitePass" title="libgs.visualisation.SatellitePass"><code class="xref py py-class docutils literal notranslate"><span class="pre">SatellitePass</span></code></a> : Plot the pass of a satellite</li>
+</ul>
+<p>A user can make use of any of these, or make their own plots by deriving from the <a class="reference internal" href="libgs.visualisation.LivePlot.html#libgs.visualisation.LivePlot" title="libgs.visualisation.LivePlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">LivePlot</span></code></a> class.</p>
+<p>All plots are derived from <a class="reference internal" href="libgs.visualisation.LivePlot.html#libgs.visualisation.LivePlot" title="libgs.visualisation.LivePlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">LivePlot</span></code></a> and shall implement the following method and attribute:</p>
+<ul class="simple">
+<li><a class="reference internal" href="libgs.visualisation.LivePlot.create_fig.html#libgs.visualisation.LivePlot.create_fig" title="libgs.visualisation.LivePlot.create_fig"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_fig()</span></code></a>: Shall return a Bokeh figure.</li>
+<li><a class="reference internal" href="libgs.visualisation.LivePlot.name.html#libgs.visualisation.LivePlot.name" title="libgs.visualisation.LivePlot.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a>: A unique idenitifer for the figure</li>
+</ul>
+<p>Additionally they may implement the following attributes if required:</p>
+<ul class="simple">
+<li>live_data (type: dict)</li>
+<li>live_props (type: dict)</li>
+</ul>
+<p>Data registered in live_data will be passed onto the figure ColumnDataSource
+using the same mapping. And properites in live_props will be updated
+on the figures as well.</p>
+</div>
+<div class="section" id="dashboard-apps">
+<h3>Dashboard Apps<a class="headerlink" href="#dashboard-apps" title="Permalink to this headline">¶</a></h3>
+<p>Apps are defined as independent web-apps, and are created by deriving from <a class="reference internal" href="libgs.visualisation.BokehDash.html#libgs.visualisation.BokehDash" title="libgs.visualisation.BokehDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">BokehDash</span></code></a>. Apps then need to be added
+to a <a class="reference internal" href="libgs.visualisation.BokehServer.html#libgs.visualisation.BokehServer" title="libgs.visualisation.BokehServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BokehServer</span></code></a> object, in order to make them available.</p>
+<p><a class="reference internal" href="libgs.visualisation.BokehDash.html#libgs.visualisation.BokehDash" title="libgs.visualisation.BokehDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">BokehDash</span></code></a> implmenents the Bokeh Server and keeps
+track of the different plots that are added to it. When the web-page is
+requested by a client, it will construct a document for each client using the
+individual plots’get_fig function.</p>
+<p>It will also create ColumnDataSources for those figures, and in a regular
+callback loop, keep everything up to date with the live_data and live_props
+dictionaries in the different plots.</p>
+<p>With this implementation, it is possible to have multiple clients connect at
+the same time and see the same data while not having to run bokeh as a separate
+application.</p>
+<p>The apps that are currently available in this module are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDash</span></code></a>:   A simple app that just shows text (or html) which is updatable via a live_prop property</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="libgs.visualisation.TrackDash.html#libgs.visualisation.TrackDash" title="libgs.visualisation.TrackDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackDash</span></code></a>:  A full-fledged dashboard showing antenna tracking status as well as spectra/waterfall from the radios,</dt>
+<dd>and the current schedule information.</dd>
+</dl>
+</li>
+</ul>
+<p class="rubric">Examples</p>
+</div>
+</div>
+<div class="section" id="module-reference">
+<h2>Module reference<a class="headerlink" href="#module-reference" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.azel2rect.html#libgs.visualisation.azel2rect" title="libgs.visualisation.azel2rect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">azel2rect</span></code></a>(az,&nbsp;el)</td>
+<td>Helper-function to conver az,el (polar coordinates) to x,y for display on rectangular axes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.linktext.html#libgs.visualisation.linktext" title="libgs.visualisation.linktext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linktext</span></code></a>(links)</td>
+<td>Convenience function to create a series of navigation links to use on the top of the different apps</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.BokehDash.html#libgs.visualisation.BokehDash" title="libgs.visualisation.BokehDash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BokehDash</span></code></a>([update_rate,&nbsp;title,&nbsp;layout_callback])</td>
+<td>A bare-bone Bokeh dashboard app.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.BokehServer.html#libgs.visualisation.BokehServer" title="libgs.visualisation.BokehServer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BokehServer</span></code></a>([port,&nbsp;host])</td>
+<td>A class to set up and run the bokeh server to serve the dashboard apps.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.FrequencyPlot.html#libgs.visualisation.FrequencyPlot" title="libgs.visualisation.FrequencyPlot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FrequencyPlot</span></code></a>(name,&nbsp;get_spectrum[,&nbsp;wfall,&nbsp;title])</td>
+<td>A frequency spectrum plot for use within a libgs dashboard web-application.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.LivePlot.html#libgs.visualisation.LivePlot" title="libgs.visualisation.LivePlot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LivePlot</span></code></a>()</td>
+<td>Base class for all the plots.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.Markup.html#libgs.visualisation.Markup" title="libgs.visualisation.Markup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Markup</span></code></a>(name,&nbsp;text[,&nbsp;mtype])</td>
+<td>A LivePlot wrapper for the three Bokeh Markup widgets;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.SatellitePass.html#libgs.visualisation.SatellitePass" title="libgs.visualisation.SatellitePass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SatellitePass</span></code></a>(name,&nbsp;**fig_args)</td>
+<td>Visualisation of the sky.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TextDash</span></code></a>(title,&nbsp;plot_name[,&nbsp;mtype,&nbsp;links])</td>
+<td>A simple Dash app that just contains a single <a class="reference internal" href="libgs.visualisation.Markup.html#libgs.visualisation.Markup" title="libgs.visualisation.Markup"><code class="xref py py-class docutils literal notranslate"><span class="pre">Markup</span></code></a> text nbox.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.TrackDash.html#libgs.visualisation.TrackDash" title="libgs.visualisation.TrackDash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrackDash</span></code></a>([radios,&nbsp;title,&nbsp;links])</td>
+<td>A full dashboard featuring:</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.Waterfall.html#libgs.visualisation.Waterfall" title="libgs.visualisation.Waterfall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Waterfall</span></code></a>(name[,&nbsp;sample_rate,&nbsp;freq,&nbsp;…])</td>
+<td>LivePlot visualisation of a “waterfall plot”.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.visualisation.azel2rect.html" class="btn btn-neutral float-right" title="libgs.visualisation.azel2rect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.console_scripts.restapi.html" class="btn btn-neutral" title="libgs.console_scripts.restapi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

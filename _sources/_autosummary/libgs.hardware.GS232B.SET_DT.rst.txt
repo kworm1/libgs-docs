@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.SET\_DT
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.SET_DT

@@ -1,0 +1,6 @@
+libgs.utils.RegularCallback.start
+=================================
+
+.. currentmodule:: libgs.utils
+
+.. automethod:: RegularCallback.start

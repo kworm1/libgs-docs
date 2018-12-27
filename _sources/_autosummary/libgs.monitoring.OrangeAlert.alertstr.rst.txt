@@ -1,0 +1,6 @@
+libgs.monitoring.OrangeAlert.alertstr
+=====================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: OrangeAlert.alertstr

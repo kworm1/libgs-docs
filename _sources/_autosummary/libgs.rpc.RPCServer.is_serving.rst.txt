@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.is\_serving
+===============================
+
+.. currentmodule:: libgs.rpc
+
+.. autoattribute:: RPCServer.is_serving

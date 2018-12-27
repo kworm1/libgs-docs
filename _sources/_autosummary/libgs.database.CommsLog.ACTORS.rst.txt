@@ -1,0 +1,6 @@
+libgs.database.CommsLog.ACTORS
+==============================
+
+.. currentmodule:: libgs.database
+
+.. autoattribute:: CommsLog.ACTORS

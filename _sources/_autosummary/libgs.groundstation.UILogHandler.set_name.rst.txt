@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.set\_name
+==========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.set_name

@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.stow
+==========================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GS232B.stow

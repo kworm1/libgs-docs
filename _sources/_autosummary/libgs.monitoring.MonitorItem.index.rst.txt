@@ -1,0 +1,6 @@
+libgs.monitoring.MonitorItem.index
+==================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: MonitorItem.index

@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.stow
+===========================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotCtld.stow

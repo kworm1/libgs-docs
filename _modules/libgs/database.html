@@ -1,0 +1,1119 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.database &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.database</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.database</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+<span class="sd">libgs.database</span>
+<span class="sd">===============</span>
+
+<span class="sd">:date: Fri Jan 12 13:47:56 2018</span>
+<span class="sd">:author: Kjetil Wormnes</span>
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="n">Error</span><span class="p">,</span> <span class="n">Defaults</span><span class="p">,</span> <span class="n">conv_time</span>
+<span class="kn">from</span> <span class="nn">ephem</span> <span class="k">import</span> <span class="n">Date</span> <span class="k">as</span> <span class="n">eDate</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">string</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+
+
+<span class="c1"># The database types we allow to use in definitions. See</span>
+<span class="c1"># http://docs.sqlalchemy.org/en/latest/core/type_basics.html#generic-types</span>
+<span class="c1">#</span>
+<span class="c1"># Try to stick to generic types to make the implementation independent of database schema</span>
+<span class="c1">#</span>
+<span class="c1"># These are the generic types:</span>
+<span class="c1">#</span>
+<span class="c1"># * BigInteger</span>
+<span class="c1"># * Boolean</span>
+<span class="c1"># * Date</span>
+<span class="c1"># * DateTime</span>
+<span class="c1"># * Enum</span>
+<span class="c1"># * Float</span>
+<span class="c1"># * Integer</span>
+<span class="c1"># * Interval</span>
+<span class="c1"># * LargeBinary</span>
+<span class="c1"># * MatchType</span>
+<span class="c1"># * Numeric</span>
+<span class="c1"># * PickleType</span>
+<span class="c1"># * SchemaType</span>
+<span class="c1"># * SmallInteger</span>
+<span class="c1"># * String</span>
+<span class="c1"># * Text</span>
+<span class="c1"># * Time</span>
+<span class="c1"># * Unicode</span>
+<span class="c1"># * UnicodeText</span>
+<span class="c1">#</span>
+<span class="c1"># See http://docs.sqlalchemy.org/en/latest/core/metadata.html for how to define tables using the Table</span>
+<span class="c1"># syntax (the declarative base syntax is not used here)</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">sqlalchemy.types</span> <span class="k">as</span> <span class="nn">sa_t</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">MetaData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Table</span><span class="p">,</span> <span class="n">func</span>
+
+<span class="c1">#</span>
+<span class="c1"># Define the maxium length to apply to Strings (in SQL this equals VARCHAR, so the length is less if possible)</span>
+<span class="c1">#</span>
+<span class="n">_MAX_STRING_LEN</span> <span class="o">=</span> <span class="mi">1024</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># Set up logger</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+<span class="c1">#</span>
+<span class="c1"># The metadata column name for the timestamp</span>
+<span class="c1">#</span>
+<span class="n">TSTAMP_LBL</span> <span class="o">=</span> <span class="s1">&#39;_tstamp&#39;</span> <span class="c1">#&lt;--- warning. TSTAMP_LBL is accessed outside this class (restapi.py)</span>
+
+<span class="c1">#</span>
+<span class="c1"># The label to use for the primary key (ID).</span>
+<span class="c1"># NOTE: Tables will only get a primary key if they are initialised with the create_table method</span>
+<span class="c1">#</span>
+<span class="n">ID_LBL</span> <span class="o">=</span> <span class="s1">&#39;_id&#39;</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># IF _ALLOW_OLDSTYLE_HEX is set to true, then any entry in the database in the format</span>
+<span class="c1"># AA-BB-CC-DD ... will decode into a bytearray so long as all the characters are valid hex. If it is not set to true</span>
+<span class="c1"># then the database entries need to be prefixed with hex:// in order to decode this way.</span>
+<span class="c1"># This only exists for backwards compatability. New versions of libgs will store all bytearrays as either</span>
+<span class="c1"># base64 or hex using the appropriate label hex:// or base64://</span>
+<span class="c1">#</span>
+<span class="n">_ALLOW_OLDSTYLE_HEX</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># TODO: CHANGE type of pass_id to be BigInt rather than String. Does require some refactoring of db + restapi</span>
+<span class="c1">#       as currently the pass id is occassionally stored as a string (e.g. no pass)</span>
+<span class="c1">#</span>
+
+
+
+<div class="viewcode-block" id="tfilterstr2query"><a class="viewcode-back" href="../../_autosummary/libgs.database.tfilterstr2query.html#libgs.database.tfilterstr2query">[docs]</a><span class="k">def</span> <span class="nf">tfilterstr2query</span><span class="p">(</span><span class="n">filters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a timestamp filter string into a well formated</span>
+<span class="sd">    where query</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;=&#39;</span><span class="p">:</span>
+                <span class="n">op</span> <span class="o">=</span> <span class="n">f</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">op</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;=&#39;</span>
+            <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tstamp</span> <span class="o">=</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;julian&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">query</span> <span class="o">+=</span> <span class="p">[</span><span class="n">op</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tstamp</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">TSTAMP_LBL</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39; AND </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">TSTAMP_LBL</span><span class="p">))</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database"><a class="viewcode-back" href="../../_autosummary/libgs.database.Database.html#libgs.database.Database">[docs]</a><span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for low-level database access.</span>
+<span class="sd">    </span>
+<span class="sd">    It can be connected to different engines; MySQL, SQLITE, etc...</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> 
+            <span class="n">db</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> 
+            <span class="n">binary_fmt</span> <span class="o">=</span> <span class="s1">&#39;hex&#39;</span><span class="p">,</span> 
+            <span class="n">get_from_disk</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> 
+            <span class="n">disk_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+            <span class="n">disk_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            db (str)                 : `sqlalchemy engine connection string &lt;https://docs.sqlalchemy.org/en/latest/core/engines.html&gt;`_</span>
+<span class="sd">            binary_fmt (str[hex/b64]): Format to store binary data as</span>
+<span class="sd">            get_from_disk (bool)     : If True get linked content and insert in table before returning.</span>
+<span class="sd">            disk_threshold           : Threshold (in bytes) before storing binary data to disk (None = do not store to disk)</span>
+<span class="sd">            disk_path                : Absolute os path to store binary datafiles to</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           If disk_threshold is specified, then data larger than &lt;disk_theshold&gt; bytes will be</span>
+<span class="sd">           stored in the filesyste with only a reference inserted in the database.</span>
+
+<span class="sd">           The path in which it is stored is &lt;disk_path&gt;/comms. This path needs to</span>
+<span class="sd">           be available and writeable. If it is not, an log message will be will be raised and</span>
+<span class="sd">           the data stored in the database instead.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># pool_pre_ping is one way to try to avoide the MySQL connection gone aeay error. Other options</span>
+        <span class="c1"># may be to enable pool_recycle.</span>
+        <span class="c1">#</span>
+        <span class="c1">#</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eng</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">pool_pre_ping</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Error trying to create SQL engine using pool_pre_ping. Trying without&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_eng</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>   
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Creating SQL engine without pool_pre_ping worked. *WARNING*: You may experience issues with long running connection.&quot;</span><span class="p">)</span>
+
+
+        <span class="c1">#</span>
+        <span class="c1"># Set up sqlalchemy metadata</span>
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_eng</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">reflect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_eng</span><span class="p">)</span>
+
+        <span class="c1"># If enabled then any *bytearray* that exceeds</span>
+        <span class="c1"># the disk_theshold number of bytes will be </span>
+        <span class="c1"># saved to disk and a reference introduced in the database</span>
+        <span class="c1"># rather than the actual data</span>
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span> <span class="o">=</span> <span class="n">disk_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold_text</span> <span class="o">=</span> <span class="n">disk_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disk_path</span> <span class="o">=</span> <span class="n">disk_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_from_disk</span> <span class="o">=</span> <span class="n">get_from_disk</span>
+        
+        
+        <span class="c1">#</span>
+        <span class="c1"># Binary format. Either &#39;b64&#39; or &#39;hex&#39;. Any bytearray saved to disk</span>
+        <span class="c1"># will be automatically converted to this format before saving</span>
+        <span class="c1">#</span>
+        <span class="k">if</span> <span class="n">binary_fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;b64&#39;</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;binary_fmt must be &#39;b64&#39; or &#39;hex&#39;, got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">binary_fmt</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_binary_fmt</span> <span class="o">=</span> <span class="n">binary_fmt</span>
+
+<div class="viewcode-block" id="Database.count_rows"><a class="viewcode-back" href="../../_autosummary/libgs.database.Database.count_rows.html#libgs.database.Database.count_rows">[docs]</a>    <span class="k">def</span> <span class="nf">count_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return the number of rows in a table</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table:</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of rows</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">table</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eng</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]))</span><span class="o">.</span><span class="n">scalar</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Database.create_table"><a class="viewcode-back" href="../../_autosummary/libgs.database.Database.create_table.html#libgs.database.Database.create_table">[docs]</a>    <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set up the columns and add a unique key.</span>
+
+<span class="sd">        The Database class can be used without creating a database</span>
+<span class="sd">        first, but then pandas will take care of it on first access, and no primary key will be created.</span>
+
+<span class="sd">        It is therefore encouraged to explicitly create the table with this method in the Database subclass constructor</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">           A primary key column will be automatically added. By default it is called as in the ID_LBL constant.</span>
+<span class="sd">           Change by specify primary_key_col=</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name:                               The table to create</span>
+<span class="sd">            *columns:                           The list of :class:`sqlalchemy.types.Column` objects to add to the table</span>
+<span class="sd">            primary_key_col (str, optional):    The column to use as primary key (must be sa.Integer type)</span>
+
+<span class="sd">        Returns:</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">primary_key_col</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;primary_key_col&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span>  <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid arguments to create_table&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">primary_key_col</span> <span class="o">=</span> <span class="n">ID_LBL</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span>  <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid arguments to create_table&quot;</span><span class="p">)</span>
+
+        <span class="n">Table</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">,</span>
+              <span class="n">Column</span><span class="p">(</span><span class="n">primary_key_col</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">Integer</span><span class="p">(),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+              <span class="n">Column</span><span class="p">(</span><span class="n">TSTAMP_LBL</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">Numeric</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">12</span><span class="p">)),</span> <span class="c1">#&lt;-- dates are stored as julian dates (days since epoch). Add enough precision to allow microseconds to be stored</span>
+              <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+              <span class="n">keep_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Database.put_df"><a class="viewcode-back" href="../../_autosummary/libgs.database.Database.put_df.html#libgs.database.Database.put_df">[docs]</a>    <span class="k">def</span> <span class="nf">put_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add dataframe to database, appending metadata for when it was added</span>
+
+<span class="sd">        Certain types will be encoded (bytearrays, dates,...) so that the data actually entered in the database is usually strings.</span>
+<span class="sd">        This process is automatically reversed by the get_df method and as such is transparent to the user.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table (str):                The table</span>
+<span class="sd">            df    (:py:class:`pandas.DataFrame`):   The :py:class:`pandas.DataFrame` to add (must have the correct headers)</span>
+<span class="sd">            index (bool):               If true: add index as well</span>
+<span class="sd">            if_exists (str):            What to do if table exists (directly passed to pd.to_sql method)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Add timestamp as julian date</span>
+        <span class="n">df2</span><span class="p">[</span><span class="n">TSTAMP_LBL</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">to_julian_date</span><span class="p">()</span>
+
+        <span class="c1"># Convert any bytearray into the designated binary encoding. Do not encode column names</span>
+        <span class="c1"># that start with &#39;_&#39; (internal/private)</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df2</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+        <span class="n">df2</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encode</span><span class="p">)</span>
+
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df2</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eng</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="n">if_exists</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">{}</span><span class="s2"> trying to save to database: </span><span class="si">{}</span><span class="s2">. Trying again&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+            <span class="n">df2</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eng</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="n">if_exists</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Database.get_df"><a class="viewcode-back" href="../../_autosummary/libgs.database.Database.get_df.html#libgs.database.Database.get_df">[docs]</a>    <span class="k">def</span> <span class="nf">get_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">orderby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">descending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get data from communications database as a :py:class:`pandas.DataFrame` object</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            table (str):                    The table to fetch from</span>
+<span class="sd">            where (str, optional):          SQL syntax to append to query as WHERE=...</span>
+<span class="sd">            limit (int, optional):          Max number of rows to return</span>
+<span class="sd">            orderby (str, optional):        The column to sort by</span>
+<span class="sd">            descending (bool, optional):    If true: sort in descending order, otherwise sort in ascending order.</span>
+<span class="sd">                                            Has no effect if orderby = None</span>
+<span class="sd">            raw (bool, optional):           If true, do not decode anything in the database into native objects. Most</span>
+<span class="sd">                                            data will be returned as strings with encoding flags intact.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * from </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot; WHERE </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">where</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">orderby</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">orderby</span> <span class="o">=</span> <span class="n">TSTAMP_LBL</span>
+
+        <span class="k">if</span> <span class="n">descending</span><span class="p">:</span>
+            <span class="n">order</span> <span class="o">=</span> <span class="s1">&#39;DESC&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">order</span> <span class="o">=</span> <span class="s1">&#39;ASC&#39;</span>
+
+        <span class="k">if</span> <span class="n">descending</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot; ORDER BY </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">orderby</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">sql</span> <span class="o">+=</span> <span class="s2">&quot; LIMIT </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Limit must be an integer, got </span><span class="si">{}</span><span class="s2"> of type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">limit</span><span class="p">)))</span>
+
+
+        <span class="c1"># We ideally need to convert the sql string to raw, but or pd.read_sql seems to fail for some reason</span>
+        <span class="c1"># but I cant find an obvious way to do so, so lets just replace % with %% for now.</span>
+        <span class="c1"># TODO: come up with a more general solution</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="si">%%</span><span class="s1">&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eng</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">raw</span><span class="p">:</span>
+
+            <span class="c1"># TSTAMP_LBL is a floating point julian date. Convert it to datetime too if we arent requesting raw</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">TSTAMP_LBL</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">TSTAMP_LBL</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">float_t</span><span class="o">=</span><span class="s1">&#39;julian&#39;</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to convert timestamp to datetime. </span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+            <span class="c1"># Decode remaining fields. But do not touch column names</span>
+            <span class="c1"># that start with &#39;_&#39; (internal/private)</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decode</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+        
+<div class="viewcode-block" id="Database.get_file"><a class="viewcode-back" href="../../_autosummary/libgs.database.Database.get_file.html#libgs.database.Database.get_file">[docs]</a>    <span class="k">def</span> <span class="nf">get_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Grab a file resource and return the bytes or string (.bin or .txt)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fname: The name of the file resource</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The resource, either as a string (if its a .txt file) or as a bytearray (if its a .bin file)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">fname</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;txt&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_disk_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_disk_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+        
+    <span class="k">def</span> <span class="nf">_encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode datatypes appropriately for storing in database</span>
+<span class="sd">        Args:</span>
+<span class="sd">            data: The data to encode</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The data in a format suitable for storing in database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+
+        <span class="n">types_to_encode</span> <span class="o">=</span> <span class="p">[</span><span class="n">basestring</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">eDate</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]</span>
+        <span class="n">types_to_skip</span>   <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+
+
+        <span class="c1"># Only worry about encoding strings, bytearrays or datetime objects, for anything else. Try to just make it</span>
+        <span class="c1"># a dumb string using the __str__ method. Note that this is a non-nominal situation</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types_to_encode</span><span class="p">]):</span>
+            <span class="k">if</span>  <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types_to_skip</span><span class="p">]):</span>
+                <span class="c1"># These types are ignored</span>
+                <span class="k">return</span> <span class="n">data</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Other strange types will probably not be possible to save in database, so try to conver dumbly to a</span>
+                <span class="c1"># string.</span>
+
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_encode: No encoding handler for type </span><span class="si">{}</span><span class="s2">, trying to convert dumbly to string&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;_encode: Failed to convert type </span><span class="si">{}</span><span class="s2"> to string, database entry will be replaced with &#39;ERROR&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+                    <span class="k">return</span> <span class="s2">&quot;ERROR&quot;</span>
+
+        <span class="c1"># Handle normal string data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+
+            <span class="c1"># Make sure strings are propely utf-8 encoded</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold_text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold_text</span><span class="p">:</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1">#</span>
+                    <span class="c1"># 1.1 Data meets condition to be be saved to disk. Try to do so.</span>
+                    <span class="c1">#</span>
+                    <span class="n">fname</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">%H%M%S&#39;</span><span class="p">)</span>
+                    <span class="n">fname</span> <span class="o">+=</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)])</span>
+                    <span class="n">fname</span> <span class="o">+=</span> <span class="s1">&#39;.txt&#39;</span>
+                    <span class="n">full_fname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_disk_path</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                        
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;data is a text field but len(data) &gt; </span><span class="si">{}</span><span class="s2"> and has so it has been stored in filesystem&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="s1">&#39;file://&#39;</span> <span class="o">+</span> <span class="n">fname</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="c1">#</span>
+                    <span class="c1"># 1.2 Data failed to save to disk, return it so that at least it is saved in db</span>
+                    <span class="c1">#</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: len(data) &gt; </span><span class="si">{}</span><span class="s2"> but failed too save to filesystem: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="n">data</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#</span>
+                <span class="c1"># 1.2 Data is small enough to return without saving to disk</span>
+                <span class="c1">#</span>
+                <span class="k">return</span> <span class="n">data</span>
+
+        <span class="c1"># binary data</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span><span class="p">:</span> 
+                          
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">fname</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">%H%M%S&#39;</span><span class="p">)</span>
+                    <span class="n">fname</span> <span class="o">+=</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)])</span>
+                    <span class="n">fname</span> <span class="o">+=</span> <span class="s1">&#39;.bin&#39;</span>
+                    <span class="n">full_fname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_disk_path</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_fname</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                        
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;data is binary and len(data) &gt; </span><span class="si">{}</span><span class="s2"> so it has been stored in filesystem&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span><span class="p">))</span>
+                    
+                    <span class="c1">#</span>
+                    <span class="c1"># 2.1 Data is binary and met conditions for saving to disk</span>
+                    <span class="c1">#</span>
+                    <span class="k">return</span> <span class="s1">&#39;file://</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    
+                    <span class="c1">#</span>
+                    <span class="c1"># 2.2 Data is binary but failed to save to disk. Continue with data conversion so at least it is saved in database</span>
+                    <span class="c1"># </span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: len(data) &gt; </span><span class="si">{}</span><span class="s2"> but failed to save to filesystem: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disk_threshold</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_fmt</span> <span class="o">==</span> <span class="s1">&#39;b64&#39;</span><span class="p">:</span>
+                
+                <span class="c1">#</span>
+                <span class="c1"># 2.3 a. Return base64 encoded data</span>
+                <span class="c1">#</span>
+                <span class="k">return</span> <span class="s1">&#39;base64://&#39;</span> <span class="o">+</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_fmt</span> <span class="o">==</span> <span class="s1">&#39;hex&#39;</span><span class="p">:</span>
+                <span class="c1">#</span>
+                <span class="c1"># 2.3 b. Return hex encoded data</span>
+                <span class="c1">#</span>
+                <span class="n">b16data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b16encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s1">&#39;hex://&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">b16data</span><span class="p">[</span><span class="n">n</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b16data</span><span class="p">))[::</span><span class="mi">2</span><span class="p">]])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unexpected binary format </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_binary_fmt</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">eDate</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;ts-ephem://&#39;</span> <span class="o">+</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;ts-pandas://&#39;</span> <span class="o">+</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;ts-dtime://&#39;</span> <span class="o">+</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unexpected. This should not be possible&quot;</span><span class="p">)</span>
+            
+
+    <span class="k">def</span> <span class="nf">_decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Reverse the _encode operation. Convert database strings into native types.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: The string to decode</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Native data type</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">data</span>
+            
+        <span class="n">out</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_from_disk</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;file://&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Load data file</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">7</span><span class="p">:])</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> reading data file linked from SQL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;base64://&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">9</span><span class="p">:]))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> parsing base 64 data from SQL: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        
+        <span class="c1"># Hex dealt with differently to be backwards compatible</span>
+        <span class="c1"># Instead of looking for marker, it is just assumed that all strings in the</span>
+        <span class="c1"># format AA-BB-XX... are binary strings</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">_ALLOW_OLDSTYLE_HEX</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">all</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)])))):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b16decode</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">))))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> parsing hex data from SQL: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        <span class="c1"># New style hex encoding uses the hex:// keyword</span>
+        <span class="c1"># NOTE: it is still splitting by &#39;-&#39; but the &#39;-&#39; in the encoded string is optional. It will decode either way</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;hex://&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b16decode</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">))))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> parsing hex data from SQL: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;ts-ephem://&#39;</span><span class="p">)</span>  <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">11</span><span class="p">:],</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;ephem&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;ts-pandas://&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">12</span><span class="p">:],</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;pandas&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;ts-dtime://&#39;</span><span class="p">)</span>  <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">conv_time</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">11</span><span class="p">:],</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>      </div>
+
+            
+
+
+<div class="viewcode-block" id="CommsLog"><a class="viewcode-back" href="../../_autosummary/libgs.database.CommsLog.html#libgs.database.CommsLog">[docs]</a><span class="k">class</span> <span class="nc">CommsLog</span><span class="p">(</span><span class="n">Database</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Database class for storing communications with the satellite.</span>
+
+<span class="sd">    The columns are:</span>
+
+<span class="sd">    ========= =================================================================</span>
+<span class="sd">    nid       The norad id of the object that is being communicated with</span>
+<span class="sd">    pass_id   The current pass ID</span>
+<span class="sd">    orig      The :attr:`actor &lt;.ACTORS&gt;` that sent the message</span>
+<span class="sd">    dest      The :attr:`actor &lt;.ACTORS&gt;` that received the message</span>
+<span class="sd">    msg       The message itself</span>
+<span class="sd">    ========= =================================================================</span>
+
+<span class="sd">    Additionally a primary key and timestamp is automatically added to each record.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: Name of the various actors that send or receive communications</span>
+    <span class="n">ACTORS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sat&#39;</span><span class="p">,</span> <span class="s1">&#39;GS&#39;</span><span class="p">,</span> <span class="s1">&#39;Protocol&#39;</span><span class="p">]</span>
+
+    <span class="c1"># The name of the database table</span>
+    <span class="n">_TABLE</span> <span class="o">=</span> <span class="s2">&quot;comms&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="n">binary_fmt</span><span class="o">=</span><span class="s1">&#39;hex&#39;</span><span class="p">,</span> <span class="n">disk_path</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DATA_PATH</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See :class:`.Database` for description of available arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CommsLog</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">db</span><span class="p">,</span> 
+            <span class="n">binary_fmt</span><span class="o">=</span><span class="n">binary_fmt</span><span class="p">,</span> 
+            <span class="n">disk_path</span> <span class="o">=</span> <span class="n">disk_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span>
+                          <span class="n">Column</span><span class="p">(</span><span class="s2">&quot;nid&quot;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)),</span>
+                          <span class="n">Column</span><span class="p">(</span><span class="s2">&quot;pass_id&quot;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)),</span>
+                          <span class="n">Column</span><span class="p">(</span><span class="s2">&quot;orig&quot;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)),</span>
+                          <span class="n">Column</span><span class="p">(</span><span class="s2">&quot;dest&quot;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)),</span>
+                          <span class="n">Column</span><span class="p">(</span><span class="s2">&quot;msg&quot;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">Text</span><span class="p">()))</span>
+
+
+<div class="viewcode-block" id="CommsLog.put"><a class="viewcode-back" href="../../_autosummary/libgs.database.CommsLog.put.html#libgs.database.CommsLog.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">pass_id</span><span class="p">,</span> <span class="n">orig</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add new item to the log</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nid(int):       Norad ID of the satellite commuicated with</span>
+<span class="sd">            pass_id (str):  ID of the pass the communication belongs to</span>
+<span class="sd">            orig (str):     Originator of the message</span>
+<span class="sd">            dest (str):     Destination of the message</span>
+<span class="sd">            msg (str):      The message itself</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">orig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACTORS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Invalid origin, must be one of </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ACTORS</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">orig</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ACTORS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Invalid destination, must be one of </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ACTORS</span><span class="p">))</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;nid&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">nid</span><span class="p">],</span> <span class="s1">&#39;pass_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">pass_id</span><span class="p">],</span> <span class="s1">&#39;orig&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">orig</span><span class="p">],</span> <span class="s1">&#39;dest&#39;</span><span class="p">:[</span><span class="n">dest</span><span class="p">],</span> <span class="s1">&#39;msg&#39;</span><span class="p">:[</span><span class="n">msg</span><span class="p">]})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">put_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommsLog.get"><a class="viewcode-back" href="../../_autosummary/libgs.database.CommsLog.get.html#libgs.database.CommsLog.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get the communication log</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            where: a WHERE=... SQL query to apply to the query</span>
+<span class="sd">            limit: limit to a number of results</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`.DataFrame` containing the stored data</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Onlu accept arguments for the columns in the db.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">intersection</span><span class="p">([</span><span class="s1">&#39;nid&#39;</span><span class="p">,</span> <span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;orig&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;One or more invalid arguments </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+
+        <span class="n">where</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">where</span> <span class="o">+</span> <span class="s1">&#39; AND &#39;</span>
+            <span class="n">where</span> <span class="o">+=</span> <span class="s1">&#39;`</span><span class="si">{}</span><span class="s1">` like &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">tstamps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">where</span> <span class="o">+</span> <span class="s1">&#39; AND &#39;</span>
+            <span class="n">where</span> <span class="o">+=</span> <span class="n">tfilterstr2query</span><span class="p">(</span><span class="n">tstamps</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+
+
+        <span class="c1"># TODO: file:// should be loaded from file ...</span>
+        <span class="c1"># def decode(d):</span>
+        <span class="c1">#     if isinstance(d, basestring) and d[:7] == &#39;file://&#39;:</span>
+        <span class="c1">#         # TODO: Load from file</span>
+        <span class="c1">#         return d</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         return d  # &lt;-- note: baseclass does decoding/enocding of some types</span>
+        <span class="c1">#</span>
+        <span class="c1"># df.msg = df.msg.apply(decode)</span>
+        <span class="k">return</span> <span class="n">df</span></div></div>
+
+
+<div class="viewcode-block" id="KVDb"><a class="viewcode-back" href="../../_autosummary/libgs.database.KVDb.html#libgs.database.KVDb">[docs]</a><span class="k">class</span> <span class="nc">KVDb</span><span class="p">(</span><span class="n">Database</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic Key-Value database with optional &quot;standard&quot; fields (columns).</span>
+
+<span class="sd">    This class is not used directly. See :class:`MonitorDb` and :class:`PassDb`</span>
+
+<span class="sd">    When initialised by itself, this class will create a key/value database with two columns; key and value</span>
+<span class="sd">    that can store arbitrary data. Values will be attempted encoded using JSON, which allows the database</span>
+<span class="sd">    to store almost arbitrary data types.</span>
+
+<span class="sd">    Additionally a set of other columns can be specified with any sqlalchemytype required.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Change this in derived classes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="p">[],</span> <span class="n">ntypes</span><span class="o">=</span><span class="n">sa_t</span><span class="o">.</span><span class="n">Text</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ncols:  Normal columns; a list of column names</span>
+<span class="sd">            ntypes: SQLAlchemy types associated with the columns (defaults to Text)</span>
+
+<span class="sd">        See :class:`.Database` for the definition of the additional arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="c1"># The table to use</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span> <span class="o">=</span> <span class="n">table</span>
+        
+        <span class="c1"># Normal (non-kv) columns</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;key&#39;</span> <span class="ow">in</span> <span class="n">ncols</span> <span class="ow">or</span> <span class="s1">&#39;value&#39;</span> <span class="ow">in</span> <span class="n">ncols</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;&#39;key&#39; or &#39;value&#39; cant be used as a normal field name&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_NCOLS</span> <span class="o">=</span> <span class="n">ncols</span>
+        
+        <span class="nb">super</span><span class="p">(</span><span class="n">KVDb</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ntypes</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">ntypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ntypes</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ncols</span><span class="p">]</span>
+
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">Column</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span> <span class="n">ntypes</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)),</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">Text</span><span class="p">()),</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="KVDb.put"><a class="viewcode-back" href="../../_autosummary/libgs.database.KVDb.put.html#libgs.database.KVDb.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NCOLS</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()]):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a clolumn in this database. Valid columns are </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NCOLS</span><span class="p">))</span>
+    
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>   
+        
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        
+        <span class="c1"># Complete the empty columns otherwise the db gets confused when</span>
+        <span class="c1"># creating new table</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NCOLS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                
+        
+        <span class="c1"># Create the dataframe</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="c1"># Encode anything that we can as json</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">eDate</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s1">&#39;json://&#39;</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="c1"># json encoding failed so just return as is, it should be encoded as strings by Database base class</span>
+                    <span class="k">return</span> <span class="n">d</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">d</span> <span class="c1">#&lt;-- the other types are automatically encoded as strings by the Database base class</span>
+
+        <span class="c1"># Save timestamps as ISO strings</span>
+        <span class="c1"># df.value = df.value.apply(lambda x: conv_time(x, to=&#39;iso&#39;, ignore_ambig_types=True))</span>
+        
+        <span class="c1"># The type is encoded with json in order to not have to worry</span>
+        <span class="c1"># about storing type.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">encode</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Could not convert data </span><span class="si">{}</span><span class="s2"> to json. Not saved to database!: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">put_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+        
+        
+<div class="viewcode-block" id="KVDb.get"><a class="viewcode-back" href="../../_autosummary/libgs.database.KVDb.get.html#libgs.database.KVDb.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;      </span>
+<span class="sd">        .. note:: </span>
+<span class="sd">        </span>
+<span class="sd">           To do partial matches, use the % wildchar.</span>
+<span class="sd">           eg keys = [&#39;%NW%&#39;, &#39;%NE%&#39;] will match all keys</span>
+<span class="sd">           with NW and NE in their names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">where</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">where</span> <span class="o">+</span> <span class="s1">&#39; AND &#39;</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> like &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">keys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">where</span> <span class="o">+</span> <span class="s1">&#39; AND &#39;</span>
+            <span class="n">where</span> <span class="o">+=</span> <span class="s1">&#39; (`key` like &quot;&#39;</span> <span class="o">+</span> <span class="s1">&#39;&quot; or `key` like &quot;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;)&#39;</span>
+            
+        <span class="k">if</span> <span class="n">tstamps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">where</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">where</span> <span class="o">+</span> <span class="s1">&#39; AND &#39;</span>
+            <span class="n">where</span> <span class="o">+=</span> <span class="n">tfilterstr2query</span><span class="p">(</span><span class="n">tstamps</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+        
+        <span class="c1">#file:// and byttearray passthroughs fail json decoding unless we do a bit of wranglign:</span>
+        <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">basestring</span><span class="p">)</span> <span class="ow">and</span> <span class="n">d</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;json://&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">7</span><span class="p">:])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">basestring</span><span class="p">)</span> <span class="ow">and</span> <span class="n">d</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;file://&#39;</span><span class="p">:</span>
+                <span class="c1"># TODO: Load from file if required (?)</span>
+                <span class="k">return</span> <span class="n">d</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">d</span> <span class="c1">#&lt;-- note: baseclass does decoding/enocding of some types</span>
+                    
+        
+        <span class="c1">#print(&quot;B, &quot;, [v for v in df.value],[type(v) for v in df.value])        </span>
+        <span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">decode</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span></div></div>
+
+
+
+
+<div class="viewcode-block" id="MonitorDb"><a class="viewcode-back" href="../../_autosummary/libgs.database.MonitorDb.html#libgs.database.MonitorDb">[docs]</a><span class="k">class</span> <span class="nc">MonitorDb</span><span class="p">(</span><span class="n">KVDb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Monitor database interface class</span>
+<span class="sd">    </span>
+<span class="sd">    The monitor database is a key/value type database</span>
+<span class="sd">    that stores arbitrary monitoring values. Each key/value pair</span>
+<span class="sd">    is additionally associated with the pass id for easy search.</span>
+
+<span class="sd">    It sets up a table with the following columns</span>
+
+<span class="sd">    ========= =================================================================</span>
+<span class="sd">    key       The name of the monitor point</span>
+<span class="sd">    value     The monitor point value (JSON encoded)</span>
+<span class="sd">    pass_id   The pass id associated with the current monitor entry</span>
+<span class="sd">    alert     The alert level of the current monitor entry</span>
+<span class="sd">    ========= =================================================================</span>
+
+<span class="sd">    Additionally each row is assigned a primary key and a timestamp</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">_TABLE</span> <span class="o">=</span> <span class="s1">&#39;monitor&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="n">binary_fmt</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">,</span> <span class="n">disk_threshold</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">disk_path</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DATA_PATH</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See :class:`.Database` for description of available arguments</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MonitorDb</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> 
+            <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> 
+            <span class="n">ncols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;alert&#39;</span><span class="p">],</span>
+            <span class="n">ntypes</span><span class="o">=</span><span class="p">[</span><span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">),</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)],</span>
+            <span class="n">binary_fmt</span>     <span class="o">=</span> <span class="n">binary_fmt</span><span class="p">,</span>
+            <span class="n">disk_threshold</span> <span class="o">=</span> <span class="n">disk_threshold</span><span class="p">,</span>
+            <span class="n">disk_path</span> <span class="o">=</span> <span class="n">disk_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>    
+    
+
+<div class="viewcode-block" id="MonitorDb.put"><a class="viewcode-back" href="../../_autosummary/libgs.database.MonitorDb.put.html#libgs.database.MonitorDb.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pass_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">alert</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MonitorDb</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">pass_id</span> <span class="o">=</span> <span class="n">pass_id</span><span class="p">,</span> <span class="n">alert</span><span class="o">=</span><span class="n">alert</span><span class="p">)</span></div></div>
+
+    <span class="c1"># get doesnt require a wrapper as it will act correctly anyway.</span>
+
+
+<div class="viewcode-block" id="PassDb"><a class="viewcode-back" href="../../_autosummary/libgs.database.PassDb.html#libgs.database.PassDb">[docs]</a><span class="k">class</span> <span class="nc">PassDb</span><span class="p">(</span><span class="n">KVDb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface class to Pass Information Database.</span>
+<span class="sd">    </span>
+<span class="sd">    The Pass Information Database is a key/value type database</span>
+<span class="sd">    that stores arbitrary data about a pass (pass information). Each key/value pair</span>
+<span class="sd">    is associated with the pass id and module from which it was added for easy </span>
+<span class="sd">    search.</span>
+<span class="sd">    </span>
+<span class="sd">    It sets up a table with the following columns</span>
+
+<span class="sd">    ========= =================================================================</span>
+<span class="sd">    key       The pass information key</span>
+<span class="sd">    value     The pass information value</span>
+<span class="sd">    pass_id   The pass id associated with the current monitor entry</span>
+<span class="sd">    module    The module that requested the data to be added to the database</span>
+<span class="sd">    ========= =================================================================</span>
+
+<span class="sd">    Additionally each row is assigned a primary key and a timestamp</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+
+    <span class="n">_TABLE</span> <span class="o">=</span> <span class="s2">&quot;passes&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="n">binary_fmt</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">,</span> <span class="n">disk_threshold</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">disk_path</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">DATA_PATH</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PassDb</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> 
+            <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> 
+            <span class="n">ncols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="s1">&#39;module&#39;</span><span class="p">],</span>
+            <span class="n">ntypes</span><span class="o">=</span><span class="p">[</span><span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">),</span> <span class="n">sa_t</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">_MAX_STRING_LEN</span><span class="p">)],</span>
+            <span class="n">binary_fmt</span>     <span class="o">=</span> <span class="n">binary_fmt</span><span class="p">,</span>
+            <span class="n">disk_threshold</span> <span class="o">=</span> <span class="n">disk_threshold</span><span class="p">,</span>
+            <span class="n">disk_path</span> <span class="o">=</span> <span class="n">disk_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>    
+
+    
+<div class="viewcode-block" id="PassDb.put"><a class="viewcode-back" href="../../_autosummary/libgs.database.PassDb.put.html#libgs.database.PassDb.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">pass_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add a key/value pair to the database</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            module: The module that stored the information (scheduler/groundstation)</span>
+<span class="sd">            pass_id: The pass id</span>
+<span class="sd">            key:   User defined key</span>
+<span class="sd">            value: User defined value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="nb">super</span><span class="p">(</span><span class="n">PassDb</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="n">module</span><span class="p">,</span> <span class="n">pass_id</span><span class="o">=</span><span class="n">pass_id</span><span class="p">)</span></div></div>
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

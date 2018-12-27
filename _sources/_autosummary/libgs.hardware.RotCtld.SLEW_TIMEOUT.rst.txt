@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.SLEW\_TIMEOUT
+====================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.SLEW_TIMEOUT

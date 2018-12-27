@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.power\_down
+=================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStationBase.power_down

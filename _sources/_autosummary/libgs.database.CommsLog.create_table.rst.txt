@@ -1,0 +1,6 @@
+libgs.database.CommsLog.create\_table
+=====================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: CommsLog.create_table

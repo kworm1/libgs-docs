@@ -1,0 +1,6 @@
+libgs.hardware.RotatorBase.SLEW\_TIMEOUT
+========================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotatorBase.SLEW_TIMEOUT

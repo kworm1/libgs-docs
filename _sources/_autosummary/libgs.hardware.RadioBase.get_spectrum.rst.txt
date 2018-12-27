@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.get\_spectrum
+======================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RadioBase.get_spectrum

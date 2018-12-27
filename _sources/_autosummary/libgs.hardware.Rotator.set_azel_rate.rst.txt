@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.set\_azel\_rate
+======================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: Rotator.set_azel_rate

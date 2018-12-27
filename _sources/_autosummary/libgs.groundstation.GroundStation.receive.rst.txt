@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.receive
+=========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStation.receive

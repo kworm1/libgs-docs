@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.callback
+=================================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.callback

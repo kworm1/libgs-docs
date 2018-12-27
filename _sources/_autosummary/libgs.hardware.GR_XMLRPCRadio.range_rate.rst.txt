@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.range\_rate
+==========================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GR_XMLRPCRadio.range_rate

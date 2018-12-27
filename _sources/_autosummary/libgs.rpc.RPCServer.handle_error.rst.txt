@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.handle\_error
+=================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.handle_error

@@ -1,0 +1,6 @@
+libgs.visualisation.Markup.live\_props
+======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: Markup.live_props

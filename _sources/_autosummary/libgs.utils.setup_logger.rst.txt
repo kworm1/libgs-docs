@@ -1,0 +1,6 @@
+libgs.utils.setup\_logger
+=========================
+
+.. currentmodule:: libgs.utils
+
+.. autofunction:: setup_logger

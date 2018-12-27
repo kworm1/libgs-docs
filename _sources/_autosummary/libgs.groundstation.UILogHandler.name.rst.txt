@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.name
+=====================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: UILogHandler.name

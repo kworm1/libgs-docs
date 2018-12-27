@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.register\_instance
+======================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.register_instance

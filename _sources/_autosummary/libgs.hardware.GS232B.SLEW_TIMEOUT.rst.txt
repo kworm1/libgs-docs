@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.SLEW\_TIMEOUT
+===================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.SLEW_TIMEOUT

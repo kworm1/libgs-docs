@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.connect
+======================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GR_XMLRPCRadio.connect

@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.MIN\_AZ
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.MIN_AZ

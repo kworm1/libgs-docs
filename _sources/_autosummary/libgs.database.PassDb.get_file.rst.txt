@@ -1,0 +1,6 @@
+libgs.database.PassDb.get\_file
+===============================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: PassDb.get_file

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.RESTAPI\_DEBUG\_MODE
+=========================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.RESTAPI_DEBUG_MODE

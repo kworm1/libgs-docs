@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.socket\_type
+================================
+
+.. currentmodule:: libgs.rpc
+
+.. autoattribute:: RPCServer.socket_type

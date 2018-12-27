@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.server\_bind
+================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.server_bind

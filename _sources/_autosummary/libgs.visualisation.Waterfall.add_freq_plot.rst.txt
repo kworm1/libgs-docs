@@ -1,0 +1,6 @@
+libgs.visualisation.Waterfall.add\_freq\_plot
+=============================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: Waterfall.add_freq_plot

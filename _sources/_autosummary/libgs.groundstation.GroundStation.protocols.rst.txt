@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.protocols
+===========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStation.protocols

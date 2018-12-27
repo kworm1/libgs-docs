@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.utils &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.utils.bytes2hex" href="libgs.utils.bytes2hex.html" />
+    <link rel="prev" title="Welcome to libgs’s documentation!" href="../index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libgs.utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.bytes2hex.html">libgs.utils.bytes2hex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.bytes2prettyhex.html">libgs.utils.bytes2prettyhex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.conv_time.html">libgs.utils.conv_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.hex2bytes.html">libgs.utils.hex2bytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.raise_if_aborted.html">libgs.utils.raise_if_aborted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.safe_sleep.html">libgs.utils.safe_sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.schedule_regular_callback.html">libgs.utils.schedule_regular_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.setup_logger.html">libgs.utils.setup_logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.wait_loop.html">libgs.utils.wait_loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.Defaults.html">libgs.utils.Defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.RegularCallback.html">libgs.utils.RegularCallback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatter.html">libgs.utils.UTCLogFormatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.html">libgs.utils.UTCLogFormatterHTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.XMLRPCTimeoutServerProxy.html">libgs.utils.XMLRPCTimeoutServerProxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.AbortAllException.html">libgs.utils.AbortAllException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.Error.html">libgs.utils.Error</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>libgs.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-libgs.utils"></span><div class="section" id="libgs-utils">
+<h1>libgs.utils<a class="headerlink" href="#libgs-utils" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">date:</th><td class="field-body">Thu Jul 27 20:40:36 2017</td>
+</tr>
+<tr class="field-even field"><th class="field-name">author:</th><td class="field-body">Kjetil Wormnes</td>
+</tr>
+</tbody>
+</table>
+<p>This module contains utilities and settings for the libgs package.</p>
+<p class="rubric">Examples</p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.bytes2hex.html#libgs.utils.bytes2hex" title="libgs.utils.bytes2hex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes2hex</span></code></a>(data)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.bytes2prettyhex.html#libgs.utils.bytes2prettyhex" title="libgs.utils.bytes2prettyhex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes2prettyhex</span></code></a>(data[,&nbsp;whitespacelen])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.conv_time.html#libgs.utils.conv_time" title="libgs.utils.conv_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conv_time</span></code></a>(d[,&nbsp;to,&nbsp;float_t,&nbsp;ignore_ambig_types])</td>
+<td>There are a number of different date formats used around libgs ephem.Date, datetime, pandas.Timestamp to mention some.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.hex2bytes.html#libgs.utils.hex2bytes" title="libgs.utils.hex2bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hex2bytes</span></code></a>(hexstr)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.raise_if_aborted.html#libgs.utils.raise_if_aborted" title="libgs.utils.raise_if_aborted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_if_aborted</span></code></a>()</td>
+<td>This method will raise an exception if the abort_all global event has been set.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.safe_sleep.html#libgs.utils.safe_sleep" title="libgs.utils.safe_sleep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">safe_sleep</span></code></a>(t)</td>
+<td>safe_sleep uses a subset of the wait_loop capabilities to implement an anologe to the time.sleep() function.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.schedule_regular_callback.html#libgs.utils.schedule_regular_callback" title="libgs.utils.schedule_regular_callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schedule_regular_callback</span></code></a>(func,&nbsp;delay)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.setup_logger.html#libgs.utils.setup_logger" title="libgs.utils.setup_logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_logger</span></code></a>(logger[,&nbsp;cons_loglvl,&nbsp;…])</td>
+<td>Function to set up logging for libgs.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.wait_loop.html#libgs.utils.wait_loop" title="libgs.utils.wait_loop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wait_loop</span></code></a>([events_or_callables,&nbsp;timeout,&nbsp;dt])</td>
+<td>Generic waiting loop.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.html#libgs.utils.Defaults" title="libgs.utils.Defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Defaults</span></code></a></td>
+<td>Defines default values used by the different classes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.RegularCallback.html#libgs.utils.RegularCallback" title="libgs.utils.RegularCallback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegularCallback</span></code></a>(func,&nbsp;delay[,&nbsp;min_interval])</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param func:</th><td class="field-body">Callback funciton to call</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.html#libgs.utils.UTCLogFormatter" title="libgs.utils.UTCLogFormatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UTCLogFormatter</span></code></a>([fmt,&nbsp;datefmt])</td>
+<td>Initialize the formatter with specified format strings.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.html#libgs.utils.UTCLogFormatterHTML" title="libgs.utils.UTCLogFormatterHTML"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UTCLogFormatterHTML</span></code></a>([fmt,&nbsp;datefmt])</td>
+<td>Initialize the formatter with specified format strings.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.XMLRPCTimeoutServerProxy.html#libgs.utils.XMLRPCTimeoutServerProxy" title="libgs.utils.XMLRPCTimeoutServerProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XMLRPCTimeoutServerProxy</span></code></a>(uri[,&nbsp;timeout,&nbsp;…])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.AbortAllException.html#libgs.utils.AbortAllException" title="libgs.utils.AbortAllException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbortAllException</span></code></a>(msg[,&nbsp;original_Error])</td>
+<td>Exception representing the abort_all event</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.Error.html#libgs.utils.Error" title="libgs.utils.Error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Error</span></code></a>(msg[,&nbsp;original_Error])</td>
+<td>Generic Error for libgs</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.utils.bytes2hex.html" class="btn btn-neutral float-right" title="libgs.utils.bytes2hex" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Welcome to libgs’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

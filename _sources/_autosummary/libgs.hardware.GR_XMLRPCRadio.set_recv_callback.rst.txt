@@ -1,0 +1,6 @@
+libgs.hardware.GR\_XMLRPCRadio.set\_recv\_callback
+==================================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: GR_XMLRPCRadio.set_recv_callback

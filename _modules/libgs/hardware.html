@@ -1,0 +1,1795 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.hardware &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>libgs.hardware</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for libgs.hardware</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">..</span>
+<span class="sd">    Copyright © 2017-2018 The University of New South Wales</span>
+
+<span class="sd">    Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="sd">    this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="sd">    the Software without restriction, including without limitation the rights to use,</span>
+<span class="sd">    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the</span>
+<span class="sd">    Software, and to permit persons to whom the Software is furnished to do so,</span>
+<span class="sd">    subject to the following conditions:</span>
+
+<span class="sd">    The above copyright notice and this permission notice shall be included in all</span>
+<span class="sd">    copies or substantial portions of the Software.</span>
+
+<span class="sd">    THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="sd">    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="sd">    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="sd">    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="sd">    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN</span>
+<span class="sd">    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+
+<span class="sd">    Except as contained in this notice, the name or trademarks of a copyright holder</span>
+
+<span class="sd">    shall not be used in advertising or otherwise to promote the sale, use or other</span>
+<span class="sd">    dealings in this Software without prior written authorization of the copyright</span>
+<span class="sd">    holder.</span>
+
+<span class="sd">    UNSW is a trademark of The University of New South Wales.</span>
+
+
+<span class="sd">libgs.hardware</span>
+<span class="sd">===============</span>
+
+<span class="sd">:date:   Fri Jan 12 13:17:51 2018</span>
+<span class="sd">:author: kjetil</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="n">Error</span><span class="p">,</span> <span class="n">RegularCallback</span><span class="p">,</span> <span class="n">Defaults</span><span class="p">,</span> <span class="n">wait_loop</span><span class="p">,</span> <span class="n">conv_time</span><span class="p">,</span> <span class="n">XMLRPCTimeoutServerProxy</span><span class="p">,</span> <span class="n">raise_if_aborted</span><span class="p">,</span> <span class="n">AbortAllException</span>
+<span class="kn">import</span> <span class="nn">xmlrpclib</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">abspath</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span>
+<span class="kn">import</span> <span class="nn">angles</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">select</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
+<span class="kn">import</span> <span class="nn">zmq</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="k">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">serial</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+
+<div class="viewcode-block" id="RotatorBase"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase">[docs]</a><span class="k">class</span> <span class="nc">RotatorBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for any rotator hardware interface</span>
+
+<span class="sd">    The following configuration parameters can be changed by any derived class in order to appropriately configure</span>
+<span class="sd">    the rotator</span>
+
+<span class="sd">    ======================= ===================</span>
+<span class="sd">    Parameter               Description</span>
+<span class="sd">    ----------------------- -------------------</span>
+<span class="sd">    STOWED_AZ               Azimuth to move antenna to when stowing</span>
+<span class="sd">    STOWED_EL               Elevation to move antenna to when stowing</span>
+<span class="sd">    BEAMWIDTH               Antenna beamwidth (used when calculating granularity of antenna movements)</span>
+<span class="sd">    MAX_AZ                  Maximum allowed Azimuth</span>
+<span class="sd">    MIN_AZ                  Minimum allowed Azimuth</span>
+<span class="sd">    MAX_EL                  Maximum allowed Elevation</span>
+<span class="sd">    MIN_EL                  Minimum allowed Elevation</span>
+<span class="sd">    SLEW_TIMEOUT            Max time to wait while waiting for slewing to complete</span>
+<span class="sd">    ======================= ===================</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Any derived class may change these variables</span>
+    <span class="c1"># to suit the rotator type</span>
+    <span class="c1">#</span>
+
+    <span class="c1">#: Stowed position</span>
+    <span class="n">STOWED_AZ</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_STOWED_AZ</span>
+    <span class="n">STOWED_EL</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_STOWED_EL</span>
+
+    <span class="c1">#: Antenna beamwidth</span>
+    <span class="n">BEAMWIDTH</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_ANTENNA_BEAMWIDTH</span>
+
+    <span class="c1">#: Maximum allowd azimuth command</span>
+    <span class="n">MAX_AZ</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_MAX_AZ</span>
+
+    <span class="c1">#: Minimum allowed azimuth command</span>
+    <span class="n">MIN_AZ</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_MIN_AZ</span>
+
+    <span class="c1">#: Maximum allowed elevation command</span>
+    <span class="n">MAX_EL</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_MAX_EL</span>
+
+    <span class="c1">#: Minimum allowed elevation command</span>
+    <span class="n">MIN_EL</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_MIN_EL</span>
+
+    <span class="c1">#: Slewing Timeout (s)</span>
+    <span class="n">SLEW_TIMEOUT</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_SLEW_TIMEOUT</span>
+
+    <span class="c1"># Instance counter (for unnamed rotators)</span>
+    <span class="n">_instance_name_cntr</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#####</span>
+    <span class="c1">#</span>
+    <span class="c1"># Properties for getting/setting the radio name. If no name is supplied, none is generated based</span>
+    <span class="c1"># on the isntance counter</span>
+    <span class="c1">#</span>
+    <span class="c1">#####</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Rotator</span><span class="si">{:03d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">RotatorBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span><span class="p">)</span>
+            <span class="n">RotatorBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+
+
+    <span class="c1">####################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Internal methods</span>
+    <span class="c1">#</span>
+    <span class="c1">####################</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt; Rotator (name = &#39;</span><span class="si">{}</span><span class="s2">&#39;) &gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="c1">####################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Private methods</span>
+    <span class="c1">#</span>
+    <span class="c1">####################</span>
+
+
+    <span class="k">def</span> <span class="nf">_wait_for_in_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">el</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">last_print_t</span> <span class="o">=</span> <span class="n">t0</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_pos</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">SLEW_TIMEOUT</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Timed out waiting for antenna to complete slewing&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_print_t</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Antenna slewing - currently at az=</span><span class="si">{:.1f}</span><span class="s2">, el=</span><span class="si">{:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">azel</span><span class="p">))</span>
+                <span class="n">last_print_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                <span class="c1"># TODO: Remove. This is not really necessary except if rotctl/socat crashes while we are waiting</span>
+                <span class="k">if</span> <span class="n">az</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">el</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error communicating with hamlib while waiting for positioning, no biggie so ignoring </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1">####################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Public methods</span>
+    <span class="c1">#</span>
+    <span class="c1">####################</span>
+
+<div class="viewcode-block" id="RotatorBase.stow"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.stow.html#libgs.hardware.RotatorBase.stow">[docs]</a>    <span class="k">def</span> <span class="nf">stow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stow antenna</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">STOWED_AZ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">STOWED_EL</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="n">block</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RotatorBase.azel_err"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.azel_err.html#libgs.hardware.RotatorBase.azel_err">[docs]</a>    <span class="k">def</span> <span class="nf">azel_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">az_dist</span><span class="p">(</span><span class="n">az1</span><span class="p">,</span> <span class="n">az2</span><span class="p">):</span>
+            <span class="n">az1</span> <span class="o">=</span> <span class="n">az1</span><span class="o">%</span><span class="mi">360</span>
+            <span class="n">az2</span> <span class="o">=</span> <span class="n">az2</span><span class="o">%</span><span class="mi">360</span>
+
+            <span class="k">if</span> <span class="p">((</span><span class="mi">360</span><span class="o">-</span><span class="n">az1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">az1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="mi">360</span> <span class="o">-</span> <span class="n">az2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">az2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">az2</span><span class="o">+</span><span class="mi">360</span><span class="p">)</span> <span class="o">-</span> <span class="n">az1</span>
+            <span class="k">elif</span> <span class="p">((</span><span class="mi">360</span><span class="o">-</span><span class="n">az1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">az1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="mi">360</span> <span class="o">-</span> <span class="n">az2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">az2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">az1</span> <span class="o">+</span> <span class="mi">360</span><span class="p">)</span> <span class="o">-</span> <span class="n">az2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">az1</span><span class="o">-</span><span class="n">az2</span><span class="p">)</span>
+
+
+        <span class="k">def</span> <span class="nf">el_dist</span><span class="p">(</span><span class="n">el1</span><span class="p">,</span> <span class="n">el2</span><span class="p">):</span>
+            <span class="n">el1</span> <span class="o">=</span> <span class="n">el1</span><span class="o">%</span><span class="mi">180</span>
+            <span class="n">el2</span> <span class="o">=</span> <span class="n">el2</span><span class="o">%</span><span class="mi">180</span>
+
+            <span class="k">if</span> <span class="p">((</span><span class="mi">180</span><span class="o">-</span><span class="n">el1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">el1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="mi">180</span> <span class="o">-</span> <span class="n">el2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">el2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">el2</span><span class="o">+</span><span class="mi">180</span><span class="p">)</span> <span class="o">-</span> <span class="n">el1</span>
+            <span class="k">elif</span> <span class="p">((</span><span class="mi">180</span><span class="o">-</span><span class="n">el1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">el1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="mi">180</span> <span class="o">-</span> <span class="n">el2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">el2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">el1</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">-</span> <span class="n">el2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">el1</span><span class="o">-</span><span class="n">el2</span><span class="p">)</span>
+
+        <span class="n">az1</span><span class="p">,</span><span class="n">el1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">az_dist</span><span class="p">(</span><span class="n">az1</span><span class="p">,</span> <span class="n">az</span><span class="p">),</span> <span class="n">el_dist</span><span class="p">(</span><span class="n">el1</span><span class="p">,</span> <span class="n">el</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RotatorBase.in_pos"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.in_pos.html#libgs.hardware.RotatorBase.in_pos">[docs]</a>    <span class="k">def</span> <span class="nf">in_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">el</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if antenna is in position</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if antenna is in position, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cmd_az&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">az</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cmd_el&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">el</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">az</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">el</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;in_pos called with arguments az=</span><span class="si">{}</span><span class="s2"> and el=</span><span class="si">{}</span><span class="s2">, which is invalid&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span><span class="n">el</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">az</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">el</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span>
+            <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span>
+        <span class="n">azerr</span><span class="p">,</span> <span class="n">elerr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">azel_err</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">azerr</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">BEAMWIDTH</span><span class="o">/</span><span class="mf">2.0</span> <span class="ow">and</span> <span class="n">elerr</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">BEAMWIDTH</span><span class="o">/</span><span class="mf">2.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="RotatorBase.azel_to_antenna_angles"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.azel_to_antenna_angles.html#libgs.hardware.RotatorBase.azel_to_antenna_angles">[docs]</a>    <span class="k">def</span> <span class="nf">azel_to_antenna_angles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdat</span><span class="p">,</span> <span class="n">cont_track_method</span><span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        From a table of az/el pointings, compute a new table that minimises the</span>
+<span class="sd">        amount of movements while keeping the off-pointing within the antenna</span>
+<span class="sd">        beamwidth</span>
+
+<span class="sd">        Note: this method does *not* interpolate, it just uses nearest neighbour</span>
+<span class="sd">              so pdat must be at sufficient time resolution.</span>
+
+
+<span class="sd">        Also transform antenna pointing vectors in such a way that the antenna will track continously  throughout</span>
+<span class="sd">        the pass. We do this by checking if the antenna ever needs to enter both the NE and NW quarters, and</span>
+<span class="sd">        if so, depending on the antenna rotator capabilities we can use one of 2 methods to achieve a continous</span>
+<span class="sd">        (up to 3 quadrant) track.</span>
+<span class="sd">          * flipover:         We move the antenna in the 90 -- 180 degree extended elevation range</span>
+<span class="sd">          * extended_azimuth: We move the antenna in the 360 -- 540 degree extended azimuth range</span>
+
+<span class="sd">        4 quadrant tracking is not currently supported. If the trajectory enters 4 quadrants, or if the antenna</span>
+<span class="sd">        capabilities do not meet the requirements for flipover or extended_azimuth, then the antenna will be commanded</span>
+<span class="sd">        in the &quot;normal&quot; 0-360 az and 0-90 el range and there may be discontinuities.</span>
+
+<span class="sd">        args:</span>
+<span class="sd">           pdat (DataFrame): must have at least an az and el column.</span>
+<span class="sd">           cont_track_method (str): Try to force a continous tracking method. If omited a method will be chosen</span>
+<span class="sd">                             based on antenna capabilities.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pdat</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;pdat must be a DataFrame, got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">pdat</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="s1">&#39;az&#39;</span><span class="ow">not</span> <span class="ow">in</span> <span class="n">pdat</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="s1">&#39;el&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pdat</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;pdat must have at least an az and el column&quot;</span><span class="p">)</span>
+
+
+        <span class="c1">#</span>
+        <span class="c1"># Transform antenna pointing vectors in such a way that the antenna will track continously  throughout</span>
+        <span class="c1"># the pass. We do this by checking if the antenna ever needs to enter both the NE and NW quarters, and</span>
+        <span class="c1"># if so, depending on the antenna rotator capabilities we can use one of 2 methods to achieve a continous</span>
+        <span class="c1"># (up to 3 quadrant) track.</span>
+        <span class="c1">#   * flipover: We move the antenna in the 90 -- 180 degree extended elevation range</span>
+        <span class="c1">#   * extended_azimuth: We move the antenna in the 360 -- 540 degree extended azimuth range</span>
+        <span class="c1">#</span>
+        <span class="c1"># 4 quadrant tracking is not currently supported. If the trajectory enters 4 quadrants, or if the antenna</span>
+        <span class="c1"># capabilities do not meet the requirements for flipover or continue, then the antenna will be commanded</span>
+        <span class="c1"># in the &quot;normal&quot; 0-360 az and 0-90 el range and there may be discontinuities.</span>
+        <span class="c1">#</span>
+
+        <span class="k">if</span> <span class="n">cont_track_method</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># TODO (maybe one day): Enable 4 quadrant continous tracking by utilising extended range (360-&gt;450 deg)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span> <span class="o">&gt;=</span> <span class="mi">540</span><span class="p">:</span>
+                <span class="n">cont_track_method</span> <span class="o">=</span> <span class="s1">&#39;extended_azimuth&#39;</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span> <span class="o">&gt;=</span> <span class="mi">180</span><span class="p">:</span>
+                <span class="n">cont_track_method</span> <span class="o">=</span> <span class="s1">&#39;flipover&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cont_track_method</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+
+        <span class="c1"># Compute quadrants the trajectory passes through</span>
+        <span class="n">quadrants</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="s1">&#39;N&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">az</span> <span class="o">&lt;</span> <span class="mi">90</span> <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">az</span> <span class="o">&gt;</span> <span class="mi">270</span> <span class="k">else</span> <span class="s1">&#39;S&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;E&#39;</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">az</span> <span class="o">&lt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="s1">&#39;W&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pdat</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>
+
+        <span class="c1"># Note NE and NW in quadrants and len(q) &lt;=3 implies that SW and SE cant both be passed through and so the below</span>
+        <span class="c1"># works. It would *not* work if the track crossed the SW-SE boundary.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">quadrants</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="s1">&#39;NE&#39;</span> <span class="ow">in</span> <span class="n">quadrants</span> <span class="ow">and</span> <span class="s1">&#39;NW&#39;</span> <span class="ow">in</span> <span class="n">quadrants</span> <span class="ow">and</span> <span class="n">cont_track_method</span> <span class="o">==</span> <span class="s1">&#39;flipover&#39;</span><span class="p">:</span>
+            <span class="c1"># Make sure antenna tracks continously when crossing NE-&gt;NW boundary by flipping antenna over</span>
+            <span class="c1"># i.e by applying elevation angles between 180 -&gt; 90, and adjusting azimuth appropriately.</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Antenna track crosses between NE and NW quadrant. Using &quot;flipover&quot; method for continous tracking&#39;</span><span class="p">)</span>
+            <span class="n">pdat</span> <span class="o">=</span> <span class="n">pdat</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">pdat</span><span class="o">.</span><span class="n">az</span> <span class="o">-=</span> <span class="mi">180</span>
+            <span class="n">pdat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pdat</span><span class="o">.</span><span class="n">az</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">360</span>
+            <span class="n">pdat</span><span class="o">.</span><span class="n">el</span> <span class="o">=</span> <span class="mi">180</span> <span class="o">-</span> <span class="n">pdat</span><span class="o">.</span><span class="n">el</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">quadrants</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="s1">&#39;NE&#39;</span> <span class="ow">in</span> <span class="n">quadrants</span> <span class="ow">and</span> <span class="s1">&#39;NW&#39;</span> <span class="ow">in</span> <span class="n">quadrants</span> <span class="ow">and</span> <span class="n">cont_track_method</span> <span class="o">==</span> <span class="s1">&#39;extended_azimuth&#39;</span><span class="p">:</span>
+            <span class="c1"># Make sure antenna tracks continously when crossing NE--&gt;NW boundary by using the 180--&gt;540 azimuth</span>
+            <span class="c1"># range instead of 0 --&gt; 360</span>
+            <span class="c1">#</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Antenna track crosses between NE and NW quadrant. Using &quot;extended_azimuth&quot; method for continous tracking&#39;</span><span class="p">)</span>
+            <span class="n">pdat</span> <span class="o">=</span> <span class="n">pdat</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">pdat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pdat</span><span class="o">.</span><span class="n">az</span> <span class="o">&lt;</span> <span class="mi">180</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">360</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">quadrants</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;4 Quadrant continous tracking is not currently supported.&quot;</span><span class="p">)</span>
+
+            <span class="n">az</span> <span class="o">=</span> <span class="n">pdat</span><span class="o">.</span><span class="n">az</span>
+            <span class="n">el</span> <span class="o">=</span> <span class="n">pdat</span><span class="o">.</span><span class="n">el</span>
+
+
+        <span class="n">ant_p</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">pdat</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="n">ant_p</span> <span class="o">=</span> <span class="n">ant_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pdat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+        <span class="n">R2D</span> <span class="o">=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+        <span class="n">D2R</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="n">pdat</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">angles</span><span class="o">.</span><span class="n">sep</span><span class="p">(</span><span class="n">ant_p</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">az</span><span class="o">*</span><span class="n">D2R</span><span class="p">,</span> <span class="n">ant_p</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">el</span><span class="o">*</span><span class="n">D2R</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">az</span><span class="o">*</span><span class="n">D2R</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">el</span><span class="o">*</span><span class="n">D2R</span><span class="p">)</span><span class="o">*</span><span class="n">R2D</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BEAMWIDTH</span><span class="o">/</span><span class="mf">2.2</span><span class="p">):</span> <span class="c1">#&lt;--- half beamwdith less 10% margin</span>
+                <span class="n">ant_p</span> <span class="o">=</span> <span class="n">ant_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ant_p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">ant_p</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">ant_p</span> <span class="o">=</span> <span class="n">ant_p</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">ant_p</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span><span class="n">t</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">ant_p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Failed to compute any antenna points&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ant_p</span></div>
+
+
+
+    <span class="c1">####################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Interface methods. Shall be overloaded</span>
+    <span class="c1">#</span>
+    <span class="c1">####################</span>
+
+<div class="viewcode-block" id="RotatorBase.get_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.get_azel.html#libgs.hardware.RotatorBase.get_azel">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.get_azel was called but has not been implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RotatorBase.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.set_azel.html#libgs.hardware.RotatorBase.set_azel">[docs]</a>    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.set_azel was called but has not been implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RotatorBase.get_azel_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.get_azel_rate.html#libgs.hardware.RotatorBase.get_azel_rate">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.get_azel_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RotatorBase.set_azel_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.set_azel_rate.html#libgs.hardware.RotatorBase.set_azel_rate">[docs]</a>    <span class="k">def</span> <span class="nf">set_azel_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.set_azel_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">#####################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Also allow access via properties because some people prefer that</span>
+    <span class="c1">#</span>
+    <span class="c1">#####################</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()</span>
+
+    <span class="nd">@azel</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">az</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@az</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">az</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">el</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@el</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">el</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cmd_az</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_cmd_az&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_az</span>
+
+    <span class="nd">@cmd_az</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cmd_az</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_az</span> <span class="o">=</span> <span class="n">az</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cmd_el</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_cmd_el&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_el</span>
+
+    <span class="nd">@cmd_el</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cmd_el</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_el</span> <span class="o">=</span> <span class="n">el</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_assure_azel_in_range</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">az</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded az = </span><span class="si">{:.1f}</span><span class="s2"> deg &lt; MIN_AZ, using MIN_AZ = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span><span class="p">))</span>
+                <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span>
+
+            <span class="k">if</span> <span class="n">az</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded az = </span><span class="si">{:.1f}</span><span class="s2"> deg &gt; MAX_AZ, using MAX_AZ = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span><span class="p">))</span>
+                <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span>
+
+            <span class="k">if</span> <span class="n">el</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded el = </span><span class="si">{:.1f}</span><span class="s2"> deg &lt; MIN_EL, using MIN_EL = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">))</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span>
+
+            <span class="k">if</span> <span class="n">el</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded el = </span><span class="si">{:.1f}</span><span class="s2"> deg &gt; MAX_EL, using MAX_EL = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">))</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span>
+
+            <span class="c1"># Also use this wrapper to ensure cmd_az and cmd_el gets set.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span> <span class="o">=</span> <span class="n">az</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span> <span class="o">=</span> <span class="n">el</span>
+
+            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapped</span></div>
+
+<div class="viewcode-block" id="DummyRotator"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.DummyRotator.html#libgs.hardware.DummyRotator">[docs]</a><span class="k">class</span> <span class="nc">DummyRotator</span><span class="p">(</span><span class="n">RotatorBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A dummy class that responds like the rotator but does nothing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DummyRotator.get_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.DummyRotator.get_azel.html#libgs.hardware.DummyRotator.get_azel">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_azel</span></div>
+
+<div class="viewcode-block" id="DummyRotator.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.DummyRotator.set_azel.html#libgs.hardware.DummyRotator.set_azel">[docs]</a>    <span class="nd">@RotatorBase</span><span class="o">.</span><span class="n">_assure_azel_in_range</span>
+    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_azel</span> <span class="o">=</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span></div></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="GS232B"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.html#libgs.hardware.GS232B">[docs]</a><span class="k">class</span> <span class="nc">GS232B</span><span class="p">(</span><span class="n">RotatorBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This Rotator class implements a subset of the Yaesu GS232-B protocol.</span>
+
+<span class="sd">    It can be used directly to control rotators either directly connected via USB or serial port as a local tty</span>
+<span class="sd">    or remotely over the ethernet. The initialiser url_or_dev is used to specify how to connect.</span>
+
+<span class="sd">    See https://pythonhosted.org/pyserial/url_handlers.html for the syntax.</span>
+
+
+<span class="sd">    Available configuration parameters are all of RotatorBase as well as the following additional parameters</span>
+
+<span class="sd">    ======================= ===================</span>
+<span class="sd">    Parameter               Description</span>
+<span class="sd">    ----------------------- -------------------</span>
+<span class="sd">    STALE_TIME              Time before azel reading is considered stale (default = 3 seconds)</span>
+<span class="sd">    SERIAL_PORT_TIMEOUT     Timeout delay waiting for serial port comms (default = 0.1 seconds)</span>
+<span class="sd">    ROT_SETTLETIME_GET      Delay after getting position from rotator (default = 0 seconds)</span>
+<span class="sd">    ROT_SETTLETIME_SET      Delay after setting position from rotator (default = 0.75 seconds)</span>
+<span class="sd">    SET_DT                  Time interval to wait before re-issuing a position command (default = 10 seconds, ignored if SET_REGULARLY = False)</span>
+<span class="sd">    GET_DT                  Time delay to wait between consecutive attempts to get position (default = 0 seconds)</span>
+<span class="sd">    SET_REGULARLY           Whether to continuously issue set commands to rotators, or only on request. (Default=True)</span>
+<span class="sd">    ======================= ===================</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1">############</span>
+    <span class="c1">#</span>
+    <span class="c1"># Configuration parameters</span>
+    <span class="c1">#</span>
+    <span class="c1">############</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Within STALE_TIME, if no reply can be obtained from rotator return the last valid reply</span>
+    <span class="c1">#</span>
+    <span class="n">STALE_TIME</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Allowed time to wait for a byte from the serial port</span>
+    <span class="c1">#</span>
+    <span class="n">SERIAL_PORT_TIMEOUT</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+
+
+    <span class="c1"># SETTLETIME is a delay the system gives the rotator controller before trying to send any more commands</span>
+    <span class="n">ROT_SETTLETIME_GET</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">ROT_SETTLETIME_SET</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+    <span class="c1"># Time interval at which position is attempted to be set again</span>
+    <span class="n">SET_DT</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="c1"># Maximum time interval at which position is polled (if smaller than _POLL_DT, _POLL_DT will win)</span>
+    <span class="n">GET_DT</span>  <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># set to false to only set position when set_azel is called explicitly.</span>
+    <span class="n">SET_REGULARLY</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+    <span class="c1">############</span>
+    <span class="c1">#</span>
+    <span class="c1"># Private config parameters</span>
+    <span class="c1">#</span>
+    <span class="c1">############</span>
+
+    <span class="c1"># Max time to wait for serial port to become available before</span>
+    <span class="c1"># writing to it</span>
+    <span class="n">_WAIT_TIMEOUT</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1">#: Tick sleep betwen successive attempts to poll the rotator</span>
+    <span class="n">_POLL_DT</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+
+
+    <span class="c1">############</span>
+    <span class="c1">#</span>
+    <span class="c1"># Internal methods</span>
+    <span class="c1">#</span>
+    <span class="c1">############</span>
+
+    <span class="c1"># Initialise serial port</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_or_dev</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">serial_conf</span> <span class="o">=</span> <span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url_or_dev:  URL or device of serial port (TTY)</span>
+<span class="sd">            serial_conf: Dictionary representing serial port configuration (see See https://pythonhosted.org/pyserial/url_handlers.html )</span>
+<span class="sd">            **kwargs:    Any available configuration parameter (see above)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_port</span><span class="p">(</span><span class="n">url_or_dev</span><span class="p">,</span> <span class="o">**</span><span class="n">serial_conf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ser</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>  <span class="c1"># &lt;-- initialise generator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cur_az</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cur_el</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_get_t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_now</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_set_t</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c1"># Parameters that store error states in the poller (if any)</span>
+        <span class="c1"># ... could be queried with a monitor if necessary.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err_set</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err_get</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err_stale</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+        <span class="c1"># Allow for setting of other properties</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+    <span class="c1">############</span>
+    <span class="c1">#</span>
+    <span class="c1"># Private methods</span>
+    <span class="c1">#</span>
+    <span class="c1">############</span>
+
+    <span class="k">def</span> <span class="nf">_serial_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_or_dev</span><span class="p">,</span> <span class="n">tx_eol</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">rx_eol</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a serial port generator. Send commands to it by using</span>
+<span class="sd">        the generator send() method. It will return whatever comes back</span>
+<span class="sd">        or None if readline failsself.</span>
+
+<span class="sd">        Note: we do it this way to avoid conflicting writes to the serial</span>
+<span class="sd">        port from different threads. If that&#39;s attempted, a ValueError: generator is already executing</span>
+<span class="sd">        Exception will happen.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;timeout&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;timeout&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">serial_for_url</span><span class="p">(</span><span class="n">url_or_dev</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">_ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">url_or_dev</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rx_eol</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;rx_eol parameter can only be a single character long&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="n">_ser</span><span class="o">=</span><span class="n">_ser</span><span class="p">,</span> <span class="n">rx_eol</span><span class="o">=</span><span class="n">rx_eol</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">_ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">+=</span> <span class="n">b</span>
+                <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="n">rx_eol</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+                <span class="c1"># Make loop abortable by making the abort_all event raise an exception</span>
+                <span class="n">raise_if_aborted</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="n">outp</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">exc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># t0 = time.time()</span>
+        <span class="c1"># t1 =t0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1">#print(&#39;BLAH. Time through loop = {:.2f}, time waiting for yield = {:.2f}&#39;.format(time.time() - t0, t1-t0))</span>
+            <span class="c1"># t0 = time.time()</span>
+            <span class="n">inp</span> <span class="o">=</span> <span class="k">yield</span> <span class="p">(</span><span class="n">outp</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+            <span class="c1"># t1 = time.time()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_ser</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="n">inp</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="n">tx_eol</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+
+                <span class="n">outp</span> <span class="o">=</span> <span class="n">readline</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">outp</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Timeout: No response&#39;</span><span class="p">)</span>
+
+                <span class="n">exc</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">outp</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">exc</span> <span class="o">=</span> <span class="n">e</span>
+
+    <span class="k">def</span> <span class="nf">_parse_get_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method parses the string returned from the rotator controller when a position has been</span>
+<span class="sd">        requested in order to return az and el (as floats). For rotator controllers that do not</span>
+<span class="sd">        quite adhere to the GS232B standard the class can be subclassed and this method overloaded</span>
+<span class="sd">        to properly parse the reply.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">split_s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="n">azeldict</span> <span class="o">=</span> <span class="p">{</span><span class="n">y</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">y</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">split_s</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]}</span>
+        <span class="n">az</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">azeldict</span><span class="p">[</span><span class="s1">&#39;AZ&#39;</span><span class="p">])</span>
+        <span class="n">el</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">azeldict</span><span class="p">[</span><span class="s1">&#39;EL&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">az</span><span class="p">,</span><span class="n">el</span>
+
+    <span class="k">def</span> <span class="nf">_parse_set_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_pthr_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_rotator</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">wait_loop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_POLL_DT</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Exiting GS232B polling loop due to stop() being called&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Exiting GS232B polling loop due to global abort&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+    <span class="k">def</span> <span class="nf">_update_rotator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method syncs the position state between the rotator and this class by</span>
+<span class="sd">        1) attempt to send cmd_az, cmd_el to the rotator</span>
+<span class="sd">        2) read current az,el from rotator</span>
+
+<span class="sd">        NOTE: This method is called in a thread through RegularCallback. It should therefore be acceptable to</span>
+<span class="sd">        have it block and/or raise exceptions and it will not affect anything else.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">SET_TIMEOUT</span> <span class="o">=</span> <span class="o">.</span><span class="mi">3</span>
+        <span class="n">GET_TIMEOUT</span> <span class="o">=</span> <span class="o">.</span><span class="mi">3</span>
+
+
+
+        <span class="c1">#</span>
+        <span class="c1"># Set position to cmd_az, cmd_el</span>
+        <span class="c1">#</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_now</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SET_REGULARLY</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_set_t</span>  <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">SET_DT</span><span class="p">)):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_azel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="n">SET_TIMEOUT</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_set</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Setting azel now works again&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">err_set</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_set</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Exception setting azel. (This error will only be shown once) </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">err_set</span> <span class="o">=</span> <span class="n">e</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_now</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Get current position</span>
+        <span class="c1">#</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_get_t</span>  <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">GET_DT</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cur_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_azel</span><span class="p">(</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">GET_TIMEOUT</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_last_get_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_get</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Getting azel now works again&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">err_get</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_get</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Exception getting azel (This error will only be shown once). </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">err_get</span> <span class="o">=</span> <span class="n">e</span>
+
+
+    <span class="k">def</span> <span class="nf">_send_ser_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">exc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">ret</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">exc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ret</span><span class="p">,</span> <span class="n">exc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ser</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Timeout waiting for serial port to be free&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">wait_loop</span><span class="p">(</span><span class="n">timeout</span><span class="o">=.</span><span class="mi">01</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">exc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exc</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span> <span class="nf">_set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method sends the command to set the position to the rotator.</span>
+<span class="sd">        If anything goes wrong it raises an exception</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_ser_cmd</span><span class="p">(</span><span class="s1">&#39;W</span><span class="si">{:03.0f}</span><span class="s1"> </span><span class="si">{:03.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="c1">#&lt;--- timeout</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_set_reply</span><span class="p">(</span><span class="n">ret</span><span class="p">):</span>
+            <span class="n">estr</span> <span class="o">=</span> <span class="s2">&quot;Unexpected response when setting azel: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;string_escape&#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">estr</span><span class="p">)</span>
+
+        <span class="c1">#Allow the controller time to settle</span>
+        <span class="n">wait_loop</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ROT_SETTLETIME_SET</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method sends the command to get the position to the rotator.</span>
+<span class="sd">        If anything goes wrong it raises an exception</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_ser_cmd</span><span class="p">(</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="c1">#&lt;-- timeout</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">az</span><span class="p">,</span> <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_get_reply</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">estr</span> <span class="o">=</span> <span class="s2">&quot;Unexpected response when getting azel: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;string_escape&#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">estr</span><span class="p">)</span>
+
+
+        <span class="c1">#Allow the controller time to settle</span>
+        <span class="n">wait_loop</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ROT_SETTLETIME_GET</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span>
+
+
+    <span class="c1">############</span>
+    <span class="c1">#</span>
+    <span class="c1"># Public methods</span>
+    <span class="c1">#</span>
+    <span class="c1">############</span>
+
+
+    <span class="c1">##### OVERLOADED ########</span>
+<div class="viewcode-block" id="GS232B.get_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.get_azel.html#libgs.hardware.GS232B.get_azel">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_get_t</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">STALE_TIME</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_stale</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;get_azel() - data is stale (no update in STALE_TIME = </span><span class="si">{}</span><span class="s2"> sec). Returning 0,0. (This error will only be shown once)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">STALE_TIME</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_stale</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;get_azel: No update in STALE_TIME = </span><span class="si">{}</span><span class="s1"> sec). Returning 0,0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">STALE_TIME</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_stale</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_el</span></div>
+
+<div class="viewcode-block" id="GS232B.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.set_azel.html#libgs.hardware.GS232B.set_azel">[docs]</a>    <span class="nd">@RotatorBase</span><span class="o">.</span><span class="n">_assure_azel_in_range</span>
+    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_now</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">block</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_in_pos</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error waiting for antenna to position itself. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span></div>
+
+    <span class="c1">###### OTHER #########</span>
+<div class="viewcode-block" id="GS232B.start"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.start.html#libgs.hardware.GS232B.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># Start polling thread (will run forever)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_update</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="c1"># stow on startup if we are setting regularly (otherwise the default is 0,0 which may not be good)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">SET_REGULARLY</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stow</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GS232B.stop"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.stop.html#libgs.hardware.GS232B.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopped</span><span class="o">.</span><span class="n">set</span><span class="p">()</span></div></div>
+
+
+
+<div class="viewcode-block" id="RotCtld"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotCtld.html#libgs.hardware.RotCtld">[docs]</a><span class="k">class</span> <span class="nc">RotCtld</span><span class="p">(</span><span class="n">RotatorBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       Interface to hamlib rotators using Rotctld</span>
+
+<span class="sd">       This class will continously poll hamlibs rotctld over TCP and</span>
+<span class="sd">       store the position. Requests  to get_azel will return this stored position rather than trigger a</span>
+<span class="sd">       request to hamlib. This makes the class thread-safe.</span>
+
+<span class="sd">       .. note::</span>
+
+<span class="sd">          For rotators that support the GS232B protocol, use the GS232B class instead of RotCtld. It does not depend</span>
+<span class="sd">          on hamlib and is more actively maintained than this class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+
+    <span class="c1">#: Update interval for position values</span>
+    <span class="n">_POLL_DT</span> <span class="o">=</span>  <span class="mf">0.2</span>
+
+    <span class="c1">#: Max age of position values before an exception is raised for staleness</span>
+    <span class="n">_POS_STALE_DT</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">_POLL_DT</span>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;hamlib rotctld@</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_persist</span> <span class="o">=</span> <span class="n">persist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span> <span class="o">=</span>  <span class="kc">False</span>
+        <span class="c1">#self._get_position_failures = 0</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persist</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to connect to hamlib. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_az</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_el</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_update</span> <span class="o">=</span>  <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pos_poller</span> <span class="o">=</span> <span class="n">RegularCallback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_poll_azel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_POLL_DT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pos_poller</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="c1">#: Commanded azimuth position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1">#: Commanded elevation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+        <span class="c1"># start by moving antenna to stowed position</span>
+        <span class="c1"># TODO: Maybe re-implement. Disabled now to permit system to start despite errors</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     self.stow(block=False)</span>
+        <span class="c1"># except Error, e:</span>
+        <span class="c1">#     log.error(&#39;Error initialising Rotator at %s:%s - &quot;%s&quot;&#39;%(addr, port, e))</span>
+        <span class="c1"># except:</span>
+        <span class="c1">#     raise</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span>
+            <span class="k">raise</span>
+
+
+    <span class="k">def</span> <span class="nf">_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_lock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="n">LOCK_TIMEOUT</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_locked</span><span class="p">):</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span> <span class="o">&gt;</span> <span class="n">LOCK_TIMEOUT</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;TIMEOUT while waiting for Rotctld communication lock&quot;</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+    <span class="k">def</span> <span class="nf">_unlock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_locked</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_poll_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the current AZ,EL by querying hamlib.</span>
+
+<span class="sd">            This function is not thread-safe and not intended to be run</span>
+<span class="sd">            outside this class. Use get_azel() instead.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                azimuth, elevation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persist</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_sock&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recv_all</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">resp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;RPRT&#39;</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Got invalid az/el information from hamlib&#39;</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_unlock</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">az</span><span class="p">,</span> <span class="n">el</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_last_az</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">az</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_last_el</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">=</span> <span class="s2">&quot;Error converting hamlib data &#39;</span><span class="si">%s</span><span class="s2">&#39; to az/el. Error: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_unlock</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_update</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persist</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_unlock</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="RotCtld.get_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotCtld.get_azel.html#libgs.hardware.RotCtld.get_azel">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the most current AZ,EL.</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                azimuth, elevation</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_update</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_POS_STALE_DT</span> <span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;AZ/EL are stale. Not receiving updates from hamlib?&quot;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_el</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">_recv_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">gettimeout</span><span class="p">()</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">break</span><span class="p">;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+<div class="viewcode-block" id="RotCtld.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotCtld.set_azel.html#libgs.hardware.RotCtld.set_azel">[docs]</a>    <span class="nd">@RotatorBase</span><span class="o">.</span><span class="n">_assure_azel_in_range</span>
+    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Set the AZ, EL</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                az (float): Azimuth in degrees</span>
+<span class="sd">                el (float): Elevation in degrees</span>
+<span class="sd">                block (bool, optional): True will halt execution until pointing has been achieved</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">()</span>
+
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persist</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;P </span><span class="si">%.2f</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">))</span>
+
+
+
+        <span class="c1"># TODO: This function should really block for a bit (the get_position should not)</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recv_all</span><span class="p">()</span><span class="c1">#self._sock.recv(1024)[:6]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+            <span class="n">rets</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">retc</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Invalid response from hamlib &#39;</span><span class="si">%s</span><span class="s2">&#39; when setting az/el &quot;</span><span class="o">%</span><span class="p">(</span><span class="n">resp</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_unlock</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+
+        <span class="k">if</span> <span class="n">rets</span> <span class="o">!=</span> <span class="s1">&#39;RPRT&#39;</span> <span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Invalid response from hamlib &#39;</span><span class="si">%s</span><span class="s2">&#39; when setting az/el &quot;</span><span class="o">%</span><span class="p">(</span><span class="n">resp</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_unlock</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+        <span class="c1"># if command wasn successful try again</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">retc</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_azel</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="n">debug</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Invalid response from hamlib (error code </span><span class="si">%d</span><span class="s1">) while trying to set az/el, trying again&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">retc</span><span class="p">))</span>
+
+
+
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persist</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">()</span>
+
+        <span class="c1">#: Commanded azimuth position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span> <span class="o">=</span> <span class="n">az</span>
+
+        <span class="c1">#: Commanded elevation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span> <span class="o">=</span> <span class="n">el</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unlock</span><span class="p">()</span>
+
+
+
+        <span class="k">if</span> <span class="n">block</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wait_for_in_pos</span><span class="p">()</span></div></div>
+
+
+
+
+
+<span class="c1"># For now we have made Rotator an alias for RotCtld</span>
+<span class="c1"># TODO: Remove. This is for backwards compatability only</span>
+<div class="viewcode-block" id="Rotator"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.Rotator.html#libgs.hardware.Rotator">[docs]</a><span class="k">class</span> <span class="nc">Rotator</span><span class="p">(</span><span class="n">RotCtld</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="RadioBase"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.html#libgs.hardware.RadioBase">[docs]</a><span class="k">class</span> <span class="nc">RadioBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for Radio object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">_fftsize</span> <span class="o">=</span> <span class="mi">1024</span>
+
+    <span class="c1"># Exceptions that happen during range rate setting /getting will not be raised.</span>
+    <span class="c1"># but they will be stored here so that a monitor can poll them if desired.</span>
+    <span class="n">err_range_rate_set</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">err_range_rate_get</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Instance counter (for unnamed radios)</span>
+    <span class="n">_instance_name_cntr</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="c1">#####</span>
+    <span class="c1">#</span>
+    <span class="c1"># Properties for getting/setting the radio name. If no name is supplied, none is generated based</span>
+    <span class="c1"># on the isntance counter</span>
+    <span class="c1">#</span>
+    <span class="c1">#####</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Radio</span><span class="si">{:03d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">RadioBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span><span class="p">)</span>
+            <span class="n">RadioBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+
+
+
+    <span class="c1">##############################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Interface methods (to be overloaded)</span>
+    <span class="c1">#</span>
+    <span class="c1">##############################################</span>
+    
+<div class="viewcode-block" id="RadioBase.send_bytes"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.send_bytes.html#libgs.hardware.RadioBase.send_bytes">[docs]</a>    <span class="k">def</span> <span class="nf">send_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        send_bytes should send a byte sequence to the radio for modulation</span>
+<span class="sd">        and transmission</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.send_bytes has not been implemented&quot;</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="RadioBase.set_recv_callback"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.set_recv_callback.html#libgs.hardware.RadioBase.set_recv_callback">[docs]</a>    <span class="k">def</span> <span class="nf">set_recv_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        det_recv_callback should set a callable to be invoked when radio </span>
+<span class="sd">        receives a packet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;set_recv_callback has not been implemented&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RadioBase.get_spectrum"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.get_spectrum.html#libgs.hardware.RadioBase.get_spectrum">[docs]</a>    <span class="k">def</span> <span class="nf">get_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.get_spectrum was called but has not been implemented&quot;</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="RadioBase.get_range_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.get_range_rate.html#libgs.hardware.RadioBase.get_range_rate">[docs]</a>    <span class="k">def</span> <span class="nf">get_range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get_range_rate shoudl return the currently set range_rate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.get_range_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RadioBase.set_range_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.set_range_rate.html#libgs.hardware.RadioBase.set_range_rate">[docs]</a>    <span class="k">def</span> <span class="nf">set_range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_rate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set_range_rate should set frequency adjustment for a specific range_rate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.set_range_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1">###########</span>
+    <span class="c1">#</span>
+    <span class="c1"># Also define some property for easy access for those who prefer that</span>
+    <span class="c1">#</span>
+    <span class="c1">###########</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">rr</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_range_rate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_range_rate_get</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">rr</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_range_rate_get</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="k">raise</span>
+
+    <span class="nd">@range_rate</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_rate</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_range_rate</span><span class="p">(</span><span class="n">range_rate</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_range_rate_set</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_range_rate_set</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="k">raise</span>
+
+    <span class="c1">###################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Other methods</span>
+    <span class="c1">#</span>
+    <span class="c1">###################</span>
+<div class="viewcode-block" id="RadioBase.record_spectrum"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.record_spectrum.html#libgs.hardware.RadioBase.record_spectrum">[docs]</a>    <span class="k">def</span> <span class="nf">record_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">fdec</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">add_zeroes</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Record N spectra then return them. This method returns a future.</span>
+<span class="sd">            </span>
+<span class="sd">            To get the result call the future.result(). To stop it call</span>
+<span class="sd">            future.abort() #&lt;--- note non-standard future call</span>
+<span class="sd">            </span>
+<span class="sd">            Args:</span>
+<span class="sd">               dt = rate at which to record the spectra</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            
+            <span class="n">abort</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+            
+            <span class="k">def</span> <span class="nf">_pthr_record</span><span class="p">():</span>
+                <span class="n">spec</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">N</span>
+                <span class="n">ok_idx</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span>
+                <span class="n">tvec</span>   <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span>
+                <span class="n">fvec</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">abort</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                
+                <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                
+                <span class="n">last_spec</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+
+                        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>                            
+                        <span class="n">tvec</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">t0</span>
+
+
+                        <span class="n">dt1</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt</span> <span class="o">-</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">dt1</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">abort</span> <span class="ow">in</span> <span class="n">wait_loop</span><span class="p">([</span><span class="n">abort</span><span class="p">],</span> <span class="n">timeout</span><span class="o">=</span><span class="n">dt1</span><span class="p">):</span>
+                                <span class="k">break</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">dt1</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">abort</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+                                <span class="k">break</span>
+                        
+                        
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_spectrum</span><span class="p">()</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        
+
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;get_spectrum did not return valid freq, spec&quot;</span><span class="p">)</span>
+
+                        <span class="n">fv</span><span class="p">,</span> <span class="n">sp</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="n">fdec</span><span class="p">],</span> <span class="n">ret</span><span class="p">[</span><span class="mi">1</span><span class="p">][::</span><span class="n">fdec</span><span class="p">]</span>
+                        
+                        <span class="c1"># Check if there is something new, if not skip</span>
+                        <span class="k">if</span> <span class="n">last_spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">last_spec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sp</span><span class="p">))):</span>
+                            <span class="k">continue</span>
+
+                        <span class="n">last_spec</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[:]</span>
+
+                        <span class="n">fvec</span><span class="p">,</span> <span class="n">spec</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">fv</span><span class="p">,</span> <span class="n">sp</span> 
+                        <span class="n">ok_idx</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+                        
+
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error </span><span class="si">{}</span><span class="s2"> while recording spectrum. Ignoring and continuing: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+               
+                <span class="n">spec</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">fvec</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">]</span>
+
+                <span class="n">lens</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">l</span> <span class="o">==</span> <span class="n">lens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lens</span><span class="p">]):</span>
+                    <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unexpected error recording spectra. Not all spectra are same length&quot;</span><span class="p">)</span>
+                    
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fvec</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;No data recorded&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Trim data that wasnt filled (in case abort wwas called)</span>
+                <span class="n">spec</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[:(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+                <span class="n">tvec</span> <span class="o">=</span> <span class="n">tvec</span><span class="p">[:(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+                <span class="n">ok_idx</span> <span class="o">=</span> <span class="n">ok_idx</span><span class="p">[:(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+                <span class="n">spec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+                <span class="c1"># Get rid of bad data unless zeroes are requested</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">add_zeroes</span><span class="p">:</span>                    
+                    <span class="n">spec</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="n">ok_idx</span><span class="p">,</span> <span class="p">:]</span>
+                    <span class="n">tvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">tvec</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">ok</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ok_idx</span><span class="p">)</span> <span class="k">if</span> <span class="n">ok</span><span class="p">]</span>
+                    
+                <span class="n">dvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">conv_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">float_t</span><span class="o">=</span><span class="s2">&quot;unix&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tvec</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">fvec</span><span class="p">,</span> <span class="n">dvec</span><span class="p">,</span> <span class="n">spec</span>
+            
+            <span class="n">_executor</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">_pthr_record</span><span class="p">)</span>
+            <span class="c1">#future = self._executor.submit(_pthr_record) #&lt;--- using external executor makes the thread not exit when calling aboort</span>
+            <span class="n">future</span><span class="o">.</span><span class="n">abort</span> <span class="o">=</span> <span class="n">abort</span><span class="o">.</span><span class="n">set</span>
+            <span class="k">return</span> <span class="n">future</span></div></div>
+
+
+
+<div class="viewcode-block" id="GR_XMLRPCRadio"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.html#libgs.hardware.GR_XMLRPCRadio">[docs]</a><span class="k">class</span> <span class="nc">GR_XMLRPCRadio</span><span class="p">(</span><span class="n">RadioBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for driving radios over RPC (mainly Gnu radio flowgraphs that</span>
+<span class="sd">    include an XMLRPC block)</span>
+<span class="sd">    </span>
+<span class="sd">    GNU radio flowgraphs with an XMLRPC block will expose all variables through</span>
+<span class="sd">    get_&lt;varname&gt; and set_&lt;varname&gt; rpc calls.</span>
+<span class="sd">    </span>
+<span class="sd">    This class uses those calls to set/get spectrum parameters and set/get</span>
+<span class="sd">    the range_rate.</span>
+<span class="sd">    </span>
+<span class="sd">    The flowgraph therefore needs to include variables for</span>
+<span class="sd">      * range rate (in m/s)</span>
+<span class="sd">      * centre frequency (in Hz)</span>
+<span class="sd">      * bandwidth (in Hz)</span>
+<span class="sd">    </span>
+<span class="sd">    They can be called anything as the variable names can be mapped using</span>
+<span class="sd">    the rpc_varmap parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    Additionally, the flowgraph needs to publish the raw IQ samples (complex64 type)</span>
+<span class="sd">    on a ZMQ port, which can be mapped using this class&#39;s stream parameter </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">,</span>
+                 <span class="n">stream</span><span class="p">,</span>
+                 <span class="n">rpcaddr</span><span class="p">,</span>
+                 <span class="n">rpc_varmap</span> <span class="o">=</span> <span class="p">{},</span>
+                 <span class="n">iqbufflen</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+                 <span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            name (string)    : A descriptive name for the radio</span>
+<span class="sd">            stream (string)  : The IP:PORT on which to listen for published IQ samples</span>
+<span class="sd">            rpcaddr (string) : The RPC address (in format http://ip:port) to connect the XMLRPC proxy to</span>
+<span class="sd">            rpc_varmap       : A dict mapping between freq, sample_rate and range_rate to whatever</span>
+<span class="sd">                               those variables are called in the Gnu Radio flowgraph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+                 
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rpcaddr</span> <span class="o">=</span> <span class="n">rpcaddr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iqbuff</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">iqbufflen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span> <span class="o">=</span> <span class="mi">1024</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_iqaddr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iqport</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Did not understand stream address </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stream</span><span class="p">))</span>
+            <span class="k">raise</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iqport</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iqport</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_sample_rate</span> <span class="o">=</span> <span class="mf">100e3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_freq</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iqrxcnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastiqrxcnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Store errors (if any)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err_sample_rate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err_freq</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Set a default RPC map</span>
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;freq&#39;</span><span class="p">:</span>        <span class="s1">&#39;freq&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sample_rate&#39;</span><span class="p">:</span> <span class="s1">&#39;sample_rate&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;range_rate&#39;</span><span class="p">:</span>  <span class="s1">&#39;range_rage&#39;</span><span class="p">}</span>
+                 
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">rpc_varmap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unknown key </span><span class="si">%s</span><span class="s2"> in variable map&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="c1">#self._server = xmlrpclib.ServerProxy(self._rpcaddr)</span>
+        <span class="c1">#self._server = XMLRPCTimeoutServerProxy(self._rpcaddr, timeout=.25)</span>
+        
+        <span class="k">if</span> <span class="n">connect</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+                
+                
+    <span class="k">def</span> <span class="nf">_rpc_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+
+        <span class="n">_server</span> <span class="o">=</span> <span class="n">XMLRPCTimeoutServerProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rpcaddr</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=.</span><span class="mi">25</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;_server.get_</span><span class="si">{}</span><span class="s1">()&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+        
+    <span class="k">def</span> <span class="nf">_rpc_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>      
+        <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+
+        <span class="n">_server</span> <span class="o">=</span> <span class="n">XMLRPCTimeoutServerProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rpcaddr</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=.</span><span class="mi">25</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;_server.set_</span><span class="si">{}</span><span class="s1">(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+
+
+    <span class="k">def</span> <span class="nf">_recv_iq_thread</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">poller</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Poller</span><span class="p">()</span>
+        <span class="n">poller</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sock_iq</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iqrxcnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">sock</span> <span class="o">=</span> <span class="n">poller</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">sock</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+                <span class="n">data_vals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_iqbuff</span> <span class="o">+=</span> <span class="n">data_vals</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_iqrxcnt</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_vals</span><span class="p">)</span>                    
+                    
+
+            <span class="c1"># Dont like this but it is one way to check the abort flag and at the same time</span>
+            <span class="c1"># trigger on the global abort event.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">wait_loop</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;recv_iq_thread aborted&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+            <span class="k">except</span> <span class="n">AbortAllException</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;abort all exception caught, cancelling _recv_iq_thread&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+    <span class="k">def</span> <span class="nf">_get_IQ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the array of IQ data. </span>
+<span class="sd">        </span>
+<span class="sd">        old = True will get the last buffer regardless of whether</span>
+<span class="sd">        it has been read before.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">old</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iqrxcnt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lastiqrxcnt</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iqbuff</span><span class="o">.</span><span class="n">maxlen</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;get_IQ: No new data&quot;</span><span class="p">)</span><span class="c1">#data = [np.complex64(np.complex(0,0))]* self._iqbuff.maxlen</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iqbuff</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lastiqrxcnt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iqrxcnt</span>
+        
+            
+        <span class="k">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1">###############################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Interface methods</span>
+    <span class="c1">#</span>
+    <span class="c1">###############################</span>
+
+        
+<div class="viewcode-block" id="GR_XMLRPCRadio.get_spectrum"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.get_spectrum.html#libgs.hardware.GR_XMLRPCRadio.get_spectrum">[docs]</a>    <span class="k">def</span> <span class="nf">get_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get_spectrum should return the latest spectrum from the radio as well</span>
+<span class="sd">        as an associated frequency vecgor</span>
+<span class="sd">        </span>
+<span class="sd">        fvec, famp = get_spectrum()</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_IQ</span><span class="p">(</span><span class="n">old</span><span class="p">)[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span><span class="p">:]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Expected at least </span><span class="si">{}</span><span class="s2"> samples to do fft on&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span><span class="p">))</span> <span class="c1">#&lt;--- could change this to do padding instead</span>
+            
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span><span class="p">))))</span>
+            
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span>
+        
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span></div>
+    
+<div class="viewcode-block" id="GR_XMLRPCRadio.set_range_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.set_range_rate.html#libgs.hardware.GR_XMLRPCRadio.set_range_rate">[docs]</a>    <span class="k">def</span> <span class="nf">set_range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_rate</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Setting range_rate for radio </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%.0f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">range_rate</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_set</span><span class="p">(</span><span class="s1">&#39;range_rate&#39;</span><span class="p">,</span> <span class="n">range_rate</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="GR_XMLRPCRadio.get_range_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.get_range_rate.html#libgs.hardware.GR_XMLRPCRadio.get_range_rate">[docs]</a>    <span class="k">def</span> <span class="nf">get_range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_get</span><span class="p">(</span><span class="s1">&#39;range_rate&#39;</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_sample_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">updated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_sample_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_get</span><span class="p">(</span><span class="s1">&#39;sample_rate&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_sample_rate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Successfully reading sample rate again&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_sample_rate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_sample_rate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to read sample rate. Using last value (only showing this message once). </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_sample_rate</span> <span class="o">=</span> <span class="n">e</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_sample_rate</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_get</span><span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_freq</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Successfully reading frequency again&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_freq</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to read frequency. Using last value (only showing this message once). </span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_freq</span> <span class="o">=</span> <span class="n">e</span>
+
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_freq</span>
+        
+
+
+    <span class="c1">###############################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Other methods</span>
+    <span class="c1">#</span>
+    <span class="c1">###############################</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">failed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">failed</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;RPC ok&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">failed</span> <span class="k">else</span> <span class="s1">&#39;RPC not ok&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Radio: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;  RPC connected: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rpcaddr</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rpc_get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;OK&#39;</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;NOT OK&#39;</span>
+
+            <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;    </span><span class="si">{:30s}</span><span class="s2">--&gt;</span><span class="si">{:30s}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;  Stream:        </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span>
+    
+
+<div class="viewcode-block" id="GR_XMLRPCRadio.connect"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.connect.html#libgs.hardware.GR_XMLRPCRadio.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock_iq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">SUB</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock_iq</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;tcp://</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iqaddr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iqport</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sock_iq</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">SUBSCRIBE</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recv_iq_thread</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="GR_XMLRPCRadio.disconnect"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.disconnect.html#libgs.hardware.GR_XMLRPCRadio.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_pthr_iq&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

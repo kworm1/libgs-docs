@@ -1,0 +1,6 @@
+libgs.groundstation.UILogHandler.acquire
+========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: UILogHandler.acquire

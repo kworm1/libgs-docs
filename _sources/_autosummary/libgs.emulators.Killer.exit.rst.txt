@@ -1,0 +1,6 @@
+libgs.emulators.Killer.exit
+===========================
+
+.. currentmodule:: libgs.emulators
+
+.. automethod:: Killer.exit

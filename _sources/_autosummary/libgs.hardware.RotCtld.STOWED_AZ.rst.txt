@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.STOWED\_AZ
+=================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.STOWED_AZ

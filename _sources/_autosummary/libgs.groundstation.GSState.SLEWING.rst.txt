@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.SLEWING
+===================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.SLEWING

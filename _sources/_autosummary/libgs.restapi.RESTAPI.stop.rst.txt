@@ -1,0 +1,6 @@
+libgs.restapi.RESTAPI.stop
+==========================
+
+.. currentmodule:: libgs.restapi
+
+.. automethod:: RESTAPI.stop

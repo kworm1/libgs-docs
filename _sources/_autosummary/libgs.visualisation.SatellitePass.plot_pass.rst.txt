@@ -1,0 +1,6 @@
+libgs.visualisation.SatellitePass.plot\_pass
+============================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: SatellitePass.plot_pass

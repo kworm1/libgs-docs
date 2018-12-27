@@ -1,0 +1,6 @@
+libgs.visualisation.LivePlot.live\_data
+=======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoattribute:: LivePlot.live_data

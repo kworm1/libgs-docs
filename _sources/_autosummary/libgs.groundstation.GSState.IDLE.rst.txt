@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.IDLE
+================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.IDLE

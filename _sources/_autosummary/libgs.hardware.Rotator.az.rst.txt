@@ -1,0 +1,6 @@
+libgs.hardware.Rotator.az
+=========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: Rotator.az

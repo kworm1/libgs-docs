@@ -1,0 +1,6 @@
+libgs.visualisation.LivePlot.create\_fig
+========================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: LivePlot.create_fig

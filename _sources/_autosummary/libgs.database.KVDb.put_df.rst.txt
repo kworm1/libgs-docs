@@ -1,0 +1,6 @@
+libgs.database.KVDb.put\_df
+===========================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: KVDb.put_df

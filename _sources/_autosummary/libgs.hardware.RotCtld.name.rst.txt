@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.name
+===========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.name

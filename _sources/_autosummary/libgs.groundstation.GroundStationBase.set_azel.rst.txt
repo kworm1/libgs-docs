@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.set\_azel
+===============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStationBase.set_azel

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.UI\_LOG\_LEN
+=================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.UI_LOG_LEN

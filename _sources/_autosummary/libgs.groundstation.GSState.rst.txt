@@ -1,0 +1,60 @@
+
+
+libgs.groundstation.GSState
+===========================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoclass:: GSState
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~GSState.antenna_info
+      
+      
+      ~GSState.hardware_info
+      
+      
+      ~GSState.service_info
+      
+      
+      ~GSState.tracking_info
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~GSState.IDLE
+      ~GSState.SLEWING
+      ~GSState.TRACKING
+      ~GSState.WAITING
+      ~GSState.cmdpos
+      ~GSState.curpos
+      ~GSState.last_response
+      ~GSState.libgs_log
+      ~GSState.nid
+      ~GSState.pdat
+      ~GSState.pdu
+      ~GSState.satpos
+      ~GSState.schedule
+      ~GSState.state
+      ~GSState.track_msg
+      ~GSState.uiloghandler
+   
+   
+

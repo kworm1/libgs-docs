@@ -1,0 +1,6 @@
+libgs.utils.UTCLogFormatter.formatException
+===========================================
+
+.. currentmodule:: libgs.utils
+
+.. automethod:: UTCLogFormatter.formatException

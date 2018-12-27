@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.timer
+===============================
+
+.. currentmodule:: libgs.scheduler
+
+.. autoattribute:: Scheduler.timer

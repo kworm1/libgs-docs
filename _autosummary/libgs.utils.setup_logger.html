@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.utils.setup_logger &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.utils.wait_loop" href="libgs.utils.wait_loop.html" />
+    <link rel="prev" title="libgs.utils.schedule_regular_callback" href="libgs.utils.schedule_regular_callback.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.utils.html">libgs.utils</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.bytes2hex.html">libgs.utils.bytes2hex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.bytes2prettyhex.html">libgs.utils.bytes2prettyhex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.conv_time.html">libgs.utils.conv_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.hex2bytes.html">libgs.utils.hex2bytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.raise_if_aborted.html">libgs.utils.raise_if_aborted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.safe_sleep.html">libgs.utils.safe_sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.schedule_regular_callback.html">libgs.utils.schedule_regular_callback</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.utils.setup_logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.wait_loop.html">libgs.utils.wait_loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.Defaults.html">libgs.utils.Defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.RegularCallback.html">libgs.utils.RegularCallback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatter.html">libgs.utils.UTCLogFormatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.html">libgs.utils.UTCLogFormatterHTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.XMLRPCTimeoutServerProxy.html">libgs.utils.XMLRPCTimeoutServerProxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.AbortAllException.html">libgs.utils.AbortAllException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.utils.Error.html">libgs.utils.Error</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.utils.html">libgs.utils</a> &raquo;</li>
+        
+      <li>libgs.utils.setup_logger</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.utils.setup_logger.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-utils-setup-logger">
+<h1>libgs.utils.setup_logger<a class="headerlink" href="#libgs-utils-setup-logger" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="libgs.utils.setup_logger">
+<code class="descclassname">libgs.utils.</code><code class="descname">setup_logger</code><span class="sig-paren">(</span><em>logger</em>, <em>cons_loglvl=20</em>, <em>file_logpath=None</em>, <em>file_loglvl=20</em>, <em>fmt='%(asctime)s - %(name)14s - %(levelname)5s - %(module)20s:%(lineno)4s - &quot;%(message)s&quot;'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#setup_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.setup_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set up logging for libgs. Should only ever be called
+once.</p>
+<p>It sill set up logging to console and to file if requested.</p>
+<p>It will also make sure all logging is timestamped in UTC time
+following ISO 8601</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>logger</strong> – The log to setup</li>
+<li><strong>cons_loglvl</strong> – log level for console logging,</li>
+<li><strong>file_logpath</strong> – Path to log to if logging to file (None for no file logging),</li>
+<li><strong>file_loglvl</strong> – log level for file log</li>
+<li><strong>fmt</strong> – log formatting string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.utils.wait_loop.html" class="btn btn-neutral float-right" title="libgs.utils.wait_loop" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.utils.schedule_regular_callback.html" class="btn btn-neutral" title="libgs.utils.schedule_regular_callback" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+libgs.database.MonitorDb.count\_rows
+====================================
+
+.. currentmodule:: libgs.database
+
+.. automethod:: MonitorDb.count_rows

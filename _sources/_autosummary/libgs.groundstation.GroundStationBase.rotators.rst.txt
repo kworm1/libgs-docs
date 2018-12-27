@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStationBase.rotators
+==============================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GroundStationBase.rotators

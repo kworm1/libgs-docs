@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.MIN\_AZ
+==============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RotCtld.MIN_AZ

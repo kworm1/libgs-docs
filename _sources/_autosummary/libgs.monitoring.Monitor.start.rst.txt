@@ -1,0 +1,6 @@
+libgs.monitoring.Monitor.start
+==============================
+
+.. currentmodule:: libgs.monitoring
+
+.. automethod:: Monitor.start

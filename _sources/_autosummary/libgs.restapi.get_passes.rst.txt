@@ -1,0 +1,6 @@
+libgs.restapi.get\_passes
+=========================
+
+.. currentmodule:: libgs.restapi
+
+.. autofunction:: get_passes

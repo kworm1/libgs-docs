@@ -1,0 +1,26 @@
+.. automodule:: libgs.hardware
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree: .
+   
+      DummyRotator
+      GR_XMLRPCRadio
+      GS232B
+      RadioBase
+      RotCtld
+      Rotator
+      RotatorBase
+   
+   
+
+   
+   
+   

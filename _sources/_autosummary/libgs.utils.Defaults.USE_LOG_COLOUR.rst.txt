@@ -1,0 +1,6 @@
+libgs.utils.Defaults.USE\_LOG\_COLOUR
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.USE_LOG_COLOUR

@@ -1,0 +1,6 @@
+libgs.hardware.RotCtld.in\_pos
+==============================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotCtld.in_pos

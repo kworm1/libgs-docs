@@ -1,0 +1,54 @@
+
+
+libgs.database.CommsLog
+=======================
+
+.. currentmodule:: libgs.database
+
+.. autoclass:: CommsLog
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~CommsLog.count_rows
+      
+      
+      ~CommsLog.create_table
+      
+      
+      ~CommsLog.get
+      
+      
+      ~CommsLog.get_df
+      
+      
+      ~CommsLog.get_file
+      
+      
+      ~CommsLog.put
+      
+      
+      ~CommsLog.put_df
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~CommsLog.ACTORS
+   
+   
+

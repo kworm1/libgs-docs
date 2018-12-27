@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.SERIAL\_PORT\_TIMEOUT
+===========================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.SERIAL_PORT_TIMEOUT

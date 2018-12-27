@@ -1,0 +1,6 @@
+libgs.visualisation.linktext
+============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autofunction:: linktext

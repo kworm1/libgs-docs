@@ -1,0 +1,6 @@
+libgs.visualisation.TextDash.make\_doc
+======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: TextDash.make_doc

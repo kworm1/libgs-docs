@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.set\_azel
+=====================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: DummyRotator.set_azel

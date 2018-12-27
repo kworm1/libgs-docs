@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.name
+=============================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: RadioBase.name

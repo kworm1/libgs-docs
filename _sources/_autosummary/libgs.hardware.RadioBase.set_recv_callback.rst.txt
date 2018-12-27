@@ -1,0 +1,6 @@
+libgs.hardware.RadioBase.set\_recv\_callback
+============================================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RadioBase.set_recv_callback

@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.azel
+==========================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.azel

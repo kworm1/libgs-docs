@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.groundstation.GroundStation &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.groundstation.GroundStation.do_action" href="libgs.groundstation.GroundStation.do_action.html" />
+    <link rel="prev" title="libgs.groundstation.GSState.uiloghandler" href="libgs.groundstation.GSState.uiloghandler.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GSState.html">libgs.groundstation.GSState</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.groundstation.GroundStation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.do_action.html">libgs.groundstation.GroundStation.do_action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.get_azel.html">libgs.groundstation.GroundStation.get_azel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.init_rx.html">libgs.groundstation.GroundStation.init_rx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.init_rxtx.html">libgs.groundstation.GroundStation.init_rxtx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.power_down.html">libgs.groundstation.GroundStation.power_down</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.power_up.html">libgs.groundstation.GroundStation.power_up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.receive.html">libgs.groundstation.GroundStation.receive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.set_azel.html">libgs.groundstation.GroundStation.set_azel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.set_rangerate.html">libgs.groundstation.GroundStation.set_rangerate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.set_schedule_msg.html">libgs.groundstation.GroundStation.set_schedule_msg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.start_track.html">libgs.groundstation.GroundStation.start_track</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.stop_track.html">libgs.groundstation.GroundStation.stop_track</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.stow.html">libgs.groundstation.GroundStation.stow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.terminate.html">libgs.groundstation.GroundStation.terminate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.track.html">libgs.groundstation.GroundStation.track</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.transmit.html">libgs.groundstation.GroundStation.transmit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.FAILED_COMMUNICATION.html">libgs.groundstation.GroundStation.FAILED_COMMUNICATION</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.MAX_TRACK_DT.html">libgs.groundstation.GroundStation.MAX_TRACK_DT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK.html">libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_TRACK.html">libgs.groundstation.GroundStation.MONITOR_SAVE_DT_TRACK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA.html">libgs.groundstation.GroundStation.RECORD_SPECTRA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA_DT.html">libgs.groundstation.GroundStation.RECORD_SPECTRA_DT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN.html">libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.monitor.html">libgs.groundstation.GroundStation.monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.propagator.html">libgs.groundstation.GroundStation.propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.protocol.html">libgs.groundstation.GroundStation.protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.protocols.html">libgs.groundstation.GroundStation.protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.radios.html">libgs.groundstation.GroundStation.radios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html">libgs.groundstation.GroundStation.rotators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.rpcserver.html">libgs.groundstation.GroundStation.rpcserver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GroundStation.scheduler.html">libgs.groundstation.GroundStation.scheduler</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GroundStationBase.html">libgs.groundstation.GroundStationBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.UILogHandler.html">libgs.groundstation.UILogHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.groundstation.html">libgs.groundstation</a> &raquo;</li>
+        
+      <li>libgs.groundstation.GroundStation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.groundstation.GroundStation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-groundstation-groundstation">
+<h1>libgs.groundstation.GroundStation<a class="headerlink" href="#libgs-groundstation-groundstation" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="libgs.groundstation.GroundStation">
+<em class="property">class </em><code class="descclassname">libgs.groundstation.</code><code class="descname">GroundStation</code><span class="sig-paren">(</span><em>name</em>, <em>propagator=None</em>, <em>protocols=[]</em>, <em>radios=[]</em>, <em>rotators=[]</em>, <em>commslog=&lt;libgs.database.CommsLog object&gt;</em>, <em>passlog=&lt;libgs.database.PassDb object&gt;</em>, <em>monlog=None</em>, <em>rpcserver=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/groundstation.html#GroundStation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.groundstation.GroundStation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main class for the ground station</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.do_action.html#libgs.groundstation.GroundStation.do_action" title="libgs.groundstation.GroundStation.do_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_action</span></code></a>(desc,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Ask the protocol to do something (to presumably do something with the satellites) without any restrictions.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.get_azel.html#libgs.groundstation.GroundStation.get_azel" title="libgs.groundstation.GroundStation.get_azel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_azel</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.init_rx.html#libgs.groundstation.GroundStation.init_rx" title="libgs.groundstation.GroundStation.init_rx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_rx</span></code></a>()</td>
+<td>Wrapper for protocol.init_rx()</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.init_rxtx.html#libgs.groundstation.GroundStation.init_rxtx" title="libgs.groundstation.GroundStation.init_rxtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_rxtx</span></code></a>()</td>
+<td>Wrapper for protocol.init_rxtx()</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.power_down.html#libgs.groundstation.GroundStation.power_down" title="libgs.groundstation.GroundStation.power_down"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_down</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.power_up.html#libgs.groundstation.GroundStation.power_up" title="libgs.groundstation.GroundStation.power_up"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_up</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.receive.html#libgs.groundstation.GroundStation.receive" title="libgs.groundstation.GroundStation.receive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receive</span></code></a>(msg)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.set_azel.html#libgs.groundstation.GroundStation.set_azel" title="libgs.groundstation.GroundStation.set_azel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_azel</span></code></a>(az,&nbsp;el[,&nbsp;block])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.set_rangerate.html#libgs.groundstation.GroundStation.set_rangerate" title="libgs.groundstation.GroundStation.set_rangerate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_rangerate</span></code></a>(range_rate)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.set_schedule_msg.html#libgs.groundstation.GroundStation.set_schedule_msg" title="libgs.groundstation.GroundStation.set_schedule_msg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_schedule_msg</span></code></a>(msg)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.start_track.html#libgs.groundstation.GroundStation.start_track" title="libgs.groundstation.GroundStation.start_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_track</span></code></a>(nid_or_pdata,&nbsp;**kwargs)</td>
+<td>Non-blocking tracking.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.stop_track.html#libgs.groundstation.GroundStation.stop_track" title="libgs.groundstation.GroundStation.stop_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_track</span></code></a>([block])</td>
+<td>Stop tracking satellite.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.stow.html#libgs.groundstation.GroundStation.stow" title="libgs.groundstation.GroundStation.stow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stow</span></code></a>([block])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.terminate.html#libgs.groundstation.GroundStation.terminate" title="libgs.groundstation.GroundStation.terminate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminate</span></code></a>()</td>
+<td>Wrapper for protocol.terminate()</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.track.html#libgs.groundstation.GroundStation.track" title="libgs.groundstation.GroundStation.track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">track</span></code></a>(nid_or_pdata,&nbsp;**kwargs)</td>
+<td>Track satellite by Norad ID</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.transmit.html#libgs.groundstation.GroundStation.transmit" title="libgs.groundstation.GroundStation.transmit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transmit</span></code></a>(msg[,&nbsp;wait])</td>
+<td>Transmit something to a satellite</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.FAILED_COMMUNICATION.html#libgs.groundstation.GroundStation.FAILED_COMMUNICATION" title="libgs.groundstation.GroundStation.FAILED_COMMUNICATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FAILED_COMMUNICATION</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.MAX_TRACK_DT.html#libgs.groundstation.GroundStation.MAX_TRACK_DT" title="libgs.groundstation.GroundStation.MAX_TRACK_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_TRACK_DT</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK.html#libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK" title="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONITOR_SAVE_DT_NOTRACK</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_TRACK.html#libgs.groundstation.GroundStation.MONITOR_SAVE_DT_TRACK" title="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_TRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONITOR_SAVE_DT_TRACK</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA.html#libgs.groundstation.GroundStation.RECORD_SPECTRA" title="libgs.groundstation.GroundStation.RECORD_SPECTRA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA_DT.html#libgs.groundstation.GroundStation.RECORD_SPECTRA_DT" title="libgs.groundstation.GroundStation.RECORD_SPECTRA_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA_DT</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN.html#libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN" title="libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA_MAX_LEN</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.monitor.html#libgs.groundstation.GroundStation.monitor" title="libgs.groundstation.GroundStation.monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.propagator.html#libgs.groundstation.GroundStation.propagator" title="libgs.groundstation.GroundStation.propagator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">propagator</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.protocol.html#libgs.groundstation.GroundStation.protocol" title="libgs.groundstation.GroundStation.protocol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">protocol</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.protocols.html#libgs.groundstation.GroundStation.protocols" title="libgs.groundstation.GroundStation.protocols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">protocols</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.radios.html#libgs.groundstation.GroundStation.radios" title="libgs.groundstation.GroundStation.radios"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radios</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html#libgs.groundstation.GroundStation.rotators" title="libgs.groundstation.GroundStation.rotators"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotators</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.rpcserver.html#libgs.groundstation.GroundStation.rpcserver" title="libgs.groundstation.GroundStation.rpcserver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rpcserver</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.scheduler.html#libgs.groundstation.GroundStation.scheduler" title="libgs.groundstation.GroundStation.scheduler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scheduler</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.groundstation.GroundStation.do_action.html" class="btn btn-neutral float-right" title="libgs.groundstation.GroundStation.do_action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.groundstation.GSState.uiloghandler.html" class="btn btn-neutral" title="libgs.groundstation.GSState.uiloghandler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

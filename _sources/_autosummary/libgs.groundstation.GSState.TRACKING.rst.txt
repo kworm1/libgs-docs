@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.TRACKING
+====================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.TRACKING

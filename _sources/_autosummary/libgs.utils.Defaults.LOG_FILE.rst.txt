@@ -1,0 +1,6 @@
+libgs.utils.Defaults.LOG\_FILE
+==============================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.LOG_FILE

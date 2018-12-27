@@ -1,0 +1,35 @@
+
+
+libgs.visualisation.BokehServer
+===============================
+
+.. currentmodule:: libgs.visualisation
+
+.. autoclass:: BokehServer
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~BokehServer.add_app
+      
+      
+      ~BokehServer.start
+      
+      
+      ~BokehServer.stop
+      
+   
+   
+
+   
+   
+   
+

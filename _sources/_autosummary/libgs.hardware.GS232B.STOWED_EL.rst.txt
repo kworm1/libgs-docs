@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.STOWED\_EL
+================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.STOWED_EL

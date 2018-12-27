@@ -1,0 +1,6 @@
+libgs.groundstation.GSState.last\_response
+==========================================
+
+.. currentmodule:: libgs.groundstation
+
+.. autoattribute:: GSState.last_response

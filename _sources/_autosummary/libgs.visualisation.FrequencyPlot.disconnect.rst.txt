@@ -1,0 +1,6 @@
+libgs.visualisation.FrequencyPlot.disconnect
+============================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: FrequencyPlot.disconnect

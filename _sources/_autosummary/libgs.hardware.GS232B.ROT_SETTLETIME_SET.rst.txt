@@ -1,0 +1,6 @@
+libgs.hardware.GS232B.ROT\_SETTLETIME\_SET
+==========================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: GS232B.ROT_SETTLETIME_SET

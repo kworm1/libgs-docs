@@ -1,0 +1,6 @@
+libgs.monitoring.NoAlert.alertstr
+=================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: NoAlert.alertstr

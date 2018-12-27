@@ -1,0 +1,6 @@
+libgs.visualisation.BokehServer.stop
+====================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: BokehServer.stop

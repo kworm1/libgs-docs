@@ -1,0 +1,6 @@
+libgs.monitoring.CriticalAlert.alertcode
+========================================
+
+.. currentmodule:: libgs.monitoring
+
+.. autoattribute:: CriticalAlert.alertcode

@@ -1,0 +1,6 @@
+libgs.hardware.RotatorBase.stow
+===============================
+
+.. currentmodule:: libgs.hardware
+
+.. automethod:: RotatorBase.stow

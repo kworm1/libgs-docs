@@ -1,0 +1,6 @@
+libgs.utils.conv\_time
+======================
+
+.. currentmodule:: libgs.utils
+
+.. autofunction:: conv_time

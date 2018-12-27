@@ -1,0 +1,6 @@
+libgs.utils.UTCLogFormatter.converter
+=====================================
+
+.. currentmodule:: libgs.utils
+
+.. automethod:: UTCLogFormatter.converter

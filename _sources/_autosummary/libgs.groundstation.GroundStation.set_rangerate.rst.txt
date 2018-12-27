@@ -1,0 +1,6 @@
+libgs.groundstation.GroundStation.set\_rangerate
+================================================
+
+.. currentmodule:: libgs.groundstation
+
+.. automethod:: GroundStation.set_rangerate

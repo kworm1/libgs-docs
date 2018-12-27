@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.execute\_pass
+=======================================
+
+.. currentmodule:: libgs.scheduler
+
+.. automethod:: Scheduler.execute_pass

@@ -1,0 +1,6 @@
+libgs.console\_scripts.restapi
+==============================
+
+.. currentmodule:: libgs.console_scripts
+
+.. autofunction:: restapi

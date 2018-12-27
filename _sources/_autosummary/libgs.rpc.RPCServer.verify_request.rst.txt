@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.verify\_request
+===================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.verify_request

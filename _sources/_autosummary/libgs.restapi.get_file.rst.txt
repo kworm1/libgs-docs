@@ -1,0 +1,6 @@
+libgs.restapi.get\_file
+=======================
+
+.. currentmodule:: libgs.restapi
+
+.. autofunction:: get_file

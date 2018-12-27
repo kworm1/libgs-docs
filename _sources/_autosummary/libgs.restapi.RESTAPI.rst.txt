@@ -1,0 +1,32 @@
+
+
+libgs.restapi.RESTAPI
+=====================
+
+.. currentmodule:: libgs.restapi
+
+.. autoclass:: RESTAPI
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~RESTAPI.start
+      
+      
+      ~RESTAPI.stop
+      
+   
+   
+
+   
+   
+   
+

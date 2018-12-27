@@ -1,0 +1,6 @@
+libgs.visualisation.FrequencyPlot.create\_fig
+=============================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: FrequencyPlot.create_fig

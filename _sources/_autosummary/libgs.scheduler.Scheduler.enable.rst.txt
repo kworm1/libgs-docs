@@ -1,0 +1,6 @@
+libgs.scheduler.Scheduler.enable
+================================
+
+.. currentmodule:: libgs.scheduler
+
+.. automethod:: Scheduler.enable

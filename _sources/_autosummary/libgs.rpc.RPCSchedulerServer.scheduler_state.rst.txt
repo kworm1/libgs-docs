@@ -1,0 +1,6 @@
+libgs.rpc.RPCSchedulerServer.scheduler\_state
+=============================================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCSchedulerServer.scheduler_state

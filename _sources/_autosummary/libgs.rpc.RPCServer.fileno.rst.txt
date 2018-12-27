@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.fileno
+==========================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.fileno

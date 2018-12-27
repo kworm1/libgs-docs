@@ -1,0 +1,6 @@
+libgs.rpc.RPCServer.start
+=========================
+
+.. currentmodule:: libgs.rpc
+
+.. automethod:: RPCServer.start

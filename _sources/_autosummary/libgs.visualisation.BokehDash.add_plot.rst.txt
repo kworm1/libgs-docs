@@ -1,0 +1,6 @@
+libgs.visualisation.BokehDash.add\_plot
+=======================================
+
+.. currentmodule:: libgs.visualisation
+
+.. automethod:: BokehDash.add_plot

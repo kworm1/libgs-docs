@@ -1,0 +1,6 @@
+libgs.hardware.DummyRotator.cmd\_az
+===================================
+
+.. currentmodule:: libgs.hardware
+
+.. autoattribute:: DummyRotator.cmd_az

@@ -1,0 +1,6 @@
+libgs.utils.Defaults.LOG\_FORMAT
+================================
+
+.. currentmodule:: libgs.utils
+
+.. autoattribute:: Defaults.LOG_FORMAT
