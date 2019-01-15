@@ -36,3 +36,20 @@ libgs.visualisation.LivePlot
    
    
 
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+         
+   
+   
+
+   
+

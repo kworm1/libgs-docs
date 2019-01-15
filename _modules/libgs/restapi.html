@@ -188,8 +188,35 @@
 <span class="sd">:date:   Mon Sep 18 09:22:40 2017</span>
 <span class="sd">:author: Kjetil Wormnes</span>
 
+<span class="sd">The REST-API interface to the libgs databases (and arbitrary XMRPC APIs)</span>
 
-<span class="sd">This defines the rest api that permits interaction with a database and arbitrary XMLRPC apis.</span>
+<span class="sd">Basic usage:</span>
+
+<span class="sd">&gt;&gt;&gt; api = RESTAPI()</span>
+<span class="sd">&gt;&gt;&gt; api.start()</span>
+
+<span class="sd">See :class:`RESTAPI` for detailed information on the permitted arguments. </span>
+
+<span class="sd">the class, when calling start() will set up a number of API endpoints for access to the</span>
+<span class="sd">different libgs databases. It is also possible to connect arbitrary XMLRPC APIs that will</span>
+<span class="sd">also be exposed.</span>
+
+<span class="sd">A detailed help with examples for how to use the api is automatically generated</span>
+<span class="sd">by the API itself and made available to the user. Just to to ``hostname:port/api`` to see it,</span>
+<span class="sd">where hostname and port can be configured when creating the :class:`RESTAPI`.</span>
+
+<span class="sd">XMLRPC API endpoints can also, as mentioned, be mapped to the RESTAPI. To do so</span>
+<span class="sd">you must pass some information when creating the api. For example:</span>
+
+<span class="sd">&gt;&gt;&gt; api = RESTAPI(rpcapi={&#39;rpc/gs&#39;:&#39;http://localhost:10001&#39;, &#39;rpc/sch&#39;:&#39;http://localhost:8000&#39;})</span>
+
+<span class="sd">will create two additional api endpoints on ``/api/rpc/gs`` and ``/api/rpc/sch`` to which it will</span>
+<span class="sd">map the :class:`libgs.groundstation.GroundStation` and :class:`libgs.rpc.RPCSchedulerServer`  XMLRPC API interfaces respectively.</span>
+
+<span class="sd">Note that any XMLRPC interface can be mapped this way so long as it has registered introspection functions. </span>
+<span class="sd">See SimpleXMLRPCServer. :meth:`~SimpleXMLRPCServer.SimpleXMLRPCServer.register_introspection_functions`. (you can of course also</span>
+<span class="sd">use :class:`libgs.rpc.RPCServer` as a drop-in replacement for SimpleXMLRPCServer anytime you make such an api)</span>
+
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -518,26 +545,12 @@
 <span class="sd">    Will create a RESTFUL API interface to the Commslog database and start</span>
 <span class="sd">    it on a specified port. The api will be started in a separate thread.</span>
 
-<span class="sd">    The URI endpoints are:</span>
-
-<span class="sd">    /api/comms</span>
-<span class="sd">      Download the entire communications log</span>
-
-<span class="sd">    /api/comms/&lt;pass_id&gt;</span>
-<span class="sd">      Download a specific pass</span>
-
-<span class="sd">    Valid parameters are:</span>
-
-<span class="sd">    ======== =============================================</span>
-<span class="sd">    format   output format: json / csv / html</span>
-<span class="sd">    N        max number of entries to return. Omit for all</span>
-<span class="sd">    ======== =============================================</span>
-
 <span class="sd">    Usage:</span>
 <span class="sd">      &gt;&gt;&gt; api = RESTAPI()</span>
 <span class="sd">      &gt;&gt;&gt; api.start()</span>
 
-
+<span class="sd">    The help will be automatically generated and is available on the endpoint ``/api`` after</span>
+<span class="sd">    creation. See :mod:`~libgs.restapi` for more details.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -554,11 +567,15 @@
                  <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">          commslog (CommsLog)     : Database end-point for comms log</span>
+<span class="sd">          commslog (:class:`~libgs.database.CommsLog`): Database specification for comms database</span>
+<span class="sd">          monlog (:class:`~libgs.database.MonitorDb`) : Database specification for monitoring db</span>
+<span class="sd">          passdb (:class:`~libgs.database.PassDb`)    : Database specification for passes db</span>
 <span class="sd">          host     (str)          : Ip address to bind to</span>
 <span class="sd">          port     (int)          : Port to bind to</span>
 <span class="sd">          default_format (str)    : Format to provide if no argument given (default = json)</span>
+<span class="sd">          rpcapi (dict)           : Dictionary of endpoint:url for XMLRPC APIs to map.</span>
 <span class="sd">          allowed  (list(str))    : LIst of allowed URI patterns. Default is None, which actually means all</span>
+<span class="sd">          retry_rpc_conn (bool)   : If a mapped XMLRPC API is not available, retry connection at regular intervals.</span>
 <span class="sd">          debug    (bool)         : Set flask in Debug mode for extra verbosity</span>
 
 
@@ -637,6 +654,9 @@
         <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span> <span class="n">use_reloader</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RESTAPI.start"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.RESTAPI.start.html#libgs.restapi.RESTAPI.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start the REST API (in a separate thread)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_api</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -645,20 +665,26 @@
 
 
 <div class="viewcode-block" id="RESTAPI.stop"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.RESTAPI.stop.html#libgs.restapi.RESTAPI.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the REST API</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">           This method is not currently implemented and does not do anything.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 
 
 
 <span class="c1"># Just a helper funciton used a few places below</span>
-<div class="viewcode-block" id="nid_to_int_if_possible"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.nid_to_int_if_possible.html#libgs.restapi.nid_to_int_if_possible">[docs]</a><span class="k">def</span> <span class="nf">nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">nid</span></div>
+        <span class="k">return</span> <span class="n">nid</span>
 
 
 
-<div class="viewcode-block" id="handle_bytes"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.handle_bytes.html#libgs.restapi.handle_bytes">[docs]</a><span class="k">def</span> <span class="nf">handle_bytes</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">format</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_handle_bytes</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">format</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">d</span>
         
@@ -669,9 +695,9 @@
     <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;b64string&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">encodestring</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid format&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid format&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="is_allowed"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.is_allowed.html#libgs.restapi.is_allowed">[docs]</a><span class="k">def</span> <span class="nf">is_allowed</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_is_allowed</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This decorator checks if a resource is allowed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -693,7 +719,7 @@
         <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
 
     <span class="n">wrapped</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span>
-    <span class="k">return</span> <span class="n">wrapped</span></div>
+    <span class="k">return</span> <span class="n">wrapped</span>
 
 
 
@@ -795,10 +821,10 @@
 
 
 
-<div class="viewcode-block" id="get_comms"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_comms.html#libgs.restapi.get_comms">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/comms&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/comms&quot;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/comms/&lt;pass_id&gt;&quot;</span><span class="p">)</span>
-<span class="nd">@is_allowed</span>
-<span class="k">def</span> <span class="nf">get_comms</span><span class="p">(</span><span class="n">pass_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="nd">@_is_allowed</span>
+<span class="k">def</span> <span class="nf">_get_comms</span><span class="p">(</span><span class="n">pass_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
     <span class="n">log</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">commslog</span>
@@ -835,7 +861,7 @@
     <span class="n">ret</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pass_id</span><span class="o">=</span><span class="n">pass_id</span><span class="p">,</span> <span class="n">nid</span> <span class="o">=</span> <span class="n">nid</span><span class="p">,</span> <span class="n">orig</span><span class="o">=</span><span class="n">orig</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="n">tstamps</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
 
     <span class="c1"># Make norad ids proper integers if we can</span>
-    <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;nid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span> <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;nid&#39;</span><span class="p">]]</span>
+    <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;nid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">_nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span> <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;nid&#39;</span><span class="p">]]</span>
 
 
     <span class="c1"># ensure table has columns in the right order</span>
@@ -846,12 +872,12 @@
     <span class="n">ret</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">retc</span>
 
     <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span>
-        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">))</span>
         <span class="n">ret</span><span class="o">.</span><span class="n">pass_id</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;a href=&quot;comms/</span><span class="si">{}</span><span class="s1">?format=html&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;pass_id&#39;</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;pass_id&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="n">ret</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>
         <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="s2">&quot;Comms log&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;comms&quot;</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
-        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b64&#39;</span><span class="p">))</span>
 
         <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
             <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
@@ -862,7 +888,7 @@
         <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+        <span class="n">ret</span>  <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">))</span>
         <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
             <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(),</span>
             <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
@@ -873,17 +899,17 @@
 
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span></div>
+        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span>
 
 
 
 
 
 
-<div class="viewcode-block" id="get_mon"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_mon.html#libgs.restapi.get_mon">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/mon&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/mon&quot;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/mon/&lt;pass_id&gt;&quot;</span><span class="p">)</span>
-<span class="nd">@is_allowed</span>
-<span class="k">def</span> <span class="nf">get_mon</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="nd">@_is_allowed</span>
+<span class="k">def</span> <span class="nf">_get_mon</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
     <span class="n">monlog</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">monlog</span>
 
@@ -937,7 +963,7 @@
 
             <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
             <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">ret1</span><span class="p">,</span> <span class="s2">&quot;Monitoring data&quot;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s2">&quot;mon&quot;</span><span class="p">)</span>
@@ -970,14 +996,14 @@
 
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span></div>
+        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span>
 
 
 
-<div class="viewcode-block" id="get_passes"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_passes.html#libgs.restapi.get_passes">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/passes&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/passes&quot;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/passes/&lt;pass_id&gt;&quot;</span><span class="p">)</span>
-<span class="nd">@is_allowed</span>
-<span class="k">def</span> <span class="nf">get_passes</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="nd">@_is_allowed</span>
+<span class="k">def</span> <span class="nf">_get_passes</span><span class="p">(</span><span class="n">pass_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
     <span class="n">passlog</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">passdb</span>
     <span class="n">commslog</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">commslog</span>
@@ -1031,7 +1057,7 @@
 
             <span class="c1"># pivot the table</span>
             <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;pass_id&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+            <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
             <span class="n">ret1</span> <span class="o">=</span> <span class="n">ret1</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">,</span> <span class="s1">&#39;start_t&#39;</span><span class="p">,</span> <span class="s1">&#39;start_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;end_track_t&#39;</span><span class="p">,</span> <span class="s1">&#39;stowed_t&#39;</span><span class="p">,</span> <span class="s1">&#39;max_el&#39;</span><span class="p">]</span>
             <span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">]</span>
@@ -1068,7 +1094,7 @@
             <span class="k">if</span> <span class="s1">&#39;signoffs&#39;</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
                 <span class="n">ret1</span><span class="o">.</span><span class="n">signoffs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ret1</span><span class="o">.</span><span class="n">signoffs</span><span class="p">]</span>
 
-            <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span> <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">]]</span>
+            <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">_nid_to_int_if_possible</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span> <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">ret1</span><span class="p">[</span><span class="s1">&#39;norad_id&#39;</span><span class="p">]]</span>
 
             <span class="c1">#</span>
             <span class="c1"># add some meta columns</span>
@@ -1092,7 +1118,7 @@
 
 
     <span class="k">if</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;htmlraw&#39;</span><span class="p">:</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
         <span class="n">ret</span><span class="o">.</span><span class="n">pass_id</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">pass_id</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;&lt;a href=&quot;/api/passes/</span><span class="si">{}</span><span class="s1">?format=html&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
         <span class="c1"># html = &quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&quot; + ret.style.set_table_styles(_TABLE_STYLES).render()</span>
         <span class="c1"># html += &quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>
@@ -1102,7 +1128,7 @@
 
 
     <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>
         <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
             <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
             <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
@@ -1112,7 +1138,7 @@
         <span class="k">return</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>        
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;b64&#39;</span><span class="p">))</span>        
         <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
             <span class="n">response</span><span class="o">=</span><span class="n">ret</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">_RETURNED_TSTAMP_LBL</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(),</span>
             <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
@@ -1123,14 +1149,14 @@
 
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span></div>
+        <span class="k">return</span> <span class="s2">&quot;Invalid format&quot;</span><span class="p">,</span> <span class="mi">440</span>
 
 
-<div class="viewcode-block" id="get_file"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_file.html#libgs.restapi.get_file">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file&quot;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file/&lt;dbname&gt;&quot;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/file/&lt;dbname&gt;/&lt;fname&gt;&quot;</span><span class="p">)</span>
-<span class="nd">@is_allowed</span>
-<span class="k">def</span> <span class="nf">get_file</span><span class="p">(</span><span class="n">dbname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="nd">@_is_allowed</span>
+<span class="k">def</span> <span class="nf">_get_file</span><span class="p">(</span><span class="n">dbname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">dbname</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">fname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;Invalid DB / FILE&quot;</span> <span class="p">,</span> <span class="mi">403</span>
@@ -1182,19 +1208,19 @@
         <span class="k">return</span> <span class="n">rv</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">handle_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;b64string&#39;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">_handle_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;b64string&#39;</span><span class="p">)</span>
         <span class="n">rv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span>
             <span class="n">response</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ret</span><span class="p">),</span>
             <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
             <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">rv</span></div>
+        <span class="k">return</span> <span class="n">rv</span>
         
 
 
-<div class="viewcode-block" id="get_rpcapi"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_rpcapi.html#libgs.restapi.get_rpcapi">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/&lt;path:path&gt;&quot;</span><span class="p">)</span>
-<span class="nd">@is_allowed</span>
-<span class="k">def</span> <span class="nf">get_rpcapi</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/&lt;path:path&gt;&quot;</span><span class="p">)</span>
+<span class="nd">@_is_allowed</span>
+<span class="k">def</span> <span class="nf">_get_rpcapi</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Invoke a (user-defined) RPC API. </span>
 <span class="sd">    </span>
@@ -1277,15 +1303,15 @@
         <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">,</span>
         <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
     
-    <span class="k">return</span> <span class="n">rv</span></div>
+    <span class="k">return</span> <span class="n">rv</span>
     
     
     
 
 
-<div class="viewcode-block" id="get_help"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.get_help.html#libgs.restapi.get_help">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">,</span> <span class="n">strict_slashes</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nd">@is_allowed</span>
-<span class="k">def</span> <span class="nf">get_help</span><span class="p">():</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">,</span> <span class="n">strict_slashes</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nd">@_is_allowed</span>
+<span class="k">def</span> <span class="nf">_get_help</span><span class="p">():</span>
     <span class="n">api</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;API&#39;</span><span class="p">]</span>
     <span class="n">rpcapi</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">rpcapi</span>
     
@@ -1321,8 +1347,7 @@
     <span class="n">html</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;div class=&#39;helptext&#39;&gt;&lt;div style=&#39;margin:10px;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="n">htext</span> <span class="o">+</span> <span class="s2">&quot;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&quot;</span>
 
     
-    <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;libgs REST API&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;help&quot;</span><span class="p">),</span> <span class="mi">200</span></div>
-
+    <span class="k">return</span> <span class="n">_style_html_page</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;libgs REST API&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;help&quot;</span><span class="p">),</span> <span class="mi">200</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

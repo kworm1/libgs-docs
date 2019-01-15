@@ -94,10 +94,10 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.utils.UTCLogFormatter</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.converter.html">libgs.utils.UTCLogFormatter.converter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.format.html">libgs.utils.UTCLogFormatter.format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatException.html">libgs.utils.UTCLogFormatter.formatException</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatTime.html">libgs.utils.UTCLogFormatter.formatTime</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.usesTime.html">libgs.utils.UTCLogFormatter.usesTime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.use_colour.html">libgs.utils.UTCLogFormatter.use_colour</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatException.html">libgs.utils.UTCLogFormatter.formatException</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatter.usesTime.html">libgs.utils.UTCLogFormatter.usesTime</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.html">libgs.utils.UTCLogFormatterHTML</a></li>
@@ -187,7 +187,8 @@
 <dl class="class">
 <dt id="libgs.utils.UTCLogFormatter">
 <em class="property">class </em><code class="descclassname">libgs.utils.</code><code class="descname">UTCLogFormatter</code><span class="sig-paren">(</span><em>fmt=None</em>, <em>datefmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#UTCLogFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.UTCLogFormatter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize the formatter with specified format strings.</p>
+<dd><p>A logging formatter that displays records in UTC (zulu) time</p>
+<p>Initialize the formatter with specified format strings.</p>
 <p>Initialize the formatter either with the specified format string, or a
 default as described above. Allow for specialized date formatting with
 the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
@@ -204,14 +205,8 @@ the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
 <tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.format.html#libgs.utils.UTCLogFormatter.format" title="libgs.utils.UTCLogFormatter.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a>(record)</td>
 <td>Format the specified record as text.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatException.html#libgs.utils.UTCLogFormatter.formatException" title="libgs.utils.UTCLogFormatter.formatException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatException</span></code></a>(ei)</td>
-<td>Format and return the specified exception information as a string.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatTime.html#libgs.utils.UTCLogFormatter.formatTime" title="libgs.utils.UTCLogFormatter.formatTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatTime</span></code></a>(record[,&nbsp;datefmt])</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatTime.html#libgs.utils.UTCLogFormatter.formatTime" title="libgs.utils.UTCLogFormatter.formatTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatTime</span></code></a>(record[,&nbsp;datefmt])</td>
 <td>Return the creation time of the specified LogRecord as formatted text.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.usesTime.html#libgs.utils.UTCLogFormatter.usesTime" title="libgs.utils.UTCLogFormatter.usesTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">usesTime</span></code></a>()</td>
-<td>Check if the format uses the creation time of the record.</td>
 </tr>
 </tbody>
 </table>
@@ -224,6 +219,21 @@ the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.use_colour.html#libgs.utils.UTCLogFormatter.use_colour" title="libgs.utils.UTCLogFormatter.use_colour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_colour</span></code></a></td>
 <td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.formatException.html#libgs.utils.UTCLogFormatter.formatException" title="libgs.utils.UTCLogFormatter.formatException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatException</span></code></a>(ei)</td>
+<td>Format and return the specified exception information as a string.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatter.usesTime.html#libgs.utils.UTCLogFormatter.usesTime" title="libgs.utils.UTCLogFormatter.usesTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">usesTime</span></code></a>()</td>
+<td>Check if the format uses the creation time of the record.</td>
 </tr>
 </tbody>
 </table>

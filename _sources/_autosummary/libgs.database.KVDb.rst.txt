@@ -18,13 +18,45 @@ libgs.database.KVDb
    
       
       
+      
+      
+      
+      
+      ~KVDb.get
+      
+      
+      
+      
+      
+      
+      ~KVDb.put
+      
+      
+      
+   
+   
+
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~KVDb.count_rows
       
       
       ~KVDb.create_table
       
       
-      ~KVDb.get
       
       
       ~KVDb.get_df
@@ -33,15 +65,12 @@ libgs.database.KVDb
       ~KVDb.get_file
       
       
-      ~KVDb.put
       
       
       ~KVDb.put_df
-      
+         
    
    
 
-   
-   
    
 

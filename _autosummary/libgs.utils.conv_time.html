@@ -179,9 +179,50 @@
 <dl class="function">
 <dt id="libgs.utils.conv_time">
 <code class="descclassname">libgs.utils.</code><code class="descname">conv_time</code><span class="sig-paren">(</span><em>d</em>, <em>to='iso'</em>, <em>float_t='julian'</em>, <em>ignore_ambig_types=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#conv_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.conv_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>There are a number of different date formats used around libgs
+<dd><p>Convert between different time/date types used in libgs</p>
+<p>There are a number of different date formats used around libgs
 ephem.Date, datetime, pandas.Timestamp to mention some.
 Also modified Julian time and various string formats.</p>
+<p>Time formats that can be converted:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>iso</td>
+<td>string in <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> time format. E.g. “2019-01-14T21:49:12.321Z”</td>
+</tr>
+<tr class="row-even"><td>julian</td>
+<td>float representing juilan time (days since 12:00:00 1 Jan 2713 BC in the Julian calendar)</td>
+</tr>
+<tr class="row-odd"><td>unix</td>
+<td>integer representing UNIX time (seconds since 00:00:00 1 Jan 1970)</td>
+</tr>
+<tr class="row-even"><td>datetime</td>
+<td>python <a class="reference external" href="https://docs.python.org/2.7/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> class</td>
+</tr>
+<tr class="row-odd"><td>pandas</td>
+<td><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v0.23.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a> class</td>
+</tr>
+<tr class="row-even"><td>ephem</td>
+<td><code class="xref py py-class docutils literal notranslate"><span class="pre">ephem.Date</span></code> class</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>to</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – One of the abovementioned formats</li>
+<li><strong>float_t</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – If converting from a numeric, specify one if it is ‘julian’ or ‘unix’, can be omitted if converting from other formats</li>
+<li><strong>ignore_ambig_types</strong> – Only allow conversions to non-ambigous types (i.e. none of the numeric or string formats)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

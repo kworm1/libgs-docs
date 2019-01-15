@@ -36,9 +36,30 @@ libgs.visualisation.SatellitePass
    .. autosummary::
       :toctree: .
    
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+         
+   
       ~SatellitePass.live_data
       ~SatellitePass.live_props
       ~SatellitePass.name
    
+
    
 

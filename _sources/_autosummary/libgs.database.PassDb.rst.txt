@@ -18,6 +18,38 @@ libgs.database.PassDb
    
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ~PassDb.put
+      
+      
+      
+   
+   
+
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~PassDb.count_rows
       
       
@@ -33,15 +65,12 @@ libgs.database.PassDb
       ~PassDb.get_file
       
       
-      ~PassDb.put
       
       
       ~PassDb.put_df
-      
+         
    
    
 
-   
-   
    
 

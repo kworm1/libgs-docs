@@ -18,28 +18,22 @@ libgs.hardware.RotCtld
    
       
       
-      ~RotCtld.azel_err
       
       
-      ~RotCtld.azel_to_antenna_angles
       
       
       ~RotCtld.get_azel
       
       
-      ~RotCtld.get_azel_rate
       
       
-      ~RotCtld.in_pos
       
       
       ~RotCtld.set_azel
       
       
-      ~RotCtld.set_azel_rate
       
       
-      ~RotCtld.stow
       
    
    
@@ -50,6 +44,42 @@ libgs.hardware.RotCtld
    
    .. autosummary::
       :toctree: .
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~RotCtld.azel_err
+      
+      
+      ~RotCtld.azel_to_antenna_angles
+      
+      
+      
+      
+      ~RotCtld.get_azel_rate
+      
+      
+      ~RotCtld.in_pos
+      
+      
+      
+      
+      ~RotCtld.set_azel_rate
+      
+      
+      ~RotCtld.stow
+         
    
       ~RotCtld.BEAMWIDTH
       ~RotCtld.MAX_AZ
@@ -66,5 +96,6 @@ libgs.hardware.RotCtld
       ~RotCtld.el
       ~RotCtld.name
    
+
    
 

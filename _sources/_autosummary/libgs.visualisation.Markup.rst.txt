@@ -30,9 +30,26 @@ libgs.visualisation.Markup
    .. autosummary::
       :toctree: .
    
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+         
+   
       ~Markup.live_data
       ~Markup.live_props
       ~Markup.name
    
+
    
 

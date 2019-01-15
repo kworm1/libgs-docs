@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.rpc.RPCServer.close_request" href="libgs.rpc.RPCServer.close_request.html" />
+    <link rel="next" title="libgs.rpc.RPCServer.register_function" href="libgs.rpc.RPCServer.register_function.html" />
     <link rel="prev" title="libgs.rpc.RPCSchedulerServer.stop_schedule" href="libgs.rpc.RPCSchedulerServer.stop_schedule.html" /> 
 
   
@@ -84,6 +84,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.html">libgs.rpc.RPCSchedulerServer</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.rpc.RPCServer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.register_function.html">libgs.rpc.RPCServer.register_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.register_instance.html">libgs.rpc.RPCServer.register_instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.serve_forever.html">libgs.rpc.RPCServer.serve_forever</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.start.html">libgs.rpc.RPCServer.start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.stop.html">libgs.rpc.RPCServer.stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.is_serving.html">libgs.rpc.RPCServer.is_serving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.close_request.html">libgs.rpc.RPCServer.close_request</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.fileno.html">libgs.rpc.RPCServer.fileno</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.finish_request.html">libgs.rpc.RPCServer.finish_request</a></li>
@@ -92,18 +98,13 @@
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.handle_request.html">libgs.rpc.RPCServer.handle_request</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.handle_timeout.html">libgs.rpc.RPCServer.handle_timeout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.process_request.html">libgs.rpc.RPCServer.process_request</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.register_function.html">libgs.rpc.RPCServer.register_function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.register_instance.html">libgs.rpc.RPCServer.register_instance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.register_introspection_functions.html">libgs.rpc.RPCServer.register_introspection_functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.register_multicall_functions.html">libgs.rpc.RPCServer.register_multicall_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.serve_forever.html">libgs.rpc.RPCServer.serve_forever</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.server_activate.html">libgs.rpc.RPCServer.server_activate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.server_bind.html">libgs.rpc.RPCServer.server_bind</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.server_close.html">libgs.rpc.RPCServer.server_close</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.shutdown.html">libgs.rpc.RPCServer.shutdown</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.shutdown_request.html">libgs.rpc.RPCServer.shutdown_request</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.start.html">libgs.rpc.RPCServer.start</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.stop.html">libgs.rpc.RPCServer.stop</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.system_listMethods.html">libgs.rpc.RPCServer.system_listMethods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.system_methodHelp.html">libgs.rpc.RPCServer.system_methodHelp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.system_methodSignature.html">libgs.rpc.RPCServer.system_methodSignature</a></li>
@@ -111,7 +112,6 @@
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.verify_request.html">libgs.rpc.RPCServer.verify_request</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.address_family.html">libgs.rpc.RPCServer.address_family</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.allow_reuse_address.html">libgs.rpc.RPCServer.allow_reuse_address</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.is_serving.html">libgs.rpc.RPCServer.is_serving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.request_queue_size.html">libgs.rpc.RPCServer.request_queue_size</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.socket_type.html">libgs.rpc.RPCServer.socket_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.rpc.RPCServer.timeout.html">libgs.rpc.RPCServer.timeout</a></li>
@@ -198,27 +198,81 @@
 <dl class="class">
 <dt id="libgs.rpc.RPCServer">
 <em class="property">class </em><code class="descclassname">libgs.rpc.</code><code class="descname">RPCServer</code><span class="sig-paren">(</span><em>uri</em>, <em>logRequests=False</em>, <em>allow_none=True</em>, <em>start=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/rpc.html#RPCServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.rpc.RPCServer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drop-in replacement for SimpleXMLRPCServer that supports kwargs.</p>
-<p>It also allows the address to be specified as a uri, <a class="reference external" href="http://hostname:port">http://hostname:port</a> instead of (hostname,port), but
-the latter is also supported for full SimpleXMLRPCServer compatability.</p>
+<dd><p>Drop-in replacement for <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer.SimpleXMLRPCServer</span></code></a> that supports kwargs.</p>
+<p>It also allows the address to be specified as a uri, <code class="docutils literal notranslate"><span class="pre">http://hostname:port</span></code> instead of (hostname,port), but
+the latter is also supported for full <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer.SimpleXMLRPCServer</span></code></a> compatability.</p>
 <p>Finally, it allows you to call register_function in the same way as for SimpleXMLRPCServer, but it also
 allows you to use it as a decorator.</p>
 <p>So these two are equivalent:</p>
 <ol class="upperalpha simple">
 <li></li>
 </ol>
-<p>s = RPCServer()
-&#64;s.register_function
-def blah()</p>
-<blockquote>
-<div>print(“blah”)</div></blockquote>
-<p>B)
-s = RPCServer()
-def blah()</p>
-<blockquote>
-<div>print(“blah”)</div></blockquote>
-<p>s.register_function(blah)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">RPCServer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@s</span><span class="o">.</span><span class="n">register_function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">blah</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;blah&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="upperalpha simple" start="2">
+<li></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">RPCServer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">blah</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;blah&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="n">blah</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>uri</strong> – address and port to bind to. Accepted formats are (str) <code class="docutils literal notranslate"><span class="pre">http://domain.name:port</span></code> <em>and</em> (domain.name, port)</li>
+<li><strong>logRequests</strong> – See <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer.SimpleXMLRPCServer</span></code></a></li>
+<li><strong>allow_none</strong> – See <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer.SimpleXMLRPCServer</span></code></a></li>
+<li><strong>start</strong> – Start server immediately.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.register_function.html#libgs.rpc.RPCServer.register_function" title="libgs.rpc.RPCServer.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_function</span></code></a>(function[,&nbsp;name])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.register_instance.html#libgs.rpc.RPCServer.register_instance" title="libgs.rpc.RPCServer.register_instance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_instance</span></code></a>(instance[,&nbsp;allow_dotted_names])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.serve_forever.html#libgs.rpc.RPCServer.serve_forever" title="libgs.rpc.RPCServer.serve_forever"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serve_forever</span></code></a>([poll_interval])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.start.html#libgs.rpc.RPCServer.start" title="libgs.rpc.RPCServer.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.stop.html#libgs.rpc.RPCServer.stop" title="libgs.rpc.RPCServer.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.is_serving.html#libgs.rpc.RPCServer.is_serving" title="libgs.rpc.RPCServer.is_serving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_serving</span></code></a></td>
+<td>Returns True if the</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -249,82 +303,55 @@ def blah()</p>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.process_request.html#libgs.rpc.RPCServer.process_request" title="libgs.rpc.RPCServer.process_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_request</span></code></a>(request,&nbsp;client_address)</td>
 <td>Call finish_request.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.register_function.html#libgs.rpc.RPCServer.register_function" title="libgs.rpc.RPCServer.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_function</span></code></a>(function[,&nbsp;name])</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.register_instance.html#libgs.rpc.RPCServer.register_instance" title="libgs.rpc.RPCServer.register_instance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_instance</span></code></a>(instance[,&nbsp;allow_dotted_names])</td>
-<td></td>
-</tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.register_introspection_functions.html#libgs.rpc.RPCServer.register_introspection_functions" title="libgs.rpc.RPCServer.register_introspection_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_introspection_functions</span></code></a>()</td>
 <td>Registers the XML-RPC introspection methods in the system namespace.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.register_multicall_functions.html#libgs.rpc.RPCServer.register_multicall_functions" title="libgs.rpc.RPCServer.register_multicall_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_multicall_functions</span></code></a>()</td>
 <td>Registers the XML-RPC multicall method in the system namespace.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.serve_forever.html#libgs.rpc.RPCServer.serve_forever" title="libgs.rpc.RPCServer.serve_forever"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serve_forever</span></code></a>([poll_interval])</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.server_activate.html#libgs.rpc.RPCServer.server_activate" title="libgs.rpc.RPCServer.server_activate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_activate</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.server_activate.html#libgs.rpc.RPCServer.server_activate" title="libgs.rpc.RPCServer.server_activate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_activate</span></code></a>()</td>
 <td>Called by constructor to activate the server.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.server_bind.html#libgs.rpc.RPCServer.server_bind" title="libgs.rpc.RPCServer.server_bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_bind</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.server_bind.html#libgs.rpc.RPCServer.server_bind" title="libgs.rpc.RPCServer.server_bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_bind</span></code></a>()</td>
 <td>Called by constructor to bind the socket.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.server_close.html#libgs.rpc.RPCServer.server_close" title="libgs.rpc.RPCServer.server_close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_close</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.server_close.html#libgs.rpc.RPCServer.server_close" title="libgs.rpc.RPCServer.server_close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">server_close</span></code></a>()</td>
 <td>Called to clean-up the server.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.shutdown.html#libgs.rpc.RPCServer.shutdown" title="libgs.rpc.RPCServer.shutdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shutdown</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.shutdown.html#libgs.rpc.RPCServer.shutdown" title="libgs.rpc.RPCServer.shutdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shutdown</span></code></a>()</td>
 <td>Stops the serve_forever loop.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.shutdown_request.html#libgs.rpc.RPCServer.shutdown_request" title="libgs.rpc.RPCServer.shutdown_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shutdown_request</span></code></a>(request)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.shutdown_request.html#libgs.rpc.RPCServer.shutdown_request" title="libgs.rpc.RPCServer.shutdown_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shutdown_request</span></code></a>(request)</td>
 <td>Called to shutdown and close an individual request.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.start.html#libgs.rpc.RPCServer.start" title="libgs.rpc.RPCServer.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.stop.html#libgs.rpc.RPCServer.stop" title="libgs.rpc.RPCServer.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_listMethods.html#libgs.rpc.RPCServer.system_listMethods" title="libgs.rpc.RPCServer.system_listMethods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_listMethods</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_listMethods.html#libgs.rpc.RPCServer.system_listMethods" title="libgs.rpc.RPCServer.system_listMethods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_listMethods</span></code></a>()</td>
 <td>system.listMethods() =&gt; [‘add’, ‘subtract’, ‘multiple’]</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_methodHelp.html#libgs.rpc.RPCServer.system_methodHelp" title="libgs.rpc.RPCServer.system_methodHelp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_methodHelp</span></code></a>(method_name)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_methodHelp.html#libgs.rpc.RPCServer.system_methodHelp" title="libgs.rpc.RPCServer.system_methodHelp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_methodHelp</span></code></a>(method_name)</td>
 <td>system.methodHelp(‘add’) =&gt; “Adds two integers together”</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_methodSignature.html#libgs.rpc.RPCServer.system_methodSignature" title="libgs.rpc.RPCServer.system_methodSignature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_methodSignature</span></code></a>(method_name)</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_methodSignature.html#libgs.rpc.RPCServer.system_methodSignature" title="libgs.rpc.RPCServer.system_methodSignature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_methodSignature</span></code></a>(method_name)</td>
 <td>system.methodSignature(‘add’) =&gt; [double, int, int]</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_multicall.html#libgs.rpc.RPCServer.system_multicall" title="libgs.rpc.RPCServer.system_multicall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_multicall</span></code></a>(call_list)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.system_multicall.html#libgs.rpc.RPCServer.system_multicall" title="libgs.rpc.RPCServer.system_multicall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">system_multicall</span></code></a>(call_list)</td>
 <td>system.multicall([{‘methodName’: ‘add’, ‘params’: [2, 2]}, …]) =&gt; [[4], …]</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.verify_request.html#libgs.rpc.RPCServer.verify_request" title="libgs.rpc.RPCServer.verify_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">verify_request</span></code></a>(request,&nbsp;client_address)</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.verify_request.html#libgs.rpc.RPCServer.verify_request" title="libgs.rpc.RPCServer.verify_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">verify_request</span></code></a>(request,&nbsp;client_address)</td>
 <td>Verify the request.</td>
 </tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.address_family.html#libgs.rpc.RPCServer.address_family" title="libgs.rpc.RPCServer.address_family"><code class="xref py py-obj docutils literal notranslate"><span class="pre">address_family</span></code></a></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.allow_reuse_address.html#libgs.rpc.RPCServer.allow_reuse_address" title="libgs.rpc.RPCServer.allow_reuse_address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allow_reuse_address</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.is_serving.html#libgs.rpc.RPCServer.is_serving" title="libgs.rpc.RPCServer.is_serving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_serving</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.request_queue_size.html#libgs.rpc.RPCServer.request_queue_size" title="libgs.rpc.RPCServer.request_queue_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_queue_size</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.request_queue_size.html#libgs.rpc.RPCServer.request_queue_size" title="libgs.rpc.RPCServer.request_queue_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_queue_size</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.socket_type.html#libgs.rpc.RPCServer.socket_type" title="libgs.rpc.RPCServer.socket_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">socket_type</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.socket_type.html#libgs.rpc.RPCServer.socket_type" title="libgs.rpc.RPCServer.socket_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">socket_type</span></code></a></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.timeout.html#libgs.rpc.RPCServer.timeout" title="libgs.rpc.RPCServer.timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCServer.timeout.html#libgs.rpc.RPCServer.timeout" title="libgs.rpc.RPCServer.timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout</span></code></a></td>
 <td></td>
 </tr>
 </tbody>
@@ -341,7 +368,7 @@ def blah()</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.rpc.RPCServer.close_request.html" class="btn btn-neutral float-right" title="libgs.rpc.RPCServer.close_request" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.rpc.RPCServer.register_function.html" class="btn btn-neutral float-right" title="libgs.rpc.RPCServer.register_function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.rpc.RPCSchedulerServer.stop_schedule.html" class="btn btn-neutral" title="libgs.rpc.RPCSchedulerServer.stop_schedule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

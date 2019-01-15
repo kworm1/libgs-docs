@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.restapi.get_comms" href="libgs.restapi.get_comms.html" />
+    <link rel="next" title="libgs.restapi.RESTAPI" href="libgs.restapi.RESTAPI.html" />
     <link rel="prev" title="libgs.rpc.RPCServer.timeout" href="libgs.rpc.RPCServer.timeout.html" /> 
 
   
@@ -83,15 +83,6 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">libgs.restapi</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.get_comms.html">libgs.restapi.get_comms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.get_file.html">libgs.restapi.get_file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.get_help.html">libgs.restapi.get_help</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.get_mon.html">libgs.restapi.get_mon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.get_passes.html">libgs.restapi.get_passes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.get_rpcapi.html">libgs.restapi.get_rpcapi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.handle_bytes.html">libgs.restapi.handle_bytes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.is_allowed.html">libgs.restapi.is_allowed</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.restapi.nid_to_int_if_possible.html">libgs.restapi.nid_to_int_if_possible</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.restapi.RESTAPI.html">libgs.restapi.RESTAPI</a></li>
 </ul>
 </li>
@@ -178,43 +169,29 @@
 </tr>
 </tbody>
 </table>
-<p>This defines the rest api that permits interaction with a database and arbitrary XMLRPC apis.</p>
-<p class="rubric">Functions</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="libgs.restapi.get_comms.html#libgs.restapi.get_comms" title="libgs.restapi.get_comms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_comms</span></code></a>(*args,&nbsp;**argv)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.restapi.get_file.html#libgs.restapi.get_file" title="libgs.restapi.get_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file</span></code></a>(*args,&nbsp;**argv)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.restapi.get_help.html#libgs.restapi.get_help" title="libgs.restapi.get_help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_help</span></code></a>(*args,&nbsp;**argv)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.restapi.get_mon.html#libgs.restapi.get_mon" title="libgs.restapi.get_mon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mon</span></code></a>(*args,&nbsp;**argv)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.restapi.get_passes.html#libgs.restapi.get_passes" title="libgs.restapi.get_passes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_passes</span></code></a>(*args,&nbsp;**argv)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.restapi.get_rpcapi.html#libgs.restapi.get_rpcapi" title="libgs.restapi.get_rpcapi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_rpcapi</span></code></a>(*args,&nbsp;**argv)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.restapi.handle_bytes.html#libgs.restapi.handle_bytes" title="libgs.restapi.handle_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_bytes</span></code></a>(d,&nbsp;format)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.restapi.is_allowed.html#libgs.restapi.is_allowed" title="libgs.restapi.is_allowed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_allowed</span></code></a>(fn)</td>
-<td>This decorator checks if a resource is allowed</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.restapi.nid_to_int_if_possible.html#libgs.restapi.nid_to_int_if_possible" title="libgs.restapi.nid_to_int_if_possible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nid_to_int_if_possible</span></code></a>(nid)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>The REST-API interface to the libgs databases (and arbitrary XMRPC APIs)</p>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">RESTAPI</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="libgs.restapi.RESTAPI.html#libgs.restapi.RESTAPI" title="libgs.restapi.RESTAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">RESTAPI</span></code></a> for detailed information on the permitted arguments.</p>
+<p>the class, when calling start() will set up a number of API endpoints for access to the
+different libgs databases. It is also possible to connect arbitrary XMLRPC APIs that will
+also be exposed.</p>
+<p>A detailed help with examples for how to use the api is automatically generated
+by the API itself and made available to the user. Just to to <code class="docutils literal notranslate"><span class="pre">hostname:port/api</span></code> to see it,
+where hostname and port can be configured when creating the <a class="reference internal" href="libgs.restapi.RESTAPI.html#libgs.restapi.RESTAPI" title="libgs.restapi.RESTAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">RESTAPI</span></code></a>.</p>
+<p>XMLRPC API endpoints can also, as mentioned, be mapped to the RESTAPI. To do so
+you must pass some information when creating the api. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">RESTAPI</span><span class="p">(</span><span class="n">rpcapi</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;rpc/gs&#39;</span><span class="p">:</span><span class="s1">&#39;http://localhost:10001&#39;</span><span class="p">,</span> <span class="s1">&#39;rpc/sch&#39;</span><span class="p">:</span><span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>will create two additional api endpoints on <code class="docutils literal notranslate"><span class="pre">/api/rpc/gs</span></code> and <code class="docutils literal notranslate"><span class="pre">/api/rpc/sch</span></code> to which it will
+map the <a class="reference internal" href="libgs.groundstation.GroundStation.html#libgs.groundstation.GroundStation" title="libgs.groundstation.GroundStation"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.groundstation.GroundStation</span></code></a> and <a class="reference internal" href="libgs.rpc.RPCSchedulerServer.html#libgs.rpc.RPCSchedulerServer" title="libgs.rpc.RPCSchedulerServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.rpc.RPCSchedulerServer</span></code></a>  XMLRPC API interfaces respectively.</p>
+<p>Note that any XMLRPC interface can be mapped this way so long as it has registered introspection functions.
+See SimpleXMLRPCServer. <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer.register_introspection_functions" title="(in Python v2.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_introspection_functions()</span></code></a>. (you can of course also
+use <a class="reference internal" href="libgs.rpc.RPCServer.html#libgs.rpc.RPCServer" title="libgs.rpc.RPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.rpc.RPCServer</span></code></a> as a drop-in replacement for SimpleXMLRPCServer anytime you make such an api)</p>
 <p class="rubric">Classes</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -237,7 +214,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.restapi.get_comms.html" class="btn btn-neutral float-right" title="libgs.restapi.get_comms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.restapi.RESTAPI.html" class="btn btn-neutral float-right" title="libgs.restapi.RESTAPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.rpc.RPCServer.timeout.html" class="btn btn-neutral" title="libgs.rpc.RPCServer.timeout" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

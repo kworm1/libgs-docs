@@ -24,13 +24,11 @@ libgs.utils.UTCLogFormatter
       ~UTCLogFormatter.format
       
       
-      ~UTCLogFormatter.formatException
       
       
       ~UTCLogFormatter.formatTime
       
       
-      ~UTCLogFormatter.usesTime
       
    
    
@@ -44,5 +42,32 @@ libgs.utils.UTCLogFormatter
    
       ~UTCLogFormatter.use_colour
    
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+      ~UTCLogFormatter.formatException
+      
+      
+      
+      
+      ~UTCLogFormatter.usesTime
+         
+   
+   
+
    
 

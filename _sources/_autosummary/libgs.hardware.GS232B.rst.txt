@@ -18,25 +18,20 @@ libgs.hardware.GS232B
    
       
       
-      ~GS232B.azel_err
       
       
-      ~GS232B.azel_to_antenna_angles
       
       
       ~GS232B.get_azel
       
       
-      ~GS232B.get_azel_rate
       
       
-      ~GS232B.in_pos
       
       
       ~GS232B.set_azel
       
       
-      ~GS232B.set_azel_rate
       
       
       ~GS232B.start
@@ -45,7 +40,6 @@ libgs.hardware.GS232B
       ~GS232B.stop
       
       
-      ~GS232B.stow
       
    
    
@@ -57,19 +51,59 @@ libgs.hardware.GS232B
    .. autosummary::
       :toctree: .
    
-      ~GS232B.BEAMWIDTH
       ~GS232B.GET_DT
-      ~GS232B.MAX_AZ
-      ~GS232B.MAX_EL
-      ~GS232B.MIN_AZ
-      ~GS232B.MIN_EL
       ~GS232B.ROT_SETTLETIME_GET
       ~GS232B.ROT_SETTLETIME_SET
       ~GS232B.SERIAL_PORT_TIMEOUT
       ~GS232B.SET_DT
       ~GS232B.SET_REGULARLY
-      ~GS232B.SLEW_TIMEOUT
       ~GS232B.STALE_TIME
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~GS232B.azel_err
+      
+      
+      ~GS232B.azel_to_antenna_angles
+      
+      
+      
+      
+      ~GS232B.get_azel_rate
+      
+      
+      ~GS232B.in_pos
+      
+      
+      
+      
+      ~GS232B.set_azel_rate
+      
+      
+      
+      
+      
+      
+      ~GS232B.stow
+         
+   
+      ~GS232B.BEAMWIDTH
+      ~GS232B.MAX_AZ
+      ~GS232B.MAX_EL
+      ~GS232B.MIN_AZ
+      ~GS232B.MIN_EL
+      ~GS232B.SLEW_TIMEOUT
       ~GS232B.STOWED_AZ
       ~GS232B.STOWED_EL
       ~GS232B.az
@@ -79,5 +113,6 @@ libgs.hardware.GS232B
       ~GS232B.el
       ~GS232B.name
    
+
    
 

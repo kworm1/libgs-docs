@@ -18,19 +18,15 @@ libgs.utils.UTCLogFormatterHTML
    
       
       
-      ~UTCLogFormatterHTML.converter
       
       
       ~UTCLogFormatterHTML.format
       
       
-      ~UTCLogFormatterHTML.formatException
       
       
-      ~UTCLogFormatterHTML.formatTime
       
       
-      ~UTCLogFormatterHTML.usesTime
       
    
    
@@ -42,7 +38,36 @@ libgs.utils.UTCLogFormatterHTML
    .. autosummary::
       :toctree: .
    
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~UTCLogFormatterHTML.converter
+      
+      
+      
+      
+      ~UTCLogFormatterHTML.formatException
+      
+      
+      ~UTCLogFormatterHTML.formatTime
+      
+      
+      ~UTCLogFormatterHTML.usesTime
+         
+   
       ~UTCLogFormatterHTML.use_colour
    
+
    
 

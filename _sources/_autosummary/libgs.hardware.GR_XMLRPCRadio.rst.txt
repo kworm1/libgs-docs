@@ -30,16 +30,13 @@ libgs.hardware.GR\_XMLRPCRadio
       ~GR_XMLRPCRadio.get_spectrum
       
       
-      ~GR_XMLRPCRadio.record_spectrum
       
       
-      ~GR_XMLRPCRadio.send_bytes
       
       
       ~GR_XMLRPCRadio.set_range_rate
       
       
-      ~GR_XMLRPCRadio.set_recv_callback
       
    
    
@@ -51,10 +48,44 @@ libgs.hardware.GR\_XMLRPCRadio
    .. autosummary::
       :toctree: .
    
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ~GR_XMLRPCRadio.record_spectrum
+      
+      
+      ~GR_XMLRPCRadio.send_bytes
+      
+      
+      
+      
+      ~GR_XMLRPCRadio.set_recv_callback
+         
+   
       ~GR_XMLRPCRadio.err_range_rate_get
       ~GR_XMLRPCRadio.err_range_rate_set
       ~GR_XMLRPCRadio.name
       ~GR_XMLRPCRadio.range_rate
    
+
    
 

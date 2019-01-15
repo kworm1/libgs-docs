@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="libgs.visualisation.Waterfall.add_freq_plot" href="libgs.visualisation.Waterfall.add_freq_plot.html" />
-    <link rel="prev" title="libgs.visualisation.TrackDash.UNITS" href="libgs.visualisation.TrackDash.UNITS.html" /> 
+    <link rel="prev" title="libgs.visualisation.TrackDash.make_doc" href="libgs.visualisation.TrackDash.make_doc.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -194,17 +194,17 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The <a class="reference internal" href="libgs.visualisation.LivePlot.name.html#libgs.visualisation.LivePlot.name" title="libgs.visualisation.LivePlot.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">LivePlot</span> <span class="pre">name</span></code></a></li>
-<li><strong>sample_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – Only affects the figure x-axis which is disabled by default. This parameter
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The <a class="reference internal" href="libgs.visualisation.LivePlot.name.html#libgs.visualisation.LivePlot.name" title="libgs.visualisation.LivePlot.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">LivePlot</span> <span class="pre">name</span></code></a></li>
+<li><strong>sample_rate</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Only affects the figure x-axis which is disabled by default. This parameter
 will therefore normally have no effect.</li>
-<li><strong>freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) – Only affects the figure x-axis which is disabled by default. This parameter
+<li><strong>freq</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – Only affects the figure x-axis which is disabled by default. This parameter
 will therefore normally have no effect.</li>
-<li><strong>wfallwidth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) – The width of the waterfall (in pixels). Note wfallwidth must divide
+<li><strong>wfallwidth</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – The width of the waterfall (in pixels). Note wfallwidth must divide
 the number of channels in the spectrum returned by the radio. I.e. if the radio
 returns a 1024 point fft, then wfallwidth could be 128 since 8 * 128 = 1024.
 A wfallwidth of 129 will cause an exception and error.</li>
-<li><strong>wfallheight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optinal</em>) – The height of the waterfall (in pixels).</li>
-<li><strong>**fig_args</strong> – Additional arguments to pass to the <a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/plotting.html#bokeh.plotting.figure.Figure" title="(in Bokeh v1.0.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.plotting.figure.Figure</span></code></a> constructor.</li>
+<li><strong>wfallheight</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optinal</em>) – The height of the waterfall (in pixels).</li>
+<li><strong>**fig_args</strong> – Additional arguments to pass to the <a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/plotting.html#bokeh.plotting.figure.Figure" title="(in Bokeh v1.0.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.plotting.figure.Figure</span></code></a> constructor.</li>
 </ul>
 </td>
 </tr>
@@ -226,6 +226,15 @@ A wfallwidth of 129 will cause an exception and error.</li>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -258,7 +267,7 @@ A wfallwidth of 129 will cause an exception and error.</li>
         <a href="libgs.visualisation.Waterfall.add_freq_plot.html" class="btn btn-neutral float-right" title="libgs.visualisation.Waterfall.add_freq_plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="libgs.visualisation.TrackDash.UNITS.html" class="btn btn-neutral" title="libgs.visualisation.TrackDash.UNITS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="libgs.visualisation.TrackDash.make_doc.html" class="btn btn-neutral" title="libgs.visualisation.TrackDash.make_doc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

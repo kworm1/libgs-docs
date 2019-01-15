@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.utils.UTCLogFormatterHTML.converter" href="libgs.utils.UTCLogFormatterHTML.converter.html" />
-    <link rel="prev" title="libgs.utils.UTCLogFormatter.use_colour" href="libgs.utils.UTCLogFormatter.use_colour.html" /> 
+    <link rel="next" title="libgs.utils.UTCLogFormatterHTML.format" href="libgs.utils.UTCLogFormatterHTML.format.html" />
+    <link rel="prev" title="libgs.utils.UTCLogFormatter.usesTime" href="libgs.utils.UTCLogFormatter.usesTime.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,8 +93,8 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.utils.RegularCallback.html">libgs.utils.RegularCallback</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.utils.UTCLogFormatter.html">libgs.utils.UTCLogFormatter</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.utils.UTCLogFormatterHTML</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.converter.html">libgs.utils.UTCLogFormatterHTML.converter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.format.html">libgs.utils.UTCLogFormatterHTML.format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.converter.html">libgs.utils.UTCLogFormatterHTML.converter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.formatException.html">libgs.utils.UTCLogFormatterHTML.formatException</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.formatTime.html">libgs.utils.UTCLogFormatterHTML.formatTime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.usesTime.html">libgs.utils.UTCLogFormatterHTML.usesTime</a></li>
@@ -187,7 +187,8 @@
 <dl class="class">
 <dt id="libgs.utils.UTCLogFormatterHTML">
 <em class="property">class </em><code class="descclassname">libgs.utils.</code><code class="descname">UTCLogFormatterHTML</code><span class="sig-paren">(</span><em>fmt=None</em>, <em>datefmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#UTCLogFormatterHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.UTCLogFormatterHTML" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize the formatter with specified format strings.</p>
+<dd><p>A logging formatter that displays records in UTC (zulu) time and uses HTML tags for formatting.</p>
+<p>Initialize the formatter with specified format strings.</p>
 <p>Initialize the formatter either with the specified format string, or a
 default as described above. Allow for specialized date formatting with
 the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
@@ -198,20 +199,8 @@ the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.converter.html#libgs.utils.UTCLogFormatterHTML.converter" title="libgs.utils.UTCLogFormatterHTML.converter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">converter</span></code></a></td>
-<td>gmtime([seconds]) -&gt; (tm_year, tm_mon, tm_mday, tm_hour, tm_min,</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.format.html#libgs.utils.UTCLogFormatterHTML.format" title="libgs.utils.UTCLogFormatterHTML.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a>(record)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.format.html#libgs.utils.UTCLogFormatterHTML.format" title="libgs.utils.UTCLogFormatterHTML.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a>(record)</td>
 <td>Format the specified record as text.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.formatException.html#libgs.utils.UTCLogFormatterHTML.formatException" title="libgs.utils.UTCLogFormatterHTML.formatException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatException</span></code></a>(ei)</td>
-<td>Format and return the specified exception information as a string.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.formatTime.html#libgs.utils.UTCLogFormatterHTML.formatTime" title="libgs.utils.UTCLogFormatterHTML.formatTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatTime</span></code></a>(record[,&nbsp;datefmt])</td>
-<td>Return the creation time of the specified LogRecord as formatted text.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.usesTime.html#libgs.utils.UTCLogFormatterHTML.usesTime" title="libgs.utils.UTCLogFormatterHTML.usesTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">usesTime</span></code></a>()</td>
-<td>Check if the format uses the creation time of the record.</td>
 </tr>
 </tbody>
 </table>
@@ -222,6 +211,27 @@ the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.converter.html#libgs.utils.UTCLogFormatterHTML.converter" title="libgs.utils.UTCLogFormatterHTML.converter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">converter</span></code></a></td>
+<td>gmtime([seconds]) -&gt; (tm_year, tm_mon, tm_mday, tm_hour, tm_min,</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.formatException.html#libgs.utils.UTCLogFormatterHTML.formatException" title="libgs.utils.UTCLogFormatterHTML.formatException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatException</span></code></a>(ei)</td>
+<td>Format and return the specified exception information as a string.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.formatTime.html#libgs.utils.UTCLogFormatterHTML.formatTime" title="libgs.utils.UTCLogFormatterHTML.formatTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatTime</span></code></a>(record[,&nbsp;datefmt])</td>
+<td>Return the creation time of the specified LogRecord as formatted text.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.usesTime.html#libgs.utils.UTCLogFormatterHTML.usesTime" title="libgs.utils.UTCLogFormatterHTML.usesTime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">usesTime</span></code></a>()</td>
+<td>Check if the format uses the creation time of the record.</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.utils.UTCLogFormatterHTML.use_colour.html#libgs.utils.UTCLogFormatterHTML.use_colour" title="libgs.utils.UTCLogFormatterHTML.use_colour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_colour</span></code></a></td>
 <td></td>
 </tr>
@@ -239,10 +249,10 @@ the optional datefmt argument (if omitted, you get the ISO8601 format).</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.utils.UTCLogFormatterHTML.converter.html" class="btn btn-neutral float-right" title="libgs.utils.UTCLogFormatterHTML.converter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.utils.UTCLogFormatterHTML.format.html" class="btn btn-neutral float-right" title="libgs.utils.UTCLogFormatterHTML.format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="libgs.utils.UTCLogFormatter.use_colour.html" class="btn btn-neutral" title="libgs.utils.UTCLogFormatter.use_colour" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="libgs.utils.UTCLogFormatter.usesTime.html" class="btn btn-neutral" title="libgs.utils.UTCLogFormatter.usesTime" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

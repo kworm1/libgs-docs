@@ -170,6 +170,11 @@
 </tr>
 </tbody>
 </table>
+<p>RPC interface to libgs</p>
+<p>Currently implmeents the generic RPCServer type as well as the
+rpc interface to the scheduler.</p>
+<p>The latter is a deprecation and should be moved directly into the
+Scheduler class.</p>
 <p class="rubric">Classes</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -178,10 +183,10 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.html#libgs.rpc.RPCSchedulerServer" title="libgs.rpc.RPCSchedulerServer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RPCSchedulerServer</span></code></a>(gs[,&nbsp;addr,&nbsp;port,&nbsp;…])</td>
-<td>This class sets up an RPC server that can be contacted remotely in order to load and execute a schedule (it will create a local scheduler with that) schedule and execute it.</td>
+<td>XMLRPC interface to Scheduler class</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCServer.html#libgs.rpc.RPCServer" title="libgs.rpc.RPCServer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RPCServer</span></code></a>(uri[,&nbsp;logRequests,&nbsp;allow_none,&nbsp;start])</td>
-<td>Drop-in replacement for SimpleXMLRPCServer that supports kwargs.</td>
+<td>Drop-in replacement for <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleXMLRPCServer.SimpleXMLRPCServer</span></code></a> that supports kwargs.</td>
 </tr>
 </tbody>
 </table>

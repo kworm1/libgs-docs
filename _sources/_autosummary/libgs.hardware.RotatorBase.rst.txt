@@ -67,3 +67,33 @@ libgs.hardware.RotatorBase
    
    
 
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+         
+   
+   
+
+   
+

@@ -173,9 +173,30 @@
 <dl class="class">
 <dt id="libgs.rpc.RPCSchedulerServer">
 <em class="property">class </em><code class="descclassname">libgs.rpc.</code><code class="descname">RPCSchedulerServer</code><span class="sig-paren">(</span><em>gs</em>, <em>addr='localhost'</em>, <em>port=8000</em>, <em>enforce_signoffs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/rpc.html#RPCSchedulerServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.rpc.RPCSchedulerServer" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class sets up an RPC server that can be contacted remotely in order
+<dd><p>XMLRPC interface to Scheduler class</p>
+<p>This class sets up an RPC server that can be contacted remotely in order
 to load and execute a schedule (it will create a local scheduler with that)
 schedule and execute it.</p>
+<p>Most of the methods here are directly wrapping Scheduler methods, so please
+see <a class="reference internal" href="libgs.scheduler.Scheduler.html#libgs.scheduler.Scheduler" title="libgs.scheduler.Scheduler"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.scheduler.Scheduler</span></code></a> for details.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Move into Scheduler class (in the same way the ground station RPC interface is in the groundstaiton class now)</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gs</strong> – The groundstation object to interface with</li>
+<li><strong>addr</strong> – The address to bind to</li>
+<li><strong>port</strong> – The port to bind to</li>
+<li><strong>enforce_signoffs</strong> – (optional) Number of signoffs to enforce</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -184,23 +205,32 @@ schedule and execute it.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.disable.html#libgs.rpc.RPCSchedulerServer.disable" title="libgs.rpc.RPCSchedulerServer.disable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable</span></code></a>()</td>
-<td></td>
+<td>Disable scheduler.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.enable.html#libgs.rpc.RPCSchedulerServer.enable" title="libgs.rpc.RPCSchedulerServer.enable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable</span></code></a>()</td>
-<td></td>
+<td>Enable scheduler.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.execute_schedule.html#libgs.rpc.RPCSchedulerServer.execute_schedule" title="libgs.rpc.RPCSchedulerServer.execute_schedule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute_schedule</span></code></a>(schedule[,&nbsp;…])</td>
-<td></td>
+<td>Create a new scheduler, load the attached schedule and execute it.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.scheduler_state.html#libgs.rpc.RPCSchedulerServer.scheduler_state" title="libgs.rpc.RPCSchedulerServer.scheduler_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scheduler_state</span></code></a>()</td>
-<td></td>
+<td>Get the scheduler state.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.start.html#libgs.rpc.RPCSchedulerServer.start" title="libgs.rpc.RPCSchedulerServer.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>()</td>
-<td></td>
+<td>Start XMLRPC server in a new thread</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.rpc.RPCSchedulerServer.stop_schedule.html#libgs.rpc.RPCSchedulerServer.stop_schedule" title="libgs.rpc.RPCSchedulerServer.stop_schedule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_schedule</span></code></a>()</td>
-<td></td>
+<td>Stop the scheduler.</td>
 </tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
 </tbody>
 </table>
 </dd></dl>

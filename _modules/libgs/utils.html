@@ -189,15 +189,15 @@
 <span class="sd">:author: Kjetil Wormnes</span>
 
 
-<span class="sd">This module contains utilities and settings for the libgs package.</span>
+<span class="sd">This module contains utilities and settings for the libgs package. </span>
 
+<span class="sd">Functions and classes from utils can be imported to provide useful and common functionality across the application.</span>
 
-<span class="sd">Examples</span>
-<span class="sd">---------</span>
+<span class="sd">.. note::</span>
 
-<span class="sd">.. todo:</span>
-<span class="sd">    Add examples to libgs.utils</span>
-
+<span class="sd">   Implementers should take particular note of :func:`wait_loop` which will allow you to wait</span>
+<span class="sd">   for events, or perform an equivalent of time.sleep while aborting in case of termination events. The blocking</span>
+<span class="sd">   time.sleep should be avoided as much as possible.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
@@ -214,12 +214,13 @@
 <span class="kn">import</span> <span class="nn">ephem</span>
 <span class="kn">from</span> <span class="nn">libgs_ops.rpc</span> <span class="k">import</span> <span class="n">RPCClient</span>
 
-
-<span class="n">abort_all</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
 
+
+<span class="c1">#: abort_all is an importanle event that is being used all through</span>
+<span class="c1">#: libgs. When set all wait_loops will exit.</span>
+<span class="n">abort_all</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
 
 
 <span class="c1">##########################</span>
@@ -253,14 +254,13 @@
 <span class="c1">##########################</span>
 
 
+
 <div class="viewcode-block" id="Defaults"><a class="viewcode-back" href="../../_autosummary/libgs.utils.Defaults.html#libgs.utils.Defaults">[docs]</a><span class="k">class</span> <span class="nc">Defaults</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Defines default values used by the different classes.</span>
 
-<span class="sd">    .. note:</span>
-
+<span class="sd">    .. note::</span>
 <span class="sd">        Many (probably most) of these values are configurable in other ways (through class interfaces, constructors, etc...)</span>
-
 <span class="sd">        This class just holds all the fallback values (defaults).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -426,9 +426,9 @@
     <span class="n">RECORD_SPECTRA_MAX_LEN</span> <span class="o">=</span> <span class="mi">900</span>    <span class="c1">#: If spectrum recording enabled, maximum number of spectra to record in a single pass</span>
     <span class="n">RECORD_SPECTRA_DT</span> <span class="o">=</span> <span class="mf">1.0</span>         <span class="c1">#: If spectrum recording enabled, time delay between subsequent recorded spectra (in seconds)</span>
 
-    <span class="c1">#</span>
-    <span class="c1"># Max allowed dt (in seconds) in data used for gs tracking</span>
-    <span class="c1">#</span>
+    <span class="c1">#:</span>
+    <span class="c1">#: Max allowed dt (in seconds) in data used for gs tracking</span>
+    <span class="c1">#:</span>
     <span class="n">MAX_TRACK_DT</span> <span class="o">=</span> <span class="mf">1.0</span>
 
     <span class="c1">#:</span>
@@ -442,8 +442,8 @@
     <span class="c1">#</span>
     <span class="c1"># Visualisation waterfalls</span>
     <span class="c1">#</span>
-    <span class="n">WFALL_COLORMAP</span> <span class="o">=</span> <span class="s1">&#39;Viridis256&#39;</span> <span class="c1">#: Bokeh colormap. see https://bokeh.pydata.org/en/0.12.6/docs/reference/palettes.html</span>
-    <span class="n">WFALL_JPG_COLORMAP</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span> <span class="c1">#: Matplotlib colormap. See: https://matplotlib.org/examples/color/colormaps_reference.html</span>
+    <span class="n">WFALL_COLORMAP</span> <span class="o">=</span> <span class="s1">&#39;Viridis256&#39;</span> <span class="c1">#: Bokeh colormap, see bokeh.pydata.org/en/0.12.6/docs/reference/palettes.html</span>
+    <span class="n">WFALL_JPG_COLORMAP</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span> <span class="c1">#: Matplotlib colormap, see matplotlib.org/examples/color/colormaps_reference.html</span>
     <span class="n">WFALL_JPG_WIDTH</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1">#: Width of each recorded waterfall plot (in pixels) if dpi=100</span>
     <span class="n">WFALL_JPG_HEIGHT</span> <span class="o">=</span> <span class="mi">600</span> <span class="c1">#: Height of each recorded waterfall plot(in pixels) if dpi = 100</span>
     <span class="n">WFALL_JPG_WIDTH_EXTRA</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1">#: Extra width of each recorded waterfall plot in pixels if dpi = 100</span>
@@ -464,7 +464,7 @@
 
 <div class="viewcode-block" id="raise_if_aborted"><a class="viewcode-back" href="../../_autosummary/libgs.utils.raise_if_aborted.html#libgs.utils.raise_if_aborted">[docs]</a><span class="k">def</span> <span class="nf">raise_if_aborted</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This method will raise an exception if the abort_all global event has been set.</span>
+<span class="sd">    Raises an exception if the abort_all global event has been set.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">abort_all</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
         <span class="k">raise</span> <span class="n">AbortAllException</span><span class="p">(</span><span class="s2">&quot;abort_all event has been set&quot;</span><span class="p">)</span></div>
@@ -472,6 +472,17 @@
 
 
 <div class="viewcode-block" id="RegularCallback"><a class="viewcode-back" href="../../_autosummary/libgs.utils.RegularCallback.html#libgs.utils.RegularCallback">[docs]</a><span class="k">class</span> <span class="nc">RegularCallback</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Invokes a callback at regular intervals.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; def callback():</span>
+<span class="sd">    &gt;&gt;&gt;    print(&quot;Called callback&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; rb = RegularCallback(callback, 5)</span>
+<span class="sd">    &gt;&gt;&gt; rb.start()</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">min_interval</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -536,9 +547,15 @@
             <span class="c1">#time.sleep(max(self.delay - (time.time() - t0), self.min_interval))</span>
 
 <div class="viewcode-block" id="RegularCallback.start"><a class="viewcode-back" href="../../_autosummary/libgs.utils.RegularCallback.start.html#libgs.utils.RegularCallback.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start the regular callback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RegularCallback.stop"><a class="viewcode-back" href="../../_autosummary/libgs.utils.RegularCallback.stop.html#libgs.utils.RegularCallback.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the regular callback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stop_thread</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>
 
@@ -546,10 +563,28 @@
 
 <div class="viewcode-block" id="conv_time"><a class="viewcode-back" href="../../_autosummary/libgs.utils.conv_time.html#libgs.utils.conv_time">[docs]</a><span class="k">def</span> <span class="nf">conv_time</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">,</span> <span class="n">float_t</span><span class="o">=</span><span class="s1">&#39;julian&#39;</span><span class="p">,</span> <span class="n">ignore_ambig_types</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert between different time/date types used in libgs</span>
+
 <span class="sd">    There are a number of different date formats used around libgs</span>
 <span class="sd">    ephem.Date, datetime, pandas.Timestamp to mention some.</span>
 <span class="sd">    Also modified Julian time and various string formats.</span>
 <span class="sd">    </span>
+<span class="sd">    Time formats that can be converted:</span>
+
+<span class="sd">    ========== ==========================</span>
+<span class="sd">    iso        string in `ISO 8601 &lt;https://en.wikipedia.org/wiki/ISO_8601&gt;`_ time format. E.g. &quot;2019-01-14T21:49:12.321Z&quot;</span>
+<span class="sd">    julian     float representing juilan time (days since 12:00:00 1 Jan 2713 BC in the Julian calendar)</span>
+<span class="sd">    unix       integer representing UNIX time (seconds since 00:00:00 1 Jan 1970)</span>
+<span class="sd">    datetime   python :class:`datetime.datetime` class</span>
+<span class="sd">    pandas     :class:`pandas.Timestamp` class</span>
+<span class="sd">    ephem      :class:`ephem.Date` class</span>
+<span class="sd">    ========== ==========================</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        to (str):           One of the abovementioned formats</span>
+<span class="sd">        float_t (str):      If converting from a numeric, specify one if it is &#39;julian&#39; or &#39;unix&#39;, can be omitted if converting from other formats</span>
+<span class="sd">        ignore_ambig_types: Only allow conversions to non-ambigous types (i.e. none of the numeric or string formats)</span>
+
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ignore_ambig_types</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ephem</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)):</span>
@@ -566,7 +601,6 @@
             <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;julian&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">float_t</span> <span class="o">==</span> <span class="s1">&#39;unix&#39;</span><span class="p">:</span>
             <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;unix&quot;</span> <span class="p">)</span>
-            <span class="c1">#d2 = pd.to_datetime(datetime.fromtimestamp(d))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unknown float  time type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">float_t</span><span class="p">))</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
@@ -606,6 +640,27 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic waiting loop. It will wait for any event</span>
 <span class="sd">    (of type threading.Event) to be set, or for any callable to return True</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; ev = wait_loop([fn, event], timeout=10)</span>
+<span class="sd">    &gt;&gt;&gt; if ev is None:</span>
+<span class="sd">    &gt;&gt;&gt;    print(&quot;Timeout&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; elif fn in ev:</span>
+<span class="sd">    &gt;&gt;&gt;    print(&quot;fn callable returned true)</span>
+<span class="sd">    &gt;&gt;&gt; elif event in ev:</span>
+<span class="sd">    &gt;&gt;&gt;    print(&quot;threading event became true)</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        events_or_callables (list(callable or threading.Event)):</span>
+<span class="sd">            A list of events or callables to monitor. If any return true the wait loop will be broken</span>
+<span class="sd">        timeout (int): Maximum number of seconds to wait until breaking regardless</span>
+<span class="sd">        dt (float): The internal sleep interval between checking events (default = 0.1 sec)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of the events that have returned true. In case of timeout returns None. An exception will</span>
+<span class="sd">        be raised if the global abort_event has been set.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
@@ -640,8 +695,9 @@
 
 <div class="viewcode-block" id="safe_sleep"><a class="viewcode-back" href="../../_autosummary/libgs.utils.safe_sleep.html#libgs.utils.safe_sleep">[docs]</a><span class="k">def</span> <span class="nf">safe_sleep</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    safe_sleep uses a subset of the wait_loop capabilities to implement an anologe to the time.sleep() function.</span>
+<span class="sd">    Sleep for a specified number of seconds.</span>
 
+<span class="sd">    safe_sleep uses a subset of the :func:`wait_loop` capabilities to implement an anologe to the time.sleep() function. </span>
 <span class="sd">    The advantage is that it will raise an exception if the global abort event gets set, and as such is safe to</span>
 <span class="sd">    use in thread loops that need to exit on adfa-gs exit.</span>
 
@@ -651,6 +707,9 @@
 
 
 <div class="viewcode-block" id="UTCLogFormatter"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatter.html#libgs.utils.UTCLogFormatter">[docs]</a><span class="k">class</span> <span class="nc">UTCLogFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A logging formatter that displays records in UTC (zulu) time</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">converter</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span>
     <span class="n">use_colour</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">USE_LOG_COLOUR</span>
 
@@ -671,6 +730,10 @@
         <span class="k">return</span> <span class="n">s</span></div></div>
 
 <div class="viewcode-block" id="UTCLogFormatterHTML"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatterHTML.html#libgs.utils.UTCLogFormatterHTML">[docs]</a><span class="k">class</span> <span class="nc">UTCLogFormatterHTML</span><span class="p">(</span><span class="n">UTCLogFormatter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A logging formatter that displays records in UTC (zulu) time and uses HTML tags for formatting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
 
 <div class="viewcode-block" id="UTCLogFormatterHTML.format"><a class="viewcode-back" href="../../_autosummary/libgs.utils.UTCLogFormatterHTML.format.html#libgs.utils.UTCLogFormatterHTML.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
 
@@ -681,7 +744,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&lt;pre style=&quot;&#39;</span>
 
-        <span class="c1">#s += &#39;max-width: 100%;overflow-x: auto;&quot;&gt;{}&lt;/pre&gt;\n&#39;.format(frec)</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/pre&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frec</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">s</span></div></div>
 
@@ -730,31 +792,6 @@
 
     <span class="c1"># create logger</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-
-    <span class="c1"># create formatter</span>
-
-    <span class="c1"># class MyFormatter(logging.Formatter):</span>
-    <span class="c1">#     converter = time.gmtime</span>
-    <span class="c1">#     use_colour = Defaults.USE_LOG_COLOUR</span>
-    <span class="c1">#</span>
-    <span class="c1">#     def formatTime(self, record, datefmt=None):</span>
-    <span class="c1">#         ct = self.converter(record.created)</span>
-    <span class="c1">#         t = time.strftime(&quot;%Y-%m-%dT%H:%M:%S&quot;, ct)</span>
-    <span class="c1">#         s = &quot;%s.%03dZ&quot; % (t, record.msecs)</span>
-    <span class="c1">#</span>
-    <span class="c1">#         return s</span>
-    <span class="c1">#</span>
-    <span class="c1">#     def format(self, record):</span>
-    <span class="c1">#</span>
-    <span class="c1">#         s =  super(MyFormatter, self).format(record)</span>
-    <span class="c1">#</span>
-    <span class="c1">#         if record.levelno &gt;= logging.ERROR and self.use_colour:</span>
-    <span class="c1">#             s = &quot;\033[1;31m%s\033[1;0m&quot;%(s)</span>
-    <span class="c1">#</span>
-    <span class="c1">#         return s</span>
-
-
-
     <span class="n">formatter</span> <span class="o">=</span> <span class="n">UTCLogFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
 
     <span class="c1"># create console handler and set level to debug</span>
@@ -792,6 +829,9 @@
 
 
 <div class="viewcode-block" id="schedule_regular_callback"><a class="viewcode-back" href="../../_autosummary/libgs.utils.schedule_regular_callback.html#libgs.utils.schedule_regular_callback">[docs]</a><span class="k">def</span> <span class="nf">schedule_regular_callback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">delay</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A wrapper for :class:`RegularCallback`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cb</span> <span class="o">=</span>  <span class="n">RegularCallback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">delay</span><span class="p">)</span>
     <span class="n">cb</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">cb</span></div>
@@ -818,9 +858,18 @@
 
 
 <div class="viewcode-block" id="bytes2prettyhex"><a class="viewcode-back" href="../../_autosummary/libgs.utils.bytes2prettyhex.html#libgs.utils.bytes2prettyhex">[docs]</a><span class="k">def</span> <span class="nf">bytes2prettyhex</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">whitespacelen</span><span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">LOG_STRING_LEN</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to convert a bytearray to a pretty printed hex string. </span>
 
-    <span class="c1">#log.info(st)</span>
+<span class="sd">    Example:</span>
 
+<span class="sd">    &gt;&gt;&gt; print(bytes2prettyhex(range(59), whitespacelen=10))</span>
+<span class="sd">          000000  00-01-02-03-04-05-06-07-08-09-0A-0B-0C-0D-0E-0F</span>
+<span class="sd">          000010  10-11-12-13-14-15-16-17-18-19-1A-1B-1C-1D-1E-1F</span>
+<span class="sd">          000020  20-21-22-23-24-25-26-27-28-29-2A-2B-2C-2D-2E-2F</span>
+<span class="sd">          000030  30-31-32-33-34-35-36-37-38-39-3A</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">st</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">data_array</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -832,11 +881,29 @@
     <span class="k">return</span> <span class="n">st</span></div>
 
 <div class="viewcode-block" id="bytes2hex"><a class="viewcode-back" href="../../_autosummary/libgs.utils.bytes2hex.html#libgs.utils.bytes2hex">[docs]</a><span class="k">def</span> <span class="nf">bytes2hex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to convert a bytearray to a hex string AA-BB-CC-...</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; bytes2hex([0xaa, 0xbb, 0x00, 0x01, 0x10])</span>
+<span class="sd">    &#39;AA-BB-00-01-10&#39;    </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">return</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%02X</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]))</span></div>
 
 
 <div class="viewcode-block" id="hex2bytes"><a class="viewcode-back" href="../../_autosummary/libgs.utils.hex2bytes.html#libgs.utils.hex2bytes">[docs]</a><span class="k">def</span> <span class="nf">hex2bytes</span><span class="p">(</span><span class="n">hexstr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to convert a hex string (AA-BB-CC-...) to a python bytearray</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; hex2bytes(&quot;AA-BB-00-01-10&quot;)</span>
+<span class="sd">    bytearray(b&#39;\\xaa\\xbb\\x00\\x01\\x10&#39;)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">hexstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">bytearray</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]))</span></div>
 
@@ -844,9 +911,9 @@
 
 <div class="viewcode-block" id="XMLRPCTimeoutServerProxy"><a class="viewcode-back" href="../../_autosummary/libgs.utils.XMLRPCTimeoutServerProxy.html#libgs.utils.XMLRPCTimeoutServerProxy">[docs]</a><span class="k">class</span> <span class="nc">XMLRPCTimeoutServerProxy</span><span class="p">(</span><span class="n">RPCClient</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    .. warning::</span>
-
-<span class="sd">        Deprecated in favor of RPCClient. The implmeentation is now just that this is an alias for RPCClient</span>
+<span class="sd">    Deprecated in favor of :class:`libgs_ops.rpc.RPCClient`. </span>
+<span class="sd">    </span>
+<span class="sd">    The implmentation is now just that this is an alias for RPCClient</span>
 
 <span class="sd">    .. todo::</span>
 
@@ -856,15 +923,8 @@
 
 
 
-
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">setup_logger</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">cons_loglvl</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-    <span class="c1">#m = Monitor(dt = 1)</span>
-    <span class="c1">#fn = lambda: x</span>
-    <span class="c1">#alfn = lambda r: &#39;RED&#39; if r &lt; 0 else &#39;GREEN&#39;</span>
-    <span class="c1">#m.register_monitor(&#39;blah test&#39;, 5, fn, alert_fn = alfn)</span>
-    <span class="c1">#m.start()</span>
 </pre></div>
 
            </div>

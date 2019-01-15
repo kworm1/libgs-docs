@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.groundstation.UILogHandler.acquire" href="libgs.groundstation.UILogHandler.acquire.html" />
+    <link rel="next" title="libgs.groundstation.UILogHandler.emit" href="libgs.groundstation.UILogHandler.emit.html" />
     <link rel="prev" title="libgs.groundstation.GroundStationBase.scheduler" href="libgs.groundstation.GroundStationBase.scheduler.html" /> 
 
   
@@ -89,11 +89,12 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GroundStation.html">libgs.groundstation.GroundStation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.groundstation.GroundStationBase.html">libgs.groundstation.GroundStationBase</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.groundstation.UILogHandler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.emit.html">libgs.groundstation.UILogHandler.emit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.test.html">libgs.groundstation.UILogHandler.test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.acquire.html">libgs.groundstation.UILogHandler.acquire</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.addFilter.html">libgs.groundstation.UILogHandler.addFilter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.close.html">libgs.groundstation.UILogHandler.close</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.createLock.html">libgs.groundstation.UILogHandler.createLock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.emit.html">libgs.groundstation.UILogHandler.emit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.filter.html">libgs.groundstation.UILogHandler.filter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.flush.html">libgs.groundstation.UILogHandler.flush</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.format.html">libgs.groundstation.UILogHandler.format</a></li>
@@ -105,7 +106,6 @@
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.setFormatter.html">libgs.groundstation.UILogHandler.setFormatter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.setLevel.html">libgs.groundstation.UILogHandler.setLevel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.set_name.html">libgs.groundstation.UILogHandler.set_name</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.test.html">libgs.groundstation.UILogHandler.test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.UILogHandler.name.html">libgs.groundstation.UILogHandler.name</a></li>
 </ul>
 </li>
@@ -194,6 +194,30 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.emit.html#libgs.groundstation.UILogHandler.emit" title="libgs.groundstation.UILogHandler.emit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emit</span></code></a>(record)</td>
+<td>Do whatever it takes to actually log the specified logging record.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.test.html#libgs.groundstation.UILogHandler.test" title="libgs.groundstation.UILogHandler.test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test</span></code></a>(m)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.acquire.html#libgs.groundstation.UILogHandler.acquire" title="libgs.groundstation.UILogHandler.acquire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acquire</span></code></a>()</td>
 <td>Acquire the I/O thread lock.</td>
 </tr>
@@ -206,55 +230,40 @@
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.createLock.html#libgs.groundstation.UILogHandler.createLock" title="libgs.groundstation.UILogHandler.createLock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createLock</span></code></a>()</td>
 <td>Acquire a thread lock for serializing access to the underlying I/O.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.emit.html#libgs.groundstation.UILogHandler.emit" title="libgs.groundstation.UILogHandler.emit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emit</span></code></a>(record)</td>
-<td>Do whatever it takes to actually log the specified logging record.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.filter.html#libgs.groundstation.UILogHandler.filter" title="libgs.groundstation.UILogHandler.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(record)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.filter.html#libgs.groundstation.UILogHandler.filter" title="libgs.groundstation.UILogHandler.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(record)</td>
 <td>Determine if a record is loggable by consulting all the filters.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.flush.html#libgs.groundstation.UILogHandler.flush" title="libgs.groundstation.UILogHandler.flush"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flush</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.flush.html#libgs.groundstation.UILogHandler.flush" title="libgs.groundstation.UILogHandler.flush"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flush</span></code></a>()</td>
 <td>Ensure all logging output has been flushed.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.format.html#libgs.groundstation.UILogHandler.format" title="libgs.groundstation.UILogHandler.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a>(record)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.format.html#libgs.groundstation.UILogHandler.format" title="libgs.groundstation.UILogHandler.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a>(record)</td>
 <td>Format the specified record.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.get_name.html#libgs.groundstation.UILogHandler.get_name" title="libgs.groundstation.UILogHandler.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.get_name.html#libgs.groundstation.UILogHandler.get_name" title="libgs.groundstation.UILogHandler.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.handle.html#libgs.groundstation.UILogHandler.handle" title="libgs.groundstation.UILogHandler.handle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle</span></code></a>(record)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.handle.html#libgs.groundstation.UILogHandler.handle" title="libgs.groundstation.UILogHandler.handle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle</span></code></a>(record)</td>
 <td>Conditionally emit the specified logging record.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.handleError.html#libgs.groundstation.UILogHandler.handleError" title="libgs.groundstation.UILogHandler.handleError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handleError</span></code></a>(record)</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.handleError.html#libgs.groundstation.UILogHandler.handleError" title="libgs.groundstation.UILogHandler.handleError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handleError</span></code></a>(record)</td>
 <td>Handle errors which occur during an emit() call.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.release.html#libgs.groundstation.UILogHandler.release" title="libgs.groundstation.UILogHandler.release"><code class="xref py py-obj docutils literal notranslate"><span class="pre">release</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.release.html#libgs.groundstation.UILogHandler.release" title="libgs.groundstation.UILogHandler.release"><code class="xref py py-obj docutils literal notranslate"><span class="pre">release</span></code></a>()</td>
 <td>Release the I/O thread lock.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.removeFilter.html#libgs.groundstation.UILogHandler.removeFilter" title="libgs.groundstation.UILogHandler.removeFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeFilter</span></code></a>(filter)</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.removeFilter.html#libgs.groundstation.UILogHandler.removeFilter" title="libgs.groundstation.UILogHandler.removeFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeFilter</span></code></a>(filter)</td>
 <td>Remove the specified filter from this handler.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.setFormatter.html#libgs.groundstation.UILogHandler.setFormatter" title="libgs.groundstation.UILogHandler.setFormatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFormatter</span></code></a>(fmt)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.setFormatter.html#libgs.groundstation.UILogHandler.setFormatter" title="libgs.groundstation.UILogHandler.setFormatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFormatter</span></code></a>(fmt)</td>
 <td>Set the formatter for this handler.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.setLevel.html#libgs.groundstation.UILogHandler.setLevel" title="libgs.groundstation.UILogHandler.setLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLevel</span></code></a>(level)</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.setLevel.html#libgs.groundstation.UILogHandler.setLevel" title="libgs.groundstation.UILogHandler.setLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLevel</span></code></a>(level)</td>
 <td>Set the logging level of this handler.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.set_name.html#libgs.groundstation.UILogHandler.set_name" title="libgs.groundstation.UILogHandler.set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_name</span></code></a>(name)</td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.set_name.html#libgs.groundstation.UILogHandler.set_name" title="libgs.groundstation.UILogHandler.set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_name</span></code></a>(name)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.test.html#libgs.groundstation.UILogHandler.test" title="libgs.groundstation.UILogHandler.test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test</span></code></a>(m)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.name.html#libgs.groundstation.UILogHandler.name" title="libgs.groundstation.UILogHandler.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.UILogHandler.name.html#libgs.groundstation.UILogHandler.name" title="libgs.groundstation.UILogHandler.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
 <td></td>
 </tr>
 </tbody>
@@ -271,7 +280,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.groundstation.UILogHandler.acquire.html" class="btn btn-neutral float-right" title="libgs.groundstation.UILogHandler.acquire" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.groundstation.UILogHandler.emit.html" class="btn btn-neutral float-right" title="libgs.groundstation.UILogHandler.emit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.groundstation.GroundStationBase.scheduler.html" class="btn btn-neutral" title="libgs.groundstation.GroundStationBase.scheduler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

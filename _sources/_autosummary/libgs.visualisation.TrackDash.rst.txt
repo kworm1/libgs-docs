@@ -18,13 +18,10 @@ libgs.visualisation.TrackDash
    
       
       
-      ~TrackDash.add_plot
       
       
-      ~TrackDash.get_plot
       
       
-      ~TrackDash.make_doc
       
    
    
@@ -38,5 +35,29 @@ libgs.visualisation.TrackDash
    
       ~TrackDash.UNITS
    
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~TrackDash.add_plot
+      
+      
+      ~TrackDash.get_plot
+      
+      
+      ~TrackDash.make_doc
+         
+   
+   
+
    
 

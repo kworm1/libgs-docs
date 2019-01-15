@@ -33,3 +33,24 @@ libgs.visualisation.BokehDash
    
    
 
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+         
+   
+   
+
+   
+

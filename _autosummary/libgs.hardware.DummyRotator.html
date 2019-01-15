@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.hardware.DummyRotator.azel_err" href="libgs.hardware.DummyRotator.azel_err.html" />
+    <link rel="next" title="libgs.hardware.DummyRotator.get_azel" href="libgs.hardware.DummyRotator.get_azel.html" />
     <link rel="prev" title="libgs.hardware" href="libgs.hardware.html" /> 
 
   
@@ -85,12 +85,12 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.hardware.DummyRotator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.get_azel.html">libgs.hardware.DummyRotator.get_azel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.set_azel.html">libgs.hardware.DummyRotator.set_azel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.azel_err.html">libgs.hardware.DummyRotator.azel_err</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.azel_to_antenna_angles.html">libgs.hardware.DummyRotator.azel_to_antenna_angles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.get_azel.html">libgs.hardware.DummyRotator.get_azel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.get_azel_rate.html">libgs.hardware.DummyRotator.get_azel_rate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.in_pos.html">libgs.hardware.DummyRotator.in_pos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.set_azel.html">libgs.hardware.DummyRotator.set_azel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.set_azel_rate.html">libgs.hardware.DummyRotator.set_azel_rate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.stow.html">libgs.hardware.DummyRotator.stow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.BEAMWIDTH.html">libgs.hardware.DummyRotator.BEAMWIDTH</a></li>
@@ -202,29 +202,11 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.azel_err.html#libgs.hardware.DummyRotator.azel_err" title="libgs.hardware.DummyRotator.azel_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">azel_err</span></code></a>(az,&nbsp;el)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.azel_to_antenna_angles.html#libgs.hardware.DummyRotator.azel_to_antenna_angles" title="libgs.hardware.DummyRotator.azel_to_antenna_angles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">azel_to_antenna_angles</span></code></a>(pdat[,&nbsp;cont_track_method])</td>
-<td>From a table of az/el pointings, compute a new table that minimises the amount of movements while keeping the off-pointing within the antenna beamwidth</td>
-</tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.get_azel.html#libgs.hardware.DummyRotator.get_azel" title="libgs.hardware.DummyRotator.get_azel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_azel</span></code></a>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.get_azel_rate.html#libgs.hardware.DummyRotator.get_azel_rate" title="libgs.hardware.DummyRotator.get_azel_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_azel_rate</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.in_pos.html#libgs.hardware.DummyRotator.in_pos" title="libgs.hardware.DummyRotator.in_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">in_pos</span></code></a>([az,&nbsp;el])</td>
-<td>Check if antenna is in position</td>
-</tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.set_azel.html#libgs.hardware.DummyRotator.set_azel" title="libgs.hardware.DummyRotator.set_azel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_azel</span></code></a>(az,&nbsp;el,&nbsp;*args,&nbsp;**kwargs)</td>
 <td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.set_azel_rate.html#libgs.hardware.DummyRotator.set_azel_rate" title="libgs.hardware.DummyRotator.set_azel_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_azel_rate</span></code></a>(az,&nbsp;el,&nbsp;block)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.stow.html#libgs.hardware.DummyRotator.stow" title="libgs.hardware.DummyRotator.stow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stow</span></code></a>([block])</td>
-<td>Stow antenna</td>
 </tr>
 </tbody>
 </table>
@@ -235,6 +217,33 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.azel_err.html#libgs.hardware.DummyRotator.azel_err" title="libgs.hardware.DummyRotator.azel_err"><code class="xref py py-obj docutils literal notranslate"><span class="pre">azel_err</span></code></a>(az,&nbsp;el)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.azel_to_antenna_angles.html#libgs.hardware.DummyRotator.azel_to_antenna_angles" title="libgs.hardware.DummyRotator.azel_to_antenna_angles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">azel_to_antenna_angles</span></code></a>(pdat[,&nbsp;cont_track_method])</td>
+<td>From a table of az/el pointings, compute a new table that minimises the amount of movements while keeping the off-pointing within the antenna beamwidth</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.get_azel_rate.html#libgs.hardware.DummyRotator.get_azel_rate" title="libgs.hardware.DummyRotator.get_azel_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_azel_rate</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.in_pos.html#libgs.hardware.DummyRotator.in_pos" title="libgs.hardware.DummyRotator.in_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">in_pos</span></code></a>([az,&nbsp;el])</td>
+<td>Check if antenna is in position</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.set_azel_rate.html#libgs.hardware.DummyRotator.set_azel_rate" title="libgs.hardware.DummyRotator.set_azel_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_azel_rate</span></code></a>(az,&nbsp;el,&nbsp;block)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.DummyRotator.stow.html#libgs.hardware.DummyRotator.stow" title="libgs.hardware.DummyRotator.stow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stow</span></code></a>([block])</td>
+<td>Stow antenna</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.BEAMWIDTH.html#libgs.hardware.DummyRotator.BEAMWIDTH" title="libgs.hardware.DummyRotator.BEAMWIDTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BEAMWIDTH</span></code></a></td>
 <td></td>
 </tr>
@@ -291,7 +300,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.hardware.DummyRotator.azel_err.html" class="btn btn-neutral float-right" title="libgs.hardware.DummyRotator.azel_err" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.hardware.DummyRotator.get_azel.html" class="btn btn-neutral float-right" title="libgs.hardware.DummyRotator.get_azel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.hardware.html" class="btn btn-neutral" title="libgs.hardware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

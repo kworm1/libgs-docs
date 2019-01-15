@@ -18,6 +18,38 @@ libgs.database.MonitorDb
    
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ~MonitorDb.put
+      
+      
+      
+   
+   
+
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~MonitorDb.count_rows
       
       
@@ -33,15 +65,12 @@ libgs.database.MonitorDb
       ~MonitorDb.get_file
       
       
-      ~MonitorDb.put
       
       
       ~MonitorDb.put_df
-      
+         
    
    
 
-   
-   
    
 

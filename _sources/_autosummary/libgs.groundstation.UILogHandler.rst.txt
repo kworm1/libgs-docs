@@ -18,6 +18,65 @@ libgs.groundstation.UILogHandler
    
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      ~UILogHandler.emit
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ~UILogHandler.test
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~UILogHandler.acquire
       
       
@@ -30,7 +89,6 @@ libgs.groundstation.UILogHandler
       ~UILogHandler.createLock
       
       
-      ~UILogHandler.emit
       
       
       ~UILogHandler.filter
@@ -66,19 +124,10 @@ libgs.groundstation.UILogHandler
       ~UILogHandler.set_name
       
       
-      ~UILogHandler.test
-      
-   
-   
-
-   
-   
-   .. rubric:: Attributes
-   
-   .. autosummary::
-      :toctree: .
+         
    
       ~UILogHandler.name
    
+
    
 

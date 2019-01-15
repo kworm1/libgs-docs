@@ -18,6 +18,29 @@ libgs.emulators.Rotctld
    
       
       
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~Rotctld.close_all
       
       
@@ -25,11 +48,9 @@ libgs.emulators.Rotctld
       
       
       ~Rotctld.stop
-      
+         
    
    
 
-   
-   
    
 

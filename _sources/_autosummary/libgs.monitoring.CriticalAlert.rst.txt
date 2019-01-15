@@ -32,3 +32,18 @@ libgs.monitoring.CriticalAlert
    
    
 
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+         
+   
+   
+
+   
+

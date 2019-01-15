@@ -8,15 +8,33 @@
    .. autosummary::
       :toctree: .
    
+      
       bytes2hex
+      
+      
       bytes2prettyhex
+      
+      
       conv_time
+      
+      
       hex2bytes
+      
+      
       raise_if_aborted
+      
+      
       safe_sleep
+      
+      
       schedule_regular_callback
+      
+      
       setup_logger
+      
+      
       wait_loop
+      
    
    
 

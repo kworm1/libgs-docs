@@ -17,28 +17,22 @@ libgs.hardware.DummyRotator
       :toctree: .
    
       
-      ~DummyRotator.azel_err
       
       
-      ~DummyRotator.azel_to_antenna_angles
       
       
       ~DummyRotator.get_azel
       
       
-      ~DummyRotator.get_azel_rate
       
       
-      ~DummyRotator.in_pos
       
       
       ~DummyRotator.set_azel
       
       
-      ~DummyRotator.set_azel_rate
       
       
-      ~DummyRotator.stow
       
    
    
@@ -49,6 +43,41 @@ libgs.hardware.DummyRotator
    
    .. autosummary::
       :toctree: .
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~DummyRotator.azel_err
+      
+      
+      ~DummyRotator.azel_to_antenna_angles
+      
+      
+      
+      
+      ~DummyRotator.get_azel_rate
+      
+      
+      ~DummyRotator.in_pos
+      
+      
+      
+      
+      ~DummyRotator.set_azel_rate
+      
+      
+      ~DummyRotator.stow
+         
    
       ~DummyRotator.BEAMWIDTH
       ~DummyRotator.MAX_AZ
@@ -65,5 +94,6 @@ libgs.hardware.DummyRotator
       ~DummyRotator.el
       ~DummyRotator.name
    
+
    
 

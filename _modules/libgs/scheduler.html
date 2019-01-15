@@ -187,6 +187,16 @@
 
 <span class="sd">:date:   Sun Aug  6 17:36:19 2017</span>
 <span class="sd">:author: Kjetil Wormnes</span>
+
+<span class="sd">This module implements the libgs Scheduler, which makes it possible</span>
+<span class="sd">to line up a number of different satellite passes, each with different</span>
+<span class="sd">communication plans.</span>
+
+<span class="sd">Use :mod:`libgs_ops.scheduling` to create the schedules.</span>
+
+<span class="sd">.. note::</span>
+<span class="sd">   In addition to the below, this module also exposes everything from :mod:`libgs_ops.scheduling`, for ease of import.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -214,13 +224,12 @@
 <span class="c1">#        (Multiple ones are a recipe for disaster)</span>
 <div class="viewcode-block" id="Scheduler"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.html#libgs.scheduler.Scheduler">[docs]</a><span class="k">class</span> <span class="nc">Scheduler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This is the main scheduler class.</span>
+<span class="sd">    Implements the libgs scheduler.</span>
 
 <span class="sd">    It is responsible for executing the schedule on the ground station. As such</span>
-<span class="sd">    it needs access to both the ground station instance</span>
-<span class="sd">    and the schedule instance.</span>
+<span class="sd">    it needs access to both the ground station instance and the schedule instance.</span>
 
-<span class="sd">    ..note::</span>
+<span class="sd">    .. note::</span>
 <span class="sd">        A schedule is assumed immutable after being added to the scheduler</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -246,6 +255,8 @@
 <span class="sd">            track_full_pass (bool (optional)): If this flag is true the scheduler will not complete</span>
 <span class="sd">                 a pass before the satellite is no longer in view, regardless of whether there</span>
 <span class="sd">                 are any remaining communications. (Useful for debugging)</span>
+<span class="sd">            compute_ant_points (bool (optional)): If true, re-compute (or interpolate) antenna points based on antenna beamwidth. If false follow schedule exactly.</span>
+<span class="sd">            enforce_signoffs (int (optional)): If true, will not permit execution of a communications plan that does not have at least the specified number of signoffs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">gs</span><span class="p">,</span> <span class="s1">&#39;scheduler&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">gs</span><span class="o">.</span><span class="n">scheduler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">gs</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">EXECUTING</span><span class="p">:</span>
@@ -270,28 +281,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">compute_ant_points</span> <span class="o">=</span> <span class="n">compute_ant_points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enforce_signoffs</span> <span class="o">=</span> <span class="n">enforce_signoffs</span>
 
+
+
+    <span class="c1">##########################################################################################</span>
     <span class="c1">#</span>
-    <span class="c1"># Use properties for the timer in order to ensure that the State is updated</span>
-    <span class="c1"># appropriately whenever the timer changes</span>
+    <span class="c1"># Private attributes and methods</span>
     <span class="c1">#</span>
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span>
-
-    <span class="nd">@timer</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="n">t</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">set_schedule_msg</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()))</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">STOPPED</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">EXECUTING</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">IDLE</span>
-
+    <span class="c1">##########################################################################################</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Schedule of communication passes:</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -318,33 +314,6 @@
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
-
-
-    <span class="c1"># Allow the disabling of the scheduler. Main reason is to allow the disabling of the scheduler</span>
-    <span class="c1"># when testing to prevent remote connections via rpc</span>
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_disabled&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="nd">@disabled</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Scheduler: Disabled can only be True or False&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Stop ground station if disabling</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span> <span class="o">=</span> <span class="n">val</span>
-
-<div class="viewcode-block" id="Scheduler.disable"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.disable.html#libgs.scheduler.Scheduler.disable">[docs]</a>    <span class="k">def</span> <span class="nf">disable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span></div>
-
-<div class="viewcode-block" id="Scheduler.enable"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.enable.html#libgs.scheduler.Scheduler.enable">[docs]</a>    <span class="k">def</span> <span class="nf">enable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span></div>
 
     <span class="c1"># a wrapper to disable funciton calls if class disabled.</span>
     <span class="k">def</span> <span class="nf">_if_not_disabled</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
@@ -386,6 +355,116 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="n">tstart</span><span class="p">,</span> <span class="n">Timer</span><span class="p">(</span><span class="n">sleeptime</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,)))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Executing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">passes</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute_pass</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># &lt;-- this one traps all its own errors so should never fail</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Completed pass execution&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Scheduler was aborted mid-pass, will not continue&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">passes</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_pass</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Scheduler has finished executing schedule&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#&lt;-- this is probably not necessary, but set it to 0 just in case.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1">#&lt;-- Added 2018-09-14 Make sure the schedule is marked as stopped regardless of the reason for finishing (This prevents attempts to restart it)</span>
+
+    <span class="c1">##########################################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Properties</span>
+    <span class="c1">#</span>
+    <span class="c1">##########################################################################################</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Use properties for the timer in order to ensure that the State is updated</span>
+    <span class="c1"># appropriately whenever the timer changes</span>
+    <span class="c1">#</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The timer keeps track of the next schedule to execute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span>
+
+    <span class="nd">@timer</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">set_schedule_msg</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The current Scheduler state.</span>
+
+<span class="sd">        ========== ===============</span>
+<span class="sd">        IDLE       Has never been started</span>
+<span class="sd">        EXECUTING  Currently running</span>
+<span class="sd">        STOPPED    Has previously been running, but not running now.</span>
+<span class="sd">        ========== ===============</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">STOPPED</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">EXECUTING</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">States</span><span class="o">.</span><span class="n">IDLE</span>
+
+
+    <span class="c1"># Allow the disabling of the scheduler. Main reason is to allow the disabling of the scheduler</span>
+    <span class="c1"># when testing to prevent remote connections via rpc</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Whether or not the scheduler is currently disabled. Setting this</span>
+<span class="sd">        to true will make it not execute, nor will it be possible to start it before</span>
+<span class="sd">        it disabled gets set to false again.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_disabled&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@disabled</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Scheduler: Disabled can only be True or False&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Stop ground station if disabling</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span> <span class="o">=</span> <span class="n">val</span>
+
+
+    <span class="c1">##########################################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Public interface</span>
+    <span class="c1">#</span>
+    <span class="c1">##########################################################################################</span>
+
+<div class="viewcode-block" id="Scheduler.disable"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.disable.html#libgs.scheduler.Scheduler.disable">[docs]</a>    <span class="k">def</span> <span class="nf">disable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set :attr:`disabled` to True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Scheduler.enable"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.enable.html#libgs.scheduler.Scheduler.enable">[docs]</a>    <span class="k">def</span> <span class="nf">enable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set :attr:`disabled` to False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Scheduler.execute"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.execute.html#libgs.scheduler.Scheduler.execute">[docs]</a>    <span class="nd">@_if_not_disabled</span>
     <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -429,6 +508,9 @@
 
 <div class="viewcode-block" id="Scheduler.stop"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.stop.html#libgs.scheduler.Scheduler.stop">[docs]</a>    <span class="nd">@_if_not_disabled</span>
     <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stopping scheduler&quot;</span><span class="p">)</span>
 
@@ -452,29 +534,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;BLAH: timer is none on call to stop()&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Executing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">passes</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">execute_pass</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># &lt;-- this one traps all its own errors so should never fail</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Completed pass execution&quot;</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="kc">None</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Scheduler was aborted mid-pass, will not continue&quot;</span><span class="p">)</span>
-                <span class="k">return</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">passes</span><span class="p">)):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_pass</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Scheduler has finished executing schedule&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_continue</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#&lt;-- this is probably not necessary, but set it to 0 just in case.</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1">#&lt;-- Added 2018-09-14 Make sure the schedule is marked as stopped regardless of the reason for finishing (This prevents attempts to restart it)</span>
 
 <div class="viewcode-block" id="Scheduler.execute_pass"><a class="viewcode-back" href="../../_autosummary/libgs.scheduler.Scheduler.execute_pass.html#libgs.scheduler.Scheduler.execute_pass">[docs]</a>    <span class="nd">@_if_not_disabled</span>
     <span class="k">def</span> <span class="nf">execute_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>

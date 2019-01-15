@@ -227,6 +227,11 @@
 <dt id="libgs.utils.Defaults">
 <em class="property">class </em><code class="descclassname">libgs.utils.</code><code class="descname">Defaults</code><a class="reference internal" href="../_modules/libgs/utils.html#Defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.Defaults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines default values used by the different classes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Many (probably most) of these values are configurable in other ways (through class interfaces, constructors, etc…)
+This class just holds all the fallback values (defaults).</p>
+</div>
 <p class="rubric">Attributes</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -274,7 +279,7 @@
 <td>length of log format string</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.MAX_TRACK_DT.html#libgs.utils.Defaults.MAX_TRACK_DT" title="libgs.utils.Defaults.MAX_TRACK_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_TRACK_DT</span></code></a></td>
-<td></td>
+<td>Max allowed dt (in seconds) in data used for gs tracking</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK.html#libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK" title="libgs.utils.Defaults.MONITOR_SAVE_DT_NOTRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONITOR_SAVE_DT_NOTRACK</span></code></a></td>
 <td>The time inteval (in seconds) at which to save monitor values to database while not tracking</td>
@@ -334,10 +339,10 @@
 <td>Update delay for frequency plot (should be around .2 - 2)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_COLORMAP.html#libgs.utils.Defaults.WFALL_COLORMAP" title="libgs.utils.Defaults.WFALL_COLORMAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_COLORMAP</span></code></a></td>
-<td>//bokeh.pydata.org/en/0.12.6/docs/reference/palettes.html</td>
+<td>Bokeh colormap, see bokeh.pydata.org/en/0.12.6/docs/reference/palettes.html</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_COLORMAP.html#libgs.utils.Defaults.WFALL_JPG_COLORMAP" title="libgs.utils.Defaults.WFALL_JPG_COLORMAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_COLORMAP</span></code></a></td>
-<td>//matplotlib.org/examples/color/colormaps_reference.html</td>
+<td>Matplotlib colormap, see matplotlib.org/examples/color/colormaps_reference.html</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.utils.Defaults.WFALL_JPG_DPI.html#libgs.utils.Defaults.WFALL_JPG_DPI" title="libgs.utils.Defaults.WFALL_JPG_DPI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WFALL_JPG_DPI</span></code></a></td>
 <td>DPI for recorded waterfall plots</td>

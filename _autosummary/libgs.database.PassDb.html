@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.database.PassDb.count_rows" href="libgs.database.PassDb.count_rows.html" />
+    <link rel="next" title="libgs.database.PassDb.put" href="libgs.database.PassDb.put.html" />
     <link rel="prev" title="libgs.database.MonitorDb.put_df" href="libgs.database.MonitorDb.put_df.html" /> 
 
   
@@ -94,12 +94,12 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.database.KVDb.html">libgs.database.KVDb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.database.MonitorDb.html">libgs.database.MonitorDb</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.database.PassDb</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.put.html">libgs.database.PassDb.put</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.count_rows.html">libgs.database.PassDb.count_rows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.create_table.html">libgs.database.PassDb.create_table</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.get.html">libgs.database.PassDb.get</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.get_df.html">libgs.database.PassDb.get_df</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.get_file.html">libgs.database.PassDb.get_file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.put.html">libgs.database.PassDb.put</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.database.PassDb.put_df.html">libgs.database.PassDb.put_df</a></li>
 </ul>
 </li>
@@ -212,6 +212,18 @@ search.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.database.PassDb.put.html#libgs.database.PassDb.put" title="libgs.database.PassDb.put"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put</span></code></a>(module,&nbsp;pass_id,&nbsp;key,&nbsp;value)</td>
+<td>Add a key/value pair to the database</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.database.PassDb.count_rows.html#libgs.database.PassDb.count_rows" title="libgs.database.PassDb.count_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_rows</span></code></a>(table)</td>
 <td>Return the number of rows in a table</td>
 </tr>
@@ -227,10 +239,7 @@ search.</p>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.database.PassDb.get_file.html#libgs.database.PassDb.get_file" title="libgs.database.PassDb.get_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file</span></code></a>(fname)</td>
 <td>Grab a file resource and return the bytes or string (.bin or .txt)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.database.PassDb.put.html#libgs.database.PassDb.put" title="libgs.database.PassDb.put"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put</span></code></a>(module,&nbsp;pass_id,&nbsp;key,&nbsp;value)</td>
-<td>Add a key/value pair to the database</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.database.PassDb.put_df.html#libgs.database.PassDb.put_df" title="libgs.database.PassDb.put_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put_df</span></code></a>(table,&nbsp;df[,&nbsp;index,&nbsp;if_exists])</td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.database.PassDb.put_df.html#libgs.database.PassDb.put_df" title="libgs.database.PassDb.put_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put_df</span></code></a>(table,&nbsp;df[,&nbsp;index,&nbsp;if_exists])</td>
 <td>Add dataframe to database, appending metadata for when it was added</td>
 </tr>
 </tbody>
@@ -247,7 +256,7 @@ search.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.database.PassDb.count_rows.html" class="btn btn-neutral float-right" title="libgs.database.PassDb.count_rows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.database.PassDb.put.html" class="btn btn-neutral float-right" title="libgs.database.PassDb.put" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.database.MonitorDb.put_df.html" class="btn btn-neutral" title="libgs.database.MonitorDb.put_df" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

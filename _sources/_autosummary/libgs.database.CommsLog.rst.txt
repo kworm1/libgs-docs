@@ -18,25 +18,20 @@ libgs.database.CommsLog
    
       
       
-      ~CommsLog.count_rows
       
       
-      ~CommsLog.create_table
       
       
       ~CommsLog.get
       
       
-      ~CommsLog.get_df
       
       
-      ~CommsLog.get_file
       
       
       ~CommsLog.put
       
       
-      ~CommsLog.put_df
       
    
    
@@ -50,5 +45,39 @@ libgs.database.CommsLog
    
       ~CommsLog.ACTORS
    
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      ~CommsLog.count_rows
+      
+      
+      ~CommsLog.create_table
+      
+      
+      
+      
+      ~CommsLog.get_df
+      
+      
+      ~CommsLog.get_file
+      
+      
+      
+      
+      ~CommsLog.put_df
+         
+   
+   
+
    
 

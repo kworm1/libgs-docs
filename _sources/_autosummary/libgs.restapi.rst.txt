@@ -2,22 +2,6 @@
 
    
    
-   .. rubric:: Functions
-
-   
-   .. autosummary::
-      :toctree: .
-   
-      get_comms
-      get_file
-      get_help
-      get_mon
-      get_passes
-      get_rpcapi
-      handle_bytes
-      is_allowed
-      nid_to_int_if_possible
-   
    
 
    

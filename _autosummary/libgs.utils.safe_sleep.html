@@ -179,8 +179,9 @@
 <dl class="function">
 <dt id="libgs.utils.safe_sleep">
 <code class="descclassname">libgs.utils.</code><code class="descname">safe_sleep</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#safe_sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.safe_sleep" title="Permalink to this definition">¶</a></dt>
-<dd><p>safe_sleep uses a subset of the wait_loop capabilities to implement an anologe to the time.sleep() function.</p>
-<p>The advantage is that it will raise an exception if the global abort event gets set, and as such is safe to
+<dd><p>Sleep for a specified number of seconds.</p>
+<p>safe_sleep uses a subset of the <a class="reference internal" href="libgs.utils.wait_loop.html#libgs.utils.wait_loop" title="libgs.utils.wait_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">wait_loop()</span></code></a> capabilities to implement an anologe to the time.sleep() function.
+The advantage is that it will raise an exception if the global abort event gets set, and as such is safe to
 use in thread loops that need to exit on adfa-gs exit.</p>
 </dd></dl>
 

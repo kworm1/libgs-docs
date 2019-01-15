@@ -187,6 +187,14 @@
 <span class="sd">:date:   Tue Sep 19 16:29:54 2017</span>
 <span class="sd">:author: Kjetil Wormnes</span>
 
+<span class="sd">RPC interface to libgs</span>
+
+<span class="sd">Currently implmeents the generic RPCServer type as well as the</span>
+<span class="sd">rpc interface to the scheduler. </span>
+
+<span class="sd">The latter is a deprecation and should be moved directly into the</span>
+<span class="sd">Scheduler class.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
@@ -201,18 +209,33 @@
 <span class="n">ags_log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
 
 
-<span class="c1">#</span>
-<span class="c1"># TODO: Move into Scheduler class (in the same way the ground station RPC interface is in the groundstaiton class now)</span>
-<span class="c1">#</span>
 <div class="viewcode-block" id="RPCSchedulerServer"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.html#libgs.rpc.RPCSchedulerServer">[docs]</a><span class="k">class</span> <span class="nc">RPCSchedulerServer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    XMLRPC interface to Scheduler class</span>
+
 <span class="sd">    This class sets up an RPC server that can be contacted remotely in order</span>
 <span class="sd">    to load and execute a schedule (it will create a local scheduler with that)</span>
-<span class="sd">    schedule and execute it.</span>
+<span class="sd">    schedule and execute it. </span>
+
+<span class="sd">    Most of the methods here are directly wrapping Scheduler methods, so please</span>
+<span class="sd">    see :class:`libgs.scheduler.Scheduler` for details.</span>
+
+<span class="sd">    .. todo::</span>
+<span class="sd">        Move into Scheduler class (in the same way the ground station RPC interface is in the groundstaiton class now)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gs</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">XMLRPC_SCH_SERVER_ADDR</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">XMLRPC_SCH_SERVER_PORT</span><span class="p">,</span> <span class="n">enforce_signoffs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gs:               The groundstation object to interface with</span>
+<span class="sd">            addr:             The address to bind to</span>
+<span class="sd">            port:             The port to bind to</span>
+<span class="sd">            enforce_signoffs: (optional) Number of signoffs to enforce</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_addr</span> <span class="o">=</span> <span class="n">addr</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
@@ -236,6 +259,11 @@
 
 
 <div class="viewcode-block" id="RPCSchedulerServer.execute_schedule"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.execute_schedule.html#libgs.rpc.RPCSchedulerServer.execute_schedule">[docs]</a>    <span class="k">def</span> <span class="nf">execute_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schedule</span><span class="p">,</span> <span class="n">track_full_pass</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">compute_ant_points</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new scheduler, load the attached schedule and execute it.</span>
+
+<span class="sd">        See :class:`libgs.scheduler.Scheduler`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span><span class="p">:</span> <span class="c1"># Note, the scheduler itself is also enabled/disabled. But also want to prevent the creation of new schedules.</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;RPCSchedulerServer: Currently disabled. Call enable() first&quot;</span><span class="p">)</span>
 
@@ -244,21 +272,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RPCSchedulerServer.stop_schedule"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.stop_schedule.html#libgs.rpc.RPCSchedulerServer.stop_schedule">[docs]</a>    <span class="k">def</span> <span class="nf">stop_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the scheduler. See  :meth:`libgs.scheduler.Scheduler.stop`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;scheduler&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RPCSchedulerServer.scheduler_state"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.scheduler_state.html#libgs.rpc.RPCSchedulerServer.scheduler_state">[docs]</a>    <span class="k">def</span> <span class="nf">scheduler_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the scheduler state. See  :attr:`libgs.scheduler.Scheduler.state`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;scheduler&#39;</span><span class="p">):</span>
             <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span><span class="p">(</span><span class="s1">&#39;never started&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RPCSchedulerServer.start"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.start.html#libgs.rpc.RPCSchedulerServer.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start XMLRPC server in a new thread</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RPCSchedulerServer.disable"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.disable.html#libgs.rpc.RPCSchedulerServer.disable">[docs]</a>    <span class="k">def</span> <span class="nf">disable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable scheduler. See  :meth:`libgs.scheduler.Scheduler.disable`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
         <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;scheduler&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
@@ -266,6 +306,10 @@
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No scheduler to disable&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RPCSchedulerServer.enable"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCSchedulerServer.enable.html#libgs.rpc.RPCSchedulerServer.enable">[docs]</a>    <span class="k">def</span> <span class="nf">enable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enable scheduler. See  :meth:`libgs.scheduler.Scheduler.enable`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_disabled</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;scheduler&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
@@ -282,10 +326,10 @@
 
 <div class="viewcode-block" id="RPCServer"><a class="viewcode-back" href="../../_autosummary/libgs.rpc.RPCServer.html#libgs.rpc.RPCServer">[docs]</a><span class="k">class</span> <span class="nc">RPCServer</span><span class="p">(</span><span class="n">SimpleXMLRPCServer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Drop-in replacement for SimpleXMLRPCServer that supports kwargs.</span>
+<span class="sd">    Drop-in replacement for :class:`SimpleXMLRPCServer.SimpleXMLRPCServer` that supports kwargs.</span>
 
-<span class="sd">    It also allows the address to be specified as a uri, http://hostname:port instead of (hostname,port), but</span>
-<span class="sd">    the latter is also supported for full SimpleXMLRPCServer compatability.</span>
+<span class="sd">    It also allows the address to be specified as a uri, ``http://hostname:port`` instead of (hostname,port), but</span>
+<span class="sd">    the latter is also supported for full :class:`SimpleXMLRPCServer.SimpleXMLRPCServer` compatability.</span>
 
 <span class="sd">    Finally, it allows you to call register_function in the same way as for SimpleXMLRPCServer, but it also</span>
 <span class="sd">    allows you to use it as a decorator.</span>
@@ -294,25 +338,38 @@
 
 <span class="sd">    A)</span>
 
-<span class="sd">    s = RPCServer()</span>
-<span class="sd">    @s.register_function</span>
-<span class="sd">    def blah()</span>
-<span class="sd">        print(&quot;blah&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; s = RPCServer()</span>
+<span class="sd">    &gt;&gt;&gt; @s.register_function</span>
+<span class="sd">    &gt;&gt;&gt; def blah()</span>
+<span class="sd">    &gt;&gt;&gt;    print(&quot;blah&quot;)</span>
 
 <span class="sd">    B)</span>
-<span class="sd">    s = RPCServer()</span>
-<span class="sd">    def blah()</span>
-<span class="sd">        print(&quot;blah&quot;)</span>
 
-<span class="sd">    s.register_function(blah)</span>
-
+<span class="sd">    &gt;&gt;&gt; s = RPCServer()</span>
+<span class="sd">    &gt;&gt;&gt; def blah()</span>
+<span class="sd">    &gt;&gt;&gt;     print(&quot;blah&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; s.register_function(blah)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">##########################################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1"># Private attributes and methods</span>
+    <span class="c1">#</span>
+    <span class="c1">##########################################################################################</span>
+
 
     <span class="c1"># This flag is added by the client to an argument dictionary to be treated as kwargs</span>
     <span class="n">_KWARGS_FLAG</span> <span class="o">=</span> <span class="s1">&#39;__xmlrpc__kwargs__&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">uri</span><span class="p">,</span> <span class="n">logRequests</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            uri: address and port to bind to. Accepted formats are (str) ``http://domain.name:port`` *and* (domain.name, port)</span>
+<span class="sd">            logRequests: See :class:`SimpleXMLRPCServer.SimpleXMLRPCServer`</span>
+<span class="sd">            allow_none: See :class:`SimpleXMLRPCServer.SimpleXMLRPCServer`</span>
+<span class="sd">            start: Start server immediately.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span> <span class="c1"># Allow http://domain.name:port definition</span>
             <span class="k">if</span> <span class="n">uri</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;https://&#39;</span> <span class="ow">and</span> <span class="n">uri</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;http://&#39;</span><span class="p">:</span>
@@ -338,6 +395,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_serving</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the </span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_serving&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serving</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>

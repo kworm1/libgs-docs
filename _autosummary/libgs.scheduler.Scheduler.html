@@ -174,14 +174,13 @@
 <dl class="class">
 <dt id="libgs.scheduler.Scheduler">
 <em class="property">class </em><code class="descclassname">libgs.scheduler.</code><code class="descname">Scheduler</code><span class="sig-paren">(</span><em>gs</em>, <em>schedule</em>, <em>track_full_pass=False</em>, <em>compute_ant_points=True</em>, <em>enforce_signoffs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/scheduler.html#Scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.scheduler.Scheduler" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the main scheduler class.</p>
+<dd><p>Implements the libgs scheduler.</p>
 <p>It is responsible for executing the schedule on the ground station. As such
-it needs access to both the ground station instance
-and the schedule instance.</p>
-<dl class="docutils">
-<dt>..note::</dt>
-<dd>A schedule is assumed immutable after being added to the scheduler</dd>
-</dl>
+it needs access to both the ground station instance and the schedule instance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A schedule is assumed immutable after being added to the scheduler</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -189,9 +188,11 @@ and the schedule instance.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>gs</strong> (<em>Groundstation</em>) – Instance of Grounstation class</li>
 <li><strong>schedule</strong> (<em>Schedule</em>) – The schedule to execute</li>
-<li><strong>track_full_pass</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – If this flag is true the scheduler will not complete
+<li><strong>track_full_pass</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – If this flag is true the scheduler will not complete
 a pass before the satellite is no longer in view, regardless of whether there
 are any remaining communications. (Useful for debugging)</li>
+<li><strong>compute_ant_points</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em> (</em><em>optional</em><em>)</em>) – If true, re-compute (or interpolate) antenna points based on antenna beamwidth. If false follow schedule exactly.</li>
+<li><strong>enforce_signoffs</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> (</em><em>optional</em><em>)</em>) – If true, will not permit execution of a communications plan that does not have at least the specified number of signoffs.</li>
 </ul>
 </td>
 </tr>
@@ -205,10 +206,10 @@ are any remaining communications. (Useful for debugging)</li>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.disable.html#libgs.scheduler.Scheduler.disable" title="libgs.scheduler.Scheduler.disable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disable</span></code></a>()</td>
-<td></td>
+<td>Set <a class="reference internal" href="libgs.scheduler.Scheduler.disabled.html#libgs.scheduler.Scheduler.disabled" title="libgs.scheduler.Scheduler.disabled"><code class="xref py py-attr docutils literal notranslate"><span class="pre">disabled</span></code></a> to True</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.scheduler.Scheduler.enable.html#libgs.scheduler.Scheduler.enable" title="libgs.scheduler.Scheduler.enable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable</span></code></a>()</td>
-<td></td>
+<td>Set <a class="reference internal" href="libgs.scheduler.Scheduler.disabled.html#libgs.scheduler.Scheduler.disabled" title="libgs.scheduler.Scheduler.disabled"><code class="xref py py-attr docutils literal notranslate"><span class="pre">disabled</span></code></a> to False</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.execute.html#libgs.scheduler.Scheduler.execute" title="libgs.scheduler.Scheduler.execute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Execute the schedule.</td>
@@ -217,7 +218,7 @@ are any remaining communications. (Useful for debugging)</li>
 <td>Method to execute a pass on the ground station.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.stop.html#libgs.scheduler.Scheduler.stop" title="libgs.scheduler.Scheduler.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>(*args,&nbsp;**kwargs)</td>
-<td></td>
+<td>Stop the schedule</td>
 </tr>
 </tbody>
 </table>
@@ -229,14 +230,23 @@ are any remaining communications. (Useful for debugging)</li>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.disabled.html#libgs.scheduler.Scheduler.disabled" title="libgs.scheduler.Scheduler.disabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disabled</span></code></a></td>
-<td></td>
+<td>Whether or not the scheduler is currently disabled.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.scheduler.Scheduler.state.html#libgs.scheduler.Scheduler.state" title="libgs.scheduler.Scheduler.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a></td>
-<td></td>
+<td>The current Scheduler state.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.scheduler.Scheduler.timer.html#libgs.scheduler.Scheduler.timer" title="libgs.scheduler.Scheduler.timer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timer</span></code></a></td>
-<td></td>
+<td>The timer keeps track of the next schedule to execute</td>
 </tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
 </tbody>
 </table>
 </dd></dl>

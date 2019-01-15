@@ -90,9 +90,9 @@
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.disconnect.html">libgs.hardware.GR_XMLRPCRadio.disconnect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.get_range_rate.html">libgs.hardware.GR_XMLRPCRadio.get_range_rate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.get_spectrum.html">libgs.hardware.GR_XMLRPCRadio.get_spectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.set_range_rate.html">libgs.hardware.GR_XMLRPCRadio.set_range_rate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.record_spectrum.html">libgs.hardware.GR_XMLRPCRadio.record_spectrum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.send_bytes.html">libgs.hardware.GR_XMLRPCRadio.send_bytes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.set_range_rate.html">libgs.hardware.GR_XMLRPCRadio.set_range_rate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.set_recv_callback.html">libgs.hardware.GR_XMLRPCRadio.set_recv_callback</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.err_range_rate_get.html">libgs.hardware.GR_XMLRPCRadio.err_range_rate_get</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.err_range_rate_set.html">libgs.hardware.GR_XMLRPCRadio.err_range_rate_set</a></li>
@@ -237,17 +237,8 @@ those variables are called in the Gnu Radio flowgraph.</li>
 <tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.get_spectrum.html#libgs.hardware.GR_XMLRPCRadio.get_spectrum" title="libgs.hardware.GR_XMLRPCRadio.get_spectrum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectrum</span></code></a>([old])</td>
 <td>get_spectrum should return the latest spectrum from the radio as well as an associated frequency vecgor</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.record_spectrum.html#libgs.hardware.GR_XMLRPCRadio.record_spectrum" title="libgs.hardware.GR_XMLRPCRadio.record_spectrum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">record_spectrum</span></code></a>([dt,&nbsp;N,&nbsp;fdec,&nbsp;add_zeroes])</td>
-<td>Record N spectra then return them.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.send_bytes.html#libgs.hardware.GR_XMLRPCRadio.send_bytes" title="libgs.hardware.GR_XMLRPCRadio.send_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_bytes</span></code></a>()</td>
-<td>send_bytes should send a byte sequence to the radio for modulation and transmission</td>
-</tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.set_range_rate.html#libgs.hardware.GR_XMLRPCRadio.set_range_rate" title="libgs.hardware.GR_XMLRPCRadio.set_range_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_range_rate</span></code></a>(range_rate)</td>
 <td>set_range_rate should set frequency adjustment for a specific range_rate</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.set_recv_callback.html#libgs.hardware.GR_XMLRPCRadio.set_recv_callback" title="libgs.hardware.GR_XMLRPCRadio.set_recv_callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_recv_callback</span></code></a>(callable)</td>
-<td>det_recv_callback should set a callable to be invoked when radio receives a packet.</td>
 </tr>
 </tbody>
 </table>
@@ -258,16 +249,34 @@ those variables are called in the Gnu Radio flowgraph.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.err_range_rate_get.html#libgs.hardware.GR_XMLRPCRadio.err_range_rate_get" title="libgs.hardware.GR_XMLRPCRadio.err_range_rate_get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_range_rate_get</span></code></a></td>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.record_spectrum.html#libgs.hardware.GR_XMLRPCRadio.record_spectrum" title="libgs.hardware.GR_XMLRPCRadio.record_spectrum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">record_spectrum</span></code></a>([dt,&nbsp;N,&nbsp;fdec,&nbsp;add_zeroes])</td>
+<td>Record N spectra then return them.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.send_bytes.html#libgs.hardware.GR_XMLRPCRadio.send_bytes" title="libgs.hardware.GR_XMLRPCRadio.send_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_bytes</span></code></a>()</td>
+<td>send_bytes should send a byte sequence to the radio for modulation and transmission</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.set_recv_callback.html#libgs.hardware.GR_XMLRPCRadio.set_recv_callback" title="libgs.hardware.GR_XMLRPCRadio.set_recv_callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_recv_callback</span></code></a>(callable)</td>
+<td>det_recv_callback should set a callable to be invoked when radio receives a packet.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.err_range_rate_get.html#libgs.hardware.GR_XMLRPCRadio.err_range_rate_get" title="libgs.hardware.GR_XMLRPCRadio.err_range_rate_get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_range_rate_get</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.err_range_rate_set.html#libgs.hardware.GR_XMLRPCRadio.err_range_rate_set" title="libgs.hardware.GR_XMLRPCRadio.err_range_rate_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_range_rate_set</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.err_range_rate_set.html#libgs.hardware.GR_XMLRPCRadio.err_range_rate_set" title="libgs.hardware.GR_XMLRPCRadio.err_range_rate_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_range_rate_set</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.name.html#libgs.hardware.GR_XMLRPCRadio.name" title="libgs.hardware.GR_XMLRPCRadio.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.name.html#libgs.hardware.GR_XMLRPCRadio.name" title="libgs.hardware.GR_XMLRPCRadio.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.range_rate.html#libgs.hardware.GR_XMLRPCRadio.range_rate" title="libgs.hardware.GR_XMLRPCRadio.range_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">range_rate</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.range_rate.html#libgs.hardware.GR_XMLRPCRadio.range_rate" title="libgs.hardware.GR_XMLRPCRadio.range_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">range_rate</span></code></a></td>
 <td></td>
 </tr>
 </tbody>

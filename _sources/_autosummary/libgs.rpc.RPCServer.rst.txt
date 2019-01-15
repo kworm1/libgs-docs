@@ -18,6 +18,85 @@ libgs.rpc.RPCServer
    
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ~RPCServer.register_function
+      
+      
+      ~RPCServer.register_instance
+      
+      
+      
+      
+      
+      
+      ~RPCServer.serve_forever
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ~RPCServer.start
+      
+      
+      ~RPCServer.stop
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~RPCServer.is_serving
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~RPCServer.close_request
       
       
@@ -42,10 +121,8 @@ libgs.rpc.RPCServer
       ~RPCServer.process_request
       
       
-      ~RPCServer.register_function
       
       
-      ~RPCServer.register_instance
       
       
       ~RPCServer.register_introspection_functions
@@ -54,7 +131,6 @@ libgs.rpc.RPCServer
       ~RPCServer.register_multicall_functions
       
       
-      ~RPCServer.serve_forever
       
       
       ~RPCServer.server_activate
@@ -72,10 +148,8 @@ libgs.rpc.RPCServer
       ~RPCServer.shutdown_request
       
       
-      ~RPCServer.start
       
       
-      ~RPCServer.stop
       
       
       ~RPCServer.system_listMethods
@@ -91,23 +165,14 @@ libgs.rpc.RPCServer
       
       
       ~RPCServer.verify_request
-      
-   
-   
-
-   
-   
-   .. rubric:: Attributes
-   
-   .. autosummary::
-      :toctree: .
+         
    
       ~RPCServer.address_family
       ~RPCServer.allow_reuse_address
-      ~RPCServer.is_serving
       ~RPCServer.request_queue_size
       ~RPCServer.socket_type
       ~RPCServer.timeout
    
+
    
 

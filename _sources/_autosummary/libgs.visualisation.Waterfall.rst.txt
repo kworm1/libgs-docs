@@ -33,9 +33,28 @@ libgs.visualisation.Waterfall
    .. autosummary::
       :toctree: .
    
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+         
+   
       ~Waterfall.live_data
       ~Waterfall.live_props
       ~Waterfall.name
    
+
    
 

@@ -18,6 +18,45 @@ libgs.hardware.Rotator
    
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
       ~Rotator.azel_err
       
       
@@ -40,16 +79,7 @@ libgs.hardware.Rotator
       
       
       ~Rotator.stow
-      
-   
-   
-
-   
-   
-   .. rubric:: Attributes
-   
-   .. autosummary::
-      :toctree: .
+         
    
       ~Rotator.BEAMWIDTH
       ~Rotator.MAX_AZ
@@ -66,5 +96,6 @@ libgs.hardware.Rotator
       ~Rotator.el
       ~Rotator.name
    
+
    
 

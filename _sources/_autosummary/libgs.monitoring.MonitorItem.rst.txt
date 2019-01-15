@@ -17,10 +17,8 @@ libgs.monitoring.MonitorItem
       :toctree: .
    
       
-      ~MonitorItem.count
       
       
-      ~MonitorItem.index
       
       
       ~MonitorItem.items
@@ -33,5 +31,29 @@ libgs.monitoring.MonitorItem
 
    
    
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~MonitorItem.count
+      
+      
+      ~MonitorItem.index
+      
+      
+      
+      
+         
+   
+   
+
    
 

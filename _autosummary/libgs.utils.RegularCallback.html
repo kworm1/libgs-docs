@@ -183,7 +183,15 @@
 <dl class="class">
 <dt id="libgs.utils.RegularCallback">
 <em class="property">class </em><code class="descclassname">libgs.utils.</code><code class="descname">RegularCallback</code><span class="sig-paren">(</span><em>func</em>, <em>delay</em>, <em>min_interval=0.05</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#RegularCallback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.RegularCallback" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Invokes a callback at regular intervals.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Called callback&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span> <span class="o">=</span> <span class="n">RegularCallback</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -204,11 +212,20 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.utils.RegularCallback.start.html#libgs.utils.RegularCallback.start" title="libgs.utils.RegularCallback.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>()</td>
-<td></td>
+<td>Start the regular callback</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.utils.RegularCallback.stop.html#libgs.utils.RegularCallback.stop" title="libgs.utils.RegularCallback.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>()</td>
-<td></td>
+<td>Stop the regular callback</td>
 </tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
 </tbody>
 </table>
 </dd></dl>

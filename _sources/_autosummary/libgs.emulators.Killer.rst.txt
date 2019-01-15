@@ -27,3 +27,20 @@ libgs.emulators.Killer
    
    
 
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+         
+   
+   
+
+   
+

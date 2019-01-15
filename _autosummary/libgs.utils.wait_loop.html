@@ -181,6 +181,33 @@
 <code class="descclassname">libgs.utils.</code><code class="descname">wait_loop</code><span class="sig-paren">(</span><em>events_or_callables=[]</em>, <em>timeout=None</em>, <em>dt=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/utils.html#wait_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.utils.wait_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic waiting loop. It will wait for any event
 (of type threading.Event) to be set, or for any callable to return True</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ev</span> <span class="o">=</span> <span class="n">wait_loop</span><span class="p">([</span><span class="n">fn</span><span class="p">,</span> <span class="n">event</span><span class="p">],</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">ev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Timeout&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">elif</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">ev</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fn callable returned true)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">elif</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">ev</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;threading event became true)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>events_or_callables</strong> (<em>list</em><em>(</em><em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/2.7/library/threading.html#threading.Event" title="(in Python v2.7)"><em>threading.Event</em></a><em>)</em>) – A list of events or callables to monitor. If any return true the wait loop will be broken</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Maximum number of seconds to wait until breaking regardless</li>
+<li><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – The internal sleep interval between checking events (default = 0.1 sec)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of the events that have returned true. In case of timeout returns None. An exception will
+be raised if the global abort_event has been set.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

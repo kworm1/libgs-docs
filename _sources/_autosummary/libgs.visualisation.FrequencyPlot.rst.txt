@@ -36,9 +36,30 @@ libgs.visualisation.FrequencyPlot
    .. autosummary::
       :toctree: .
    
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+         
+   
       ~FrequencyPlot.live_data
       ~FrequencyPlot.live_props
       ~FrequencyPlot.name
    
+
    
 
