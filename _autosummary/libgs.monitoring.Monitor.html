@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -185,7 +186,24 @@
 <dl class="class">
 <dt id="libgs.monitoring.Monitor">
 <em class="property">class </em><code class="descclassname">libgs.monitoring.</code><code class="descname">Monitor</code><span class="sig-paren">(</span><em>workers=10</em>, <em>tick=0.5</em>, <em>tick_cb=&lt;function &lt;lambda&gt;&gt;</em>, <em>default_dt=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Monitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Monitor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to provide functionality for monitoring</p>
+<dd><p>Class to provide functionality for monitoring.</p>
+<p>The monitor class works by spawning a threadpool in which it will call a number
+of user-defined monitoring functions. Every tick, it will check the list
+of monitoring functions to find the ones that are due and then invoke them in the
+threadpool. It then <em>immediately proceeds to the next tick</em>.</p>
+<p>In other words, monitoring functions are free to do whatever they want, including
+to block for a while since while it is running the Monitor class will just proceed
+with executing other monitoring functions (up to the limit of the workers in the threadpool).</p>
+<p>Monitoring functions are added to the class instance preferably using the
+<a class="reference internal" href="libgs.monitoring.Monitor.monitor.html#libgs.monitoring.Monitor.monitor" title="libgs.monitoring.Monitor.monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">monitor()</span></code></a> decorator.</p>
+<p>It is possible to add callbacks to monitor points that are invoked every time the value
+is updated.</p>
+<p>It is also possible to add a single tick callback when creating the Monitor object. Take
+care when doing this as it is invoked at the end of every tick, and the next tick will not
+execute before it completes. Therefore care should be taken to ensure tick callbacks return very
+fast.</p>
+<p>This restriction does not apply to monitor callbacks as they are executed in the Threadpool with
+the call to the monitor function and will therefore not hold up the Monitor overall.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -208,13 +226,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Monitor.add_callback.html#libgs.monitoring.Monitor.add_callback" title="libgs.monitoring.Monitor.add_callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_callback</span></code></a>(callable)</td>
-<td>Add a callable to be invoked every N times a value is polled.</td>
+<td>Add a callable to be invoked every time a value is polled.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.Monitor.callback.html#libgs.monitoring.Monitor.callback" title="libgs.monitoring.Monitor.callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">callback</span></code></a>()</td>
-<td>Decorator to convert a function definition to an IntervalCallback instance and add it to the monitor’s callback list.</td>
+<td>Decorator that can be applied to a function to automatically add it to the monitor</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Monitor.itertree.html#libgs.monitoring.Monitor.itertree" title="libgs.monitoring.Monitor.itertree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itertree</span></code></a>([parent])</td>
-<td></td>
+<td>Iterator that will iterate through the full tree of monitor points, or alternatively just a specific branch by specifying the parent of that branch.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.Monitor.keys.html#libgs.monitoring.Monitor.keys" title="libgs.monitoring.Monitor.keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code></a>()</td>
 <td>Just include this since dicts etc all use keys to describe the access keys.</td>
@@ -223,7 +241,15 @@
 <td>Creates a decorator that can be applied to any function to add it to be monitored.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.Monitor.names.html#libgs.monitoring.Monitor.names" title="libgs.monitoring.Monitor.names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">names</span></code></a>()</td>
-<td></td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">list of monitor names</td>
+</tr>
+</tbody>
+</table>
+</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_monitor</span></code></a>(name,&nbsp;gen[,&nbsp;dt,&nbsp;parent,&nbsp;…])</td>
 <td>This is a low level function to register a monitor generator with the monitor class.</td>
@@ -232,13 +258,13 @@
 <td>A parent monitor is not really a monitor.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Monitor.start.html#libgs.monitoring.Monitor.start" title="libgs.monitoring.Monitor.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>([subprocess])</td>
-<td></td>
+<td>Start polling loop.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.Monitor.stop.html#libgs.monitoring.Monitor.stop" title="libgs.monitoring.Monitor.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop</span></code></a>()</td>
-<td></td>
+<td>Stop the polling loop.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Monitor.to_gen_in_executor.html#libgs.monitoring.Monitor.to_gen_in_executor" title="libgs.monitoring.Monitor.to_gen_in_executor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_gen_in_executor</span></code></a>(fn,&nbsp;point_names,&nbsp;*args,&nbsp;…)</td>
-<td>This decorator will take any function and turn it into a generator that always returns immediately after calls to next().</td>
+<td>This decorator will take any function and turn it into a generator appropriately formatted for adding using <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -250,7 +276,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Monitor.alertcode.html#libgs.monitoring.Monitor.alertcode" title="libgs.monitoring.Monitor.alertcode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alertcode</span></code></a></td>
-<td></td>
+<td>The current worst alert level.</td>
 </tr>
 </tbody>
 </table>

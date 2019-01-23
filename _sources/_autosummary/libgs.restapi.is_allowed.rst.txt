@@ -1,6 +1,0 @@
-libgs.restapi.is\_allowed
-=========================
-
-.. currentmodule:: libgs.restapi
-
-.. autofunction:: is_allowed

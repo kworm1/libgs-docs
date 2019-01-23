@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -188,24 +189,17 @@
 <dt id="libgs.monitoring.Monitor.to_gen_in_executor">
 <code class="descclassname">Monitor.</code><code class="descname">to_gen_in_executor</code><span class="sig-paren">(</span><em>fn</em>, <em>point_names</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Monitor.to_gen_in_executor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Monitor.to_gen_in_executor" title="Permalink to this definition">¶</a></dt>
 <dd><p>This decorator will take any function and turn it into a generator
-that always returns immediately after calls to next().</p>
+appropriately formatted for adding using <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a>.</p>
 <p>The call to fn is being delegated to an executor, and while it is not
 done, calls to next() will return None, otherwise it will return a tuple containging</p>
 <blockquote>
 <div><ul class="simple">
-<li>the timestamp the data the return</li>
+<li>The timestamp the data the return value of fn</li>
+<li>Any Exceptions that occurred</li>
+<li>The return value</li>
 </ul>
 </div></blockquote>
-<p>value of fn</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> – </td>
-</tr>
-</tbody>
-</table>
-<p>Returns:</p>
+<p>This is the format that is required in order to add it to the Monitor.</p>
 </dd></dl>
 
 </div>

@@ -84,13 +84,16 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">libgs.hardware</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-a-new-hardware-interface">Implementing a new hardware interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
@@ -99,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -175,6 +179,16 @@
 </tr>
 </tbody>
 </table>
+<p>This module contains base classes for interfacing with key hardware components:</p>
+<ul class="simple">
+<li>Rotators: <a class="reference internal" href="libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase" title="libgs.hardware.RotatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatorBase</span></code></a></li>
+<li>Radios:   <a class="reference internal" href="libgs.hardware.RadioBase.html#libgs.hardware.RadioBase" title="libgs.hardware.RadioBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RadioBase</span></code></a></li>
+</ul>
+<p>As well as implementations for some common Rotator and Radios.</p>
+<div class="section" id="implementing-a-new-hardware-interface">
+<h2>Implementing a new hardware interface<a class="headerlink" href="#implementing-a-new-hardware-interface" title="Permalink to this headline">¶</a></h2>
+<p>Derive from the appropriate base class and implement the interface methods.
+See <a class="reference internal" href="libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase" title="libgs.hardware.RotatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatorBase</span></code></a> and <a class="reference internal" href="libgs.hardware.RadioBase.html#libgs.hardware.RadioBase" title="libgs.hardware.RadioBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RadioBase</span></code></a> for details.</p>
 <p class="rubric">Classes</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -183,7 +197,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.hardware.DummyRotator.html#libgs.hardware.DummyRotator" title="libgs.hardware.DummyRotator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DummyRotator</span></code></a></td>
-<td>A dummy class that responds like the rotator but does nothing</td>
+<td>A dummy class that responds like the rotator but does nothing.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html#libgs.hardware.GR_XMLRPCRadio" title="libgs.hardware.GR_XMLRPCRadio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GR_XMLRPCRadio</span></code></a>(name,&nbsp;stream,&nbsp;rpcaddr[,&nbsp;…])</td>
 <td>Class for driving radios over RPC (mainly Gnu radio flowgraphs that include an XMLRPC block)</td>
@@ -205,6 +219,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 
 

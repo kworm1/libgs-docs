@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolTest.init\_rx
+==================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolTest.init_rx

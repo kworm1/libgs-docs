@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs.protocols.protocolbase.ProtocolBase &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="libgs.protocols.protocolbase.ProtocolBase.do_action" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html" />
+    <link rel="prev" title="libgs.protocols.protocolbase.bytes2hex" href="libgs.protocols.protocolbase.bytes2hex.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libgs.protocols.protocolbase.bytes2hex.html">libgs.protocols.protocolbase.bytes2hex</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.protocols.protocolbase.ProtocolBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html">libgs.protocols.protocolbase.ProtocolBase.do_action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rx.html">libgs.protocols.protocolbase.ProtocolBase.init_rx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rxtx.html">libgs.protocols.protocolbase.ProtocolBase.init_rxtx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.send_bytes.html">libgs.protocols.protocolbase.ProtocolBase.send_bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.set_handler.html">libgs.protocols.protocolbase.ProtocolBase.set_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.terminate.html">libgs.protocols.protocolbase.ProtocolBase.terminate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.name.html">libgs.protocols.protocolbase.ProtocolBase.name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.sch_metadata.html">libgs.protocols.protocolbase.ProtocolBase.sch_metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolTest.html">libgs.protocols.protocolbase.ProtocolTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.protocols.protocolbase.Error.html">libgs.protocols.protocolbase.Error</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a> &raquo;</li>
+        
+      <li>libgs.protocols.protocolbase.ProtocolBase</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/libgs.protocols.protocolbase.ProtocolBase.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libgs-protocols-protocolbase-protocolbase">
+<h1>libgs.protocols.protocolbase.ProtocolBase<a class="headerlink" href="#libgs-protocols-protocolbase-protocolbase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="libgs.protocols.protocolbase.ProtocolBase">
+<em class="property">class </em><code class="descclassname">libgs.protocols.protocolbase.</code><code class="descname">ProtocolBase</code><a class="reference internal" href="../_modules/libgs/protocols/protocolbase.html#ProtocolBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.protocols.protocolbase.ProtocolBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for protocols. Defines the primary interface that is used
+by the scheduler. Any protocol used by the library must implement
+the following methods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.send_bytes.html#libgs.protocols.protocolbase.ProtocolBase.send_bytes" title="libgs.protocols.protocolbase.ProtocolBase.send_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send_bytes()</span></code></a>: Send a sequence of bytes to the satellite</li>
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html#libgs.protocols.protocolbase.ProtocolBase.do_action" title="libgs.protocols.protocolbase.ProtocolBase.do_action"><code class="xref py py-meth docutils literal notranslate"><span class="pre">do_action()</span></code></a>: Ask the protocol to do something. The do_action should take different
+actions, depending on the arguments, but there are no further requirements on what those arguments
+should be.</li>
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.set_handler.html#libgs.protocols.protocolbase.ProtocolBase.set_handler" title="libgs.protocols.protocolbase.ProtocolBase.set_handler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_handler()</span></code></a>: Set callback for when data is received back from satellite, this is invoked
+by the ground-station class upon creation. The groundstation will expect the callback function to be called
+every time data is received from the satellite. It is the responsibility of the Protocol to ensure that
+happens.</li>
+</ul>
+<p>The following class attribute shall also be overloaded:</p>
+<ul class="simple">
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.name.html#libgs.protocols.protocolbase.ProtocolBase.name" title="libgs.protocols.protocolbase.ProtocolBase.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a> : The name of the protocol</li>
+</ul>
+<p>Additionally a protocol <em>may</em> implement the following methods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rx.html#libgs.protocols.protocolbase.ProtocolBase.init_rx" title="libgs.protocols.protocolbase.ProtocolBase.init_rx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_rx()</span></code></a> : This method will be called by the scheduler before starting a listening pass. It should contain
+any initialisation routines required.</li>
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rxtx.html#libgs.protocols.protocolbase.ProtocolBase.init_rxtx" title="libgs.protocols.protocolbase.ProtocolBase.init_rxtx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_rxtx()</span></code></a> : This method will be called by the scheduler before starting a transmitting pass. It should contain
+any initialisation routines required (power on amplifiers etc…)</li>
+<li><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.terminate.html#libgs.protocols.protocolbase.ProtocolBase.terminate" title="libgs.protocols.protocolbase.ProtocolBase.terminate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">terminate()</span></code></a> : This method will be called by the scheduler as soon as a pass has finished. It should contain
+any clean-up routines required (power off amplifiers etc…), and most importantly ensure that
+any threads or loops initiated by the Protocolclass are immediately terminated in a clean and
+controlled manner.</li>
+</ul>
+<p>When the scheduler starts a pass it will also set an attribute on the protocol class called sch_metadata. This
+attribute contains all the metadata stored in the currently scheduled <a class="reference external" href="https://kworm1.github.io/libgs_ops-docs/_autosummary/libgs_ops.scheduling.CommsPass.html#libgs_ops.scheduling.CommsPass" title="(in libgs_ops)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommsPass</span></code></a>, and is available to the Protocol
+class to refer to as needed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Warning 1</p>
+<p class="last">This class should avoid blocking functions at all cost, and need to respond to the global abort_all event to allow
+libgs to shut down cleanly. A method is provided in libgs.utils called wait_loop that can be used as a
+replacement for time.sleep and/or waiting for events to occur. wait_loop will automatically handle the global
+abort_all event.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Warning 2</p>
+<p class="last">It is imperative that the terminate() method immediately stops any and all running processes or threads
+spawned by the Protocol class.</p>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html#libgs.protocols.protocolbase.ProtocolBase.do_action" title="libgs.protocols.protocolbase.ProtocolBase.do_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_action</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Request an action to be performed</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rx.html#libgs.protocols.protocolbase.ProtocolBase.init_rx" title="libgs.protocols.protocolbase.ProtocolBase.init_rx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_rx</span></code></a>()</td>
+<td>Interface method that is called by the scheduler before starting a listening pass.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rxtx.html#libgs.protocols.protocolbase.ProtocolBase.init_rxtx" title="libgs.protocols.protocolbase.ProtocolBase.init_rxtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_rxtx</span></code></a>()</td>
+<td>Interface method that is called by the scheduler before starting a transmitting pass.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.send_bytes.html#libgs.protocols.protocolbase.ProtocolBase.send_bytes" title="libgs.protocols.protocolbase.ProtocolBase.send_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_bytes</span></code></a>(data[,&nbsp;wait])</td>
+<td>Send a sequence of bytes to the satellite.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.set_handler.html#libgs.protocols.protocolbase.ProtocolBase.set_handler" title="libgs.protocols.protocolbase.ProtocolBase.set_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_handler</span></code></a>(func)</td>
+<td>Set a callback message handler for received data.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.terminate.html#libgs.protocols.protocolbase.ProtocolBase.terminate" title="libgs.protocols.protocolbase.ProtocolBase.terminate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminate</span></code></a>()</td>
+<td>Interface method that is called by the scheduler as soon as a pass has finished.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.name.html#libgs.protocols.protocolbase.ProtocolBase.name" title="libgs.protocols.protocolbase.ProtocolBase.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
+<td>The name of the protocol.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.sch_metadata.html#libgs.protocols.protocolbase.ProtocolBase.sch_metadata" title="libgs.protocols.protocolbase.ProtocolBase.sch_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sch_metadata</span></code></a></td>
+<td>The scheduler will update this property with any metadata the operator has attached to the schedule, thereby allowing him/her to pass information to the protocol class</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited from base class</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="libgs.protocols.protocolbase.ProtocolBase.do_action.html" class="btn btn-neutral float-right" title="libgs.protocols.protocolbase.ProtocolBase.do_action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libgs.protocols.protocolbase.bytes2hex.html" class="btn btn-neutral" title="libgs.protocols.protocolbase.bytes2hex" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

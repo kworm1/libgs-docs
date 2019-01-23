@@ -1,0 +1,77 @@
+
+
+libgs.protocols.protocolbase.ProtocolTest
+=========================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. autoclass:: ProtocolTest
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~ProtocolTest.do_action
+      
+      
+      
+      
+      
+      
+      ~ProtocolTest.send_bytes
+      
+      
+      ~ProtocolTest.set_handler
+      
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~ProtocolTest.name
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      ~ProtocolTest.init_rx
+      
+      
+      ~ProtocolTest.init_rxtx
+      
+      
+      
+      
+      
+      
+      ~ProtocolTest.terminate
+         
+   
+      ~ProtocolTest.sch_metadata
+   
+
+   
+

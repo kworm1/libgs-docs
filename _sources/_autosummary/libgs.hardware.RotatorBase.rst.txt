@@ -26,16 +26,10 @@ libgs.hardware.RotatorBase
       ~RotatorBase.get_azel
       
       
-      ~RotatorBase.get_azel_rate
-      
-      
       ~RotatorBase.in_pos
       
       
       ~RotatorBase.set_azel
-      
-      
-      ~RotatorBase.set_azel_rate
       
       
       ~RotatorBase.stow
@@ -76,10 +70,6 @@ libgs.hardware.RotatorBase
    .. autosummary::
       :toctree: .
    
-      
-      
-      
-      
       
       
       

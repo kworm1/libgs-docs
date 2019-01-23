@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolBase.sch\_metadata
+=======================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. autoattribute:: ProtocolBase.sch_metadata

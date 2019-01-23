@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -187,23 +188,25 @@
 <dl class="method">
 <dt id="libgs.monitoring.Monitor.add_callback">
 <code class="descclassname">Monitor.</code><code class="descname">add_callback</code><span class="sig-paren">(</span><em>callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Monitor.add_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Monitor.add_callback" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a callable to be invoked every N times a value is polled.</p>
+<dd><p>Add a callable to be invoked every time a value is polled. Multiple callbacks can
+be added.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The callback will be executed in the same sub-thread that does the polling</p>
 </div>
-<dl class="docutils">
-<dt>The prototype of the callable should be</dt>
-<dd>some_function(point_name, tstamp, exc, ret)</dd>
-<dt>where</dt>
-<dd><ul class="first last simple">
+<p>The prototype of the callable should be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">some_function</span><span class="p">(</span><span class="n">point_name</span><span class="p">,</span> <span class="n">tstamp</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">ret</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where:</p>
+<blockquote>
+<div><ul class="simple">
 <li>point_name is the name of the monitor point that has been polled</li>
 <li>tstamp is the unix timestamp at which the monitor function returned a value (obtained wiht time.time()),</li>
 <li>exc is None if no exception happened, otherwise it is set to the exception that occurred.</li>
-<li>ret are the return values. Will always be an Alert object.</li>
+<li>ret are the return values. Will always be an <a class="reference internal" href="libgs.monitoring.Alert.html#libgs.monitoring.Alert" title="libgs.monitoring.Alert"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alert</span></code></a> object.</li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -212,7 +215,6 @@
 </tr>
 </tbody>
 </table>
-<p>Returns:</p>
 </dd></dl>
 
 </div>

@@ -32,11 +32,7 @@ libgs.hardware.GR\_XMLRPCRadio
       
       
       
-      
-      
       ~GR_XMLRPCRadio.set_range_rate
-      
-      
       
    
    
@@ -73,12 +69,6 @@ libgs.hardware.GR\_XMLRPCRadio
       ~GR_XMLRPCRadio.record_spectrum
       
       
-      ~GR_XMLRPCRadio.send_bytes
-      
-      
-      
-      
-      ~GR_XMLRPCRadio.set_recv_callback
          
    
       ~GR_XMLRPCRadio.err_range_rate_get

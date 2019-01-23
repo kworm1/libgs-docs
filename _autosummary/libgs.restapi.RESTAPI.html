@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -185,9 +186,11 @@ creation. See <a class="reference internal" href="libgs.restapi.html#module-libg
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>commslog</strong> (<a class="reference internal" href="libgs.database.CommsLog.html#libgs.database.CommsLog" title="libgs.database.CommsLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommsLog</span></code></a>) – Database specification for comms database</li>
-<li><strong>monlog</strong> (<a class="reference internal" href="libgs.database.MonitorDb.html#libgs.database.MonitorDb" title="libgs.database.MonitorDb"><code class="xref py py-class docutils literal notranslate"><span class="pre">MonitorDb</span></code></a>) – Database specification for monitoring db</li>
-<li><strong>passdb</strong> (<a class="reference internal" href="libgs.database.PassDb.html#libgs.database.PassDb" title="libgs.database.PassDb"><code class="xref py py-class docutils literal notranslate"><span class="pre">PassDb</span></code></a>) – Database specification for passes db</li>
+<li><strong>commslog</strong> (<a class="reference internal" href="libgs.database.CommsLog.html#libgs.database.CommsLog" title="libgs.database.CommsLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommsLog</span></code></a>) – <a class="reference external" href="https://docs.sqlalchemy.org/en/latest/core/engines.html">Database specification</a> string for comms database</li>
+<li><strong>monlog</strong> (<a class="reference internal" href="libgs.database.MonitorDb.html#libgs.database.MonitorDb" title="libgs.database.MonitorDb"><code class="xref py py-class docutils literal notranslate"><span class="pre">MonitorDb</span></code></a>) – <p><a class="reference external" href="https://docs.sqlalchemy.org/en/latest/core/engines.html">Database specification</a> string for monitoring db</p>
+</li>
+<li><strong>passdb</strong> (<a class="reference internal" href="libgs.database.PassDb.html#libgs.database.PassDb" title="libgs.database.PassDb"><code class="xref py py-class docutils literal notranslate"><span class="pre">PassDb</span></code></a>) – <p><a class="reference external" href="https://docs.sqlalchemy.org/en/latest/core/engines.html">Database specification</a> string for passes db</p>
+</li>
 <li><strong>host</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Ip address to bind to</li>
 <li><strong>port</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Port to bind to</li>
 <li><strong>default_format</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Format to provide if no argument given (default = json)</li>

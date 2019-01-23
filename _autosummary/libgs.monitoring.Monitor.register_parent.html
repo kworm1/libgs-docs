@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -188,8 +189,20 @@
 <dt id="libgs.monitoring.Monitor.register_parent">
 <code class="descclassname">Monitor.</code><code class="descname">register_parent</code><span class="sig-paren">(</span><em>name</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Monitor.register_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Monitor.register_parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>A parent monitor is not really a monitor. It is merely the product
-of its children and exists for visualisation purposes only.</p>
-<p>Its alert status will always be the worst of its children</p>
+of its children and exists for visualisation/grouping purposes only.</p>
+<p>Its alert status will always be the worst of its children.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The name of the parent to register</li>
+<li><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>(</em><em>optional</em><em>)</em>) – The parent of the parent you are registering</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

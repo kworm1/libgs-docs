@@ -1,6 +1,0 @@
-libgs.hardware.GR\_XMLRPCRadio.send\_bytes
-==========================================
-
-.. currentmodule:: libgs.hardware
-
-.. automethod:: GR_XMLRPCRadio.send_bytes

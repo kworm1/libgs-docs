@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolBase.name
+==============================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. autoattribute:: ProtocolBase.name

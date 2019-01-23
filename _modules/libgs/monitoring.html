@@ -88,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -187,6 +188,67 @@
 
 <span class="sd">:date:   Mon Sep 18 09:22:40 2017</span>
 <span class="sd">:author: Kjetil Wormnes</span>
+
+<span class="sd">Monitoring is a stand-alone module that allows monitoring of telemetry points while</span>
+<span class="sd">attempting to have a minimal impact on the execution of the rest of the code.</span>
+
+<span class="sd">It implements a simple pythonic syntax for the creation of monitoring points. To use;</span>
+
+<span class="sd">1. Create a monitor</span>
+
+<span class="sd">&gt;&gt;&gt; from libgs.monitoring import Monitor</span>
+<span class="sd">&gt;&gt;&gt; mon = Monitor()</span>
+
+<span class="sd">2. Define a function that returns the monitored value, </span>
+<span class="sd">and decorate it with mon.monitor(). </span>
+
+<span class="sd">For example, to monitor the current time:</span>
+
+<span class="sd">&gt;&gt;&gt; from datetime import datetime</span>
+<span class="sd">&gt;&gt;&gt; @mon.monitor()</span>
+<span class="sd">&gt;&gt;&gt; def current_time():</span>
+<span class="sd">&gt;&gt;&gt;    return datetime.utcnow()</span>
+
+<span class="sd">3. Start the monitor</span>
+
+<span class="sd">&gt;&gt;&gt; mon.start()</span>
+
+<span class="sd">And that&#39;s it. The current time is now monitored at the default update interval </span>
+<span class="sd">under a monitor point called &quot;current_time&quot;. </span>
+<span class="sd">You can view the state of the monitor by printing it::</span>
+
+<span class="sd">    &gt;&gt;&gt; print(mon)</span>
+<span class="sd">    Monitor ()  -- running</span>
+<span class="sd">    Name                          Value               Alert     Last polled   </span>
+<span class="sd">    ----------------------------- ------------------- --------- ---------------</span>
+<span class="sd">    .current_time                 2018-06-21 00:39:07           0.7</span>
+
+
+<span class="sd">More complicated monitoring functions can easily be created by specifying the point</span>
+<span class="sd">value in the decorator. See :meth:`Monitor.monitor` for syntax. You can also change</span>
+<span class="sd">the update interval etc...</span>
+
+<span class="sd">The constructor also takes some arguments to customise its default behaviour. See :class:`Monitor`.</span>
+
+<span class="sd">You are able to add callbacks whenever a monitored value is updated. This is useful</span>
+<span class="sd">if you are displaying the data on a dashboard or updating a database. See :meth:`Monitor.add_callback`.</span>
+
+<span class="sd">Finally, you can set alert levels by returning an Alert object rather than a value from</span>
+<span class="sd">your monitoring function. This module defines :class:`GreenAlert`, :class:`OrangeAlert`, </span>
+<span class="sd">:class:`RedAlert`, and :class:`CriticalAlert`. You are welcome to customise or make others </span>
+<span class="sd">by deriving a new subclass from :class:`Alert`.</span>
+
+<span class="sd">The following example monitoring function gets the cpu usage every 2 seconds, and</span>
+<span class="sd">marks the alert as Red if it is above 50%:</span>
+
+<span class="sd">&gt;&gt;&gt; @mon.monitor(dt = 2)</span>
+<span class="sd">&gt;&gt;&gt; def cpu_usage():</span>
+<span class="sd">&gt;&gt;&gt;     usage = psutil.cpu_percent(interval=1)</span>
+<span class="sd">&gt;&gt;&gt;     if usage &gt; 50:</span>
+<span class="sd">&gt;&gt;&gt;         return RedAlert(usage)</span>
+<span class="sd">&gt;&gt;&gt;     else:</span>
+<span class="sd">&gt;&gt;&gt;         return GreenAlert(usage)</span>
+<span class="sd"> </span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
@@ -214,6 +276,10 @@
 <span class="c1">#</span>
 <span class="c1">############################################</span>
 <div class="viewcode-block" id="Alert"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Alert.html#libgs.monitoring.Alert">[docs]</a><span class="k">class</span> <span class="nc">Alert</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for Alerts. Any derived class must set </span>
+<span class="sd">    the alertstr and alertcode properties.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
@@ -250,6 +316,9 @@
 
 
 <div class="viewcode-block" id="MonitorItem"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.MonitorItem.html#libgs.monitoring.MonitorItem">[docs]</a><span class="k">class</span> <span class="nc">MonitorItem</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A monitored item.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;alert&#39;</span><span class="p">,</span> <span class="s1">&#39;parent&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
@@ -297,7 +366,31 @@
 
 <div class="viewcode-block" id="Monitor"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.html#libgs.monitoring.Monitor">[docs]</a><span class="k">class</span> <span class="nc">Monitor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to provide functionality for monitoring</span>
+<span class="sd">    Class to provide functionality for monitoring.</span>
+
+<span class="sd">    The monitor class works by spawning a threadpool in which it will call a number</span>
+<span class="sd">    of user-defined monitoring functions. Every tick, it will check the list</span>
+<span class="sd">    of monitoring functions to find the ones that are due and then invoke them in the</span>
+<span class="sd">    threadpool. It then *immediately proceeds to the next tick*.</span>
+
+<span class="sd">    In other words, monitoring functions are free to do whatever they want, including</span>
+<span class="sd">    to block for a while since while it is running the Monitor class will just proceed</span>
+<span class="sd">    with executing other monitoring functions (up to the limit of the workers in the threadpool).</span>
+
+<span class="sd">    Monitoring functions are added to the class instance preferably using the </span>
+<span class="sd">    :meth:`monitor` decorator. </span>
+<span class="sd">    </span>
+<span class="sd">    It is possible to add callbacks to monitor points that are invoked every time the value</span>
+<span class="sd">    is updated.</span>
+
+<span class="sd">    It is also possible to add a single tick callback when creating the Monitor object. Take</span>
+<span class="sd">    care when doing this as it is invoked at the end of every tick, and the next tick will not</span>
+<span class="sd">    execute before it completes. Therefore care should be taken to ensure tick callbacks return very</span>
+<span class="sd">    fast.</span>
+
+<span class="sd">    This restriction does not apply to monitor callbacks as they are executed in the Threadpool with</span>
+<span class="sd">    the call to the monitor function and will therefore not hold up the Monitor overall.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
 
@@ -360,6 +453,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">alertcode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The current worst alert level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">alert</span><span class="p">)</span>
 
 
@@ -368,9 +464,13 @@
                         <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A parent monitor is not really a monitor. It is merely the product</span>
-<span class="sd">        of its children and exists for visualisation purposes only.</span>
+<span class="sd">        of its children and exists for visualisation/grouping purposes only.</span>
 
-<span class="sd">        Its alert status will always be the worst of its children</span>
+<span class="sd">        Its alert status will always be the worst of its children.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str)              : The name of the parent to register</span>
+<span class="sd">            parent (str(optional))  : The parent of the parent you are registering</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -382,25 +482,25 @@
 
 <div class="viewcode-block" id="Monitor.add_callback"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.add_callback.html#libgs.monitoring.Monitor.add_callback">[docs]</a>    <span class="k">def</span> <span class="nf">add_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a callable to be invoked every N times a value is polled.</span>
+<span class="sd">        Add a callable to be invoked every time a value is polled. Multiple callbacks can</span>
+<span class="sd">        be added.</span>
 
 <span class="sd">        .. note::</span>
-
 <span class="sd">           The callback will be executed in the same sub-thread that does the polling</span>
 
-<span class="sd">        The prototype of the callable should be</span>
+<span class="sd">        The prototype of the callable should be::</span>
+
 <span class="sd">            some_function(point_name, tstamp, exc, ret)</span>
 
-<span class="sd">        where</span>
+<span class="sd">        where:</span>
+
 <span class="sd">            * point_name is the name of the monitor point that has been polled</span>
 <span class="sd">            * tstamp is the unix timestamp at which the monitor function returned a value (obtained wiht time.time()),</span>
 <span class="sd">            * exc is None if no exception happened, otherwise it is set to the exception that occurred.</span>
-<span class="sd">            * ret are the return values. Will always be an Alert object.</span>
+<span class="sd">            * ret are the return values. Will always be an :class:`Alert` object.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            callable: The callable</span>
-
-<span class="sd">        Returns:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">callable</span><span class="p">)</span></div>
@@ -409,17 +509,15 @@
 <div class="viewcode-block" id="Monitor.to_gen_in_executor"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.to_gen_in_executor.html#libgs.monitoring.Monitor.to_gen_in_executor">[docs]</a>    <span class="k">def</span> <span class="nf">to_gen_in_executor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">point_names</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This decorator will take any function and turn it into a generator</span>
-<span class="sd">        that always returns immediately after calls to next().</span>
+<span class="sd">        appropriately formatted for adding using :meth:`.register_monitor`.</span>
 
 <span class="sd">        The call to fn is being delegated to an executor, and while it is not</span>
 <span class="sd">        done, calls to next() will return None, otherwise it will return a tuple containging</span>
-<span class="sd">            * the timestamp the data the return</span>
-<span class="sd">        value of fn</span>
+<span class="sd">            * The timestamp the data the return value of fn</span>
+<span class="sd">            * Any Exceptions that occurred</span>
+<span class="sd">            * The return value</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            fn:</span>
-
-<span class="sd">        Returns:</span>
+<span class="sd">        This is the format that is required in order to add it to the Monitor.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -491,12 +589,9 @@
     <span class="c1">#############</span>
 <div class="viewcode-block" id="Monitor.callback"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.callback.html#libgs.monitoring.Monitor.callback">[docs]</a>    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Decorator to convert a function definition to an IntervalCallback instance and add it to the</span>
-<span class="sd">        monitor&#39;s callback list.</span>
+<span class="sd">        Decorator that can be applied to a function to automatically add it to the monitor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-
-        <span class="c1"># Otherwise convert it to an IntervalCallback instance</span>
         <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">fn</span>
@@ -508,16 +603,34 @@
 <span class="sd">        Creates a decorator that can be applied to any function to add it to be monitored.</span>
 
 <span class="sd">        It will do two things:</span>
-<span class="sd">            1) convert the function to a generator in which the function call is run in an executor, so that</span>
+
+<span class="sd">            1. Convert the function to a generator in which the function call is run in an executor, so that</span>
 <span class="sd">               any call to the generators next() function will return immeditately and not hold up execution. If</span>
 <span class="sd">               the function has not finished the generator will return None. If it has completed, it will return</span>
 <span class="sd">               the value as well as a timestamp and any potential exception in the format required for the monitoring</span>
 <span class="sd">               loop.</span>
-<span class="sd">            2) add the function to the Monitor class  polling schedule.</span>
+<span class="sd">            2. Add the function to the Monitor class polling schedule.</span>
+
+<span class="sd">        The decorator can create multiple monitor points from a single callable (that returns a tuple) by</span>
+<span class="sd">        specifying point as a tuple.</span>
+<span class="sd">        </span>
+<span class="sd">        Please see :meth:`.register_monitor` for the full list of the remaining arguments that can be applied.</span>
+<span class="sd">        *args and **kwargs can be anything accepted by :meth:`.register_monitor` except name, gen or dependents.</span>
+
+<span class="sd">        Example: </span>
+<span class="sd">        </span>
+<span class="sd">            register 3 monitoring points from a function that retuns random values at an interval</span>
+<span class="sd">            of once every 10 seconds, grouped under the heading Test:</span>
+
+<span class="sd">            &gt;&gt;&gt; @mon.monitor(point=(&quot;Point 1&quot;, &quot;Point 2&quot;, &quot;Point 3&quot;), dt=10, parent=&quot;Test&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; def monitoring_function():</span>
+<span class="sd">            &gt;&gt;&gt;    return random.random(), random.random(), random.random()</span>
+
 
 <span class="sd">        Args:</span>
-<span class="sd">            point:           The name of the monitor point. If omitted it will use the function name</span>
-<span class="sd">            *args, **kwargs: Also accepts all the arguments of register_monitor()</span>
+<span class="sd">            point:           The name of the monitor point. If omitted it will use the function name. </span>
+<span class="sd">                             Can also be a tuple if function monitors several variables.</span>
+<span class="sd">            *args, **kwargs: Also accepts all the arguments of :class:`.register_monitor`</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Decorator</span>
@@ -560,7 +673,7 @@
 <span class="sd">        This is a low level function to register a monitor generator with the monitor class.</span>
 
 <span class="sd">        The format of the generator is quite specific, and it should therefore ideally have been created from</span>
-<span class="sd">        a callable using the to_gen_in_executor() method. Using this method will ensure the generator returns</span>
+<span class="sd">        a callable using the :meth:`.to_gen_in_executor` method. Using this method will ensure the generator returns</span>
 <span class="sd">        values in the right format for the monitor class, and that it never blocks.</span>
 
 
@@ -568,12 +681,13 @@
 <span class="sd">            name:           The name of the monitor point</span>
 <span class="sd">            gen:            The monitor generator (* see description above)</span>
 <span class="sd">            dt:             The time interval in which to poll the monitored (dt = None -&gt; one shot)</span>
-<span class="sd">            parent:         Assign a parent to the monitored (For grouping purposes only,</span>
+<span class="sd">            parent:         Assign a parent to the monitored (For grouping purposes only)</span>
+<span class="sd">                            If the parent does not exist, it will be created.</span>
 <span class="sd">            loglvl_values:  If not None, any change in value will be logged with the logging level specified.</span>
 <span class="sd">            loglvl_alerts:  If not None, a change in alert level may be logged with the logging level specified</span>
-<span class="sd">            logthr_alerts:  The threshold for the alertcode above by which to log. Default = RedAlert.alertcode</span>
+<span class="sd">            logthr_alerts:  The threshold for the alertcode above by which to log. Default = :attr:`RedAlert.alertcode`</span>
 <span class="sd">            dependents:     Other monitors to update from same generator</span>
-<span class="sd">            alert_exc:      Alert to set in case an exception is raised in monitor function. Default = NoAlert</span>
+<span class="sd">            alert_exc:      Alert to set in case an exception is raised in monitor function. Default = :class:`NoAlert`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -622,6 +736,12 @@
 
 
 <div class="viewcode-block" id="Monitor.start"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.start.html#libgs.monitoring.Monitor.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subprocess</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start polling loop.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            subprocess (bool (optional)): Start the polling loop in a subprocess rather than a thread.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
@@ -635,6 +755,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Monitor.stop"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.stop.html#libgs.monitoring.Monitor.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the polling loop.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pthr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
@@ -800,6 +924,15 @@
 
 
 <div class="viewcode-block" id="Monitor.itertree"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.itertree.html#libgs.monitoring.Monitor.itertree">[docs]</a>    <span class="k">def</span> <span class="nf">itertree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Iterator that will iterate through the full tree of monitor points, or </span>
+<span class="sd">        alternatively just a specific branch by specifying the parent of that branch.</span>
+
+<span class="sd">        &gt;&gt;&gt; for item in mon.itertree():</span>
+<span class="sd">        &gt;&gt;&gt;    print(item)</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="o">.</span><span class="n">parent</span><span class="p">)]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
             <span class="n">top</span> <span class="o">+=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parents</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
@@ -826,11 +959,19 @@
 <span class="sd">        names is more descriptive. This method is the same as .names()</span>
 
 <span class="sd">        Returns:</span>
+<span class="sd">            list of monitor names</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exec_map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Monitor.names"><a class="viewcode-back" href="../../_autosummary/libgs.monitoring.Monitor.names.html#libgs.monitoring.Monitor.names">[docs]</a>    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of monitor names</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div></div>
 
 

@@ -1,6 +1,0 @@
-libgs.restapi.nid\_to\_int\_if\_possible
-========================================
-
-.. currentmodule:: libgs.restapi
-
-.. autofunction:: nid_to_int_if_possible

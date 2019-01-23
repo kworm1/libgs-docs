@@ -1,0 +1,77 @@
+
+
+libgs.protocols.protocolbase.ProtocolBase
+=========================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. autoclass:: ProtocolBase
+
+   
+
+   
+   .. rubric:: Methods
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      ~ProtocolBase.do_action
+      
+      
+      ~ProtocolBase.init_rx
+      
+      
+      ~ProtocolBase.init_rxtx
+      
+      
+      ~ProtocolBase.send_bytes
+      
+      
+      ~ProtocolBase.set_handler
+      
+      
+      ~ProtocolBase.terminate
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+   
+   .. autosummary::
+      :toctree: .
+   
+      ~ProtocolBase.name
+      ~ProtocolBase.sch_metadata
+   
+   
+
+
+   
+   
+
+   .. rubric:: Inherited from base class
+
+   .. autosummary::
+      :toctree: .
+   
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+         
+   
+   
+
+   
+

@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -188,25 +189,37 @@
 <dt id="libgs.monitoring.Monitor.monitor">
 <code class="descclassname">Monitor.</code><code class="descname">monitor</code><span class="sig-paren">(</span><em>point=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Monitor.monitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Monitor.monitor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a decorator that can be applied to any function to add it to be monitored.</p>
-<dl class="docutils">
-<dt>It will do two things:</dt>
-<dd><ol class="first last arabic simple">
-<li>convert the function to a generator in which the function call is run in an executor, so that
+<p>It will do two things:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Convert the function to a generator in which the function call is run in an executor, so that
 any call to the generators next() function will return immeditately and not hold up execution. If
 the function has not finished the generator will return None. If it has completed, it will return
 the value as well as a timestamp and any potential exception in the format required for the monitoring
 loop.</li>
-<li>add the function to the Monitor class  polling schedule.</li>
+<li>Add the function to the Monitor class polling schedule.</li>
 </ol>
-</dd>
-</dl>
+</div></blockquote>
+<p>The decorator can create multiple monitor points from a single callable (that returns a tuple) by
+specifying point as a tuple.</p>
+<p>Please see <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a> for the full list of the remaining arguments that can be applied.
+<a href="#id1"><span class="problematic" id="id2">*</span></a>args and <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs can be anything accepted by <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a> except name, gen or dependents.</p>
+<p class="rubric">Example</p>
+<p>register 3 monitoring points from a function that retuns random values at an interval
+of once every 10 seconds, grouped under the heading Test:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@mon</span><span class="o">.</span><span class="n">monitor</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Point 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Point 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Point 3&quot;</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">monitoring_function</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>point</strong> – The name of the monitor point. If omitted it will use the function name</li>
-<li><strong>**kwargs</strong> (<em>*args</em><em>,</em>) – <p>Also accepts all the arguments of register_monitor()</p>
+<li><strong>point</strong> – The name of the monitor point. If omitted it will use the function name.
+Can also be a tuple if function monitors several variables.</li>
+<li><strong>**kwargs</strong> (<em>*args</em><em>,</em>) – <p>Also accepts all the arguments of <code class="xref py py-class docutils literal notranslate"><span class="pre">register_monitor</span></code></p>
 </li>
 </ul>
 </td>

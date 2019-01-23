@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.hardware.RotCtld.set_azel_rate" href="libgs.hardware.RotCtld.set_azel_rate.html" />
-    <link rel="prev" title="libgs.hardware.RotCtld.get_azel_rate" href="libgs.hardware.RotCtld.get_azel_rate.html" /> 
+    <link rel="next" title="libgs.hardware.RotCtld.stow" href="libgs.hardware.RotCtld.stow.html" />
+    <link rel="prev" title="libgs.hardware.RotCtld.azel_to_antenna_angles" href="libgs.hardware.RotCtld.azel_to_antenna_angles.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -84,37 +84,38 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.get_azel.html">libgs.hardware.RotCtld.get_azel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.set_azel.html">libgs.hardware.RotCtld.set_azel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.azel_err.html">libgs.hardware.RotCtld.azel_err</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.azel_to_antenna_angles.html">libgs.hardware.RotCtld.azel_to_antenna_angles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.get_azel_rate.html">libgs.hardware.RotCtld.get_azel_rate</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">libgs.hardware.RotCtld.in_pos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.set_azel_rate.html">libgs.hardware.RotCtld.set_azel_rate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.stow.html">libgs.hardware.RotCtld.stow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.BEAMWIDTH.html">libgs.hardware.RotCtld.BEAMWIDTH</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.MAX_AZ.html">libgs.hardware.RotCtld.MAX_AZ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.MAX_EL.html">libgs.hardware.RotCtld.MAX_EL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.MIN_AZ.html">libgs.hardware.RotCtld.MIN_AZ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.MIN_EL.html">libgs.hardware.RotCtld.MIN_EL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.SLEW_TIMEOUT.html">libgs.hardware.RotCtld.SLEW_TIMEOUT</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.STOWED_AZ.html">libgs.hardware.RotCtld.STOWED_AZ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.STOWED_EL.html">libgs.hardware.RotCtld.STOWED_EL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.az.html">libgs.hardware.RotCtld.az</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.azel.html">libgs.hardware.RotCtld.azel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.cmd_az.html">libgs.hardware.RotCtld.cmd_az</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.cmd_el.html">libgs.hardware.RotCtld.cmd_el</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.el.html">libgs.hardware.RotCtld.el</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.name.html">libgs.hardware.RotCtld.name</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="libgs.hardware.html#implementing-a-new-hardware-interface">Implementing a new hardware interface</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.get_azel.html">libgs.hardware.RotCtld.get_azel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.set_azel.html">libgs.hardware.RotCtld.set_azel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.azel_err.html">libgs.hardware.RotCtld.azel_err</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.azel_to_antenna_angles.html">libgs.hardware.RotCtld.azel_to_antenna_angles</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">libgs.hardware.RotCtld.in_pos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.stow.html">libgs.hardware.RotCtld.stow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.BEAMWIDTH.html">libgs.hardware.RotCtld.BEAMWIDTH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.MAX_AZ.html">libgs.hardware.RotCtld.MAX_AZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.MAX_EL.html">libgs.hardware.RotCtld.MAX_EL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.MIN_AZ.html">libgs.hardware.RotCtld.MIN_AZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.MIN_EL.html">libgs.hardware.RotCtld.MIN_EL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.SLEW_TIMEOUT.html">libgs.hardware.RotCtld.SLEW_TIMEOUT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.STOWED_AZ.html">libgs.hardware.RotCtld.STOWED_AZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.STOWED_EL.html">libgs.hardware.RotCtld.STOWED_EL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.az.html">libgs.hardware.RotCtld.az</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.azel.html">libgs.hardware.RotCtld.azel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.cmd_az.html">libgs.hardware.RotCtld.cmd_az</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.cmd_el.html">libgs.hardware.RotCtld.cmd_el</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.el.html">libgs.hardware.RotCtld.el</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.RotCtld.name.html">libgs.hardware.RotCtld.name</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
@@ -123,6 +124,7 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -196,7 +198,8 @@
 <dl class="method">
 <dt id="libgs.hardware.RotCtld.in_pos">
 <code class="descclassname">RotCtld.</code><code class="descname">in_pos</code><span class="sig-paren">(</span><em>az=None</em>, <em>el=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libgs.hardware.RotCtld.in_pos" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if antenna is in position</p>
+<dd><p>Check if antenna is in position. Optionally a different az,el can be supplied. If so
+the position check will be done against that instead of the currently commanded position.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -217,10 +220,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.hardware.RotCtld.set_azel_rate.html" class="btn btn-neutral float-right" title="libgs.hardware.RotCtld.set_azel_rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.hardware.RotCtld.stow.html" class="btn btn-neutral float-right" title="libgs.hardware.RotCtld.stow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="libgs.hardware.RotCtld.get_azel_rate.html" class="btn btn-neutral" title="libgs.hardware.RotCtld.get_azel_rate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="libgs.hardware.RotCtld.azel_to_antenna_angles.html" class="btn btn-neutral" title="libgs.hardware.RotCtld.azel_to_antenna_angles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

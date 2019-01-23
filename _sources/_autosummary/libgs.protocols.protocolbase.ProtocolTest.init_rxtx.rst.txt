@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolTest.init\_rxtx
+====================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolTest.init_rxtx

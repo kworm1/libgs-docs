@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolBase.do\_action
+====================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolBase.do_action

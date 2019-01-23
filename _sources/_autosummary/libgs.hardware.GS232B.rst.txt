@@ -27,11 +27,7 @@ libgs.hardware.GS232B
       
       
       
-      
-      
       ~GS232B.set_azel
-      
-      
       
       
       ~GS232B.start
@@ -80,15 +76,9 @@ libgs.hardware.GS232B
       
       
       
-      ~GS232B.get_azel_rate
-      
-      
       ~GS232B.in_pos
       
       
-      
-      
-      ~GS232B.set_azel_rate
       
       
       

@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -189,7 +190,7 @@
 <code class="descclassname">Monitor.</code><code class="descname">register_monitor</code><span class="sig-paren">(</span><em>name</em>, <em>gen</em>, <em>dt=-1</em>, <em>parent=None</em>, <em>loglvl_values=None</em>, <em>loglvl_alerts=10</em>, <em>logthr_alerts=30</em>, <em>dependents=()</em>, <em>alert_exc=&lt;class 'libgs.monitoring.NoAlert'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Monitor.register_monitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Monitor.register_monitor" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a low level function to register a monitor generator with the monitor class.</p>
 <p>The format of the generator is quite specific, and it should therefore ideally have been created from
-a callable using the to_gen_in_executor() method. Using this method will ensure the generator returns
+a callable using the <a class="reference internal" href="libgs.monitoring.Monitor.to_gen_in_executor.html#libgs.monitoring.Monitor.to_gen_in_executor" title="libgs.monitoring.Monitor.to_gen_in_executor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_gen_in_executor()</span></code></a> method. Using this method will ensure the generator returns
 values in the right format for the monitor class, and that it never blocks.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -199,12 +200,13 @@ values in the right format for the monitor class, and that it never blocks.</p>
 <li><strong>name</strong> – The name of the monitor point</li>
 <li><strong>gen</strong> – The monitor generator (* see description above)</li>
 <li><strong>dt</strong> – The time interval in which to poll the monitored (dt = None -&gt; one shot)</li>
-<li><strong>parent</strong> – Assign a parent to the monitored (For grouping purposes only,</li>
+<li><strong>parent</strong> – Assign a parent to the monitored (For grouping purposes only)
+If the parent does not exist, it will be created.</li>
 <li><strong>loglvl_values</strong> – If not None, any change in value will be logged with the logging level specified.</li>
 <li><strong>loglvl_alerts</strong> – If not None, a change in alert level may be logged with the logging level specified</li>
-<li><strong>logthr_alerts</strong> – The threshold for the alertcode above by which to log. Default = RedAlert.alertcode</li>
+<li><strong>logthr_alerts</strong> – The threshold for the alertcode above by which to log. Default = <a class="reference internal" href="libgs.monitoring.RedAlert.alertcode.html#libgs.monitoring.RedAlert.alertcode" title="libgs.monitoring.RedAlert.alertcode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RedAlert.alertcode</span></code></a></li>
 <li><strong>dependents</strong> – Other monitors to update from same generator</li>
-<li><strong>alert_exc</strong> – Alert to set in case an exception is raised in monitor function. Default = NoAlert</li>
+<li><strong>alert_exc</strong> – Alert to set in case an exception is raised in monitor function. Default = <a class="reference internal" href="libgs.monitoring.NoAlert.html#libgs.monitoring.NoAlert" title="libgs.monitoring.NoAlert"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoAlert</span></code></a></li>
 </ul>
 </td>
 </tr>

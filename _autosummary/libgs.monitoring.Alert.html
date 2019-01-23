@@ -102,6 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -173,7 +174,9 @@
 <dl class="class">
 <dt id="libgs.monitoring.Alert">
 <em class="property">class </em><code class="descclassname">libgs.monitoring.</code><code class="descname">Alert</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/monitoring.html#Alert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.monitoring.Alert" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>Base class for Alerts. Any derived class must set
+the alertstr and alertcode properties.</p>
+<p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />

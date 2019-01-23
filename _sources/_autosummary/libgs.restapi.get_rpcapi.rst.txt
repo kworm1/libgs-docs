@@ -1,6 +1,0 @@
-libgs.restapi.get\_rpcapi
-=========================
-
-.. currentmodule:: libgs.restapi
-
-.. autofunction:: get_rpcapi

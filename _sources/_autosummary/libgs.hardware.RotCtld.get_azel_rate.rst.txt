@@ -1,6 +1,0 @@
-libgs.hardware.RotCtld.get\_azel\_rate
-======================================
-
-.. currentmodule:: libgs.hardware
-
-.. automethod:: RotCtld.get_azel_rate

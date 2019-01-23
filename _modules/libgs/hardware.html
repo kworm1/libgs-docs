@@ -88,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -188,6 +189,20 @@
 <span class="sd">:date:   Fri Jan 12 13:17:51 2018</span>
 <span class="sd">:author: kjetil</span>
 
+<span class="sd">This module contains base classes for interfacing with key hardware components:</span>
+
+<span class="sd">* Rotators: :class:`RotatorBase`</span>
+<span class="sd">* Radios:   :class:`RadioBase`</span>
+
+<span class="sd">As well as implementations for some common Rotator and Radios.</span>
+
+<span class="sd">Implementing a new hardware interface</span>
+<span class="sd">-------------------------------------</span>
+
+<span class="sd">Derive from the appropriate base class and implement the interface methods. </span>
+<span class="sd">See :class:`RotatorBase` and :class:`RadioBase` for details.</span>
+
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -212,32 +227,34 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">serial</span>
 <span class="kn">import</span> <span class="nn">time</span>
-
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;libgs-log&#39;</span><span class="p">)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
 
 
+
 <div class="viewcode-block" id="RotatorBase"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase">[docs]</a><span class="k">class</span> <span class="nc">RotatorBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for any rotator hardware interface</span>
 
-<span class="sd">    The following configuration parameters can be changed by any derived class in order to appropriately configure</span>
-<span class="sd">    the rotator</span>
+<span class="sd">    Any rotator interface must derive from this class and implement the interface methods:</span>
 
-<span class="sd">    ======================= ===================</span>
-<span class="sd">    Parameter               Description</span>
-<span class="sd">    ----------------------- -------------------</span>
-<span class="sd">    STOWED_AZ               Azimuth to move antenna to when stowing</span>
-<span class="sd">    STOWED_EL               Elevation to move antenna to when stowing</span>
-<span class="sd">    BEAMWIDTH               Antenna beamwidth (used when calculating granularity of antenna movements)</span>
-<span class="sd">    MAX_AZ                  Maximum allowed Azimuth</span>
-<span class="sd">    MIN_AZ                  Minimum allowed Azimuth</span>
-<span class="sd">    MAX_EL                  Maximum allowed Elevation</span>
-<span class="sd">    MIN_EL                  Minimum allowed Elevation</span>
-<span class="sd">    SLEW_TIMEOUT            Max time to wait while waiting for slewing to complete</span>
-<span class="sd">    ======================= ===================</span>
+<span class="sd">    * :meth:`.get_azel`</span>
+<span class="sd">    * :meth:`.set_azel`</span>
+
+<span class="sd">    Additionally you should set the name attribute to something descriptive, and change the configuration attribute parameters</span>
+<span class="sd">    as appropriate:</span>
+<span class="sd">    </span>
+<span class="sd">    * :attr:`STOWED_AZ`</span>
+<span class="sd">    * :attr:`STOWED_EL`</span>
+<span class="sd">    * :attr:`BEAMWIDTH`</span>
+<span class="sd">    * :attr:`MAX_AZ`</span>
+<span class="sd">    * :attr:`MIN_AZ`</span>
+<span class="sd">    * :attr:`MAX_EL`</span>
+<span class="sd">    * :attr:`MIN_EL`</span>
+<span class="sd">    * :attr:`SLEW_TIMEOUT`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -246,9 +263,9 @@
     <span class="c1"># to suit the rotator type</span>
     <span class="c1">#</span>
 
-    <span class="c1">#: Stowed position</span>
-    <span class="n">STOWED_AZ</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_STOWED_AZ</span>
-    <span class="n">STOWED_EL</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_STOWED_EL</span>
+    <span class="c1"># Stowed positions</span>
+    <span class="n">STOWED_AZ</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_STOWED_AZ</span> <span class="c1">#: Stowed azimuth position</span>
+    <span class="n">STOWED_EL</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_STOWED_EL</span> <span class="c1">#: Stowed elevation position</span>
 
     <span class="c1">#: Antenna beamwidth</span>
     <span class="n">BEAMWIDTH</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">ROTATOR_ANTENNA_BEAMWIDTH</span>
@@ -279,6 +296,9 @@
     <span class="c1">#####</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property for getting/setting the radio name. If no name is supplied, none is generated based on the isntance counter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Rotator</span><span class="si">{:03d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">RotatorBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span><span class="p">)</span>
             <span class="n">RotatorBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -307,7 +327,40 @@
     <span class="c1">#</span>
     <span class="c1">####################</span>
 
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_assure_azel_in_range</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
 
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">az</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded az = </span><span class="si">{:.1f}</span><span class="s2"> deg &lt; MIN_AZ, using MIN_AZ = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span><span class="p">))</span>
+                <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span>
+
+            <span class="k">if</span> <span class="n">az</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded az = </span><span class="si">{:.1f}</span><span class="s2"> deg &gt; MAX_AZ, using MAX_AZ = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span><span class="p">))</span>
+                <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span>
+
+            <span class="k">if</span> <span class="n">el</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded el = </span><span class="si">{:.1f}</span><span class="s2"> deg &lt; MIN_EL, using MIN_EL = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">))</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span>
+
+            <span class="k">if</span> <span class="n">el</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded el = </span><span class="si">{:.1f}</span><span class="s2"> deg &gt; MAX_EL, using MAX_EL = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">))</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span>
+
+            <span class="c1"># Also use this wrapper to ensure cmd_az and cmd_el gets set.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span> <span class="o">=</span> <span class="n">az</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span> <span class="o">=</span> <span class="n">el</span>
+
+            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">wrapped</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__doc__</span>
+        <span class="n">wrapped</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span>
+
+        <span class="k">return</span> <span class="n">wrapped</span>
+
+
+        
     <span class="k">def</span> <span class="nf">_wait_for_in_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">el</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="n">last_print_t</span> <span class="o">=</span> <span class="n">t0</span>
@@ -345,6 +398,9 @@
 
 
 <div class="viewcode-block" id="RotatorBase.azel_err"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.azel_err.html#libgs.hardware.RotatorBase.azel_err">[docs]</a>    <span class="k">def</span> <span class="nf">azel_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the error in degrees between the current pointing and a specified az/el</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">az_dist</span><span class="p">(</span><span class="n">az1</span><span class="p">,</span> <span class="n">az2</span><span class="p">):</span>
             <span class="n">az1</span> <span class="o">=</span> <span class="n">az1</span><span class="o">%</span><span class="mi">360</span>
@@ -376,7 +432,8 @@
 
 <div class="viewcode-block" id="RotatorBase.in_pos"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.in_pos.html#libgs.hardware.RotatorBase.in_pos">[docs]</a>    <span class="k">def</span> <span class="nf">in_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">el</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Check if antenna is in position</span>
+<span class="sd">        Check if antenna is in position. Optionally a different az,el can be supplied. If so</span>
+<span class="sd">        the position check will be done against that instead of the currently commanded position.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            True if antenna is in position, False otherwise</span>
@@ -408,18 +465,20 @@
 <span class="sd">        amount of movements while keeping the off-pointing within the antenna</span>
 <span class="sd">        beamwidth</span>
 
-<span class="sd">        Note: this method does *not* interpolate, it just uses nearest neighbour</span>
-<span class="sd">              so pdat must be at sufficient time resolution.</span>
+<span class="sd">        .. note::</span>
+<span class="sd">            This method does *not* interpolate, it just uses nearest neighbour</span>
+<span class="sd">            so pdat must be at sufficient time resolution.</span>
 
 
 <span class="sd">        Also transform antenna pointing vectors in such a way that the antenna will track continously  throughout</span>
 <span class="sd">        the pass. We do this by checking if the antenna ever needs to enter both the NE and NW quarters, and</span>
 <span class="sd">        if so, depending on the antenna rotator capabilities we can use one of 2 methods to achieve a continous</span>
-<span class="sd">        (up to 3 quadrant) track.</span>
-<span class="sd">          * flipover:         We move the antenna in the 90 -- 180 degree extended elevation range</span>
-<span class="sd">          * extended_azimuth: We move the antenna in the 360 -- 540 degree extended azimuth range</span>
+<span class="sd">        (up to 3 quadrant) track:</span>
 
-<span class="sd">        4 quadrant tracking is not currently supported. If the trajectory enters 4 quadrants, or if the antenna</span>
+<span class="sd">          :flipover:         We move the antenna in the 90 -- 180 degree extended elevation range</span>
+<span class="sd">          :extended_azimuth: We move the antenna in the 360 -- 540 degree extended azimuth range</span>
+
+<span class="sd">        4 quadrant tracking is *not* currently supported. If the trajectory enters 4 quadrants, or if the antenna</span>
 <span class="sd">        capabilities do not meet the requirements for flipover or extended_azimuth, then the antenna will be commanded</span>
 <span class="sd">        in the &quot;normal&quot; 0-360 az and 0-90 el range and there may be discontinuities.</span>
 
@@ -517,16 +576,32 @@
     <span class="c1">####################</span>
 
 <div class="viewcode-block" id="RotatorBase.get_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.get_azel.html#libgs.hardware.RotatorBase.get_azel">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get current az, el pointing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.get_azel was called but has not been implemented&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RotatorBase.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.set_azel.html#libgs.hardware.RotatorBase.set_azel">[docs]</a>    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set new az, el pointing</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            az (float):     Azimuth angle</span>
+<span class="sd">            el (float):     Elevation angle</span>
+<span class="sd">            block (bool):   Block until positioning complete</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.set_azel was called but has not been implemented&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RotatorBase.get_azel_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.get_azel_rate.html#libgs.hardware.RotatorBase.get_azel_rate">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.get_azel_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RotatorBase.set_azel_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RotatorBase.set_azel_rate.html#libgs.hardware.RotatorBase.set_azel_rate">[docs]</a>    <span class="k">def</span> <span class="nf">set_azel_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Rotator.set_azel_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
+    <span class="c1">#</span>
+    <span class="c1"># The below methods may be used in the future.</span>
+    <span class="c1">#</span>
+
+    <span class="c1"># def get_azel_rate(self):</span>
+    <span class="c1">#     raise Error(&quot;Rotator.get_azel_rate was called but has not been implemented&quot;)</span>
+
+    <span class="c1"># def set_azel_rate(self, az, el, block):</span>
+    <span class="c1">#     raise Error(&quot;Rotator.set_azel_rate was called but has not been implemented&quot;)</span>
 
 
 
@@ -538,6 +613,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return / Set current (azimuth, elevation). Blocks when setting.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()</span>
 
     <span class="nd">@azel</span><span class="o">.</span><span class="n">setter</span>
@@ -546,6 +624,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">az</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return / Set current azimuth</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@az</span><span class="o">.</span><span class="n">setter</span>
@@ -555,6 +636,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">el</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return / Set current elevation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_azel</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@el</span><span class="o">.</span><span class="n">setter</span>
@@ -564,6 +648,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cmd_az</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return / Set commanded azimuth</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_cmd_az&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
@@ -575,6 +663,9 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cmd_el</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return / Set commanded elevation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_cmd_el&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
@@ -582,39 +673,15 @@
 
     <span class="nd">@cmd_el</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">cmd_el</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_el</span> <span class="o">=</span> <span class="n">el</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_assure_azel_in_range</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
-
-        <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">az</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded az = </span><span class="si">{:.1f}</span><span class="s2"> deg &lt; MIN_AZ, using MIN_AZ = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span><span class="p">))</span>
-                <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_AZ</span>
-
-            <span class="k">if</span> <span class="n">az</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded az = </span><span class="si">{:.1f}</span><span class="s2"> deg &gt; MAX_AZ, using MAX_AZ = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span><span class="p">))</span>
-                <span class="n">az</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_AZ</span>
-
-            <span class="k">if</span> <span class="n">el</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded el = </span><span class="si">{:.1f}</span><span class="s2"> deg &lt; MIN_EL, using MIN_EL = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">))</span>
-                <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span>
-
-            <span class="k">if</span> <span class="n">el</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;commanded el = </span><span class="si">{:.1f}</span><span class="s2"> deg &gt; MAX_EL, using MAX_EL = </span><span class="si">{:.1f}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_EL</span><span class="p">))</span>
-                <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_EL</span>
-
-            <span class="c1"># Also use this wrapper to ensure cmd_az and cmd_el gets set.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_az</span> <span class="o">=</span> <span class="n">az</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_el</span> <span class="o">=</span> <span class="n">el</span>
-
-            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">wrapped</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cmd_el</span> <span class="o">=</span> <span class="n">el</span></div>
 
 <div class="viewcode-block" id="DummyRotator"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.DummyRotator.html#libgs.hardware.DummyRotator">[docs]</a><span class="k">class</span> <span class="nc">DummyRotator</span><span class="p">(</span><span class="n">RotatorBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A dummy class that responds like the rotator but does nothing</span>
+<span class="sd">    A dummy class that responds like the rotator but does nothing. </span>
+<span class="sd">    </span>
+<span class="sd">    It is used internally by the GroundStation class if the user tries to interact</span>
+<span class="sd">    with it without having a rotator connected. For example when testing direct connection</span>
+<span class="sd">    to a flatsat. But can also be instantiated directly if required.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="DummyRotator.get_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.DummyRotator.get_azel.html#libgs.hardware.DummyRotator.get_azel">[docs]</a>    <span class="k">def</span> <span class="nf">get_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -639,19 +706,11 @@
 <span class="sd">    See https://pythonhosted.org/pyserial/url_handlers.html for the syntax.</span>
 
 
-<span class="sd">    Available configuration parameters are all of RotatorBase as well as the following additional parameters</span>
+<span class="sd">    Available configuration parameters are all of RotatorBase as well as the following additional parameters::</span>
 
-<span class="sd">    ======================= ===================</span>
-<span class="sd">    Parameter               Description</span>
-<span class="sd">    ----------------------- -------------------</span>
-<span class="sd">    STALE_TIME              Time before azel reading is considered stale (default = 3 seconds)</span>
-<span class="sd">    SERIAL_PORT_TIMEOUT     Timeout delay waiting for serial port comms (default = 0.1 seconds)</span>
-<span class="sd">    ROT_SETTLETIME_GET      Delay after getting position from rotator (default = 0 seconds)</span>
-<span class="sd">    ROT_SETTLETIME_SET      Delay after setting position from rotator (default = 0.75 seconds)</span>
-<span class="sd">    SET_DT                  Time interval to wait before re-issuing a position command (default = 10 seconds, ignored if SET_REGULARLY = False)</span>
-<span class="sd">    GET_DT                  Time delay to wait between consecutive attempts to get position (default = 0 seconds)</span>
-<span class="sd">    SET_REGULARLY           Whether to continuously issue set commands to rotators, or only on request. (Default=True)</span>
-<span class="sd">    ======================= ===================</span>
+<span class="sd">        STALE_TIME, SERIAL_PORT_TIMEOUT, ROT_SETTLETIME_GET, ROT_SETTLETIME_SET, SET_DT, GET_DT, SET_REGULARLY</span>
+
+<span class="sd">    See attribute help for details about these.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -663,28 +722,28 @@
     <span class="c1">############</span>
 
 
-    <span class="c1">#</span>
-    <span class="c1"># Within STALE_TIME, if no reply can be obtained from rotator return the last valid reply</span>
-    <span class="c1">#</span>
+    <span class="c1">#:</span>
+    <span class="c1">#: Time before azel reading is considered stale</span>
+    <span class="c1">#:</span>
     <span class="n">STALE_TIME</span> <span class="o">=</span> <span class="mi">3</span>
 
-    <span class="c1">#</span>
-    <span class="c1"># Allowed time to wait for a byte from the serial port</span>
-    <span class="c1">#</span>
+    <span class="c1">#:</span>
+    <span class="c1">#: Timeout delay waiting for serial port comms</span>
+    <span class="c1">#:</span>
     <span class="n">SERIAL_PORT_TIMEOUT</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
 
 
     <span class="c1"># SETTLETIME is a delay the system gives the rotator controller before trying to send any more commands</span>
-    <span class="n">ROT_SETTLETIME_GET</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">ROT_SETTLETIME_SET</span> <span class="o">=</span> <span class="mf">0.75</span>
+    <span class="n">ROT_SETTLETIME_GET</span> <span class="o">=</span> <span class="mf">0.0</span>    <span class="c1">#: Delay after getting position from rotator</span>
+    <span class="n">ROT_SETTLETIME_SET</span> <span class="o">=</span> <span class="mf">0.75</span>   <span class="c1">#: Delay after setting position from rotator</span>
 
-    <span class="c1"># Time interval at which position is attempted to be set again</span>
+    <span class="c1">#: Time interval to wait before re-issuing a position command</span>
     <span class="n">SET_DT</span> <span class="o">=</span> <span class="mi">10</span>
 
-    <span class="c1"># Maximum time interval at which position is polled (if smaller than _POLL_DT, _POLL_DT will win)</span>
+    <span class="c1">#: Time delay to wait between consecutive attempts to get position (if smaller than _POLL_DT (default 0.1), _POLL_DT will win)</span>
     <span class="n">GET_DT</span>  <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c1"># set to false to only set position when set_azel is called explicitly.</span>
+    <span class="c1">#: Whether to continuously issue set commands to rotators, or only on request. </span>
     <span class="n">SET_REGULARLY</span> <span class="o">=</span> <span class="kc">True</span>
 
 
@@ -969,8 +1028,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">err_stale</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cur_el</span></div>
 
-<div class="viewcode-block" id="GS232B.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.set_azel.html#libgs.hardware.GS232B.set_azel">[docs]</a>    <span class="nd">@RotatorBase</span><span class="o">.</span><span class="n">_assure_azel_in_range</span>
-    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="c1"># @_assure_azel_in_range</span>
+<div class="viewcode-block" id="GS232B.set_azel"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GS232B.set_azel.html#libgs.hardware.GS232B.set_azel">[docs]</a>    <span class="k">def</span> <span class="nf">set_azel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_now</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="n">block</span><span class="p">:</span>
@@ -1271,6 +1330,10 @@
 <span class="c1"># For now we have made Rotator an alias for RotCtld</span>
 <span class="c1"># TODO: Remove. This is for backwards compatability only</span>
 <div class="viewcode-block" id="Rotator"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.Rotator.html#libgs.hardware.Rotator">[docs]</a><span class="k">class</span> <span class="nc">Rotator</span><span class="p">(</span><span class="n">RotCtld</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. warning::</span>
+<span class="sd">       DEPRECATED. Available for backwards compatability only.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
@@ -1278,14 +1341,34 @@
 <div class="viewcode-block" id="RadioBase"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.html#libgs.hardware.RadioBase">[docs]</a><span class="k">class</span> <span class="nc">RadioBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for Radio object.</span>
+
+<span class="sd">    Any radio interface must derive from this class and implement the interface methods:</span>
+
+<span class="sd">    * :meth:`.get_spectrum`</span>
+<span class="sd">    * :meth:`.get_range_rate`</span>
+<span class="sd">    * :meth:`.set_range_rate`</span>
+
+<span class="sd">    Additionally you should set the name attribute to something descriptive.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        It is best to interface with Radio objects thwough the :attr:`.range_rate` attribute</span>
+<span class="sd">        (which internally calls the abovementioned getters/setters. The reason is that it will properly</span>
+<span class="sd">        handle errors)</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Currently Radio objects are used to set/get the range_rate and get the spectral data</span>
+<span class="sd">        only. The :class:`~libgs.protocols.protocolbase.ProtocolBase` class must directly work out</span>
+<span class="sd">        its radio interface to perform its send_bytes and recv functions.</span>
+
+
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">_fftsize</span> <span class="o">=</span> <span class="mi">1024</span>
 
     <span class="c1"># Exceptions that happen during range rate setting /getting will not be raised.</span>
-    <span class="c1"># but they will be stored here so that a monitor can poll them if desired.</span>
-    <span class="n">err_range_rate_set</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">err_range_rate_get</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># but they will be stored here so that a monitor can poll them if desired.    </span>
+    <span class="n">err_range_rate_set</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#: Exception during last attempt at setting range rate (None if no exception occurred)</span>
+    <span class="n">err_range_rate_get</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#: Exception during last attempt at getting range rate (None if no exception occurred)</span>
 
     <span class="c1"># Instance counter (for unnamed radios)</span>
     <span class="n">_instance_name_cntr</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1299,6 +1382,10 @@
     <span class="c1">#####</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Getting/setting the radio name. If no name is supplied, </span>
+<span class="sd">        one is generated based on the instance counter            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_name&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;Radio</span><span class="si">{:03d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">RadioBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span><span class="p">)</span>
             <span class="n">RadioBase</span><span class="o">.</span><span class="n">_instance_name_cntr</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1317,33 +1404,50 @@
     <span class="c1">#</span>
     <span class="c1">##############################################</span>
     
-<div class="viewcode-block" id="RadioBase.send_bytes"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.send_bytes.html#libgs.hardware.RadioBase.send_bytes">[docs]</a>    <span class="k">def</span> <span class="nf">send_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        send_bytes should send a byte sequence to the radio for modulation</span>
-<span class="sd">        and transmission</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.send_bytes has not been implemented&quot;</span><span class="p">)</span></div>
-        
-<div class="viewcode-block" id="RadioBase.set_recv_callback"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.set_recv_callback.html#libgs.hardware.RadioBase.set_recv_callback">[docs]</a>    <span class="k">def</span> <span class="nf">set_recv_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        det_recv_callback should set a callable to be invoked when radio </span>
-<span class="sd">        receives a packet.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;set_recv_callback has not been implemented&quot;</span><span class="p">)</span></div>
+    <span class="c1"># TODO: Currently send_bytes and set_recv_callback is done in the protocol class only, which</span>
+    <span class="c1">#       directly interfaces with the radio hardware. In the future it may go back through this</span>
+    <span class="c1">#       class and use send_byes and recv_callback.</span>
+
+    <span class="c1"># def send_bytes(self):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Send a byte sequence to the radio for modulation and transmission. </span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     raise Error(&quot;Radio.send_bytes has not been implemented&quot;)</span>
+    <span class="c1"># def set_recv_callback(self, callable):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Set a callable to be invoked when radio receives a packet. </span>
+    <span class="c1">#     Args:</span>
+    <span class="c1">#         callable (callable) : The callback function</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     raise Error(&quot;set_recv_callback has not been implemented&quot;)</span>
 
 
 <div class="viewcode-block" id="RadioBase.get_spectrum"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.get_spectrum.html#libgs.hardware.RadioBase.get_spectrum">[docs]</a>    <span class="k">def</span> <span class="nf">get_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the latest spectrum from the radio as well</span>
+<span class="sd">        as an associated frequency vecgor</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; fvec, famp = get_spectrum()</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            old (bool) : If False, only return a spectrum if it has changed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            fvec (list(float)) : Frequency vector</span>
+<span class="sd">            famp (list(float)) : Associated amplitudes (in dBm)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.get_spectrum was called but has not been implemented&quot;</span><span class="p">)</span></div>
         
 <div class="viewcode-block" id="RadioBase.get_range_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.get_range_rate.html#libgs.hardware.RadioBase.get_range_rate">[docs]</a>    <span class="k">def</span> <span class="nf">get_range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        get_range_rate shoudl return the currently set range_rate</span>
+<span class="sd">        Return the currently set range_rate </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.get_range_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RadioBase.set_range_rate"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.RadioBase.set_range_rate.html#libgs.hardware.RadioBase.set_range_rate">[docs]</a>    <span class="k">def</span> <span class="nf">set_range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_rate</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        set_range_rate should set frequency adjustment for a specific range_rate</span>
+<span class="sd">        Set frequency adjustment for a specific range_rate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Radio.set_range_rate was called but has not been implemented&quot;</span><span class="p">)</span></div>
 
@@ -1355,6 +1459,12 @@
     <span class="c1">###########</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">range_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property for getting/setting range_range using the :meth:`.get_range_rate`/:meth:`.set_range_rate` methods while</span>
+<span class="sd">        also capturing any exception and storing it in :attr:`.err_range_rate`.</span>
+
+<span class="sd">        This should be the primary way of getting or setting rangerate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">rr</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_range_rate</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">err_range_rate_get</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1385,7 +1495,10 @@
 <span class="sd">            future.abort() #&lt;--- note non-standard future call</span>
 <span class="sd">            </span>
 <span class="sd">            Args:</span>
-<span class="sd">               dt = rate at which to record the spectra</span>
+<span class="sd">               dt (float)   : time interval (in seconds) at which to record spectra</span>
+<span class="sd">               N  (int)     : Max number of spectra to record.</span>
+<span class="sd">               fdec (int)   : Decimation factor</span>
+<span class="sd">               add_zeros (bool) : Fill incomplete data with zeroes</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             
             <span class="n">abort</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
@@ -1486,6 +1599,7 @@
 <span class="sd">    the range_rate.</span>
 <span class="sd">    </span>
 <span class="sd">    The flowgraph therefore needs to include variables for</span>
+
 <span class="sd">      * range rate (in m/s)</span>
 <span class="sd">      * centre frequency (in Hz)</span>
 <span class="sd">      * bandwidth (in Hz)</span>
@@ -1506,11 +1620,13 @@
                  <span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            name (string)    : A descriptive name for the radio</span>
-<span class="sd">            stream (string)  : The IP:PORT on which to listen for published IQ samples</span>
-<span class="sd">            rpcaddr (string) : The RPC address (in format http://ip:port) to connect the XMLRPC proxy to</span>
-<span class="sd">            rpc_varmap       : A dict mapping between freq, sample_rate and range_rate to whatever</span>
+<span class="sd">            name (str)       : A descriptive name for the radio</span>
+<span class="sd">            stream (str)     : The IP:PORT on which to listen for published IQ samples</span>
+<span class="sd">            rpcaddr (str)    : The RPC address (in format http://ip:port) to connect the XMLRPC proxy to</span>
+<span class="sd">            rpc_varmap (dict): A dict mapping between freq, sample_rate and range_rate to whatever</span>
 <span class="sd">                               those variables are called in the Gnu Radio flowgraph.</span>
+<span class="sd">            iqbufflen (int)  : Number of IQ samples to keep in circular buffer (for spectrum generation)</span>
+<span class="sd">            connect (bool)   : If true connect immediately to Gnu Radio. Otherwise you need to call connect() separately.     </span>
 <span class="sd">        &quot;&quot;&quot;</span>
                  
         
@@ -1623,13 +1739,6 @@
 
         
 <div class="viewcode-block" id="GR_XMLRPCRadio.get_spectrum"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.get_spectrum.html#libgs.hardware.GR_XMLRPCRadio.get_spectrum">[docs]</a>    <span class="k">def</span> <span class="nf">get_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        get_spectrum should return the latest spectrum from the radio as well</span>
-<span class="sd">        as an associated frequency vecgor</span>
-<span class="sd">        </span>
-<span class="sd">        fvec, famp = get_spectrum()</span>
-<span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_IQ</span><span class="p">(</span><span class="n">old</span><span class="p">)[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span><span class="p">:]</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fftsize</span><span class="p">:</span>
@@ -1723,6 +1832,10 @@
     
 
 <div class="viewcode-block" id="GR_XMLRPCRadio.connect"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.connect.html#libgs.hardware.GR_XMLRPCRadio.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connect to Gnu Radio ZMQ socket to receive IQ.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sock_iq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">SUB</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sock_iq</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;tcp://</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iqaddr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iqport</span><span class="p">))</span>
@@ -1734,6 +1847,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="GR_XMLRPCRadio.disconnect"><a class="viewcode-back" href="../../_autosummary/libgs.hardware.GR_XMLRPCRadio.disconnect.html#libgs.hardware.GR_XMLRPCRadio.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disconnect from GNU radio.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_pthr_iq&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pthr_iq</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div></div>

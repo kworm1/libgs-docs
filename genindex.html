@@ -89,6 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -318,8 +319,12 @@
 </li>
       <li><a href="_autosummary/libgs.visualisation.BokehServer.html#libgs.visualisation.BokehServer">BokehServer (class in libgs.visualisation)</a>
 </li>
-      <li><a href="_autosummary/libgs.utils.bytes2hex.html#libgs.utils.bytes2hex">bytes2hex() (in module libgs.utils)</a>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.bytes2hex.html#libgs.protocols.protocolbase.bytes2hex">bytes2hex() (in module libgs.protocols.protocolbase)</a>
+
+      <ul>
+        <li><a href="_autosummary/libgs.utils.bytes2hex.html#libgs.utils.bytes2hex">(in module libgs.utils)</a>
 </li>
+      </ul></li>
       <li><a href="_autosummary/libgs.utils.bytes2prettyhex.html#libgs.utils.bytes2prettyhex">bytes2prettyhex() (in module libgs.utils)</a>
 </li>
   </ul></td>
@@ -450,14 +455,14 @@
 </li>
       <li><a href="_autosummary/libgs.utils.Defaults.html#libgs.utils.Defaults">Defaults (class in libgs.utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.rpc.RPCSchedulerServer.disable.html#libgs.rpc.RPCSchedulerServer.disable">disable() (libgs.rpc.RPCSchedulerServer method)</a>
 
       <ul>
         <li><a href="_autosummary/libgs.scheduler.Scheduler.disable.html#libgs.scheduler.Scheduler.disable">(libgs.scheduler.Scheduler method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.scheduler.Scheduler.disabled.html#libgs.scheduler.Scheduler.disabled">disabled (libgs.scheduler.Scheduler attribute)</a>
 </li>
       <li><a href="_autosummary/libgs.hardware.GR_XMLRPCRadio.disconnect.html#libgs.hardware.GR_XMLRPCRadio.disconnect">disconnect() (libgs.hardware.GR_XMLRPCRadio method)</a>
@@ -470,6 +475,10 @@
 
       <ul>
         <li><a href="_autosummary/libgs.groundstation.GroundStationBase.do_action.html#libgs.groundstation.GroundStationBase.do_action">(libgs.groundstation.GroundStationBase method)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.do_action.html#libgs.protocols.protocolbase.ProtocolBase.do_action">(libgs.protocols.protocolbase.ProtocolBase method)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.do_action.html#libgs.protocols.protocolbase.ProtocolTest.do_action">(libgs.protocols.protocolbase.ProtocolTest method)</a>
 </li>
       </ul></li>
       <li><a href="_autosummary/libgs.hardware.DummyRotator.html#libgs.hardware.DummyRotator">DummyRotator (class in libgs.hardware)</a>
@@ -516,7 +525,7 @@
         <li><a href="_autosummary/libgs.hardware.RadioBase.err_range_rate_set.html#libgs.hardware.RadioBase.err_range_rate_set">(libgs.hardware.RadioBase attribute)</a>
 </li>
       </ul></li>
-      <li><a href="_autosummary/libgs.utils.Error.html#libgs.utils.Error">Error</a>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.Error.html#libgs.protocols.protocolbase.Error">Error</a>, <a href="_autosummary/libgs.utils.Error.html#libgs.utils.Error">[1]</a>
 </li>
       <li><a href="_autosummary/libgs.scheduler.Scheduler.execute.html#libgs.scheduler.Scheduler.execute">execute() (libgs.scheduler.Scheduler method)</a>
 </li>
@@ -598,18 +607,6 @@
         <li><a href="_autosummary/libgs.hardware.RotatorBase.get_azel.html#libgs.hardware.RotatorBase.get_azel">(libgs.hardware.RotatorBase method)</a>
 </li>
       </ul></li>
-      <li><a href="_autosummary/libgs.hardware.DummyRotator.get_azel_rate.html#libgs.hardware.DummyRotator.get_azel_rate">get_azel_rate() (libgs.hardware.DummyRotator method)</a>
-
-      <ul>
-        <li><a href="_autosummary/libgs.hardware.GS232B.get_azel_rate.html#libgs.hardware.GS232B.get_azel_rate">(libgs.hardware.GS232B method)</a>
-</li>
-        <li><a href="_autosummary/libgs.hardware.RotCtld.get_azel_rate.html#libgs.hardware.RotCtld.get_azel_rate">(libgs.hardware.RotCtld method)</a>
-</li>
-        <li><a href="_autosummary/libgs.hardware.Rotator.get_azel_rate.html#libgs.hardware.Rotator.get_azel_rate">(libgs.hardware.Rotator method)</a>
-</li>
-        <li><a href="_autosummary/libgs.hardware.RotatorBase.get_azel_rate.html#libgs.hardware.RotatorBase.get_azel_rate">(libgs.hardware.RotatorBase method)</a>
-</li>
-      </ul></li>
       <li><a href="_autosummary/libgs.database.CommsLog.get_df.html#libgs.database.CommsLog.get_df">get_df() (libgs.database.CommsLog method)</a>
 
       <ul>
@@ -622,8 +619,6 @@
         <li><a href="_autosummary/libgs.database.PassDb.get_df.html#libgs.database.PassDb.get_df">(libgs.database.PassDb method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.hardware.GS232B.GET_DT.html#libgs.hardware.GS232B.GET_DT">GET_DT (libgs.hardware.GS232B attribute)</a>
 </li>
       <li><a href="_autosummary/libgs.database.CommsLog.get_file.html#libgs.database.CommsLog.get_file">get_file() (libgs.database.CommsLog method)</a>
@@ -638,6 +633,8 @@
         <li><a href="_autosummary/libgs.database.PassDb.get_file.html#libgs.database.PassDb.get_file">(libgs.database.PassDb method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.groundstation.UILogHandler.get_name.html#libgs.groundstation.UILogHandler.get_name">get_name() (libgs.groundstation.UILogHandler method)</a>
 </li>
       <li><a href="_autosummary/libgs.visualisation.BokehDash.get_plot.html#libgs.visualisation.BokehDash.get_plot">get_plot() (libgs.visualisation.BokehDash method)</a>
@@ -720,18 +717,26 @@
       </ul></li>
       <li><a href="_autosummary/libgs.monitoring.MonitorItem.index.html#libgs.monitoring.MonitorItem.index">index() (libgs.monitoring.MonitorItem method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.groundstation.GroundStation.init_rx.html#libgs.groundstation.GroundStation.init_rx">init_rx() (libgs.groundstation.GroundStation method)</a>
 
       <ul>
         <li><a href="_autosummary/libgs.groundstation.GroundStationBase.init_rx.html#libgs.groundstation.GroundStationBase.init_rx">(libgs.groundstation.GroundStationBase method)</a>
 </li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.init_rx.html#libgs.protocols.protocolbase.ProtocolBase.init_rx">(libgs.protocols.protocolbase.ProtocolBase method)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.init_rx.html#libgs.protocols.protocolbase.ProtocolTest.init_rx">(libgs.protocols.protocolbase.ProtocolTest method)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.groundstation.GroundStation.init_rxtx.html#libgs.groundstation.GroundStation.init_rxtx">init_rxtx() (libgs.groundstation.GroundStation method)</a>
 
       <ul>
         <li><a href="_autosummary/libgs.groundstation.GroundStationBase.init_rxtx.html#libgs.groundstation.GroundStationBase.init_rxtx">(libgs.groundstation.GroundStationBase method)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.init_rxtx.html#libgs.protocols.protocolbase.ProtocolBase.init_rxtx">(libgs.protocols.protocolbase.ProtocolBase method)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.init_rxtx.html#libgs.protocols.protocolbase.ProtocolTest.init_rxtx">(libgs.protocols.protocolbase.ProtocolTest method)</a>
 </li>
       </ul></li>
       <li><a href="_autosummary/libgs.rpc.RPCServer.is_serving.html#libgs.rpc.RPCServer.is_serving">is_serving (libgs.rpc.RPCServer attribute)</a>
@@ -777,6 +782,8 @@
       <li><a href="_autosummary/libgs.hardware.html#module-libgs.hardware">libgs.hardware (module)</a>
 </li>
       <li><a href="_autosummary/libgs.monitoring.html#module-libgs.monitoring">libgs.monitoring (module)</a>
+</li>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.html#module-libgs.protocols.protocolbase">libgs.protocols.protocolbase (module)</a>
 </li>
       <li><a href="_autosummary/libgs.restapi.html#module-libgs.restapi">libgs.restapi (module)</a>
 </li>
@@ -957,6 +964,10 @@
 </li>
         <li><a href="_autosummary/libgs.hardware.RotatorBase.name.html#libgs.hardware.RotatorBase.name">(libgs.hardware.RotatorBase attribute)</a>
 </li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.name.html#libgs.protocols.protocolbase.ProtocolBase.name">(libgs.protocols.protocolbase.ProtocolBase attribute)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.name.html#libgs.protocols.protocolbase.ProtocolTest.name">(libgs.protocols.protocolbase.ProtocolTest attribute)</a>
+</li>
         <li><a href="_autosummary/libgs.visualisation.FrequencyPlot.name.html#libgs.visualisation.FrequencyPlot.name">(libgs.visualisation.FrequencyPlot attribute)</a>
 </li>
         <li><a href="_autosummary/libgs.visualisation.LivePlot.name.html#libgs.visualisation.LivePlot.name">(libgs.visualisation.LivePlot attribute)</a>
@@ -1026,12 +1037,16 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.html#libgs.protocols.protocolbase.ProtocolBase">ProtocolBase (class in libgs.protocols.protocolbase)</a>
+</li>
       <li><a href="_autosummary/libgs.groundstation.GroundStation.protocols.html#libgs.groundstation.GroundStation.protocols">protocols (libgs.groundstation.GroundStation attribute)</a>
 
       <ul>
         <li><a href="_autosummary/libgs.groundstation.GroundStationBase.protocols.html#libgs.groundstation.GroundStationBase.protocols">(libgs.groundstation.GroundStationBase attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.html#libgs.protocols.protocolbase.ProtocolTest">ProtocolTest (class in libgs.protocols.protocolbase)</a>
+</li>
       <li><a href="_autosummary/libgs.database.CommsLog.put.html#libgs.database.CommsLog.put">put() (libgs.database.CommsLog method)</a>
 
       <ul>
@@ -1192,6 +1207,12 @@
 </li>
       <li><a href="_autosummary/libgs.groundstation.GSState.satpos.html#libgs.groundstation.GSState.satpos">satpos (libgs.groundstation.GSState attribute)</a>
 </li>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.sch_metadata.html#libgs.protocols.protocolbase.ProtocolBase.sch_metadata">sch_metadata (libgs.protocols.protocolbase.ProtocolBase attribute)</a>
+
+      <ul>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.sch_metadata.html#libgs.protocols.protocolbase.ProtocolTest.sch_metadata">(libgs.protocols.protocolbase.ProtocolTest attribute)</a>
+</li>
+      </ul></li>
       <li><a href="_autosummary/libgs.groundstation.GSState.schedule.html#libgs.groundstation.GSState.schedule">schedule (libgs.groundstation.GSState attribute)</a>
 </li>
       <li><a href="_autosummary/libgs.utils.schedule_regular_callback.html#libgs.utils.schedule_regular_callback">schedule_regular_callback() (in module libgs.utils)</a>
@@ -1206,10 +1227,10 @@
       </ul></li>
       <li><a href="_autosummary/libgs.rpc.RPCSchedulerServer.scheduler_state.html#libgs.rpc.RPCSchedulerServer.scheduler_state">scheduler_state() (libgs.rpc.RPCSchedulerServer method)</a>
 </li>
-      <li><a href="_autosummary/libgs.hardware.GR_XMLRPCRadio.send_bytes.html#libgs.hardware.GR_XMLRPCRadio.send_bytes">send_bytes() (libgs.hardware.GR_XMLRPCRadio method)</a>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.send_bytes.html#libgs.protocols.protocolbase.ProtocolBase.send_bytes">send_bytes() (libgs.protocols.protocolbase.ProtocolBase method)</a>
 
       <ul>
-        <li><a href="_autosummary/libgs.hardware.RadioBase.send_bytes.html#libgs.hardware.RadioBase.send_bytes">(libgs.hardware.RadioBase method)</a>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.send_bytes.html#libgs.protocols.protocolbase.ProtocolTest.send_bytes">(libgs.protocols.protocolbase.ProtocolTest method)</a>
 </li>
       </ul></li>
       <li><a href="_autosummary/libgs.hardware.GS232B.SERIAL_PORT_TIMEOUT.html#libgs.hardware.GS232B.SERIAL_PORT_TIMEOUT">SERIAL_PORT_TIMEOUT (libgs.hardware.GS232B attribute)</a>
@@ -1242,20 +1263,14 @@
         <li><a href="_autosummary/libgs.hardware.RotatorBase.set_azel.html#libgs.hardware.RotatorBase.set_azel">(libgs.hardware.RotatorBase method)</a>
 </li>
       </ul></li>
-      <li><a href="_autosummary/libgs.hardware.DummyRotator.set_azel_rate.html#libgs.hardware.DummyRotator.set_azel_rate">set_azel_rate() (libgs.hardware.DummyRotator method)</a>
-
-      <ul>
-        <li><a href="_autosummary/libgs.hardware.GS232B.set_azel_rate.html#libgs.hardware.GS232B.set_azel_rate">(libgs.hardware.GS232B method)</a>
-</li>
-        <li><a href="_autosummary/libgs.hardware.RotCtld.set_azel_rate.html#libgs.hardware.RotCtld.set_azel_rate">(libgs.hardware.RotCtld method)</a>
-</li>
-        <li><a href="_autosummary/libgs.hardware.Rotator.set_azel_rate.html#libgs.hardware.Rotator.set_azel_rate">(libgs.hardware.Rotator method)</a>
-</li>
-        <li><a href="_autosummary/libgs.hardware.RotatorBase.set_azel_rate.html#libgs.hardware.RotatorBase.set_azel_rate">(libgs.hardware.RotatorBase method)</a>
-</li>
-      </ul></li>
       <li><a href="_autosummary/libgs.hardware.GS232B.SET_DT.html#libgs.hardware.GS232B.SET_DT">SET_DT (libgs.hardware.GS232B attribute)</a>
 </li>
+      <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.set_handler.html#libgs.protocols.protocolbase.ProtocolBase.set_handler">set_handler() (libgs.protocols.protocolbase.ProtocolBase method)</a>
+
+      <ul>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.set_handler.html#libgs.protocols.protocolbase.ProtocolTest.set_handler">(libgs.protocols.protocolbase.ProtocolTest method)</a>
+</li>
+      </ul></li>
       <li><a href="_autosummary/libgs.groundstation.UILogHandler.set_name.html#libgs.groundstation.UILogHandler.set_name">set_name() (libgs.groundstation.UILogHandler method)</a>
 </li>
       <li><a href="_autosummary/libgs.hardware.GR_XMLRPCRadio.set_range_rate.html#libgs.hardware.GR_XMLRPCRadio.set_range_rate">set_range_rate() (libgs.hardware.GR_XMLRPCRadio method)</a>
@@ -1268,12 +1283,6 @@
 
       <ul>
         <li><a href="_autosummary/libgs.groundstation.GroundStationBase.set_rangerate.html#libgs.groundstation.GroundStationBase.set_rangerate">(libgs.groundstation.GroundStationBase method)</a>
-</li>
-      </ul></li>
-      <li><a href="_autosummary/libgs.hardware.GR_XMLRPCRadio.set_recv_callback.html#libgs.hardware.GR_XMLRPCRadio.set_recv_callback">set_recv_callback() (libgs.hardware.GR_XMLRPCRadio method)</a>
-
-      <ul>
-        <li><a href="_autosummary/libgs.hardware.RadioBase.set_recv_callback.html#libgs.hardware.RadioBase.set_recv_callback">(libgs.hardware.RadioBase method)</a>
 </li>
       </ul></li>
       <li><a href="_autosummary/libgs.hardware.GS232B.SET_REGULARLY.html#libgs.hardware.GS232B.SET_REGULARLY">SET_REGULARLY (libgs.hardware.GS232B attribute)</a>
@@ -1306,10 +1315,10 @@
 </li>
       <li><a href="_autosummary/libgs.rpc.RPCServer.socket_type.html#libgs.rpc.RPCServer.socket_type">socket_type (libgs.rpc.RPCServer attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.emulators.SpaceTrack.html#libgs.emulators.SpaceTrack">SpaceTrack (class in libgs.emulators)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/libgs.hardware.GS232B.STALE_TIME.html#libgs.hardware.GS232B.STALE_TIME">STALE_TIME (libgs.hardware.GS232B attribute)</a>
 </li>
       <li><a href="_autosummary/libgs.emulators.Radio.start.html#libgs.emulators.Radio.start">start() (libgs.emulators.Radio method)</a>
@@ -1439,6 +1448,10 @@
       <ul>
         <li><a href="_autosummary/libgs.groundstation.GroundStationBase.terminate.html#libgs.groundstation.GroundStationBase.terminate">(libgs.groundstation.GroundStationBase method)</a>
 </li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolBase.terminate.html#libgs.protocols.protocolbase.ProtocolBase.terminate">(libgs.protocols.protocolbase.ProtocolBase method)</a>
+</li>
+        <li><a href="_autosummary/libgs.protocols.protocolbase.ProtocolTest.terminate.html#libgs.protocols.protocolbase.ProtocolTest.terminate">(libgs.protocols.protocolbase.ProtocolTest method)</a>
+</li>
       </ul></li>
       <li><a href="_autosummary/libgs.groundstation.UILogHandler.test.html#libgs.groundstation.UILogHandler.test">test() (libgs.groundstation.UILogHandler method)</a>
 </li>
@@ -1450,10 +1463,10 @@
 </li>
       <li><a href="_autosummary/libgs.scheduler.Scheduler.timer.html#libgs.scheduler.Scheduler.timer">timer (libgs.scheduler.Scheduler attribute)</a>
 </li>
-      <li><a href="_autosummary/libgs.monitoring.Monitor.to_gen_in_executor.html#libgs.monitoring.Monitor.to_gen_in_executor">to_gen_in_executor() (libgs.monitoring.Monitor method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/libgs.monitoring.Monitor.to_gen_in_executor.html#libgs.monitoring.Monitor.to_gen_in_executor">to_gen_in_executor() (libgs.monitoring.Monitor method)</a>
+</li>
       <li><a href="_autosummary/libgs.groundstation.GroundStation.track.html#libgs.groundstation.GroundStation.track">track() (libgs.groundstation.GroundStation method)</a>
 
       <ul>

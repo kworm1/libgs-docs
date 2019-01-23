@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.hardware.Rotator.set_azel_rate" href="libgs.hardware.Rotator.set_azel_rate.html" />
+    <link rel="next" title="libgs.hardware.Rotator.stow" href="libgs.hardware.Rotator.stow.html" />
     <link rel="prev" title="libgs.hardware.Rotator.in_pos" href="libgs.hardware.Rotator.in_pos.html" /> 
 
   
@@ -84,37 +84,38 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.rpc.html">libgs.rpc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.azel_err.html">libgs.hardware.Rotator.azel_err</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.azel_to_antenna_angles.html">libgs.hardware.Rotator.azel_to_antenna_angles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.get_azel.html">libgs.hardware.Rotator.get_azel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.get_azel_rate.html">libgs.hardware.Rotator.get_azel_rate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.in_pos.html">libgs.hardware.Rotator.in_pos</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">libgs.hardware.Rotator.set_azel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.set_azel_rate.html">libgs.hardware.Rotator.set_azel_rate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.stow.html">libgs.hardware.Rotator.stow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.BEAMWIDTH.html">libgs.hardware.Rotator.BEAMWIDTH</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.MAX_AZ.html">libgs.hardware.Rotator.MAX_AZ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.MAX_EL.html">libgs.hardware.Rotator.MAX_EL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.MIN_AZ.html">libgs.hardware.Rotator.MIN_AZ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.MIN_EL.html">libgs.hardware.Rotator.MIN_EL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.SLEW_TIMEOUT.html">libgs.hardware.Rotator.SLEW_TIMEOUT</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.STOWED_AZ.html">libgs.hardware.Rotator.STOWED_AZ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.STOWED_EL.html">libgs.hardware.Rotator.STOWED_EL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.az.html">libgs.hardware.Rotator.az</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.azel.html">libgs.hardware.Rotator.azel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.cmd_az.html">libgs.hardware.Rotator.cmd_az</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.cmd_el.html">libgs.hardware.Rotator.cmd_el</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.el.html">libgs.hardware.Rotator.el</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.Rotator.name.html">libgs.hardware.Rotator.name</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="libgs.hardware.html#implementing-a-new-hardware-interface">Implementing a new hardware interface</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.DummyRotator.html">libgs.hardware.DummyRotator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html">libgs.hardware.GR_XMLRPCRadio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.GS232B.html">libgs.hardware.GS232B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RadioBase.html">libgs.hardware.RadioBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotCtld.html">libgs.hardware.RotCtld</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="libgs.hardware.Rotator.html">libgs.hardware.Rotator</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.azel_err.html">libgs.hardware.Rotator.azel_err</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.azel_to_antenna_angles.html">libgs.hardware.Rotator.azel_to_antenna_angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.get_azel.html">libgs.hardware.Rotator.get_azel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.in_pos.html">libgs.hardware.Rotator.in_pos</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">libgs.hardware.Rotator.set_azel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.stow.html">libgs.hardware.Rotator.stow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.BEAMWIDTH.html">libgs.hardware.Rotator.BEAMWIDTH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.MAX_AZ.html">libgs.hardware.Rotator.MAX_AZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.MAX_EL.html">libgs.hardware.Rotator.MAX_EL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.MIN_AZ.html">libgs.hardware.Rotator.MIN_AZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.MIN_EL.html">libgs.hardware.Rotator.MIN_EL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.SLEW_TIMEOUT.html">libgs.hardware.Rotator.SLEW_TIMEOUT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.STOWED_AZ.html">libgs.hardware.Rotator.STOWED_AZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.STOWED_EL.html">libgs.hardware.Rotator.STOWED_EL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.az.html">libgs.hardware.Rotator.az</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.azel.html">libgs.hardware.Rotator.azel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.cmd_az.html">libgs.hardware.Rotator.cmd_az</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.cmd_el.html">libgs.hardware.Rotator.cmd_el</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.el.html">libgs.hardware.Rotator.el</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libgs.hardware.Rotator.name.html">libgs.hardware.Rotator.name</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libgs.hardware.RotatorBase.html">libgs.hardware.RotatorBase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
@@ -123,6 +124,7 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -196,7 +198,21 @@
 <dl class="method">
 <dt id="libgs.hardware.Rotator.set_azel">
 <code class="descclassname">Rotator.</code><code class="descname">set_azel</code><span class="sig-paren">(</span><em>az</em>, <em>el</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#libgs.hardware.Rotator.set_azel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set the AZ, EL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>az</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Azimuth in degrees</li>
+<li><strong>el</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Elevation in degrees</li>
+<li><strong>block</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – True will halt execution until pointing has been achieved</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
@@ -208,7 +224,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.hardware.Rotator.set_azel_rate.html" class="btn btn-neutral float-right" title="libgs.hardware.Rotator.set_azel_rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.hardware.Rotator.stow.html" class="btn btn-neutral float-right" title="libgs.hardware.Rotator.stow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.hardware.Rotator.in_pos.html" class="btn btn-neutral" title="libgs.hardware.Rotator.in_pos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

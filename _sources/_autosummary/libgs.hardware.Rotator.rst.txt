@@ -29,10 +29,6 @@ libgs.hardware.Rotator
       
       
       
-      
-      
-      
-      
    
    
 
@@ -66,16 +62,10 @@ libgs.hardware.Rotator
       ~Rotator.get_azel
       
       
-      ~Rotator.get_azel_rate
-      
-      
       ~Rotator.in_pos
       
       
       ~Rotator.set_azel
-      
-      
-      ~Rotator.set_azel_rate
       
       
       ~Rotator.stow

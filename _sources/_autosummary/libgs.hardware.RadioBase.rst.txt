@@ -26,13 +26,7 @@ libgs.hardware.RadioBase
       ~RadioBase.record_spectrum
       
       
-      ~RadioBase.send_bytes
-      
-      
       ~RadioBase.set_range_rate
-      
-      
-      ~RadioBase.set_recv_callback
       
    
    
@@ -60,10 +54,6 @@ libgs.hardware.RadioBase
    .. autosummary::
       :toctree: .
    
-      
-      
-      
-      
       
       
       

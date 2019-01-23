@@ -100,6 +100,7 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.RedAlert.html">libgs.monitoring.RedAlert</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
 </ul>
 
             
@@ -176,6 +177,62 @@
 </tr>
 </tbody>
 </table>
+<p>Monitoring is a stand-alone module that allows monitoring of telemetry points while
+attempting to have a minimal impact on the execution of the rest of the code.</p>
+<p>It implements a simple pythonic syntax for the creation of monitoring points. To use;</p>
+<ol class="arabic simple">
+<li>Create a monitor</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">libgs.monitoring</span> <span class="k">import</span> <span class="n">Monitor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mon</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>2. Define a function that returns the monitored value,
+and decorate it with mon.monitor().</p>
+<p>For example, to monitor the current time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@mon</span><span class="o">.</span><span class="n">monitor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">current_time</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Start the monitor</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And that’s it. The current time is now monitored at the default update interval
+under a monitor point called “current_time”.
+You can view the state of the monitor by printing it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mon</span><span class="p">)</span>
+<span class="go">Monitor ()  -- running</span>
+<span class="go">Name                          Value               Alert     Last polled</span>
+<span class="go">----------------------------- ------------------- --------- ---------------</span>
+<span class="go">.current_time                 2018-06-21 00:39:07           0.7</span>
+</pre></div>
+</div>
+<p>More complicated monitoring functions can easily be created by specifying the point
+value in the decorator. See <a class="reference internal" href="libgs.monitoring.Monitor.monitor.html#libgs.monitoring.Monitor.monitor" title="libgs.monitoring.Monitor.monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Monitor.monitor()</span></code></a> for syntax. You can also change
+the update interval etc…</p>
+<p>The constructor also takes some arguments to customise its default behaviour. See <a class="reference internal" href="libgs.monitoring.Monitor.html#libgs.monitoring.Monitor" title="libgs.monitoring.Monitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monitor</span></code></a>.</p>
+<p>You are able to add callbacks whenever a monitored value is updated. This is useful
+if you are displaying the data on a dashboard or updating a database. See <a class="reference internal" href="libgs.monitoring.Monitor.add_callback.html#libgs.monitoring.Monitor.add_callback" title="libgs.monitoring.Monitor.add_callback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Monitor.add_callback()</span></code></a>.</p>
+<p>Finally, you can set alert levels by returning an Alert object rather than a value from
+your monitoring function. This module defines <a class="reference internal" href="libgs.monitoring.GreenAlert.html#libgs.monitoring.GreenAlert" title="libgs.monitoring.GreenAlert"><code class="xref py py-class docutils literal notranslate"><span class="pre">GreenAlert</span></code></a>, <a class="reference internal" href="libgs.monitoring.OrangeAlert.html#libgs.monitoring.OrangeAlert" title="libgs.monitoring.OrangeAlert"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrangeAlert</span></code></a>,
+<a class="reference internal" href="libgs.monitoring.RedAlert.html#libgs.monitoring.RedAlert" title="libgs.monitoring.RedAlert"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedAlert</span></code></a>, and <a class="reference internal" href="libgs.monitoring.CriticalAlert.html#libgs.monitoring.CriticalAlert" title="libgs.monitoring.CriticalAlert"><code class="xref py py-class docutils literal notranslate"><span class="pre">CriticalAlert</span></code></a>. You are welcome to customise or make others
+by deriving a new subclass from <a class="reference internal" href="libgs.monitoring.Alert.html#libgs.monitoring.Alert" title="libgs.monitoring.Alert"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alert</span></code></a>.</p>
+<p>The following example monitoring function gets the cpu usage every 2 seconds, and
+marks the alert as Red if it is above 50%:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@mon</span><span class="o">.</span><span class="n">monitor</span><span class="p">(</span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">cpu_usage</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">usage</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">if</span> <span class="n">usage</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">return</span> <span class="n">RedAlert</span><span class="p">(</span><span class="n">usage</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">return</span> <span class="n">GreenAlert</span><span class="p">(</span><span class="n">usage</span><span class="p">)</span>
+</pre></div>
+</div>
 <p class="rubric">Classes</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -184,7 +241,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.Alert.html#libgs.monitoring.Alert" title="libgs.monitoring.Alert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Alert</span></code></a>(val)</td>
-<td></td>
+<td>Base class for Alerts.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.CriticalAlert.html#libgs.monitoring.CriticalAlert" title="libgs.monitoring.CriticalAlert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CriticalAlert</span></code></a>(val)</td>
 <td></td>
@@ -193,10 +250,10 @@
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.Monitor.html#libgs.monitoring.Monitor" title="libgs.monitoring.Monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Monitor</span></code></a>([workers,&nbsp;tick,&nbsp;tick_cb,&nbsp;default_dt])</td>
-<td>Class to provide functionality for monitoring</td>
+<td>Class to provide functionality for monitoring.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.monitoring.MonitorItem.html#libgs.monitoring.MonitorItem" title="libgs.monitoring.MonitorItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonitorItem</span></code></a></td>
-<td></td>
+<td>A monitored item.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.monitoring.NoAlert.html#libgs.monitoring.NoAlert" title="libgs.monitoring.NoAlert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoAlert</span></code></a>(val)</td>
 <td></td>

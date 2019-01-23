@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolTest.send\_bytes
+=====================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolTest.send_bytes

@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.bytes2hex
+======================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. autofunction:: bytes2hex

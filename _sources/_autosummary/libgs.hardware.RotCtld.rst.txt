@@ -27,11 +27,7 @@ libgs.hardware.RotCtld
       
       
       
-      
-      
       ~RotCtld.set_azel
-      
-      
       
       
       
@@ -67,15 +63,9 @@ libgs.hardware.RotCtld
       
       
       
-      ~RotCtld.get_azel_rate
-      
-      
       ~RotCtld.in_pos
       
       
-      
-      
-      ~RotCtld.set_azel_rate
       
       
       ~RotCtld.stow

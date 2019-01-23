@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.Error
+==================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. autoexception:: Error

@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolTest.terminate
+===================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolTest.terminate

@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolBase.set\_handler
+======================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolBase.set_handler

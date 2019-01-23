@@ -1,0 +1,6 @@
+libgs.protocols.protocolbase.ProtocolBase.init\_rx
+==================================================
+
+.. currentmodule:: libgs.protocols.protocolbase
+
+.. automethod:: ProtocolBase.init_rx

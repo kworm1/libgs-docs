@@ -1,6 +1,0 @@
-libgs.hardware.DummyRotator.set\_azel\_rate
-===========================================
-
-.. currentmodule:: libgs.hardware
-
-.. automethod:: DummyRotator.set_azel_rate

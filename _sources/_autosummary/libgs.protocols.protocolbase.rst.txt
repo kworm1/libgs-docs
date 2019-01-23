@@ -1,0 +1,38 @@
+.. automodule:: libgs.protocols.protocolbase
+
+   
+   
+   .. rubric:: Functions
+
+   
+   .. autosummary::
+      :toctree: .
+   
+      
+      bytes2hex
+      
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree: .
+   
+      ProtocolBase
+      ProtocolTest
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree: .
+   
+      Error
+   
+   
