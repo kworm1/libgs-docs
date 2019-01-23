@@ -203,8 +203,24 @@
 <dl class="method">
 <dt id="libgs.groundstation.GroundStation.track">
 <code class="descclassname">GroundStation.</code><code class="descname">track</code><span class="sig-paren">(</span><em>nid_or_pdata</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/groundstation.html#GroundStation.track"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.groundstation.GroundStation.track" title="Permalink to this definition">¶</a></dt>
-<dd><p>Track satellite by Norad ID</p>
-<p>Track by moving in steps across the trajectory of the satellite</p>
+<dd><p>Track satellite by Norad ID or by specifying an az/el schedule as in <code class="xref py py-class docutils literal notranslate"><span class="pre">libgs_ops.scheduling</span></code></p>
+<p>The tracking is done by moving in steps across the trajectory of the satellite</p>
+<p>If specified by setting compute_ant_points to True, two things will happen:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>If the provided schedule does not have enough time resolution, it will be interpolated appropriately.</li>
+<li>The tracking will not be for every point in the schedule, but instead based on the antenna
+beamwidth by calling <a class="reference internal" href="libgs.hardware.RotatorBase.azel_to_antenna_angles.html#libgs.hardware.RotatorBase.azel_to_antenna_angles" title="libgs.hardware.RotatorBase.azel_to_antenna_angles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hardware.RotatorBase.azel_to_antenna_angles()</span></code></a> for each rotator.</li>
+</ol>
+</div></blockquote>
+<p>Doing so means the tracking happens as follows: If x0 is the actual satellite position at time t0:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>point to x0 + 1/2 beamwidth,</li>
+<li>wait until x0 - 1/2 beamwidth</li>
+<li>move to x0 + 1/2 beamwidth again … etc</li>
+</ol>
+</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -213,26 +229,16 @@
 <li><strong>nid</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>) or </em><em>schedule</em><em> (</em><em>pdata</em>) – Either the Norad ID or the schedule to track.
 If Norad ID is provided and a propagator connected, then the
 method will compute the pdata itself.</li>
-<li><strong>nid_or_pdata</strong> (<em>int/pdata</em>) – Either a schedule file (pdata) or a norad ID to track.</li>
-<li><strong>max_offp</strong> – max offpointing to allow</li>
+<li><strong>nid_or_pdata</strong> (<em>int/DataFrame</em>) – Either a schedule file (pdata) or a norad ID to track.</li>
+<li><strong>rotators</strong> (list (<a class="reference internal" href="libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase" title="libgs.hardware.RotatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatorBase</span></code></a>), optional) – The list of rotators to track with. If not specified use <a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html#libgs.groundstation.GroundStation.rotators" title="libgs.groundstation.GroundStation.rotators"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rotators</span></code></a>.</li>
+<li><strong>min_el</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – The minimum permitted elevation angle. If not specified used the highest <a class="reference internal" href="libgs.hardware.RotatorBase.MIN_EL.html#libgs.hardware.RotatorBase.MIN_EL" title="libgs.hardware.RotatorBase.MIN_EL"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MIN_EL</span></code></a> of
+the connected rotators.</li>
+<li><strong>compute_ant_points</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If true, do not follow every point in schedule but recompute</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<dl class="docutils">
-<dt>If x0 is the actual satellite position at time t0:</dt>
-<dd><ol class="first last arabic simple">
-<li>point to x0 + max_offp,</li>
-<li>wait until x0 - max_offp</li>
-<li>move to x0 + max_offp again … etc</li>
-</ol>
-</dd>
-</dl>
-<p>Since the antenna requires a finite amount of time to move, if
-max_offp is too small it will not have a chance to dwell at all.
-min_dwell defaults to 1 second. An exception will be raised if
-the antenna needs to move again before the minimum dwell time.</p>
 </dd></dl>
 
 </div>

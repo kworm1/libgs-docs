@@ -203,7 +203,18 @@
 <dl class="attribute">
 <dt id="libgs.groundstation.GroundStation.protocol">
 <code class="descclassname">GroundStation.</code><code class="descname">protocol</code><a class="headerlink" href="#libgs.groundstation.GroundStation.protocol" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Property to set/get the current protocol. When setting you can use the <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.name.html#libgs.protocols.protocolbase.ProtocolBase.name" title="libgs.protocols.protocolbase.ProtocolBase.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a> attribute
+of the protocol, or its instance. To use the name syntax it must already be installed (exist in the <a class="reference internal" href="libgs.groundstation.GroundStation.protocols.html#libgs.groundstation.GroundStation.protocols" title="libgs.groundstation.GroundStation.protocols"><code class="xref py py-attr docutils literal notranslate"><span class="pre">protocols</span></code></a> list).</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="n">MyFavoriteProtocol</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;a_protocol&#39;</span><span class="p">),</span> <span class="n">MyOtherProtocol</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;other_protocol&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span><span class="o">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;a_protocol&#39;</span>
+</pre></div>
+</div>
+<p>or you can directly assign a protocol:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span><span class="o">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="n">MyFavoriteProtocol</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
 
 </div>
 

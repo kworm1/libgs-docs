@@ -203,7 +203,20 @@
 <dl class="method">
 <dt id="libgs.groundstation.GroundStation.transmit">
 <code class="descclassname">GroundStation.</code><code class="descname">transmit</code><span class="sig-paren">(</span><em>msg</em>, <em>wait=1000</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/groundstation.html#GroundStation.transmit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.groundstation.GroundStation.transmit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transmit something to a satellite</p>
+<dd><p>Send bytes to satellite
+Should normally be a wrapper for <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.send_bytes.html#libgs.protocols.protocolbase.ProtocolBase.send_bytes" title="libgs.protocols.protocolbase.ProtocolBase.send_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.send_bytes()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bytearray" title="(in Python v2.7)"><em>bytearray</em></a>) – The bytes to send</li>
+<li><strong>wait</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of seconds to wait for task to complete</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

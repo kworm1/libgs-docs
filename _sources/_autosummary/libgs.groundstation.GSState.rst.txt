@@ -17,18 +17,6 @@ libgs.groundstation.GSState
       :toctree: .
    
       
-      
-      ~GSState.antenna_info
-      
-      
-      ~GSState.hardware_info
-      
-      
-      ~GSState.service_info
-      
-      
-      ~GSState.tracking_info
-      
    
    
 
@@ -67,14 +55,6 @@ libgs.groundstation.GSState
    .. autosummary::
       :toctree: .
    
-      
-      
-      
-      
-      
-      
-      
-      
          
    
    

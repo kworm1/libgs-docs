@@ -199,6 +199,18 @@
 <dd><p>Non-blocking tracking. The antenna will be pointed as
 required but returning control while doing so.</p>
 <p>It is implemented by spinning the track function off into a separate thread</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nid_or_pdata</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><em>DataFrame</em>) – The norad ID (if a <a class="reference internal" href="libgs.groundstation.GroundStationBase.propagator.html#libgs.groundstation.GroundStationBase.propagator" title="libgs.groundstation.GroundStationBase.propagator"><code class="xref py py-attr docutils literal notranslate"><span class="pre">propagator</span></code></a> is installed, or a pass data DataFrame)</li>
+<li><strong>**kwargs</strong> – Any other argument to pass to <a class="reference internal" href="libgs.groundstation.GroundStationBase.track.html#libgs.groundstation.GroundStationBase.track" title="libgs.groundstation.GroundStationBase.track"><code class="xref py py-meth docutils literal notranslate"><span class="pre">track()</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

@@ -1,6 +1,0 @@
-libgs.groundstation.GSState.antenna\_info
-=========================================
-
-.. currentmodule:: libgs.groundstation
-
-.. automethod:: GSState.antenna_info

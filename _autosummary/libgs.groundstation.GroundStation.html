@@ -201,7 +201,36 @@
 <dl class="class">
 <dt id="libgs.groundstation.GroundStation">
 <em class="property">class </em><code class="descclassname">libgs.groundstation.</code><code class="descname">GroundStation</code><span class="sig-paren">(</span><em>name</em>, <em>propagator=None</em>, <em>protocols=[]</em>, <em>radios=[]</em>, <em>rotators=[]</em>, <em>commslog=&lt;libgs.database.CommsLog object&gt;</em>, <em>passlog=&lt;libgs.database.PassDb object&gt;</em>, <em>monlog=None</em>, <em>rpcserver=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/groundstation.html#GroundStation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.groundstation.GroundStation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Main class for the ground station</p>
+<dd><p>Main class for the Ground Station</p>
+<p>Performs the function of interfacing with the hardware and user and ensuring everything is logged appropriately. It is built
+by deriving from <a class="reference internal" href="libgs.groundstation.GroundStationBase.html#libgs.groundstation.GroundStationBase" title="libgs.groundstation.GroundStationBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroundStationBase</span></code></a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">propagator, protocols, radios, rotators, rpcserver can also be set via their properties. The databases have to be specified
+in this constructor.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Descriptive name of the ground station</li>
+<li><strong>propagator</strong> (<a class="reference external" href="https://kworm1.github.io/libgs_ops-docs/_autosummary/libgs_ops.propagator.Propagator.html#libgs_ops.propagator.Propagator" title="(in libgs_ops)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Propagator</span></code></a>, optional) – A propagator to allow tracking by Norad ID</li>
+<li><strong>protocols</strong> (<a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.html#libgs.protocols.protocolbase.ProtocolBase" title="libgs.protocols.protocolbase.ProtocolBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProtocolBase</span></code></a>, optional) – List of protocols to make available to ground station</li>
+<li><strong>radios</strong> (<a class="reference internal" href="libgs.hardware.RadioBase.html#libgs.hardware.RadioBase" title="libgs.hardware.RadioBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RadioBase</span></code></a>, optional) – List of radios to make available to ground station</li>
+<li><strong>rotators</strong> (<a class="reference internal" href="libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase" title="libgs.hardware.RotatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatorBase</span></code></a>, optional) – List of rotators to make available to ground station</li>
+<li><strong>commslog</strong> (<a class="reference internal" href="libgs.database.CommsLog.html#libgs.database.CommsLog" title="libgs.database.CommsLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommsLog</span></code></a>, optional) – A database to use for storing communications. If omitted
+an sqlite file in local direcotry will be used.</li>
+<li><strong>passlog</strong> (<a class="reference internal" href="libgs.database.PassDb.html#libgs.database.PassDb" title="libgs.database.PassDb"><code class="xref py py-class docutils literal notranslate"><span class="pre">PassDb</span></code></a>, optional) – A database to use for storing information
+about passes during a track. If omitted an sqlite file in local direcotry will be used.</li>
+<li><strong>monlog</strong> (<a class="reference internal" href="libgs.database.MonitorDb.html#libgs.database.MonitorDb" title="libgs.database.MonitorDb"><code class="xref py py-class docutils literal notranslate"><span class="pre">MonitorDb</span></code></a>, optional) – A database to use for storing monitoring data. If omitted no data is stored.</li>
+<li><strong>rpcserver</strong> (<a class="reference internal" href="libgs.rpc.RPCServer.html#libgs.rpc.RPCServer" title="libgs.rpc.RPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RPCServer</span></code></a>, optional) – If an rpcserver is specified, it will be possible to control the
+Ground Station remotely via XMLRPC.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -210,22 +239,22 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.do_action.html#libgs.groundstation.GroundStation.do_action" title="libgs.groundstation.GroundStation.do_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_action</span></code></a>(desc,&nbsp;*args,&nbsp;**kwargs)</td>
-<td>Ask the protocol to do something (to presumably do something with the satellites) without any restrictions.</td>
+<td>Perform an <a class="reference external" href="https://kworm1.github.io/libgs_ops-docs/_autosummary/libgs_ops.scheduling.Action.html#libgs_ops.scheduling.Action" title="(in libgs_ops)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.receive.html#libgs.groundstation.GroundStation.receive" title="libgs.groundstation.GroundStation.receive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receive</span></code></a>(msg)</td>
-<td></td>
+<td>Callback that is invoked whenever data is received.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.set_rangerate.html#libgs.groundstation.GroundStation.set_rangerate" title="libgs.groundstation.GroundStation.set_rangerate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_rangerate</span></code></a>(range_rate)</td>
-<td></td>
+<td>Set the range_rate for all installed radios.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.set_schedule_msg.html#libgs.groundstation.GroundStation.set_schedule_msg" title="libgs.groundstation.GroundStation.set_schedule_msg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_schedule_msg</span></code></a>(msg)</td>
-<td></td>
+<td>Interface method to set the <a class="reference internal" href="libgs.groundstation.GSState.schedule.html#libgs.groundstation.GSState.schedule" title="libgs.groundstation.GSState.schedule"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GSState.schedule</span></code></a> attribute.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.track.html#libgs.groundstation.GroundStation.track" title="libgs.groundstation.GroundStation.track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">track</span></code></a>(nid_or_pdata,&nbsp;**kwargs)</td>
-<td>Track satellite by Norad ID</td>
+<td>Track satellite by Norad ID or by specifying an az/el schedule as in <code class="xref py py-class docutils literal notranslate"><span class="pre">libgs_ops.scheduling</span></code></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.transmit.html#libgs.groundstation.GroundStation.transmit" title="libgs.groundstation.GroundStation.transmit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transmit</span></code></a>(msg[,&nbsp;wait])</td>
-<td>Transmit something to a satellite</td>
+<td>Send bytes to satellite Should normally be a wrapper for <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.send_bytes.html#libgs.protocols.protocolbase.ProtocolBase.send_bytes" title="libgs.protocols.protocolbase.ProtocolBase.send_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.send_bytes()</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -237,19 +266,19 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.FAILED_COMMUNICATION.html#libgs.groundstation.GroundStation.FAILED_COMMUNICATION" title="libgs.groundstation.GroundStation.FAILED_COMMUNICATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FAILED_COMMUNICATION</span></code></a></td>
-<td></td>
+<td>Log entry for failed communication</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.MAX_TRACK_DT.html#libgs.groundstation.GroundStation.MAX_TRACK_DT" title="libgs.groundstation.GroundStation.MAX_TRACK_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_TRACK_DT</span></code></a></td>
-<td></td>
+<td>Amount of time before tracking will timeout and the ground station return to idle.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA.html#libgs.groundstation.GroundStation.RECORD_SPECTRA" title="libgs.groundstation.GroundStation.RECORD_SPECTRA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA</span></code></a></td>
-<td></td>
+<td>Whether to record spectra while tracking and attempt to create a waterfall plot at end of pass</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA_DT.html#libgs.groundstation.GroundStation.RECORD_SPECTRA_DT" title="libgs.groundstation.GroundStation.RECORD_SPECTRA_DT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA_DT</span></code></a></td>
-<td></td>
+<td>If <a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA.html#libgs.groundstation.GroundStation.RECORD_SPECTRA" title="libgs.groundstation.GroundStation.RECORD_SPECTRA"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RECORD_SPECTRA</span></code></a> is True, sets the interval at which to record a spectrum.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN.html#libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN" title="libgs.groundstation.GroundStation.RECORD_SPECTRA_MAX_LEN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RECORD_SPECTRA_MAX_LEN</span></code></a></td>
-<td></td>
+<td>If <a class="reference internal" href="libgs.groundstation.GroundStation.RECORD_SPECTRA.html#libgs.groundstation.GroundStation.RECORD_SPECTRA" title="libgs.groundstation.GroundStation.RECORD_SPECTRA"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RECORD_SPECTRA</span></code></a> is True, sets the maximum number of spectra to record.</td>
 </tr>
 </tbody>
 </table>
@@ -261,22 +290,22 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.get_azel.html#libgs.groundstation.GroundStation.get_azel" title="libgs.groundstation.GroundStation.get_azel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_azel</span></code></a>()</td>
-<td></td>
+<td>Loop through the installed <a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html#libgs.groundstation.GroundStation.rotators" title="libgs.groundstation.GroundStation.rotators"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rotators</span></code></a> and return a list of az/el positions by querying each individual rotator’s <a class="reference internal" href="libgs.hardware.RotatorBase.get_azel.html#libgs.hardware.RotatorBase.get_azel" title="libgs.hardware.RotatorBase.get_azel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_azel()</span></code></a> method.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.init_rx.html#libgs.groundstation.GroundStation.init_rx" title="libgs.groundstation.GroundStation.init_rx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_rx</span></code></a>()</td>
-<td>Wrapper for protocol.init_rx()</td>
+<td>Wrapper for <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rx.html#libgs.protocols.protocolbase.ProtocolBase.init_rx" title="libgs.protocols.protocolbase.ProtocolBase.init_rx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.init_rx()</span></code></a></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.init_rxtx.html#libgs.groundstation.GroundStation.init_rxtx" title="libgs.groundstation.GroundStation.init_rxtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_rxtx</span></code></a>()</td>
-<td>Wrapper for protocol.init_rxtx()</td>
+<td>Wrapper for <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.init_rxtx.html#libgs.protocols.protocolbase.ProtocolBase.init_rxtx" title="libgs.protocols.protocolbase.ProtocolBase.init_rxtx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.init_rxtx()</span></code></a></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.power_down.html#libgs.groundstation.GroundStation.power_down" title="libgs.groundstation.GroundStation.power_down"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_down</span></code></a>()</td>
-<td></td>
+<td>This method is called when class destroys and can be overloaded to perform tasks such as powering down amplifiers etc.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.power_up.html#libgs.groundstation.GroundStation.power_up" title="libgs.groundstation.GroundStation.power_up"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_up</span></code></a>()</td>
-<td></td>
+<td>This method is called when class initialises and can be overloaded to perform tasks such as powering on amplifiers etc.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.set_azel.html#libgs.groundstation.GroundStation.set_azel" title="libgs.groundstation.GroundStation.set_azel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_azel</span></code></a>(az,&nbsp;el[,&nbsp;block])</td>
-<td></td>
+<td>Set the az/el pointing for each installed <a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html#libgs.groundstation.GroundStation.rotators" title="libgs.groundstation.GroundStation.rotators"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rotators</span></code></a></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.start_track.html#libgs.groundstation.GroundStation.start_track" title="libgs.groundstation.GroundStation.start_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_track</span></code></a>(nid_or_pdata,&nbsp;**kwargs)</td>
 <td>Non-blocking tracking.</td>
@@ -285,10 +314,10 @@
 <td>Stop tracking satellite.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.stow.html#libgs.groundstation.GroundStation.stow" title="libgs.groundstation.GroundStation.stow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stow</span></code></a>([block])</td>
-<td></td>
+<td>Stow all installed <a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html#libgs.groundstation.GroundStation.rotators" title="libgs.groundstation.GroundStation.rotators"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rotators</span></code></a>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.terminate.html#libgs.groundstation.GroundStation.terminate" title="libgs.groundstation.GroundStation.terminate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminate</span></code></a>()</td>
-<td>Wrapper for protocol.terminate()</td>
+<td>Wrapper for <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.terminate.html#libgs.protocols.protocolbase.ProtocolBase.terminate" title="libgs.protocols.protocolbase.ProtocolBase.terminate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.terminate()</span></code></a></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK.html#libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK" title="libgs.groundstation.GroundStation.MONITOR_SAVE_DT_NOTRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONITOR_SAVE_DT_NOTRACK</span></code></a></td>
 <td></td>
@@ -297,28 +326,28 @@
 <td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.monitor.html#libgs.groundstation.GroundStation.monitor" title="libgs.groundstation.GroundStation.monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor</span></code></a></td>
-<td></td>
+<td>Set / Get a <a class="reference internal" href="libgs.monitoring.Monitor.html#libgs.monitoring.Monitor" title="libgs.monitoring.Monitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monitor</span></code></a>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.propagator.html#libgs.groundstation.GroundStation.propagator" title="libgs.groundstation.GroundStation.propagator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">propagator</span></code></a></td>
-<td></td>
+<td>Set / Get a propagator.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.protocol.html#libgs.groundstation.GroundStation.protocol" title="libgs.groundstation.GroundStation.protocol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">protocol</span></code></a></td>
-<td></td>
+<td>Property to set/get the current protocol.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.protocols.html#libgs.groundstation.GroundStation.protocols" title="libgs.groundstation.GroundStation.protocols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">protocols</span></code></a></td>
-<td></td>
+<td>A list of protocols (see <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.html#libgs.protocols.protocolbase.ProtocolBase" title="libgs.protocols.protocolbase.ProtocolBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProtocolBase</span></code></a> ) that are installed on the groundstation</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.radios.html#libgs.groundstation.GroundStation.radios" title="libgs.groundstation.GroundStation.radios"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radios</span></code></a></td>
-<td></td>
+<td>A list of radios (see <a class="reference internal" href="libgs.hardware.RadioBase.html#libgs.hardware.RadioBase" title="libgs.hardware.RadioBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RadioBase</span></code></a> ) that are installed on the groundstation</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.rotators.html#libgs.groundstation.GroundStation.rotators" title="libgs.groundstation.GroundStation.rotators"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotators</span></code></a></td>
-<td></td>
+<td>A list of rotators (see <a class="reference internal" href="libgs.hardware.RotatorBase.html#libgs.hardware.RotatorBase" title="libgs.hardware.RotatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatorBase</span></code></a> ) that are installed on the groundstation</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GroundStation.rpcserver.html#libgs.groundstation.GroundStation.rpcserver" title="libgs.groundstation.GroundStation.rpcserver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rpcserver</span></code></a></td>
-<td></td>
+<td>Assign an <a class="reference internal" href="libgs.rpc.RPCServer.html#libgs.rpc.RPCServer" title="libgs.rpc.RPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RPCServer</span></code></a> to the Ground Station if you want to be able to call its methods remotely over XMLRPC.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GroundStation.scheduler.html#libgs.groundstation.GroundStation.scheduler" title="libgs.groundstation.GroundStation.scheduler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scheduler</span></code></a></td>
-<td></td>
+<td>The currently associated <a class="reference internal" href="libgs.scheduler.Scheduler.html#libgs.scheduler.Scheduler" title="libgs.scheduler.Scheduler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scheduler</span></code></a>.</td>
 </tr>
 </tbody>
 </table>

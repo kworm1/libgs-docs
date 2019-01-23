@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="libgs.groundstation.GSState.antenna_info" href="libgs.groundstation.GSState.antenna_info.html" />
+    <link rel="next" title="libgs.groundstation.GSState.IDLE" href="libgs.groundstation.GSState.IDLE.html" />
     <link rel="prev" title="libgs.groundstation" href="libgs.groundstation.html" /> 
 
   
@@ -86,10 +86,6 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">libgs.groundstation.GSState</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.antenna_info.html">libgs.groundstation.GSState.antenna_info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.hardware_info.html">libgs.groundstation.GSState.hardware_info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.service_info.html">libgs.groundstation.GSState.service_info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.tracking_info.html">libgs.groundstation.GSState.tracking_info</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.IDLE.html">libgs.groundstation.GSState.IDLE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.SLEWING.html">libgs.groundstation.GSState.SLEWING</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.groundstation.GSState.TRACKING.html">libgs.groundstation.GSState.TRACKING</a></li>
@@ -194,51 +190,20 @@
 <p>The ground station uses this class to store important state variables,
 (as its properties). The class does however have the ability to connect
 callbacks to those properites in order to, for example, update a UI.</p>
-<p>Makes use of python properties to ensure the callbacks.</p>
-<p>The state properties are:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="56%" />
-<col width="34%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">prop</th>
-<th class="head">Description</th>
-<th class="head">type</th>
-</tr>
-</thead>
+<p>Makes use of python properties to ensure the callbacks. It is also possible to assign states to be polled</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
 <tbody valign="top">
-<tr class="row-even"><td>curpos</td>
-<td>Current antenna position(s)</td>
-<td>tuple or tuple-of-tuples</td>
-</tr>
-<tr class="row-odd"><td>cmdpos</td>
-<td>Commanded antenna position(s)</td>
-<td>tuple or tuple-of-tuples</td>
-</tr>
-<tr class="row-even"><td>satpos</td>
-<td>Current tracked satellite position(s)</td>
-<td>tuple</td>
-</tr>
-<tr class="row-odd"><td>nid</td>
-<td>Current tracked satellite Norad ID</td>
-<td>int</td>
-</tr>
-<tr class="row-even"><td>pdat</td>
-<td>Current pass data</td>
-<td>DataFrame</td>
-</tr>
-<tr class="row-odd"><td>state</td>
-<td>Current tracking state</td>
-<td>str</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>callbacks</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – A dictionary of callbacks to invoke upon setting state variables</li>
+<li><strong>callback_dt</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – A dictionary of minimum time intervals between subsequent invokations of the callbacks</li>
+<li><strong>pollmap</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – A dictionary of state variables to poll using the designated polling functions (instead of callback)</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">Complete this table</p>
-</div>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -246,18 +211,6 @@ callbacks to those properites in order to, for example, update a UI.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.antenna_info.html#libgs.groundstation.GSState.antenna_info" title="libgs.groundstation.GSState.antenna_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">antenna_info</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.hardware_info.html#libgs.groundstation.GSState.hardware_info" title="libgs.groundstation.GSState.hardware_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hardware_info</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.service_info.html#libgs.groundstation.GSState.service_info" title="libgs.groundstation.GSState.service_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">service_info</span></code></a>()</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.tracking_info.html#libgs.groundstation.GSState.tracking_info" title="libgs.groundstation.GSState.tracking_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tracking_info</span></code></a>()</td>
-<td>Return info about tracking state</td>
-</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
@@ -268,49 +221,49 @@ callbacks to those properites in order to, for example, update a UI.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.IDLE.html#libgs.groundstation.GSState.IDLE" title="libgs.groundstation.GSState.IDLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IDLE</span></code></a></td>
-<td></td>
+<td>See <a class="reference internal" href="libgs.groundstation.GSState.state.html#libgs.groundstation.GSState.state" title="libgs.groundstation.GSState.state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code></a></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.SLEWING.html#libgs.groundstation.GSState.SLEWING" title="libgs.groundstation.GSState.SLEWING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SLEWING</span></code></a></td>
-<td></td>
+<td>See <a class="reference internal" href="libgs.groundstation.GSState.state.html#libgs.groundstation.GSState.state" title="libgs.groundstation.GSState.state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code></a></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.TRACKING.html#libgs.groundstation.GSState.TRACKING" title="libgs.groundstation.GSState.TRACKING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TRACKING</span></code></a></td>
-<td></td>
+<td>See <a class="reference internal" href="libgs.groundstation.GSState.state.html#libgs.groundstation.GSState.state" title="libgs.groundstation.GSState.state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code></a></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.WAITING.html#libgs.groundstation.GSState.WAITING" title="libgs.groundstation.GSState.WAITING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WAITING</span></code></a></td>
-<td></td>
+<td>See <a class="reference internal" href="libgs.groundstation.GSState.state.html#libgs.groundstation.GSState.state" title="libgs.groundstation.GSState.state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">state</span></code></a></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.cmdpos.html#libgs.groundstation.GSState.cmdpos" title="libgs.groundstation.GSState.cmdpos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmdpos</span></code></a></td>
-<td></td>
+<td>List of current commanded positions, in same order as <a class="reference internal" href="libgs.groundstation.GroundStationBase.rotators.html#libgs.groundstation.GroundStationBase.rotators" title="libgs.groundstation.GroundStationBase.rotators"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GroundStationBase.rotators</span></code></a></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.curpos.html#libgs.groundstation.GSState.curpos" title="libgs.groundstation.GSState.curpos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">curpos</span></code></a></td>
-<td></td>
+<td>List of current antenna az,el positions, in same order as <a class="reference internal" href="libgs.groundstation.GroundStationBase.rotators.html#libgs.groundstation.GroundStationBase.rotators" title="libgs.groundstation.GroundStationBase.rotators"><code class="xref py py-attr docutils literal notranslate"><span class="pre">GroundStationBase.rotators</span></code></a></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.last_response.html#libgs.groundstation.GSState.last_response" title="libgs.groundstation.GSState.last_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_response</span></code></a></td>
-<td></td>
+<td>The last received bytes from the satellite</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.libgs_log.html#libgs.groundstation.GSState.libgs_log" title="libgs.groundstation.GSState.libgs_log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">libgs_log</span></code></a></td>
-<td></td>
+<td>The latest <a class="reference internal" href="libgs.utils.Defaults.UI_LOG_LEN.html#libgs.utils.Defaults.UI_LOG_LEN" title="libgs.utils.Defaults.UI_LOG_LEN"><code class="xref py py-attr docutils literal notranslate"><span class="pre">utils.Defaults.UI_LOG_LEN</span></code></a> entries in the libgs-log.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.nid.html#libgs.groundstation.GSState.nid" title="libgs.groundstation.GSState.nid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nid</span></code></a></td>
-<td></td>
+<td>Currently tracked Norad ID.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.pdat.html#libgs.groundstation.GSState.pdat" title="libgs.groundstation.GSState.pdat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdat</span></code></a></td>
-<td></td>
+<td>Current pass data DataFrame.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.pdu.html#libgs.groundstation.GSState.pdu" title="libgs.groundstation.GSState.pdu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdu</span></code></a></td>
-<td></td>
+<td>Depreacated</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.satpos.html#libgs.groundstation.GSState.satpos" title="libgs.groundstation.GSState.satpos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">satpos</span></code></a></td>
-<td></td>
+<td>Current satellite position</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.schedule.html#libgs.groundstation.GSState.schedule" title="libgs.groundstation.GSState.schedule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schedule</span></code></a></td>
-<td></td>
+<td>Textual representation of current schedule</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.state.html#libgs.groundstation.GSState.state" title="libgs.groundstation.GSState.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a></td>
-<td></td>
+<td>Current tracking state.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.groundstation.GSState.track_msg.html#libgs.groundstation.GSState.track_msg" title="libgs.groundstation.GSState.track_msg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">track_msg</span></code></a></td>
-<td></td>
+<td>A human readable message about current tracking state</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.groundstation.GSState.uiloghandler.html#libgs.groundstation.GSState.uiloghandler" title="libgs.groundstation.GSState.uiloghandler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uiloghandler</span></code></a></td>
 <td>The logging handler that is used for adding log messages to ui</td>
@@ -338,7 +291,7 @@ callbacks to those properites in order to, for example, update a UI.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libgs.groundstation.GSState.antenna_info.html" class="btn btn-neutral float-right" title="libgs.groundstation.GSState.antenna_info" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="libgs.groundstation.GSState.IDLE.html" class="btn btn-neutral float-right" title="libgs.groundstation.GSState.IDLE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="libgs.groundstation.html" class="btn btn-neutral" title="libgs.groundstation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

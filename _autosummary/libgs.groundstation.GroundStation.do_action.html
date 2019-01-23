@@ -203,14 +203,21 @@
 <dl class="method">
 <dt id="libgs.groundstation.GroundStation.do_action">
 <code class="descclassname">GroundStation.</code><code class="descname">do_action</code><span class="sig-paren">(</span><em>desc</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/groundstation.html#GroundStation.do_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.groundstation.GroundStation.do_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ask the protocol to do something (to presumably do something with
-the satellites) without any restrictions. The args and kwargs
-are anything implemented in the protocol.</p>
-<p>Note that when using this mode of transmission, logging is a bit
-trickier. This function will do the best it can but since it doesnt
-know much, that might not be very nice. Try to use the other
-function unless you have to do something fancy.</p>
-<p>The desc parameter is required in order to put SOMETHING in the log.</p>
+<dd><p>Perform an <a class="reference external" href="https://kworm1.github.io/libgs_ops-docs/_autosummary/libgs_ops.scheduling.Action.html#libgs_ops.scheduling.Action" title="(in libgs_ops)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.
+Should normally be a wrapper for <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html#libgs.protocols.protocolbase.ProtocolBase.do_action" title="libgs.protocols.protocolbase.ProtocolBase.do_action"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.do_action()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>desc</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Description of the action</li>
+<li><strong>*args</strong> – Arguments to pass to <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html#libgs.protocols.protocolbase.ProtocolBase.do_action" title="libgs.protocols.protocolbase.ProtocolBase.do_action"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.do_action()</span></code></a></li>
+<li><strong>**kwargs</strong> – KW Arguments to pass to <a class="reference internal" href="libgs.protocols.protocolbase.ProtocolBase.do_action.html#libgs.protocols.protocolbase.ProtocolBase.do_action" title="libgs.protocols.protocolbase.ProtocolBase.do_action"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocols.protocolbase.ProtocolBase.do_action()</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
