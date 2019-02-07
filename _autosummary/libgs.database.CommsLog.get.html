@@ -85,7 +85,6 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.database.html">libgs.database</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.database.tfilterstr2query.html">libgs.database.tfilterstr2query</a></li>
@@ -106,9 +105,11 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.database.PassDb.html">libgs.database.PassDb</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -182,13 +183,17 @@
 <dl class="method">
 <dt id="libgs.database.CommsLog.get">
 <code class="descclassname">CommsLog.</code><code class="descname">get</code><span class="sig-paren">(</span><em>limit=None</em>, <em>tstamps=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/database.html#CommsLog.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.database.CommsLog.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the communication log</p>
+<dd><p>Get the communication log.</p>
+<p>Filter by any column, the where query is constructed as WHERE &lt;column&gt; like &lt;…&gt; AND &lt;column&gt; like &lt;…&gt;</p>
+<p>where the column and … come from the kwargs. You can do partial matches using the % wildchar.
+e.g. <code class="docutils literal notranslate"><span class="pre">keys</span> <span class="pre">=</span> <span class="pre">['%NW%',</span> <span class="pre">'%NE%']</span></code> will match all keys with NW and NE in their names.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>where</strong> – a WHERE=… SQL query to apply to the query</li>
+<li><strong>tstamps</strong> – Timestamp filter. See <a class="reference internal" href="libgs.database.tfilterstr2query.html#libgs.database.tfilterstr2query" title="libgs.database.tfilterstr2query"><code class="xref py py-func docutils literal notranslate"><span class="pre">tfilterstr2query()</span></code></a></li>
+<li><strong>**kwargs</strong> – Other column filters</li>
 <li><strong>limit</strong> – limit to a number of results</li>
 </ul>
 </td>

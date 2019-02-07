@@ -85,7 +85,6 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.database.html">libgs.database</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.database.tfilterstr2query.html">libgs.database.tfilterstr2query</a></li>
@@ -106,9 +105,11 @@
 <li class="toctree-l2"><a class="reference internal" href="libgs.database.PassDb.html">libgs.database.PassDb</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -215,7 +216,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.database.CommsLog.get.html#libgs.database.CommsLog.get" title="libgs.database.CommsLog.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>([limit,&nbsp;tstamps])</td>
-<td>Get the communication log</td>
+<td>Get the communication log.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.database.CommsLog.put.html#libgs.database.CommsLog.put" title="libgs.database.CommsLog.put"><code class="xref py py-obj docutils literal notranslate"><span class="pre">put</span></code></a>(nid,&nbsp;pass_id,&nbsp;orig,&nbsp;dest,&nbsp;msg)</td>
 <td>Add new item to the log</td>
@@ -248,7 +249,7 @@
 <td>Set up the columns and add a unique key.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.database.CommsLog.get_df.html#libgs.database.CommsLog.get_df" title="libgs.database.CommsLog.get_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_df</span></code></a>(table[,&nbsp;where,&nbsp;limit,&nbsp;orderby,&nbsp;…])</td>
-<td>Get data from communications database as a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.23.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> object</td>
+<td>Get data from communications database as a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.24.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> object</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.database.CommsLog.get_file.html#libgs.database.CommsLog.get_file" title="libgs.database.CommsLog.get_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file</span></code></a>(fname)</td>
 <td>Grab a file resource and return the bytes or string (.bin or .txt)</td>

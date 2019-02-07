@@ -83,12 +83,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -188,6 +189,7 @@
 <span class="sd">:date: Fri Jan 12 13:47:56 2018</span>
 <span class="sd">:author: Kjetil Wormnes</span>
 
+<span class="sd">Module for manipulation of the libgs databases.</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -284,7 +286,27 @@
 <div class="viewcode-block" id="tfilterstr2query"><a class="viewcode-back" href="../../_autosummary/libgs.database.tfilterstr2query.html#libgs.database.tfilterstr2query">[docs]</a><span class="k">def</span> <span class="nf">tfilterstr2query</span><span class="p">(</span><span class="n">filters</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a timestamp filter string into a well formated</span>
-<span class="sd">    where query</span>
+<span class="sd">    where query. </span>
+
+<span class="sd">    A filter string shall follow the format:</span>
+<span class="sd">    &lt;comparator&gt;&lt;value&gt;</span>
+
+<span class="sd">    For example::</span>
+
+<span class="sd">        &#39;&gt;2018-01-01&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    will match anything after 2018-01-01 at 00:00:00::</span>
+
+<span class="sd">        &#39;&lt;=2019-02-01T14:00:01&#39;</span>
+
+<span class="sd">    will match anything before or exactly equal to 2019-02-01T14:00:01.</span>
+
+<span class="sd">    Valid comparators are ``&lt;``, ``&gt;``, ``&lt;=``, ``&gt;=``.</span>
+
+<span class="sd">    If no comparator is present, it will match only the exact timestamp specified.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filters (list(basestring)): A list of filter strings in the format described above.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">query</span> <span class="o">=</span> <span class="p">[]</span>
@@ -388,7 +410,7 @@
         <span class="sd">&quot;&quot;&quot; Return the number of rows in a table</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            table:</span>
+<span class="sd">            table: The table to count</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Number of rows</span>
@@ -795,10 +817,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">put_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TABLE</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CommsLog.get"><a class="viewcode-back" href="../../_autosummary/libgs.database.CommsLog.get.html#libgs.database.CommsLog.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the communication log</span>
+        <span class="sd">&quot;&quot;&quot; Get the communication log.</span>
+
+<span class="sd">        Filter by any column, the where query is constructed as WHERE &lt;column&gt; like &lt;...&gt; AND &lt;column&gt; like &lt;...&gt;</span>
+
+<span class="sd">        where the column and ... come from the kwargs. You can do partial matches using the % wildchar.</span>
+<span class="sd">        e.g. ``keys = [&#39;%NW%&#39;, &#39;%NE%&#39;]`` will match all keys with NW and NE in their names.</span>
+
 
 <span class="sd">        Args:</span>
-<span class="sd">            where: a WHERE=... SQL query to apply to the query</span>
+<span class="sd">            tstamps: Timestamp filter. See :func:`tfilterstr2query`</span>
+<span class="sd">            **kwargs: Other column filters</span>
 <span class="sd">            limit: limit to a number of results</span>
 
 <span class="sd">        Returns:</span>
@@ -881,6 +910,16 @@
 
 
 <div class="viewcode-block" id="KVDb.put"><a class="viewcode-back" href="../../_autosummary/libgs.database.KVDb.put.html#libgs.database.KVDb.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add key/value pair to database.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key:        The key to add</span>
+<span class="sd">            value:      The corresponding value</span>
+<span class="sd">            **kwargs:   Additional columns to set (if available in the database)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
         
         <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NCOLS</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()]):</span>
             <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a clolumn in this database. Valid columns are </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NCOLS</span><span class="p">))</span>
@@ -928,12 +967,22 @@
         
         
 <div class="viewcode-block" id="KVDb.get"><a class="viewcode-back" href="../../_autosummary/libgs.database.KVDb.get.html#libgs.database.KVDb.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tstamps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;      </span>
-<span class="sd">        .. note:: </span>
-<span class="sd">        </span>
-<span class="sd">           To do partial matches, use the % wildchar.</span>
-<span class="sd">           eg keys = [&#39;%NW%&#39;, &#39;%NE%&#39;] will match all keys</span>
-<span class="sd">           with NW and NE in their names.</span>
+        <span class="sd">&quot;&quot;&quot; Get data from the database.</span>
+
+<span class="sd">        Filter by any column, the where query is constructed as WHERE &lt;column&gt; like &lt;...&gt; AND &lt;column&gt; like &lt;...&gt;</span>
+
+<span class="sd">        where the column and ... come from the kwargs. You can do partial matches using the % wildchar.</span>
+<span class="sd">        e.g. ``keys = [&#39;%NW%&#39;, &#39;%NE%&#39;]`` will match all keys with NW and NE in their names.</span>
+
+
+<span class="sd">        Args:</span>
+<span class="sd">            tstamps: Timestamp filter. See :func:`tfilterstr2query`</span>
+<span class="sd">            **kwargs: Other column filters</span>
+<span class="sd">            limit: limit to a number of results</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`.DataFrame` containing the stored data</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="n">where</span> <span class="o">=</span> <span class="kc">None</span>

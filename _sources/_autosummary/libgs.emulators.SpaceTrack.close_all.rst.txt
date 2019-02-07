@@ -1,6 +1,0 @@
-libgs.emulators.SpaceTrack.close\_all
-=====================================
-
-.. currentmodule:: libgs.emulators
-
-.. automethod:: SpaceTrack.close_all

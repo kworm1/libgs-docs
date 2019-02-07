@@ -85,10 +85,10 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#tutorial">Tutorial</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="libgs.visualisation.html#module-reference">Module reference</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.azel2rect.html">libgs.visualisation.azel2rect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.linktext.html">libgs.visualisation.linktext</a></li>
@@ -113,9 +113,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -205,7 +207,7 @@ the number of channels in the spectrum returned by the radio. I.e. if the radio
 returns a 1024 point fft, then wfallwidth could be 128 since 8 * 128 = 1024.
 A wfallwidth of 129 will cause an exception and error.</li>
 <li><strong>wfallheight</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optinal</em>) – The height of the waterfall (in pixels).</li>
-<li><strong>**fig_args</strong> – Additional arguments to pass to the <a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/plotting.html#bokeh.plotting.figure.Figure" title="(in Bokeh v1.0.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.plotting.figure.Figure</span></code></a> constructor.</li>
+<li><strong>**fig_args</strong> – Additional arguments to pass to the <a class="reference external" href="https://bokeh.pydata.org/en/0.12.6/docs/reference/plotting.html#bokeh.plotting.figure.Figure" title="(in Bokeh v0.12.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.plotting.figure.Figure</span></code></a> constructor.</li>
 </ul>
 </td>
 </tr>
@@ -222,7 +224,7 @@ A wfallwidth of 129 will cause an exception and error.</li>
 <td>Method to append a spectrum to the waterfall.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.Waterfall.create_fig.html#libgs.visualisation.Waterfall.create_fig" title="libgs.visualisation.Waterfall.create_fig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_fig</span></code></a>(sources)</td>
-<td>Class implementation of <a class="reference internal" href="libgs.visualisation.LivePlot.create_fig.html#libgs.visualisation.LivePlot.create_fig" title="libgs.visualisation.LivePlot.create_fig"><code class="xref py py-meth docutils literal notranslate"><span class="pre">LivePlot.create_fig()</span></code></a>.</td>
+<td>The create_fig method shall set up a Bokeh Figure object appropriately and return it</td>
 </tr>
 </tbody>
 </table>

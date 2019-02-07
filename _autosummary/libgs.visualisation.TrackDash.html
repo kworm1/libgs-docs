@@ -85,10 +85,10 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#tutorial">Tutorial</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="libgs.visualisation.html#module-reference">Module reference</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.azel2rect.html">libgs.visualisation.azel2rect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.linktext.html">libgs.visualisation.linktext</a></li>
@@ -112,9 +112,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -198,9 +200,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>(</strong><strong>list</strong><strong>[</strong> (<em>radios</em>) – class:<a href="#id1"><span class="problematic" id="id2">`</span></a>hardware.RadioBase]).  The radios to create plots for</li>
-<li><strong>title</strong> – (str).                               The title of the dashboard</li>
-<li><strong>links</strong> – (list[tuple[str]])                   A list of tuples (name, URI) to use to create navigation links</li>
+<li><strong>radios</strong> (list():class:<cite>hardware.RadioBase</cite>) – The radios to create plots for</li>
+<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The title of the dashboard</li>
+<li><strong>links</strong> (<em>list</em><em>(</em><em>tuple</em><em>(</em><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>)</em><em>)</em>) – A list of tuples (name, URI) to use to create navigation links</li>
 </ul>
 </td>
 </tr>

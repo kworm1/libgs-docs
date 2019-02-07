@@ -44,12 +44,18 @@ libgs module reference
     ~libgs.restapi
     ~libgs.hardware
     ~libgs.groundstation
-    ~libgs.console_scripts
     ~libgs.visualisation
     ~libgs.database
-    ~libgs.emulators
     ~libgs.monitoring
     ~libgs.protocols.protocolbase
+
+command-line tools
+--------------------
+
+.. toctree::
+
+    console_scripts
+
 
 libgs_ops modules
 -----------------

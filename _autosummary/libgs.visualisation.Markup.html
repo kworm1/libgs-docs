@@ -85,10 +85,10 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#tutorial">Tutorial</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="libgs.visualisation.html#module-reference">Module reference</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.azel2rect.html">libgs.visualisation.azel2rect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.linktext.html">libgs.visualisation.linktext</a></li>
@@ -112,9 +112,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -188,9 +190,9 @@
 <em class="property">class </em><code class="descclassname">libgs.visualisation.</code><code class="descname">Markup</code><span class="sig-paren">(</span><em>name</em>, <em>text</em>, <em>mtype='PreText'</em>, <em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/visualisation.html#Markup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.visualisation.Markup" title="Permalink to this definition">¶</a></dt>
 <dd><p>A LivePlot wrapper for the three Bokeh Markup widgets;</p>
 <ul class="simple">
-<li><a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/models/widgets.markups.html#bokeh.models.widgets.markups.Div" title="(in Bokeh v1.0.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.models.widgets.markups.Div</span></code></a></li>
-<li><a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/models/widgets.markups.html#bokeh.models.widgets.markups.Paragraph" title="(in Bokeh v1.0.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.models.widgets.markups.Paragraph</span></code></a></li>
-<li><a class="reference external" href="https://bokeh.pydata.org/en/latest/docs/reference/models/widgets.markups.html#bokeh.models.widgets.markups.PreText" title="(in Bokeh v1.0.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.models.widgets.markups.PreText</span></code></a></li>
+<li><a class="reference external" href="https://bokeh.pydata.org/en/0.12.6/docs/reference/models/widgets.markups.html#bokeh.models.widgets.markups.Div" title="(in Bokeh v0.12.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.models.widgets.markups.Div</span></code></a></li>
+<li><a class="reference external" href="https://bokeh.pydata.org/en/0.12.6/docs/reference/models/widgets.markups.html#bokeh.models.widgets.markups.Paragraph" title="(in Bokeh v0.12.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.models.widgets.markups.Paragraph</span></code></a></li>
+<li><a class="reference external" href="https://bokeh.pydata.org/en/0.12.6/docs/reference/models/widgets.markups.html#bokeh.models.widgets.markups.PreText" title="(in Bokeh v0.12.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bokeh.models.widgets.markups.PreText</span></code></a></li>
 </ul>
 <p>The text (or html) can be changed through the ‘text’ property in the <a class="reference internal" href="libgs.visualisation.LivePlot.live_props.html#libgs.visualisation.LivePlot.live_props" title="libgs.visualisation.LivePlot.live_props"><code class="xref py py-attr docutils literal notranslate"><span class="pre">live_props</span></code></a> attribute.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -215,7 +217,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.Markup.create_fig.html#libgs.visualisation.Markup.create_fig" title="libgs.visualisation.Markup.create_fig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_fig</span></code></a>(sources)</td>
-<td></td>
+<td>The create_fig method shall set up a Bokeh Figure object appropriately and return it</td>
 </tr>
 </tbody>
 </table>

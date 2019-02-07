@@ -83,12 +83,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -230,8 +231,8 @@
 
 <span class="sd">Additionally they may implement the following attributes if required:</span>
 
-<span class="sd">* live_data (type: dict)</span>
-<span class="sd">* live_props (type: dict)</span>
+<span class="sd">* :attr:`~LivePlot.live_data` (type: dict)</span>
+<span class="sd">* :attr:`~LivePlot.live_props` (type: dict)</span>
 
 <span class="sd">Data registered in live_data will be passed onto the figure ColumnDataSource</span>
 <span class="sd">using the same mapping. And properites in live_props will be updated</span>
@@ -260,18 +261,141 @@
 
 <span class="sd">The apps that are currently available in this module are:</span>
 
-<span class="sd">* :class:`TextDash`:   A simple app that just shows text (or html) which is updatable via a live_prop property</span>
-<span class="sd">* :class:`TrackDash`:  A full-fledged dashboard showing antenna tracking status as well as spectra/waterfall from the radios,</span>
-<span class="sd">                       and the current schedule information.</span>
+<span class="sd">    * :class:`TextDash`:   A simple app that just shows text (or html) which is updatable via a live_prop property</span>
+<span class="sd">    * :class:`TrackDash`:  A full-fledged dashboard showing antenna tracking status as well as spectra/waterfall from the radios,</span>
+<span class="sd">                           and the current schedule information.</span>
+<span class="sd">                        </span>
+<span class="sd">You can create others by deriving from :class:`BokehDash` and updating the __init__ method.</span>
+
+
+<span class="sd">Tutorial</span>
+<span class="sd">----------------</span>
 
 
 
-<span class="sd">Examples</span>
-<span class="sd">---------</span>
+<span class="sd">Set up and manipulate a basic Track Dash</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
 
-<span class="sd">.. todo:</span>
+<span class="sd">Create a server</span>
 
-<span class="sd">    Implement visualisation examples</span>
+<span class="sd">&gt;&gt;&gt; server = BokehServer(port=5001, host=&#39;localhost&#39;)</span>
+
+<span class="sd">We will now add a couple of apps to the server, one :class:`.TrackDash` which provides most of the functionality you</span>
+<span class="sd">will need for the ground station dashboard, and ont :class:`.TextDash` which is just a simple full-page text (or html) view.</span>
+
+<span class="sd">We will also add navigation links to the apps.</span>
+
+<span class="sd">First create some radios to use with the example. You can use the ``libgs-emulate`` command-line tool, which comes with the libgs</span>
+<span class="sd">library, to feed these with dummy data if you do not yet have an actual GNU radio.</span>
+
+<span class="sd">&gt;&gt;&gt; from hardware import GR_XMLRPCRadio</span>
+<span class="sd">&gt;&gt;&gt; r1 = GR_XMLRPCRadio(stream =  &#39;localhost:5551&#39;, rpcaddr = &#39;http://localhost:8051&#39;, name=&#39;TX&#39;)</span>
+<span class="sd">&gt;&gt;&gt; r2 = GR_XMLRPCRadio(stream =  &#39;localhost:5552&#39;, rpcaddr = &#39;http://localhost:8051&#39;, name=&#39;RX&#39;)</span>
+
+<span class="sd">Take note of how we used the same rpcaddress for both radios. This is because in this example the two radios may refer to two streams (e.g. rx and tx)</span>
+<span class="sd">in the same GNU radio flowgraph. But that is not a visualisation topic so see :class:`libgs.hardware.GR_XMLRPCRadio` for details. The</span>
+<span class="sd">visualisation only cares about the stream of IQ values which will allow it to show a waterfall display.</span>
+
+<span class="sd">Set the title and navigation links</span>
+
+<span class="sd">&gt;&gt;&gt; TITLE = &quot;My Ground Station test&quot;</span>
+<span class="sd">&gt;&gt;&gt; LINKS = [(&quot;/&quot;, &quot;Track dash&quot;), (&quot;/log&quot;, &quot;Log&quot;)]</span>
+
+<span class="sd">Now create the dashboard app:</span>
+
+<span class="sd">&gt;&gt;&gt; trackdash   = TrackDash(radios = [r1, r2], title = TITLE, links = LINKS)</span>
+<span class="sd">&gt;&gt;&gt; logdash     = TextDash(title = TITLE, mtype=&#39;PreText&#39;, plot_name=&#39;log&#39;, links = LINKS)</span>
+
+<span class="sd">:class:`.TextDash` is just a single :class:`Markup` plot that covers the page. Here we keep it simple and make it plain text (PreText). It</span>
+<span class="sd">is also possible to do html (Div). See :class:`TextDash` and :class:`Markup` for details.</span>
+
+<span class="sd">And then we simply add the apps to the server on the URIs we decided (the track dash on / and the log dash on /log)</span>
+
+<span class="sd">&gt;&gt;&gt; server.add_app(&#39;/&#39;, self.trackdash)</span>
+<span class="sd">&gt;&gt;&gt; server.add_app(&#39;/log&#39;, self.logdash)</span>
+
+<span class="sd">And start it:</span>
+
+<span class="sd">&gt;&gt;&gt; server.start()</span>
+
+<span class="sd">The start method will return immediately as the Tornado IOLoop is started in a separate thread.</span>
+
+<span class="sd">Note that this just creates the pages and plot elements. I.e. you can now got to http://localhost:5001 and you should see the dashboard,</span>
+<span class="sd">and if you have started the radio (or radio emulator) on the port you set up you will also see the waterfalls and spectra change.</span>
+
+<span class="sd">But you will obviously need to add code to update the other plot elements. This is very simple, you just need to set the </span>
+<span class="sd">appropriate :class:`LivePlot` attributes.</span>
+
+<span class="sd">For example:</span>
+
+<span class="sd">&gt;&gt;&gt; passplotter = self.trackdash.get_plot(&#39;spass&#39;)</span>
+<span class="sd">&gt;&gt;&gt; track_info  = self.trackdash.get_plot(&#39;track_info&#39;)</span>
+<span class="sd">&gt;&gt;&gt; sch_info = self.trackdash.get_plot(&#39;sch_info&#39;)</span>
+<span class="sd">&gt;&gt;&gt; libgs_log = self.logdash.get_plot(&#39;log&#39;)</span>
+
+<span class="sd">Then we could plot a pass like this:</span>
+
+<span class="sd">&gt;&gt;&gt; az = [0, 10, 20, 30, 40]</span>
+<span class="sd">&gt;&gt;&gt; el = [0, 45, 60, 45, 0]</span>
+<span class="sd">&gt;&gt;&gt; passplotter.plot_pass(az, el)</span>
+
+<span class="sd">Obviously, normally the az/el values would be coming from the :class:`libgs_ops.scheduling.CommsPass`. If you try the above you should</span>
+<span class="sd">see the plot update in real time in your browser.</span>
+
+<span class="sd">You can set other :class:`.SatellitePass` live_data elements</span>
+
+<span class="sd">&gt;&gt;&gt; passplotter.update_data(&#39;ant_cmd&#39;, (20,20))</span>
+<span class="sd">&gt;&gt;&gt; passplotter.update_data(&#39;sat&#39;, (20,30))</span>
+
+<span class="sd">etc... You will see the page update in realtime. See :class:`.SatellitePass` for a full reference for this LivePlot element.</span>
+
+<span class="sd">track_info, sch_info and libgs_log are all text elements (:class:`.Markup`), you can update the text in a similar way by updating its</span>
+<span class="sd">&#39;text&#39; property. Many elements have properties such as colour, size, etc... You will have to consult the bokeh documentation for a full</span>
+<span class="sd">reference.</span>
+
+<span class="sd">&gt;&gt;&gt; libgs_log.live_props[&#39;text&#39;]= &#39;This is a test&#39;</span>
+
+<span class="sd">You should immediately see the string &#39;This is a test&#39; appear in the log app. You can try the same for the others.</span>
+
+
+<span class="sd">Create a new dasboard</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">For this example we will create a simplified version of the TrackDash from scratch that only includes a :class:`SatellitePass`,</span>
+<span class="sd">:class:`Frequency`.</span>
+
+<span class="sd">First lets create the plot elements</span>
+
+<span class="sd">&gt;&gt;&gt; waterfall = Waterfall(&#39;waterfall&#39;, 32000, 0, plot_height=100, toolbar_location=None)</span>
+<span class="sd">&gt;&gt;&gt; spectrum  = FrequencyPlot(&#39;spectrum&#39;, radio.get_spectrum, wfall=waterfall, title=radio.name, plot_height = 100, tools=&quot;hover&quot;)</span>
+<span class="sd">&gt;&gt;&gt; spectrum.connect()</span>
+
+<span class="sd">That last command makes the FrequencyPlot start calling the callback function :meth:`~libgs.hardware.RadioBase.get_spectrum` to automatically</span>
+<span class="sd">and regularly update itself. It has been connected to the waterfall using ``wfall=`` so that will update too.</span>
+
+<span class="sd">Create the satellite pass visualisation</span>
+
+<span class="sd">&gt;&gt;&gt; spass = SatellitePass(&#39;spass&#39;, plot_height=5*UNITS, plot_width=300)</span>
+
+<span class="sd">And a textbox with some tracking info</span>
+
+<span class="sd">&gt;&gt;&gt; track_info  = Markup(&#39;track_info&#39;, mtype=&#39;PreText&#39;, text=&#39;&#39;, width=500)</span>
+
+<span class="sd">The first argument in all these cases is the liveplot name, that was used in the first example when calling :meth:`BokehDash.get_plot`.</span>
+
+<span class="sd">Now lets create the dashboard</span>
+
+<span class="sd">&gt;&gt;&gt; dash = BokehDash(title=&#39;My awesome dashboard&#39;)</span>
+<span class="sd">&gt;&gt;&gt; dash.add_plot(waterfall)</span>
+<span class="sd">&gt;&gt;&gt; dash.add_plot(spectrum)</span>
+<span class="sd">&gt;&gt;&gt; dash.add_plot(spass)</span>
+<span class="sd">&gt;&gt;&gt; dash.add_plot(track_info)</span>
+
+<span class="sd">Note that the plots will be laid out automatically, and that your dashboard may therefore not look as awesome as you like.</span>
+
+<span class="sd">You can fix this by creating a function that returns a :mod:`bokeh layout &lt;bokeh.layouts&gt;`, and pass it to the BokehDash constructor&#39;s</span>
+<span class="sd">``layout_callback`` parameter. See the :class:`TextDash` or :class:`TrackDash` ``__init__`` implementation as well as :mod:`bokeh.layouts`</span>
+<span class="sd">for how to do this.</span>
 
 
 
@@ -358,6 +482,13 @@
 <span class="sd">    Helper-function to conver az,el (polar coordinates) to x,y</span>
 <span class="sd">    for display on rectangular axes</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        az (float): azimuth angle in degrees (can be a list )</span>
+<span class="sd">        el (float): elevation angle in degrees (can be a list)</span>
+
+<span class="sd">    Regurns: </span>
+<span class="sd">        rectangular coordinates suitable for plotting</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">az</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">el</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
@@ -397,16 +528,16 @@
 
 <span class="sd">    All derived classes shall implent the following method and attribute</span>
 
-<span class="sd">    * create_fig(self, sources): Shall return a Bokeh figure.</span>
-<span class="sd">    * name (type: str): Uniquely identifying name</span>
+<span class="sd">    * :meth:`.create_fig`</span>
+<span class="sd">    * :attr:`.name`</span>
 
 <span class="sd">    Additinoally they may implement the following attributes if required. Data</span>
 <span class="sd">    registered in live_data will be passed onto the figure ColumnDataSource</span>
 <span class="sd">    using the same mapping. And properites in live_props will be updated</span>
 <span class="sd">    on the figures as well.</span>
 
-<span class="sd">    * live_data (type: dict)</span>
-<span class="sd">    * live_props (type: dict)</span>
+<span class="sd">    * :attr:`.live_data` (type: dict)</span>
+<span class="sd">    * :attr:`.live_props` (type: dict)</span>
 
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -440,7 +571,7 @@
 <span class="sd">        The create_fig method shall set up a Bokeh Figure object appropriately and return it</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            sources:    Will be a ictionary of ColumnDataSources where the keys will correspond to the keys</span>
+<span class="sd">            sources:    Will be a dictionary of ColumnDataSources where the keys will correspond to the keys</span>
 <span class="sd">                        of the :attr:`.live_data` attribute dictionary.</span>
 
 <span class="sd">        Returns:</span>
@@ -456,12 +587,15 @@
 <span class="sd">    Visualisation of the sky.</span>
 
 <span class="sd">    Can show, in real-time, the current and demanded pointing of the</span>
-<span class="sd">    antennas, the satellite track, and the position of the tracked satellite</span>
+<span class="sd">    antennas, the satellite track, and the position of the tracked satellite.</span>
 
-<span class="sd">    Attr (See :class:`LivePlot`</span>
-<span class="sd">        name: A descriptive (and unique) name. Required for the Bokeh server</span>
-<span class="sd">        live_data: The datapoints that can be updated in real-time</span>
-<span class="sd">        live_props: The properties that can be updated in real-time</span>
+<span class="sd">    The SatellitePass class sets up the following :attr:`~LivePlot.live_data` sources:</span>
+<span class="sd">        </span>
+<span class="sd">        * dpass    : The pass itself</span>
+<span class="sd">        * ant_cmd  : The commanded position(s) of the antennae</span>
+<span class="sd">        * ant_cur  : The current position(s) of the antennae</span>
+<span class="sd">        * sat      : The current position(s) of the satellite</span>
+
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -499,9 +633,6 @@
 
 
 <div class="viewcode-block" id="SatellitePass.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.SatellitePass.create_fig.html#libgs.visualisation.SatellitePass.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Implementation of :meth:`LivePlot.create_fig` to set up the bokeh figure</span>
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">background_fill_color</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">toolbar_location</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -586,13 +717,12 @@
 <span class="sd">    A frequency spectrum plot for use within a libgs dashboard web-application.</span>
 
 <span class="sd">    .. note::</span>
-
 <span class="sd">        FrequencyPlot needs a callable that it can query to obtain the frequency and spectrum information. Normally</span>
-<span class="sd">         this would be :meth:`.hardware.RadioBase.get_spectrum`. If you are implementing a non-standard radio,</span>
-<span class="sd">         ensure you consult that documentation for the format of the callable.</span>
+<span class="sd">        this would be :meth:`.hardware.RadioBase.get_spectrum`. If you are implementing a non-standard radio,</span>
+<span class="sd">        ensure you consult that documentation for the format of the callable.</span>
 
 <span class="sd">    .. note::</span>
-<span class="sd">        FrequencyPlot uses the ColumnDataSource identifier &#39;freq&#39;</span>
+<span class="sd">        FrequencyPlot uses the live_data identifier &#39;freq&#39;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -649,10 +779,6 @@
 
 
 <div class="viewcode-block" id="FrequencyPlot.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.create_fig.html#libgs.visualisation.FrequencyPlot.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Class implementation of :class:`.LivePlot.create_fig`.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span> <span class="o">=</span> <span class="mi">32000</span> <span class="c1">#&lt;-- just a default sample rate to use until something is read from the get_spectrum callable</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_freq</span><span class="o">=</span><span class="mi">0</span>
@@ -675,10 +801,16 @@
 
 
 <div class="viewcode-block" id="FrequencyPlot.connect"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.connect.html#libgs.visualisation.FrequencyPlot.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start regular callbacks to the specified get_spectrum function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_regcb</span> <span class="o">=</span> <span class="n">RegularCallback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_plots</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_delay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_regcb</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FrequencyPlot.disconnect"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.FrequencyPlot.disconnect.html#libgs.visualisation.FrequencyPlot.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop regular callbacks to the get_spectrum function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_regcb&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_regcb</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div></div>
 
@@ -717,9 +849,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_fig_args</span> <span class="o">=</span> <span class="n">fig_args</span>
 
 <div class="viewcode-block" id="Waterfall.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Waterfall.create_fig.html#libgs.visualisation.Waterfall.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Class implementation of :meth:`LivePlot.create_fig`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_rate</span><span class="o">/</span><span class="mf">2.0</span><span class="p">],</span>
@@ -740,7 +869,7 @@
 <span class="sd">        It does this by appending a row to the live_data image property.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            freq: (list[float]). Spectrum to append.</span>
+<span class="sd">            freq (list(float)): Spectrum to append.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -794,10 +923,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">mtype</span>
 
 <div class="viewcode-block" id="Markup.create_fig"><a class="viewcode-back" href="../../_autosummary/libgs.visualisation.Markup.create_fig.html#libgs.visualisation.Markup.create_fig">[docs]</a>    <span class="k">def</span> <span class="nf">create_fig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="s1">&#39;PreText&#39;</span><span class="p">:</span>
             <span class="n">fig</span> <span class="o">=</span> <span class="n">PreText</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">,</span>  <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
@@ -837,11 +962,11 @@
 <span class="sd">        an arbitrary makefunction (see :class:`bokeh.application.handlers.function.FunctionHandler`), or a :class:`BokehDash`</span>
 <span class="sd">        object (which implements the same make function as the make_doc method).</span>
 
-<span class="sd">        Args:</span>
+<span class="sd">        Args:        </span>
 <span class="sd">            uri:    The URI to serve the app on (e.g. &#39;/dash&#39;, or &#39;/&#39; or ...)</span>
 <span class="sd">            makefn: The app to add (can be either a BokehDash app, or an arbitrary user-define app maker function.</span>
 <span class="sd">                    If you are implementing arbitrary app-maker ensure it follows the format required by</span>
-<span class="sd">                     :class:`bokeh.application.handlers.function.FunctionHandler`</span>
+<span class="sd">                    :class:`bokeh.application.handlers.function.FunctionHandler`</span>
 
 <span class="sd">        Returns:</span>
 
@@ -880,8 +1005,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Stops the tornado IOloop (does not do anything with the server)</span>
 
-<span class="sd">            ..todo::</span>
-<span class="sd">              Properly stop server too</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
@@ -1065,9 +1188,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            radios (list[:class:`hardware.RadioBase]).  The radios to create plots for</span>
-<span class="sd">            title: (str).                               The title of the dashboard</span>
-<span class="sd">            links: (list[tuple[str]])                   A list of tuples (name, URI) to use to create navigation links</span>
+<span class="sd">            radios (list():class:`hardware.RadioBase`):  The radios to create plots for</span>
+<span class="sd">            title (str).                             :  The title of the dashboard</span>
+<span class="sd">            links (list(tuple(str)))                 :  A list of tuples (name, URI) to use to create navigation links</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">UNITS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">UNITS</span>
@@ -1150,8 +1273,8 @@
 <span class="sd">        Args:</span>
 <span class="sd">            title:      The title of the plot</span>
 <span class="sd">            plot_name:  The unique name to refer to the LivePlot by (this dash only has a single LivePlot - the textbox)</span>
-<span class="sd">            mtype:      The type of textbox to use. Options are PreText, Div, or Paragraph. See :class:Markup</span>
-<span class="sd">            links:      An array of links to display. See :function:`linktext` for the format.</span>
+<span class="sd">            mtype:      The type of textbox to use. Options are PreText, Div, or Paragraph. See :class:`Markup`</span>
+<span class="sd">            links:      An array of links to display. See :func:`linktext` for the format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
 

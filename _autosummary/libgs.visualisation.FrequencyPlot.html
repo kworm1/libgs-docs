@@ -85,10 +85,10 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libgs.visualisation.html#tutorial">Tutorial</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="libgs.visualisation.html#module-reference">Module reference</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.azel2rect.html">libgs.visualisation.azel2rect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libgs.visualisation.linktext.html">libgs.visualisation.linktext</a></li>
@@ -114,9 +114,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -191,15 +193,13 @@
 <dd><p>A frequency spectrum plot for use within a libgs dashboard web-application.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<dl class="last docutils">
-<dt>FrequencyPlot needs a callable that it can query to obtain the frequency and spectrum information. Normally</dt>
-<dd>this would be <a class="reference internal" href="libgs.hardware.RadioBase.get_spectrum.html#libgs.hardware.RadioBase.get_spectrum" title="libgs.hardware.RadioBase.get_spectrum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hardware.RadioBase.get_spectrum()</span></code></a>. If you are implementing a non-standard radio,
-ensure you consult that documentation for the format of the callable.</dd>
-</dl>
+<p class="last">FrequencyPlot needs a callable that it can query to obtain the frequency and spectrum information. Normally
+this would be <a class="reference internal" href="libgs.hardware.RadioBase.get_spectrum.html#libgs.hardware.RadioBase.get_spectrum" title="libgs.hardware.RadioBase.get_spectrum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hardware.RadioBase.get_spectrum()</span></code></a>. If you are implementing a non-standard radio,
+ensure you consult that documentation for the format of the callable.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">FrequencyPlot uses the ColumnDataSource identifier ‘freq’</p>
+<p class="last">FrequencyPlot uses the live_data identifier ‘freq’</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -224,13 +224,13 @@ ensure you consult that documentation for the format of the callable.</dd>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.FrequencyPlot.connect.html#libgs.visualisation.FrequencyPlot.connect" title="libgs.visualisation.FrequencyPlot.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a>()</td>
-<td></td>
+<td>Start regular callbacks to the specified get_spectrum function</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="libgs.visualisation.FrequencyPlot.create_fig.html#libgs.visualisation.FrequencyPlot.create_fig" title="libgs.visualisation.FrequencyPlot.create_fig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_fig</span></code></a>(sources)</td>
-<td>Class implementation of <code class="xref py py-class docutils literal notranslate"><span class="pre">LivePlot.create_fig</span></code>.</td>
+<td>The create_fig method shall set up a Bokeh Figure object appropriately and return it</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="libgs.visualisation.FrequencyPlot.disconnect.html#libgs.visualisation.FrequencyPlot.disconnect" title="libgs.visualisation.FrequencyPlot.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a>()</td>
-<td></td>
+<td>Stop regular callbacks to the get_spectrum function</td>
 </tr>
 </tbody>
 </table>

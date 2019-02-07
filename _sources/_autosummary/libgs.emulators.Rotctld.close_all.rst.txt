@@ -1,6 +1,0 @@
-libgs.emulators.Rotctld.close\_all
-==================================
-
-.. currentmodule:: libgs.emulators
-
-.. automethod:: Rotctld.close_all

@@ -85,10 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.Alert.html">libgs.monitoring.Alert</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libgs.monitoring.CriticalAlert.html">libgs.monitoring.CriticalAlert</a></li>
@@ -115,6 +113,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -203,7 +204,7 @@ loop.</li>
 <p>The decorator can create multiple monitor points from a single callable (that returns a tuple) by
 specifying point as a tuple.</p>
 <p>Please see <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a> for the full list of the remaining arguments that can be applied.
-<a href="#id1"><span class="problematic" id="id2">*</span></a>args and <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs can be anything accepted by <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a> except name, gen or dependents.</p>
+<code class="docutils literal notranslate"><span class="pre">*args</span></code> and <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> can be anything accepted by <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a> except name, gen or dependents.</p>
 <p class="rubric">Example</p>
 <p>register 3 monitoring points from a function that retuns random values at an interval
 of once every 10 seconds, grouped under the heading Test:</p>
@@ -219,8 +220,7 @@ of once every 10 seconds, grouped under the heading Test:</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>point</strong> – The name of the monitor point. If omitted it will use the function name.
 Can also be a tuple if function monitors several variables.</li>
-<li><strong>**kwargs</strong> (<em>*args</em><em>,</em>) – <p>Also accepts all the arguments of <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a></p>
-</li>
+<li><strong>**kwargs</strong> (<em>*args</em><em>,</em>) – Also accepts all the arguments of <a class="reference internal" href="libgs.monitoring.Monitor.register_monitor.html#libgs.monitoring.Monitor.register_monitor" title="libgs.monitoring.Monitor.register_monitor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_monitor()</span></code></a></li>
 </ul>
 </td>
 </tr>

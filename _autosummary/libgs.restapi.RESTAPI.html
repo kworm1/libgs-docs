@@ -92,12 +92,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -169,16 +170,14 @@
 <dl class="class">
 <dt id="libgs.restapi.RESTAPI">
 <em class="property">class </em><code class="descclassname">libgs.restapi.</code><code class="descname">RESTAPI</code><span class="sig-paren">(</span><em>commslog=None</em>, <em>monlog=None</em>, <em>passdb=None</em>, <em>host='localhost'</em>, <em>port=8080</em>, <em>default_format='json'</em>, <em>rpcapi=None</em>, <em>allowed=None</em>, <em>retry_rpc_conn=True</em>, <em>debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/libgs/restapi.html#RESTAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libgs.restapi.RESTAPI" title="Permalink to this definition">¶</a></dt>
-<dd><p>Will create a RESTFUL API interface to the Commslog database and start
+<dd><p>THE REST API class.</p>
+<p>Will create a RESTFUL API interface to the Commslog database and start
 it on a specified port. The api will be started in a separate thread.</p>
-<dl class="docutils">
-<dt>Usage:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">RESTAPI</span><span class="p">()</span>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">RESTAPI</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <p>The help will be automatically generated and is available on the endpoint <code class="docutils literal notranslate"><span class="pre">/api</span></code> after
 creation. See <a class="reference internal" href="libgs.restapi.html#module-libgs.restapi" title="libgs.restapi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">restapi</span></code></a> for more details.</p>
 <table class="docutils field-list" frame="void" rules="none">

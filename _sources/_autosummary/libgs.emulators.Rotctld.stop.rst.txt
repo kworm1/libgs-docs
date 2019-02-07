@@ -1,6 +1,0 @@
-libgs.emulators.Rotctld.stop
-============================
-
-.. currentmodule:: libgs.emulators
-
-.. automethod:: Rotctld.stop

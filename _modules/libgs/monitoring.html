@@ -83,12 +83,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -512,7 +513,8 @@
 <span class="sd">        appropriately formatted for adding using :meth:`.register_monitor`.</span>
 
 <span class="sd">        The call to fn is being delegated to an executor, and while it is not</span>
-<span class="sd">        done, calls to next() will return None, otherwise it will return a tuple containging</span>
+<span class="sd">        done, calls to next() will return None, otherwise it will return a tuple containging:</span>
+<span class="sd">        </span>
 <span class="sd">            * The timestamp the data the return value of fn</span>
 <span class="sd">            * Any Exceptions that occurred</span>
 <span class="sd">            * The return value</span>
@@ -615,7 +617,7 @@
 <span class="sd">        specifying point as a tuple.</span>
 <span class="sd">        </span>
 <span class="sd">        Please see :meth:`.register_monitor` for the full list of the remaining arguments that can be applied.</span>
-<span class="sd">        *args and **kwargs can be anything accepted by :meth:`.register_monitor` except name, gen or dependents.</span>
+<span class="sd">        ``*args`` and ``**kwargs`` can be anything accepted by :meth:`.register_monitor` except name, gen or dependents.</span>
 
 <span class="sd">        Example: </span>
 <span class="sd">        </span>
@@ -630,7 +632,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            point:           The name of the monitor point. If omitted it will use the function name. </span>
 <span class="sd">                             Can also be a tuple if function monitors several variables.</span>
-<span class="sd">            *args, **kwargs: Also accepts all the arguments of :meth:`.register_monitor`</span>
+<span class="sd">            ``*args``, ``**kwargs``: Also accepts all the arguments of :meth:`.register_monitor`</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Decorator</span>

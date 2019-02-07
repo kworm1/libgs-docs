@@ -1,6 +1,0 @@
-libgs.emulators.SpaceTrack.stop
-===============================
-
-.. currentmodule:: libgs.emulators
-
-.. automethod:: SpaceTrack.stop

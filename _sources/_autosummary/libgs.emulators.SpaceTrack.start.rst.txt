@@ -1,6 +1,0 @@
-libgs.emulators.SpaceTrack.start
-================================
-
-.. currentmodule:: libgs.emulators
-
-.. automethod:: SpaceTrack.start

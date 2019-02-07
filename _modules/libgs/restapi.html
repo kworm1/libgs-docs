@@ -83,12 +83,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -540,15 +541,15 @@
 
 <div class="viewcode-block" id="RESTAPI"><a class="viewcode-back" href="../../_autosummary/libgs.restapi.RESTAPI.html#libgs.restapi.RESTAPI">[docs]</a><span class="k">class</span> <span class="nc">RESTAPI</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    THE REST API class</span>
-<span class="sd">    ------------------</span>
+<span class="sd">    THE REST API class.</span>
 
 <span class="sd">    Will create a RESTFUL API interface to the Commslog database and start</span>
 <span class="sd">    it on a specified port. The api will be started in a separate thread.</span>
 
 <span class="sd">    Usage:</span>
-<span class="sd">      &gt;&gt;&gt; api = RESTAPI()</span>
-<span class="sd">      &gt;&gt;&gt; api.start()</span>
+
+<span class="sd">    &gt;&gt;&gt; api = RESTAPI()</span>
+<span class="sd">    &gt;&gt;&gt; api.start()</span>
 
 <span class="sd">    The help will be automatically generated and is available on the endpoint ``/api`` after</span>
 <span class="sd">    creation. See :mod:`~libgs.restapi` for more details.</span>

@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libgs entrypoints &mdash; libgs  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="libgs.protocols.protocolbase.Error" href="_autosummary/libgs.protocols.protocolbase.Error.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> libgs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.utils.html">libgs.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.scheduler.html">libgs.scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.rpc.html">libgs.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.restapi.html">libgs.restapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.hardware.html">libgs.hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.groundstation.html">libgs.groundstation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.visualisation.html">libgs.visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.database.html">libgs.database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.monitoring.html">libgs.monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libgs entrypoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#libgs-db">libgs-db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libgs-restapi">libgs-restapi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libgs-emulate">libgs-emulate</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libgs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>libgs entrypoints</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/console_scripts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-libgs.console_scripts"></span><div class="section" id="libgs-entrypoints">
+<h1>libgs entrypoints<a class="headerlink" href="#libgs-entrypoints" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">date:</th><td class="field-body">2018-01-01</td>
+</tr>
+<tr class="field-even field"><th class="field-name">author:</th><td class="field-body">Kjetil Wormnes</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="libgs-db">
+<span id="id1"></span><h2>libgs-db<a class="headerlink" href="#libgs-db" title="Permalink to this headline">¶</a></h2>
+<p>libgs-db is a command-line tool to interact with any libgs-compatible database. It can connect to mysql databases,
+and to sqlite files, and in fact, to any other database permitted by SQLAlchemy.</p>
+<p>For full reference:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-db --help
+</pre></div>
+</div>
+<p>The most common use of libgs-db is to prune the databases to not get out of control. To do so, you should add a cron job to a script
+that runs libgs-db to prune the database. It will look something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libgs</span><span class="o">-</span><span class="n">db</span> <span class="n">mysql</span><span class="o">+</span><span class="n">pymysql</span><span class="p">:</span><span class="o">//</span><span class="n">uname</span><span class="p">:</span><span class="n">pwd</span><span class="nd">@localhost</span><span class="o">/</span><span class="n">libgs</span><span class="p">[</span><span class="n">comms</span><span class="p">]</span> <span class="o">--</span><span class="n">prune</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;sqlite:////backup/path/db.sqlite[comms]&quot;</span> <span class="o">--</span><span class="n">delete</span> <span class="o">-</span><span class="n">f</span>
+<span class="n">libgs</span><span class="o">-</span><span class="n">db</span> <span class="n">mysql</span><span class="o">+</span><span class="n">pymysql</span><span class="p">:</span><span class="o">//</span><span class="n">uname</span><span class="p">:</span><span class="n">pwd</span><span class="nd">@localhost</span><span class="o">/</span><span class="n">libgs</span><span class="p">[</span><span class="n">passes</span><span class="p">]</span> <span class="o">--</span><span class="n">prune</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;sqlite:////backup/path/db.sqlite[passes]&quot;</span> <span class="o">--</span><span class="n">delete</span> <span class="o">-</span><span class="n">f</span>
+<span class="n">libgs</span><span class="o">-</span><span class="n">db</span> <span class="n">mysql</span><span class="o">+</span><span class="n">pymysql</span><span class="p">:</span><span class="o">//</span><span class="n">uname</span><span class="p">:</span><span class="n">pwd</span><span class="nd">@localhost</span><span class="o">/</span><span class="n">libgs</span><span class="p">[</span><span class="n">monitor</span><span class="p">]</span> <span class="o">--</span><span class="n">prune</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;sqlite:////backup/path/db.sqlite[monitor]&quot;</span> <span class="o">--</span><span class="n">delete</span> <span class="o">-</span><span class="n">f</span>
+</pre></div>
+</div>
+<p>This would prune the comms and passes tables to 1000 rows, backing up the excess rows into db.sqlite.</p>
+<p>Another ommon use is to just quickly inspect the database to see the available tables. (This will work on non-libgs databases too):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-db mysql+pymysql://uname:pwd@localhost/libgs
+No table specified. Do so by adding it in square brackets: mysql+pymysql://adfags:@dfags@localhost/adfags[table_name]
+I found the following tables in mysql+pymysql://adfags:@dfags@localhost/adfags:
+* passes ( 7374 rows )
+    - _id                 INTEGER(11)
+    - _tstamp             DECIMAL(20, 12)
+    - key                 VARCHAR(1024)
+    - value               TEXT
+    - pass_id             VARCHAR(1024)
+    - module              VARCHAR(1024)
+* monitor ( 224834 rows )
+    - _id                 INTEGER(11)
+    - _tstamp             DECIMAL(20, 12)
+    - key                 VARCHAR(1024)
+    - value               TEXT
+    - pass_id             VARCHAR(1024)
+    - alert               VARCHAR(1024)
+* comms ( 10008 rows )
+    - _id                 INTEGER(11)
+    - _tstamp             DECIMAL(20, 12)
+    - nid                 VARCHAR(1024)
+    - pass_id             VARCHAR(1024)
+    - orig                VARCHAR(1024)
+    - dest                VARCHAR(1024)
+    - msg                 TEXT
+</pre></div>
+</div>
+<p>Of course, you could do the same with a sqlite file. For example, to inspect the structure of the backup file created in above:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-db sqlite:////backup/path/db.sqlite
+</pre></div>
+</div>
+<p>You could then inspect the contents of the specific tables, export to CSV, etc by specifying the table in square brackets. For example,
+show the 3 most recent rows of the comms table:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-db mysql+pymysql://adfags:@dfags@localhost/adfags[comms] -l 3 -n
+                        _tstamp    nid         pass_id orig dest                                                msg
+_id
+19302 2018-10-29 04:10:56.150400  43014  20181029041407  Sat   GS  [0, 0, 182, 0, 17, 15, 167, 66, 186, 10, 18, 0...
+19301 2018-10-29 04:09:05.731200  43014  20181029041407  Sat   GS  [211, 1, 128, 0, 32, 59, 170, 84, 150, 165, 19...
+19300 2018-10-29 04:08:08.707200  43014  20181029041407  Sat   GS  [211, 1, 128, 0, 194, 97, 212, 76, 209, 74, 73...
+</pre></div>
+</div>
+<p>See the <code class="docutils literal notranslate"><span class="pre">--help</span></code> reference for full details on the available arguments.</p>
+</div>
+<div class="section" id="libgs-restapi">
+<h2>libgs-restapi<a class="headerlink" href="#libgs-restapi" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>libgs-restapi is the command-line tool to start a libgs <a class="reference internal" href="_autosummary/libgs.restapi.html#module-libgs.restapi" title="libgs.restapi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">restapi</span></code></a>.</p>
+<p>For a full reference:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-restapi --help
+</pre></div>
+</div>
+<p><em>Example</em>
+Create a restapi and connect it to the mysql database at localhost/libgs with username uname and password pwd, and use the
+binary path (where to store files that are too big for the database, see the disk_path in <a class="reference internal" href="_autosummary/libgs.database.Database.html#libgs.database.Database" title="libgs.database.Database"><code class="xref py py-class docutils literal notranslate"><span class="pre">database.Database</span></code></a>) as /libgs-db-bib.
+Bind publicly (0.0.0.0) on port 10001:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-restapi -a 0.0.0.0 -p 10001 --db mysql+pymysql://uname:pwd@localhost/libgs --db-bin-path /libgs-db-bin
+</pre></div>
+</div>
+<p><em>Example</em> Map RPC APIs.</p>
+<p>libgs-restapi has the ability to map an arbitrary XMLRPC api. See <a class="reference internal" href="_autosummary/libgs.restapi.html#module-libgs.restapi" title="libgs.restapi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">restapi</span></code></a> for details. In order to set it up using the libgs-restapi
+command-line tool use the -r parametr. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-restapi -r rpc/gs http://localhost:10001 -r rpc/sch http://localhost:8000
+</pre></div>
+</div>
+<p>will create two additional api endpoints on <code class="docutils literal notranslate"><span class="pre">/api/rpc/gs</span></code> and <code class="docutils literal notranslate"><span class="pre">/api/rpc/sch</span></code> to which it will
+map the <a class="reference internal" href="_autosummary/libgs.groundstation.GroundStation.html#libgs.groundstation.GroundStation" title="libgs.groundstation.GroundStation"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.groundstation.GroundStation</span></code></a> and <a class="reference internal" href="_autosummary/libgs.rpc.RPCSchedulerServer.html#libgs.rpc.RPCSchedulerServer" title="libgs.rpc.RPCSchedulerServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.rpc.RPCSchedulerServer</span></code></a>  XMLRPC API interfaces respectively.</p>
+<p>Note that any XMLRPC interface can be mapped this way so long as it has registered introspection functions.
+See SimpleXMLRPCServer. <a class="reference external" href="https://docs.python.org/2.7/library/simplexmlrpcserver.html#SimpleXMLRPCServer.SimpleXMLRPCServer.register_introspection_functions" title="(in Python v2.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_introspection_functions()</span></code></a>. (you can of course also
+use <a class="reference internal" href="_autosummary/libgs.rpc.RPCServer.html#libgs.rpc.RPCServer" title="libgs.rpc.RPCServer"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.rpc.RPCServer</span></code></a> as a drop-in replacement for SimpleXMLRPCServer anytime you make such an api)</p>
+<p>See the <cite>–help</cite> for detailed reference on avialable arguments</p>
+</div></blockquote>
+</div>
+<div class="section" id="libgs-emulate">
+<h2>libgs-emulate<a class="headerlink" href="#libgs-emulate" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>libgs-emulate is a console script thar can emulate certain hardware.</p>
+<p>Currently, it can emulate:</p>
+<ul class="simple">
+<li>radio</li>
+<li>rotctld</li>
+</ul>
+<p>For a full reference on available arguments run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-emulate --help
+</pre></div>
+</div>
+<p>For emulator specific help run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ libgs-emulate radio --help
+$ libgs-emulate rotctld --help
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="_autosummary/libgs.protocols.protocolbase.Error.html" class="btn btn-neutral" title="libgs.protocols.protocolbase.Error" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, UNSW
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

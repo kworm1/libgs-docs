@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="libgs.visualisation.azel2rect" href="libgs.visualisation.azel2rect.html" />
-    <link rel="prev" title="libgs.console_scripts.restapi" href="libgs.console_scripts.restapi.html" /> 
+    <link rel="prev" title="libgs.groundstation.UILogHandler.name" href="libgs.groundstation.UILogHandler.name.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -85,12 +85,16 @@
 <li class="toctree-l1"><a class="reference internal" href="libgs.restapi.html">libgs.restapi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.hardware.html">libgs.hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.groundstation.html">libgs.groundstation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.console_scripts.html">libgs entrypoints</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">libgs.visualisation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#plot-elements">Plot elements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dashboard-apps">Dashboard Apps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-and-manipulate-a-basic-track-dash">Set up and manipulate a basic Track Dash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-dasboard">Create a new dasboard</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-reference">Module reference</a><ul>
@@ -110,9 +114,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.database.html">libgs.database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libgs.emulators.html">libgs.emulators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.monitoring.html">libgs.monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libgs.protocols.protocolbase.html">libgs.protocols.protocolbase</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../console_scripts.html">libgs entrypoints</a></li>
 </ul>
 
             
@@ -221,8 +227,8 @@ examples in the Bokeh documentation.</p>
 </ul>
 <p>Additionally they may implement the following attributes if required:</p>
 <ul class="simple">
-<li>live_data (type: dict)</li>
-<li>live_props (type: dict)</li>
+<li><a class="reference internal" href="libgs.visualisation.LivePlot.live_data.html#libgs.visualisation.LivePlot.live_data" title="libgs.visualisation.LivePlot.live_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">live_data</span></code></a> (type: dict)</li>
+<li><a class="reference internal" href="libgs.visualisation.LivePlot.live_props.html#libgs.visualisation.LivePlot.live_props" title="libgs.visualisation.LivePlot.live_props"><code class="xref py py-attr docutils literal notranslate"><span class="pre">live_props</span></code></a> (type: dict)</li>
 </ul>
 <p>Data registered in live_data will be passed onto the figure ColumnDataSource
 using the same mapping. And properites in live_props will be updated
@@ -243,7 +249,8 @@ dictionaries in the different plots.</p>
 the same time and see the same data while not having to run bokeh as a separate
 application.</p>
 <p>The apps that are currently available in this module are:</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li><a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDash</span></code></a>:   A simple app that just shows text (or html) which is updatable via a live_prop property</li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="libgs.visualisation.TrackDash.html#libgs.visualisation.TrackDash" title="libgs.visualisation.TrackDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackDash</span></code></a>:  A full-fledged dashboard showing antenna tracking status as well as spectra/waterfall from the radios,</dt>
@@ -251,7 +258,119 @@ application.</p>
 </dl>
 </li>
 </ul>
-<p class="rubric">Examples</p>
+</div></blockquote>
+<p>You can create others by deriving from <a class="reference internal" href="libgs.visualisation.BokehDash.html#libgs.visualisation.BokehDash" title="libgs.visualisation.BokehDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">BokehDash</span></code></a> and updating the __init__ method.</p>
+</div>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-up-and-manipulate-a-basic-track-dash">
+<h3>Set up and manipulate a basic Track Dash<a class="headerlink" href="#set-up-and-manipulate-a-basic-track-dash" title="Permalink to this headline">¶</a></h3>
+<p>Create a server</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server</span> <span class="o">=</span> <span class="n">BokehServer</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">5001</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will now add a couple of apps to the server, one <a class="reference internal" href="libgs.visualisation.TrackDash.html#libgs.visualisation.TrackDash" title="libgs.visualisation.TrackDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackDash</span></code></a> which provides most of the functionality you
+will need for the ground station dashboard, and ont <a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDash</span></code></a> which is just a simple full-page text (or html) view.</p>
+<p>We will also add navigation links to the apps.</p>
+<p>First create some radios to use with the example. You can use the <code class="docutils literal notranslate"><span class="pre">libgs-emulate</span></code> command-line tool, which comes with the libgs
+library, to feed these with dummy data if you do not yet have an actual GNU radio.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hardware</span> <span class="k">import</span> <span class="n">GR_XMLRPCRadio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">GR_XMLRPCRadio</span><span class="p">(</span><span class="n">stream</span> <span class="o">=</span>  <span class="s1">&#39;localhost:5551&#39;</span><span class="p">,</span> <span class="n">rpcaddr</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8051&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TX&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">GR_XMLRPCRadio</span><span class="p">(</span><span class="n">stream</span> <span class="o">=</span>  <span class="s1">&#39;localhost:5552&#39;</span><span class="p">,</span> <span class="n">rpcaddr</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8051&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;RX&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Take note of how we used the same rpcaddress for both radios. This is because in this example the two radios may refer to two streams (e.g. rx and tx)
+in the same GNU radio flowgraph. But that is not a visualisation topic so see <a class="reference internal" href="libgs.hardware.GR_XMLRPCRadio.html#libgs.hardware.GR_XMLRPCRadio" title="libgs.hardware.GR_XMLRPCRadio"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs.hardware.GR_XMLRPCRadio</span></code></a> for details. The
+visualisation only cares about the stream of IQ values which will allow it to show a waterfall display.</p>
+<p>Set the title and navigation links</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TITLE</span> <span class="o">=</span> <span class="s2">&quot;My Ground Station test&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LINKS</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;Track dash&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;/log&quot;</span><span class="p">,</span> <span class="s2">&quot;Log&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Now create the dashboard app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trackdash</span>   <span class="o">=</span> <span class="n">TrackDash</span><span class="p">(</span><span class="n">radios</span> <span class="o">=</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="n">TITLE</span><span class="p">,</span> <span class="n">links</span> <span class="o">=</span> <span class="n">LINKS</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logdash</span>     <span class="o">=</span> <span class="n">TextDash</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="n">TITLE</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;PreText&#39;</span><span class="p">,</span> <span class="n">plot_name</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">links</span> <span class="o">=</span> <span class="n">LINKS</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDash</span></code></a> is just a single <a class="reference internal" href="libgs.visualisation.Markup.html#libgs.visualisation.Markup" title="libgs.visualisation.Markup"><code class="xref py py-class docutils literal notranslate"><span class="pre">Markup</span></code></a> plot that covers the page. Here we keep it simple and make it plain text (PreText). It
+is also possible to do html (Div). See <a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDash</span></code></a> and <a class="reference internal" href="libgs.visualisation.Markup.html#libgs.visualisation.Markup" title="libgs.visualisation.Markup"><code class="xref py py-class docutils literal notranslate"><span class="pre">Markup</span></code></a> for details.</p>
+<p>And then we simply add the apps to the server on the URIs we decided (the track dash on / and the log dash on /log)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server</span><span class="o">.</span><span class="n">add_app</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trackdash</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">server</span><span class="o">.</span><span class="n">add_app</span><span class="p">(</span><span class="s1">&#39;/log&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">logdash</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And start it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The start method will return immediately as the Tornado IOLoop is started in a separate thread.</p>
+<p>Note that this just creates the pages and plot elements. I.e. you can now got to <a class="reference external" href="http://localhost:5001">http://localhost:5001</a> and you should see the dashboard,
+and if you have started the radio (or radio emulator) on the port you set up you will also see the waterfalls and spectra change.</p>
+<p>But you will obviously need to add code to update the other plot elements. This is very simple, you just need to set the
+appropriate <a class="reference internal" href="libgs.visualisation.LivePlot.html#libgs.visualisation.LivePlot" title="libgs.visualisation.LivePlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">LivePlot</span></code></a> attributes.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">passplotter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trackdash</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="s1">&#39;spass&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">track_info</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trackdash</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="s1">&#39;track_info&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sch_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trackdash</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="s1">&#39;sch_info&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">libgs_log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logdash</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then we could plot a pass like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">az</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">passplotter</span><span class="o">.</span><span class="n">plot_pass</span><span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Obviously, normally the az/el values would be coming from the <a class="reference external" href="https://kworm1.github.io/libgs_ops-docs/_autosummary/libgs_ops.scheduling.CommsPass.html#libgs_ops.scheduling.CommsPass" title="(in libgs_ops)"><code class="xref py py-class docutils literal notranslate"><span class="pre">libgs_ops.scheduling.CommsPass</span></code></a>. If you try the above you should
+see the plot update in real time in your browser.</p>
+<p>You can set other <a class="reference internal" href="libgs.visualisation.SatellitePass.html#libgs.visualisation.SatellitePass" title="libgs.visualisation.SatellitePass"><code class="xref py py-class docutils literal notranslate"><span class="pre">SatellitePass</span></code></a> live_data elements</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">passplotter</span><span class="o">.</span><span class="n">update_data</span><span class="p">(</span><span class="s1">&#39;ant_cmd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">passplotter</span><span class="o">.</span><span class="n">update_data</span><span class="p">(</span><span class="s1">&#39;sat&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>etc… You will see the page update in realtime. See <a class="reference internal" href="libgs.visualisation.SatellitePass.html#libgs.visualisation.SatellitePass" title="libgs.visualisation.SatellitePass"><code class="xref py py-class docutils literal notranslate"><span class="pre">SatellitePass</span></code></a> for a full reference for this LivePlot element.</p>
+<p>track_info, sch_info and libgs_log are all text elements (<a class="reference internal" href="libgs.visualisation.Markup.html#libgs.visualisation.Markup" title="libgs.visualisation.Markup"><code class="xref py py-class docutils literal notranslate"><span class="pre">Markup</span></code></a>), you can update the text in a similar way by updating its
+‘text’ property. Many elements have properties such as colour, size, etc… You will have to consult the bokeh documentation for a full
+reference.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">libgs_log</span><span class="o">.</span><span class="n">live_props</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">=</span> <span class="s1">&#39;This is a test&#39;</span>
+</pre></div>
+</div>
+<p>You should immediately see the string ‘This is a test’ appear in the log app. You can try the same for the others.</p>
+</div>
+<div class="section" id="create-a-new-dasboard">
+<h3>Create a new dasboard<a class="headerlink" href="#create-a-new-dasboard" title="Permalink to this headline">¶</a></h3>
+<p>For this example we will create a simplified version of the TrackDash from scratch that only includes a <a class="reference internal" href="libgs.visualisation.SatellitePass.html#libgs.visualisation.SatellitePass" title="libgs.visualisation.SatellitePass"><code class="xref py py-class docutils literal notranslate"><span class="pre">SatellitePass</span></code></a>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Frequency</span></code>.</p>
+<p>First lets create the plot elements</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">waterfall</span> <span class="o">=</span> <span class="n">Waterfall</span><span class="p">(</span><span class="s1">&#39;waterfall&#39;</span><span class="p">,</span> <span class="mi">32000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">toolbar_location</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span>  <span class="o">=</span> <span class="n">FrequencyPlot</span><span class="p">(</span><span class="s1">&#39;spectrum&#39;</span><span class="p">,</span> <span class="n">radio</span><span class="o">.</span><span class="n">get_spectrum</span><span class="p">,</span> <span class="n">wfall</span><span class="o">=</span><span class="n">waterfall</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">radio</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">plot_height</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;hover&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>That last command makes the FrequencyPlot start calling the callback function <a class="reference internal" href="libgs.hardware.RadioBase.get_spectrum.html#libgs.hardware.RadioBase.get_spectrum" title="libgs.hardware.RadioBase.get_spectrum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_spectrum()</span></code></a> to automatically
+and regularly update itself. It has been connected to the waterfall using <code class="docutils literal notranslate"><span class="pre">wfall=</span></code> so that will update too.</p>
+<p>Create the satellite pass visualisation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spass</span> <span class="o">=</span> <span class="n">SatellitePass</span><span class="p">(</span><span class="s1">&#39;spass&#39;</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="n">UNITS</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And a textbox with some tracking info</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">track_info</span>  <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;track_info&#39;</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;PreText&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first argument in all these cases is the liveplot name, that was used in the first example when calling <a class="reference internal" href="libgs.visualisation.BokehDash.get_plot.html#libgs.visualisation.BokehDash.get_plot" title="libgs.visualisation.BokehDash.get_plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BokehDash.get_plot()</span></code></a>.</p>
+<p>Now lets create the dashboard</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dash</span> <span class="o">=</span> <span class="n">BokehDash</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;My awesome dashboard&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dash</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">waterfall</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dash</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">spectrum</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dash</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">spass</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dash</span><span class="o">.</span><span class="n">add_plot</span><span class="p">(</span><span class="n">track_info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the plots will be laid out automatically, and that your dashboard may therefore not look as awesome as you like.</p>
+<p>You can fix this by creating a function that returns a <a class="reference external" href="https://bokeh.pydata.org/en/0.12.6/docs/reference/layouts.html#module-bokeh.layouts" title="(in Bokeh v0.12.6)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bokeh</span> <span class="pre">layout</span></code></a>, and pass it to the BokehDash constructor’s
+<code class="docutils literal notranslate"><span class="pre">layout_callback</span></code> parameter. See the <a class="reference internal" href="libgs.visualisation.TextDash.html#libgs.visualisation.TextDash" title="libgs.visualisation.TextDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDash</span></code></a> or <a class="reference internal" href="libgs.visualisation.TrackDash.html#libgs.visualisation.TrackDash" title="libgs.visualisation.TrackDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackDash</span></code></a> <code class="docutils literal notranslate"><span class="pre">__init__</span></code> implementation as well as <a class="reference external" href="https://bokeh.pydata.org/en/0.12.6/docs/reference/layouts.html#module-bokeh.layouts" title="(in Bokeh v0.12.6)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bokeh.layouts</span></code></a>
+for how to do this.</p>
 </div>
 </div>
 <div class="section" id="module-reference">
@@ -321,7 +440,7 @@ application.</p>
         <a href="libgs.visualisation.azel2rect.html" class="btn btn-neutral float-right" title="libgs.visualisation.azel2rect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="libgs.console_scripts.restapi.html" class="btn btn-neutral" title="libgs.console_scripts.restapi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="libgs.groundstation.UILogHandler.name.html" class="btn btn-neutral" title="libgs.groundstation.UILogHandler.name" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

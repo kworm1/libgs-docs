@@ -1,6 +1,0 @@
-libgs.console\_scripts.dbcontrol
-================================
-
-.. currentmodule:: libgs.console_scripts
-
-.. autofunction:: dbcontrol

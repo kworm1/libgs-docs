@@ -1,6 +1,0 @@
-libgs.emulators.Server.start
-============================
-
-.. currentmodule:: libgs.emulators
-
-.. automethod:: Server.start
